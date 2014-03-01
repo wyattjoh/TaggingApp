@@ -33,13 +33,13 @@ public class MainActivity extends Activity {
 	}
 
 	public void loginGuest(View view) {
-		Intent i = new Intent(MainActivity.this, PhotoGrid.class);
+		Intent i = new Intent(MainActivity.this, SwipeSuper.class);
 		startActivity(i);
 	}
 	
 	public void loginUser(View view) {
 		if (this.verify()) {
-			Intent i = new Intent(MainActivity.this, PhotoGrid.class);
+			Intent i = new Intent(MainActivity.this, SwipeSuper.class);
 			startActivity(i);
 		}
 		else {

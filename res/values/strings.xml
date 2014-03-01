@@ -7,6 +7,7 @@
     <string name="signup">Sign Up</string>
     <string name="guest">Guest</string>
     <string name="title_activity_photo_grid">PhotoGrid</string>
+    <string name="title_activity_swipe_super">SwipeSuper</string>
     <string name="emailHint">eMail</string>
     <string name="passHint">Password</string>
     <string name="title_activity_sign_up">SignUp</string>
