@@ -6,7 +6,6 @@ public class Tag {
 	private String name = null;
 	private String URL = null;
 	private ArrayList<Region> taggedRegions = new ArrayList<Region>();
-	
 	public String getName() {
 		return name;
 	}
