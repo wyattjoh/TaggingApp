@@ -31,6 +31,44 @@ public class CameraAndPhoto extends Activity {
 	private ImageAdapter myAdapter = new ImageAdapter(this);
 	private GridView gridView;
 	
+	public static final int SHOW_PICTURES_IN_GALLERY = 1;
+	public static final int TAKE_PICTURE = 2;
+	public static final int RETURN_PICTURES = 3;
+	
+	/**
+	 * Create a file where the camera will save the picture and start the
+	 * camera.
+	 */
+	public void takeAPhoto() {
+
+		String folder = Environment.getExternalStorageDirectory()
+				.getAbsolutePath() + "/tmp";
+		File folderF = new File(folder);
+
+		// if file doesn't exist create a file
+		if (!folderF.exists()) {
+			folderF.mkdir();
+		}
+
+		// save file with the current time
+		String imageFilePath = folder + "/" + System.currentTimeMillis()
+				+ ".jpg";
+		File imageFile = new File(imageFilePath);
+		imageFileUri = Uri.fromFile(imageFile);
+
+		// refresh
+		sendBroadcast(new Intent(
+				Intent.ACTION_MEDIA_MOUNTED,
+				Uri.parse("file://" + Environment.getExternalStorageDirectory())));
+
+		// intentC has information about image and is set to start the camera
+		Intent intentC = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+		intentC.putExtra(MediaStore.EXTRA_OUTPUT, imageFileUri);
+
+		startActivityForResult(intentC, TAKE_PICTURE);
+
+	}
+	
 	/**
 	 * Fill the grid view with the picture obtained from the gallery or from the
 	 * camera.
@@ -42,7 +80,7 @@ public class CameraAndPhoto extends Activity {
 		if (resultCode != RESULT_OK)
 			return;
 
-		//if (requestCode == PICK_PICTURE_FROM_GALLERY) {
+		if (requestCode == SHOW_PICTURES_IN_GALLERY) {
 
 			Cursor cursor = getContentResolver().query(data.getData(),
 					new String[] { Media.DATA }, null, null, null);
@@ -55,11 +93,11 @@ public class CameraAndPhoto extends Activity {
 
 			this.fillData(filePath);
 
-		//} 
-			//else if (requestCode == TAKE_PICTURE) {
+		} 
+			else if (requestCode == TAKE_PICTURE) {
 			String path = imageFileUri.toString();
 			this.fillData(path.replace("file://", ""));
-		//}
+		}
 
 	}
 	
@@ -71,7 +109,6 @@ public class CameraAndPhoto extends Activity {
 	 */
 
 	private void fillData(String filePath) {
-		// TODO Auto-generated method stub
 		this.imageUrls.add(filePath);
 		this.myAdapter.addPhoto(BitmapFactory.decodeFile(filePath));
 		this.gridView.setAdapter(myAdapter);
