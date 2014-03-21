@@ -1,13 +1,19 @@
 package com.example.taggingapp.View;
 
-import com.example.taggingapp.R;
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
+import android.app.AlertDialog;
 import android.app.FragmentTransaction;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+
+import com.example.taggingapp.R;
 
 public class SwipeSuper extends FragmentActivity implements ActionBar.TabListener {
 
@@ -21,6 +27,7 @@ public class SwipeSuper extends FragmentActivity implements ActionBar.TabListene
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_swipe_super);
+		setTitle("Tagging App");
 		
 		// Intiialize all of the variables to the XML indentifiers
 		vp = (ViewPager) findViewById(R.id.pager);
@@ -61,9 +68,26 @@ public class SwipeSuper extends FragmentActivity implements ActionBar.TabListene
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
-		return true;
+	    // Inflate the menu items for use in the action bar
+	    MenuInflater inflater = getMenuInflater();
+	    inflater.inflate(R.menu.swipe_super_action_bar, menu);
+	    return super.onCreateOptionsMenu(menu);
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+	    // Handles presses on the action bar items
+	    switch (item.getItemId()) {
+	        case R.id.camera:
+	        	// the openCamera() method calls katherines code
+	            // openCamera();
+	            return true;
+	        case R.id.logout:
+	        	logout();
+	            return true;
+	        default:
+	            return super.onOptionsItemSelected(item);
+	    }
 	}
 
 	@Override
@@ -81,6 +105,41 @@ public class SwipeSuper extends FragmentActivity implements ActionBar.TabListene
 	public void onTabUnselected(Tab arg0, FragmentTransaction arg1) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	private void logout() {
+		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+				this);
+ 
+			// set title
+			alertDialogBuilder.setTitle("Logout?");
+ 
+			// set dialog message
+			alertDialogBuilder
+				.setMessage("Are you sure you want to logout?")
+				.setCancelable(false)
+				.setPositiveButton("Yes",new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog,int id) {
+						// if this button is clicked, close
+						// current activity
+						Intent i = new Intent(SwipeSuper.this, MainActivity.class);
+						startActivity(i);
+						SwipeSuper.this.finish();
+					}
+				  })
+				.setNegativeButton("No",new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog,int id) {
+						// if this button is clicked, just close
+						// the dialog box and do nothing
+						dialog.cancel();
+					}
+				});
+			
+			// create alert dialog
+			AlertDialog alertDialog = alertDialogBuilder.create();
+
+			// show it
+			alertDialog.show();
 	}
 	
 	

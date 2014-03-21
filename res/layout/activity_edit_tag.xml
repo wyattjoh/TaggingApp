@@ -7,65 +7,79 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:background="#070924"
-    tools:context=".SignUp" >
+    tools:context=".EditTag" >
 
-    <EditText
-        android:id="@+id/password"
+    <TextView
+        android:id="@+id/tag"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
+        android:layout_alignParentTop="true"
+        android:textColor="#FFFFFF"
+        android:text="Tag Name"
+        android:gravity="center_horizontal" />
+
+    <EditText
+        android:id="@+id/tag_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tag"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/tag"
+        android:ems="10"
+        android:gravity="center_horizontal"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#AAAAAA" >
+
+        <requestFocus />
+    </EditText>
+
+    <TextView
+        android:id="@+id/url"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/tag_edit"
+        android:textColor="#FFFFFF"
+        android:text="URL"
+        android:gravity="center_horizontal" />
+
+    <EditText
+        android:id="@+id/url_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/url"
+        android:textColor="#FFFFFF"
         android:ems="10"
         android:textColorHint="#AAAAAA"
-        android:gravity="center_horizontal"
-        android:hint="@string/passHint"
-        android:inputType="textPassword"
-        android:textColor="#FFFFFF"
-        android:maxLines="1" />
-
-    <EditText
-        android:id="@+id/email"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/password"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginBottom="84dp"
-        android:ems="10"
-        android:gravity="center_horizontal"
-        android:hint="@string/emailHint"
-        android:inputType="textEmailAddress"
-        android:maxLines="1"
-        android:textColor="#FFFFFF"
-        android:textColorHint="#AAAAAA" />
-
-    <EditText
-        android:id="@+id/confirmPass"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/password"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginBottom="22dp"
-        android:ems="10"
-        android:gravity="center_horizontal"
-        android:hint="@string/confirmPass"
-        android:inputType="textPassword"
-        android:maxLines="1"
-        android:textColor="#FFFFFF"
-        android:textColorHint="#AAAAAA" />
+        android:gravity="center_horizontal" />
 
     <Button
-        android:id="@+id/SignUp"
+        android:id="@+id/delete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:text="@string/signup"
         android:textColor="#FFFFFF"
         android:background="@android:color/transparent"
-        android:onClick="createUser" />
+        android:text="Delete Tag"
+        android:onClick="deleteTag" />
+
+    <Button
+        android:id="@+id/save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/delete"
+        android:layout_alignLeft="@+id/delete"
+        android:layout_alignParentRight="true"
+        android:textColor="#FFFFFF"
+        android:background="@android:color/transparent"
+        android:text="Save"
+        android:onClick="saveTag" />
 
 </RelativeLayout>

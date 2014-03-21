@@ -3,7 +3,11 @@ package com.example.taggingapp.View;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
+import android.widget.Toast;
 
 import com.example.taggingapp.R;
 
@@ -20,8 +24,9 @@ public class PhotoGrid extends Activity {
  
         // Instance of ImageAdapter Class
         gridView.setAdapter(new GridImageAdapter(this));
-		
+        
 	}
+	
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

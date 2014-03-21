@@ -12,5 +12,12 @@
     <string name="passHint">Password</string>
     <string name="title_activity_sign_up">SignUp</string>
     <string name="hello_world">Hello world!</string>
+    <string name="camera">Camera</string>
+    <string name="title_activity_view_full_pic">ViewFullPic</string>
+    <string name="title_activity_tag_and_photo">TagAndPhoto</string>
+    <string name="title_activity_tag_refined_images">TagRefinedImages</string>
+    <string name="title_activity_edit_tag">EditTag</string>
+    <string name="logout">Logout</string>
+    <string name="confirmPass">Confirm Password</string>
 
 </resources>

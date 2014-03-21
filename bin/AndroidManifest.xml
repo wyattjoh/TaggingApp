@@ -10,9 +10,9 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/ex_pic3"
+        android:icon="@drawable/ic_action_labels"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme" android:logo="@drawable/ic_action_labels">
         <activity
             android:name="com.example.taggingapp.View.MainActivity"
             android:label="@string/app_name" >
@@ -33,6 +33,22 @@
         <activity
             android:name="com.example.taggingapp.View.SwipeSuper"
             android:label="@string/title_activity_swipe_super" >
+        </activity>
+        <activity
+            android:name="com.example.taggingapp.View.ViewFullPic"
+            android:label="@string/title_activity_view_full_pic" >
+        </activity>
+        <activity
+            android:name="com.example.taggingapp.View.TagAndPhoto"
+            android:label="@string/title_activity_tag_and_photo" >
+        </activity>
+        <activity
+            android:name="com.example.taggingapp.View.TagRefinedImages"
+            android:label="@string/title_activity_tag_refined_images" >
+        </activity>
+        <activity
+            android:name="com.example.taggingapp.View.EditTag"
+            android:label="@string/title_activity_edit_tag" >
         </activity>
     </application>
 

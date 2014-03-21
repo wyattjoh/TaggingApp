@@ -23,6 +23,7 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		setTitle("Tagging App");
 	}
 
 	@Override
@@ -35,12 +36,14 @@ public class MainActivity extends Activity {
 	public void loginGuest(View view) {
 		Intent i = new Intent(MainActivity.this, SwipeSuper.class);
 		startActivity(i);
+		MainActivity.this.finish();
 	}
 	
 	public void loginUser(View view) {
 		if (this.verify()) {
 			Intent i = new Intent(MainActivity.this, SwipeSuper.class);
 			startActivity(i);
+			MainActivity.this.finish();
 		}
 		else {
 			String s = "Invalid Username/Password";
@@ -49,8 +52,8 @@ public class MainActivity extends Activity {
 	}
 	
 	public void signUp(View view) {
-		String s = "Login as Guest";
-		Toast.makeText(getBaseContext(), s, Toast.LENGTH_LONG).show();
+		Intent i = new Intent(MainActivity.this, SignUp.class);
+		startActivity(i);
 	}
 	
 	public boolean verify() {

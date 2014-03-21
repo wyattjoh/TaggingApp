@@ -1,0 +1,73 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="0dp"
+    android:paddingTop="0dp"
+    android:paddingLeft="0dp"
+    android:paddingRight="0dp"
+    android:background="#070924"
+    tools:context=".TagAndPhoto" >
+
+    <ImageView
+        android:id="@+id/picViewer"
+        android:layout_width="wrap_content"
+        android:layout_height="300dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/ic_launcher" />
+
+     <TextView
+         android:id="@+id/tag"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_alignParentLeft="true"
+         android:layout_alignParentRight="true"
+         android:layout_below="@+id/picViewer"
+         android:gravity="center"
+         android:text=""
+         android:textSize="14sp"
+         android:textAppearance="?android:attr/textAppearanceMedium"
+         android:textColor="#FFFFFF" />
+     
+     <TextView
+         android:id="@+id/tagURL"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_alignParentLeft="true"
+         android:layout_alignParentRight="true"
+         android:layout_below="@+id/tag"
+         android:gravity="center"
+         android:text=""
+         android:textSize="12sp"
+         android:textAppearance="?android:attr/textAppearanceMedium"
+         android:textColor="#FFFFFF" />
+
+     <Button
+         android:id="@+id/editTag"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_alignLeft="@+id/tagURL"
+         android:layout_alignRight="@+id/tagURL"
+         android:layout_below="@+id/tagURL"
+         android:textColor="#FFFFFF"
+         android:textSize="14sp"
+         android:background="@android:color/transparent"
+         android:text="Edit Tag"
+         android:onClick="editTag" />
+
+     <Button
+         android:id="@+id/morePhotosWTag"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_alignLeft="@+id/editTag"
+         android:layout_alignRight="@+id/editTag"
+         android:layout_below="@+id/editTag"
+         android:text="More Photos Tagged With "
+         android:background="@android:color/transparent"
+         android:textSize="14sp"
+         android:textColor="#FFFFFF"
+         android:onClick="morePhotos" />
+
+</RelativeLayout>

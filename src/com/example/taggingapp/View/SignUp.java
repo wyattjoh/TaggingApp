@@ -1,12 +1,12 @@
 package com.example.taggingapp.View;
 
-import com.example.taggingapp.R;
-import com.example.taggingapp.R.layout;
-import com.example.taggingapp.R.menu;
-
-import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.Menu;
+import android.view.View;
+
+import com.example.taggingapp.R;
 
 public class SignUp extends Activity {
 
@@ -23,4 +23,10 @@ public class SignUp extends Activity {
 		return true;
 	}
 
+	public void createUser(View view) {
+		Intent i = new Intent(SignUp.this, SwipeSuper.class);
+		startActivity(i);
+		SignUp.this.finish();
+	}
+	
 }

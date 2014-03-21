@@ -6,6 +6,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="#070924"
     tools:context=".MainActivity" >
 
     <Button
@@ -16,6 +17,8 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:text="@string/guest"
+        android:textColor="#FFFFFF"
+        android:background="@android:color/transparent"
         android:onClick="loginGuest" />
 
     <Button
@@ -26,6 +29,8 @@
         android:layout_alignLeft="@+id/Login"
         android:layout_alignParentRight="true"
         android:text="@string/signup"
+        android:textColor="#FFFFFF"
+        android:background="@android:color/transparent"
         android:onClick="signUp" />
 
     <Button
@@ -36,6 +41,8 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:text="@string/login"
+        android:textColor="#FFFFFF"
+        android:background="@android:color/transparent"
         android:onClick="loginUser" />
 
     <EditText
@@ -51,6 +58,7 @@
         android:gravity="center_horizontal"
         android:hint="@string/emailHint"
         android:inputType="textEmailAddress"
+        android:textColor="#FFFFFF"
         android:maxLines="1" >
 
         <requestFocus />
@@ -68,6 +76,7 @@
         android:gravity="center_horizontal"
         android:hint="@string/passHint"
         android:inputType="textPassword"
+        android:textColor="#FFFFFF"
         android:maxLines="1" />
 
 </RelativeLayout>

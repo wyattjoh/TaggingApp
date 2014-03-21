@@ -3,14 +3,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#ff8400" >
-     
-    <TextView android:layout_width="fill_parent"
+    android:background="#070924" >
+
+    <SearchView
+        android:id="@+id/tag_search"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
+    
+    <ListView
+        android:id="@+id/tags_list_view"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="Tags List"
-        android:textSize="20dp"
-        android:layout_centerInParent="true"/>
-     
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/tag_search" >
+
+    </ListView>
  
 </RelativeLayout>
