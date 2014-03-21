@@ -1,14 +1,9 @@
 package ca.ualberta.cs.taggingapp.views;
-
-<<<<<<< HEAD:src/com/example/taggingapp/View/TagsListFragment.java
-
 import java.util.ArrayList;
 import java.util.Random;
 
 import android.content.Intent;
-=======
 import ca.ualberta.cs.taggingapp.R;
->>>>>>> 7d3824e93a37eeacb4fec3b102317be2d75683ea:src/ca/ualberta/cs/taggingapp/views/TagsListFragment.java
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -20,8 +15,6 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
-
-import com.example.taggingapp.R;
  
 public class TagsListFragment extends Fragment {
 	
