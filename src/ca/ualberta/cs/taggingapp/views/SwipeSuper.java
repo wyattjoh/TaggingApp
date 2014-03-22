@@ -80,6 +80,8 @@ public class SwipeSuper extends FragmentActivity implements ActionBar.TabListene
 	        case R.id.camera:
 	        	// the openCamera() method calls katherines code
 	            // openCamera();
+	        	CameraAndPhoto cap = new CameraAndPhoto();
+	        	cap.takeAPhoto();
 	            return true;
 	        case R.id.logout:
 	        	logout();

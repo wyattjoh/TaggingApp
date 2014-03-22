@@ -7,6 +7,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -66,8 +67,20 @@ public class ViewFullPic extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.view_full_pic, menu);
+		getMenuInflater().inflate(R.menu.view_full_pic_menu, menu);
 		return true;
+	}
+	
+	public boolean onOptionsItemSelected(MenuItem item) {
+	    // Handles presses on the action bar items
+	    switch (item.getItemId()) {
+	        case R.id.add:
+	        	Intent i = new Intent(ViewFullPic.this, AddTag.class);
+				i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+				startActivity(i);
+	        default:
+	            return super.onOptionsItemSelected(item);
+	    }
 	}
 
 }
