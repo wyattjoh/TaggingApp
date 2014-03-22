@@ -6,9 +6,7 @@ package ca.ualberta.cs.taggingapp.models;
 import java.util.ArrayList;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import ca.ualberta.cs.taggingapp.R;
 
 /**
