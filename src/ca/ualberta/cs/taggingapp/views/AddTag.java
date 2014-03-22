@@ -10,6 +10,8 @@ import android.view.View.OnTouchListener;
 import android.widget.ImageView;
 import android.widget.Toast;
 import ca.ualberta.cs.taggingapp.R;
+import ca.ualberta.cs.taggingapp.models.Picture;
+import ca.ualberta.cs.taggingapp.models.PictureList;
 
 public class AddTag extends Activity {
 
@@ -20,12 +22,12 @@ public class AddTag extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_tag);
 		setTitle("Tagging App");
-
-		Bundle extras = getIntent().getExtras();
-		picId = (Integer) extras.get("imageName");
-
+		
+		Picture thePicture = PictureList.getInstance().getSelected();
+		
 		ImageView img= (ImageView) findViewById(R.id.fullImage);
-		img.setImageResource(picId);
+		img.setImageBitmap(thePicture.getPicture());
+
 
 		img.setOnTouchListener(new OnTouchListener(){
 
