@@ -44,6 +44,7 @@ public class AddTag extends Activity {
 					int realY = y - coordinates[1];
 					String u = "x-Coordinate: \n" + realX + "\ny-Coordinate: \n" + realY;
 					Toast.makeText(getBaseContext(), u, Toast.LENGTH_SHORT).show();
+					
 				}
 
 				return true;
