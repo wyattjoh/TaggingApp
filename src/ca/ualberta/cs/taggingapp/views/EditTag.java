@@ -13,7 +13,6 @@ import ca.ualberta.cs.taggingapp.R;
 public class EditTag extends Activity {
 
 	String tagName;
-	Integer picId;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +22,6 @@ public class EditTag extends Activity {
 
 		// Get the tag name and photo id
 		Bundle extras = getIntent().getExtras();
-		picId = (Integer) extras.get("imageName");
 		tagName = extras.getString("tagName");
 
 		EditText tag = (EditText) findViewById(R.id.tag_edit);
@@ -60,7 +58,6 @@ public class EditTag extends Activity {
 				// current activity
 				Intent i = new Intent(EditTag.this, ViewFullPic.class);
 				i.putExtra("tagName", tagName);
-				i.putExtra("imageName", picId);
 				startActivity(i);
 				EditTag.this.finish();
 			}

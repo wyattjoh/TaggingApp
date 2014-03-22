@@ -47,6 +47,7 @@ public class GridImageAdapter extends BaseAdapter {
         imageView.setImageBitmap(thePictue.getPicture());
         imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
         imageView.setLayoutParams(new GridView.LayoutParams(160, 160));
+        imageView.setTag(position);
         
         return imageView;
     }

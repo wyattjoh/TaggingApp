@@ -8,13 +8,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import ca.ualberta.cs.taggingapp.R;
+import ca.ualberta.cs.taggingapp.models.Picture;
+import ca.ualberta.cs.taggingapp.models.PictureList;
 
 public class TagAndPhoto extends Activity {
-
+	Picture thePicture;
 	String tag;
-	Integer picId;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -23,11 +23,12 @@ public class TagAndPhoto extends Activity {
 		setTitle("Tagging App");
 		
 		Bundle extras = getIntent().getExtras();
-		picId = (Integer) extras.get("imageName");
+		thePicture = PictureList.getInstance().getSelected();
+		
 		tag = extras.getString("tagName");
 		
 		ImageView img= (ImageView) findViewById(R.id.picViewer);
-		img.setImageResource(picId);
+		img.setImageBitmap(thePicture.getPicture());
 		
 		TextView tagName = (TextView) findViewById(R.id.tag);
 		tagName.append(tag);
@@ -49,7 +50,6 @@ public class TagAndPhoto extends Activity {
 	public void morePhotos(View view) {
 		Intent i = new Intent(TagAndPhoto.this, TagRefinedImages.class);
 		i.putExtra("tagName", tag);
-		i.putExtra("imageName", picId);
 		startActivity(i);
 		TagAndPhoto.this.finish();
 	}
@@ -57,7 +57,6 @@ public class TagAndPhoto extends Activity {
 	public void editTag(View view) {
 		Intent i = new Intent(TagAndPhoto.this, EditTag.class);
 		i.putExtra("tagName", tag);
-		i.putExtra("imageName", picId);
 		startActivity(i);
 		TagAndPhoto.this.finish();
 	}
