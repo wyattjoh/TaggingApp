@@ -19,7 +19,7 @@ public class CameraAndPhoto extends Activity {
 	Uri imageFileUri;
 	
 	private ArrayList<String> imageUrls = new ArrayList<String>();
-	private ImageAdapter myAdapter = new ImageAdapter(this);
+	private PictureAdapter myAdapter = new PictureAdapter(this);
 	private GridView gridView;
 	
 	public static final int SHOW_PICTURES_IN_GALLERY = 1;

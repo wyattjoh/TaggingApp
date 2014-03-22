@@ -41,7 +41,7 @@ public class TagRefinedImages extends Activity {
 					View v, int position, long id)
 			{
 				Intent i = new Intent(TagRefinedImages.this, ViewFullPic.class);
-				i.putExtra("imageName", (Integer)gia.getItem(position));
+//				i.putExtra("imageName", (Integer)gia.getItem(position));
 				startActivity(i);
 				/*
 				Toast.makeText(rootView.getContext(),

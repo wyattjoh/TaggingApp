@@ -14,6 +14,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import ca.ualberta.cs.taggingapp.R;
+import ca.ualberta.cs.taggingapp.models.Picture;
+import ca.ualberta.cs.taggingapp.models.PictureList;
 
 public class ViewFullPic extends Activity {
 	
@@ -26,10 +28,12 @@ public class ViewFullPic extends Activity {
 		setTitle("Tagging App");
 		
 		Bundle extras = getIntent().getExtras();
-		final Integer picId = (Integer) extras.get("imageName");
+		
+		// TODO: WYATT: FX
+		Picture thePicture = PictureList.getInstance().getSelected();
 		
 		ImageView img= (ImageView) findViewById(R.id.picViewer);
-		img.setImageResource(picId);
+		img.setImageBitmap(thePicture.getPicture());
 		
 		Random randomGenerator = new Random();
         for (int i = 0; i < 10; i++){
@@ -52,7 +56,6 @@ public class ViewFullPic extends Activity {
 			{
 				Intent i = new Intent(ViewFullPic.this, TagAndPhoto.class);
 				i.putExtra("tagName", adapter.getItem(position));
-				i.putExtra("imageName", picId);
 				i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
 				startActivity(i);
 				//ViewFullPic.this.finish();

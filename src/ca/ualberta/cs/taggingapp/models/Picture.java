@@ -23,6 +23,7 @@ public class Picture {
 	public Bitmap getPicture() {
 		return picture;
 	}
+
 	public void setPicture(Bitmap picture) {
 		this.picture = picture;
 	}
