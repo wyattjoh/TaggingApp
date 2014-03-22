@@ -5,9 +5,13 @@
     android:orientation="vertical"
     android:background="#070924" >
 
-    <SearchView
+    <EditText
         android:id="@+id/tag_search"
         android:layout_width="fill_parent"
+        android:hint="Search"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#AAAAAA"
+        android:gravity="center_horizontal"
         android:layout_height="wrap_content" />
     
     <ListView

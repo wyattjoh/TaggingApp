@@ -32,7 +32,8 @@
         </activity>
         <activity
             android:name="ca.ualberta.cs.taggingapp.views.SwipeSuper"
-            android:label="@string/title_activity_swipe_super" >
+            android:label="@string/title_activity_swipe_super"
+            android:windowSoftInputMode="stateHidden" >
         </activity>
         <activity
             android:name="ca.ualberta.cs.taggingapp.views.ViewFullPic"
