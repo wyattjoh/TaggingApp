@@ -22,7 +22,7 @@ public class GridViewFragment extends Fragment {
 		GridView gridView = (GridView) rootView.findViewById(R.id.photo_grid_view);
 
 		// Instance of ImageAdapter Class
-		final GridImageAdapter gia = new GridImageAdapter(rootView.getContext());
+		final GridImageAdapter gia = new GridImageAdapter(getActivity());
 		gridView.setAdapter(gia);
 
 		gridView.setOnItemClickListener(new OnItemClickListener()
@@ -32,7 +32,7 @@ public class GridViewFragment extends Fragment {
 					View v, int position, long id)
 			{
 				Intent i = new Intent(rootView.getContext(), ViewFullPic.class);
-				i.putExtra("imageName", (Integer)gia.getItem(position));
+//				i.putExtra("imageName", (Integer)gia.getItem(position));
 				startActivity(i);
 				/*
 				Toast.makeText(rootView.getContext(),

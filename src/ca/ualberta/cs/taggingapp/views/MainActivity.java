@@ -1,6 +1,8 @@
 package ca.ualberta.cs.taggingapp.views;
 
 import ca.ualberta.cs.taggingapp.R;
+import ca.ualberta.cs.taggingapp.models.DummyPictureListFactory;
+import ca.ualberta.cs.taggingapp.models.PictureList;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,6 +24,8 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		setTitle("Tagging App");
+		
+		DummyPictureListFactory.createDummyPictures(getApplicationContext());
 	}
 
 	@Override

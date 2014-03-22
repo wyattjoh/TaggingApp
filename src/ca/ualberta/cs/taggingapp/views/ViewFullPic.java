@@ -28,6 +28,8 @@ public class ViewFullPic extends Activity {
 		Bundle extras = getIntent().getExtras();
 		final Integer picId = (Integer) extras.get("imageName");
 		
+		// TODO: WYATT: FX
+		
 		ImageView img= (ImageView) findViewById(R.id.picViewer);
 		img.setImageResource(picId);
 		

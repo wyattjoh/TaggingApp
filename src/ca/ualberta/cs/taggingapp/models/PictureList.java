@@ -9,6 +9,7 @@ import java.util.ArrayList;
 public class PictureList {
 	private static PictureList singleton = null;
 	private ArrayList<Picture> pictureList;
+	private Picture selectedPicture = null;
 	
 	private PictureList() {
 		this.pictureList = new ArrayList<Picture>();
@@ -49,4 +50,17 @@ public class PictureList {
 		return this.pictureList;
 	}
 	
+	/*
+	 * Sets the selected image
+	 */
+	public void setSelected(int position) {
+		selectedPicture = this.pictureList.get(position);
+	}
+	
+	/*
+	 * Get the selected image
+	 */
+	public Picture getSelected() {
+		return selectedPicture;
+	}
 }
