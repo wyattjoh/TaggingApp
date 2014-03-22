@@ -3,11 +3,12 @@
  */
 package ca.ualberta.cs.taggingapp.models;
 
+import java.util.ArrayList;
+
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.util.Log;
 import ca.ualberta.cs.taggingapp.R;
 
 /**
@@ -20,6 +21,7 @@ public class DummyPictureListFactory {
 		Integer[] picIDs = { R.drawable.ex_pic1, R.drawable.ex_pic2,
 				R.drawable.ex_pic5, R.drawable.ex_pic2, R.drawable.ex_pic3 };
 
+		ArrayList<Picture> thePictureListPrimative = new ArrayList<Picture>();
 		PictureList thePictureList = PictureList.getInstance();
 
 		for (Integer pictureId : picIDs) {
@@ -27,12 +29,10 @@ public class DummyPictureListFactory {
 			Bitmap icon = decodeSampledBitmapFromResource(context.getResources(), pictureId, 100, 100);
 			thePicture.setPicture(icon);
 
-			Log.w("DummyPictureListFactory", "Created Picture");
-
-			thePictureList.addPicture(thePicture);
-
-			Log.w("DummyPictureListFactory", "Added Picture");
+			thePictureListPrimative.add(thePicture);
 		}
+		
+		thePictureList.setPictureList(thePictureListPrimative);
 	}
 
 	public static int calculateInSampleSize(BitmapFactory.Options options,
