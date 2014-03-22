@@ -28,9 +28,6 @@ public class ViewFullPic extends Activity {
 		setContentView(R.layout.activity_view_full_pic);
 		setTitle("Tagging App");
 		
-		Bundle extras = getIntent().getExtras();
-		
-		// TODO: WYATT: FX
 		Picture thePicture = PictureList.getInstance().getSelected();
 		
 		ImageView img= (ImageView) findViewById(R.id.picViewer);

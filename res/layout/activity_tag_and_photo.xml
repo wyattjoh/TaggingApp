@@ -46,28 +46,51 @@
 
      <Button
          android:id="@+id/editTag"
-         android:layout_width="wrap_content"
+         android:layout_width="0dp"
          android:layout_height="wrap_content"
          android:layout_alignLeft="@+id/tagURL"
-         android:layout_alignRight="@+id/tagURL"
          android:layout_below="@+id/tagURL"
-         android:textColor="#FFFFFF"
-         android:textSize="14sp"
+         android:layout_toLeftOf="@+id/button1"
          android:background="@android:color/transparent"
+         android:onClick="editTag"
          android:text="Edit Tag"
-         android:onClick="editTag" />
+         android:textColor="#FFFFFF"
+         android:layout_weight="1"
+         android:textSize="14sp" />
 
      <Button
          android:id="@+id/morePhotosWTag"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
          android:layout_alignLeft="@+id/editTag"
-         android:layout_alignRight="@+id/editTag"
+         android:layout_alignParentRight="true"
          android:layout_below="@+id/editTag"
-         android:text="More Photos Tagged With "
          android:background="@android:color/transparent"
-         android:textSize="14sp"
+         android:onClick="morePhotos"
+         android:text="More Photos Tagged With "
          android:textColor="#FFFFFF"
-         android:onClick="morePhotos" />
+         android:textSize="14sp" />
+
+     <Button
+         android:id="@+id/button1"
+         android:layout_width="0dp"
+         android:layout_height="wrap_content"
+         android:layout_above="@+id/morePhotosWTag"
+         android:layout_centerHorizontal="true"
+         android:layout_weight="1"
+         android:text="Button" />
+
+     <Button
+         android:id="@+id/deleteTag"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_alignParentRight="true"
+         android:layout_alignTop="@+id/editTag"
+         android:layout_toRightOf="@+id/editTag"
+         android:text="Delete Tag"
+         android:textColor="#FFFFFF"
+         android:background="@android:color/transparent"
+         android:onClick="deleteTag"
+         android:textSize="14sp" />
 
 </RelativeLayout>
