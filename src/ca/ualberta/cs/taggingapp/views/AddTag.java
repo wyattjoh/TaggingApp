@@ -10,9 +10,6 @@ import android.view.View.OnTouchListener;
 import android.widget.ImageView;
 import android.widget.Toast;
 import ca.ualberta.cs.taggingapp.R;
-import ca.ualberta.cs.taggingapp.controllers.RegionController;
-import ca.ualberta.cs.taggingapp.models.DrawImageView;
-import ca.ualberta.cs.taggingapp.models.Picture;
 
 public class AddTag extends Activity {
 
@@ -65,6 +62,7 @@ public class AddTag extends Activity {
 		return true;
 	}
 
+	@Override
 	public boolean onTouchEvent(MotionEvent event) {
 		int x = (int)event.getX();
 		int y = (int)event.getY();
@@ -79,6 +77,7 @@ public class AddTag extends Activity {
 		return false;
 	}
 
+	@Override
 	public void onPause() {
 		super.onPause();
 		overridePendingTransition(0, 0);

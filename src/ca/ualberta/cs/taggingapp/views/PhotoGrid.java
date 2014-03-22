@@ -4,11 +4,7 @@ import ca.ualberta.cs.taggingapp.R;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
-import android.widget.Toast;
 
 public class PhotoGrid extends Activity {
 

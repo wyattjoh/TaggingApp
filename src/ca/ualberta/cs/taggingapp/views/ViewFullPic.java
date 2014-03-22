@@ -46,12 +46,13 @@ public class ViewFullPic extends Activity {
         
         miniTagsList.setOnItemClickListener(new OnItemClickListener()
 		{
+			@Override
 			public void onItemClick(AdapterView<?> parent,
 					View v, int position, long id)
 			{
 				Intent i = new Intent(ViewFullPic.this, TagAndPhoto.class);
 				i.putExtra("tagName", adapter.getItem(position));
-				i.putExtra("imageName", (Integer)picId);
+				i.putExtra("imageName", picId);
 				i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
 				startActivity(i);
 				//ViewFullPic.this.finish();

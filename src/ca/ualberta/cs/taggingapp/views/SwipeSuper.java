@@ -95,6 +95,7 @@ public class SwipeSuper extends FragmentActivity implements ActionBar.TabListene
 		
 	}
 
+	@Override
 	public void onTabSelected(Tab tab, FragmentTransaction ft) {
         // Show the right fragment when the tab is selected
         vp.setCurrentItem(tab.getPosition());
@@ -118,6 +119,7 @@ public class SwipeSuper extends FragmentActivity implements ActionBar.TabListene
 				.setMessage("Are you sure you want to logout?")
 				.setCancelable(false)
 				.setPositiveButton("Yes",new DialogInterface.OnClickListener() {
+					@Override
 					public void onClick(DialogInterface dialog,int id) {
 						// if this button is clicked, close
 						// current activity
@@ -127,6 +129,7 @@ public class SwipeSuper extends FragmentActivity implements ActionBar.TabListene
 					}
 				  })
 				.setNegativeButton("No",new DialogInterface.OnClickListener() {
+					@Override
 					public void onClick(DialogInterface dialog,int id) {
 						// if this button is clicked, just close
 						// the dialog box and do nothing

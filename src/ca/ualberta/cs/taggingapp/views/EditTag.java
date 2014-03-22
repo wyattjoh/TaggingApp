@@ -54,6 +54,7 @@ public class EditTag extends Activity {
 		.setMessage("Deleting this tag also will delete its references to any photos.")
 		.setCancelable(false)
 		.setPositiveButton("Yes",new DialogInterface.OnClickListener() {
+			@Override
 			public void onClick(DialogInterface dialog,int id) {
 				// if this button is clicked, close
 				// current activity
@@ -65,6 +66,7 @@ public class EditTag extends Activity {
 			}
 		})
 		.setNegativeButton("No",new DialogInterface.OnClickListener() {
+			@Override
 			public void onClick(DialogInterface dialog,int id) {
 				// if this button is clicked, just close
 				// the dialog box and do nothing

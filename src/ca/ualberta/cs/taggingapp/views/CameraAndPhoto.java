@@ -5,23 +5,14 @@ import java.util.ArrayList;
 
 //import taggingapp.views.ImageAdapter;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.provider.MediaStore.Images.Media;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
+import android.provider.MediaStore.MediaColumns;
 import android.widget.GridView;
-import android.widget.Toast;
 
 public class CameraAndPhoto extends Activity {
 	
@@ -73,6 +64,7 @@ public class CameraAndPhoto extends Activity {
 	 * Fill the grid view with the picture obtained from the gallery or from the
 	 * camera.
 	 */
+	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
 		super.onActivityResult(requestCode, resultCode, data);
@@ -83,12 +75,12 @@ public class CameraAndPhoto extends Activity {
 		if (requestCode == SHOW_PICTURES_IN_GALLERY) {
 
 			Cursor cursor = getContentResolver().query(data.getData(),
-					new String[] { Media.DATA }, null, null, null);
+					new String[] { MediaColumns.DATA }, null, null, null);
 			if (!cursor.moveToFirst())
 				return;
 
 			String filePath = cursor.getString(cursor
-					.getColumnIndex(Media.DATA));
+					.getColumnIndex(MediaColumns.DATA));
 			cursor.close();
 
 			this.fillData(filePath);

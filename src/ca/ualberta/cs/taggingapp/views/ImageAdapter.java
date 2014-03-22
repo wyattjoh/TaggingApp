@@ -33,19 +33,23 @@ public class ImageAdapter extends BaseAdapter {
 		photos.add(photo);
 	}
 
+	@Override
 	public int getCount() {
 		return photos.size();
 	}
 
+	@Override
 	public Object getItem(int position) {
 		return null;
 	}
 
+	@Override
 	public long getItemId(int position) {
 		return 0;
 	}
 
 	// create a new ImageView for each item referenced by the Adapter
+	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		ImageView imageView;
 		if (convertView == null) {  // if it's not recycled, initialize some attributes

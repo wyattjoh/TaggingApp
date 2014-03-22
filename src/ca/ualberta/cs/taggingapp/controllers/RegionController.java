@@ -4,12 +4,15 @@ import ca.ualberta.cs.taggingapp.models.Picture;
 import ca.ualberta.cs.taggingapp.models.Region;
 import ca.ualberta.cs.taggingapp.models.Tag;
 
+/*
+ * This class sets up and modifies Regions given either a center point or
+ * opposing corners of the desired region
+ */
 public class RegionController {
 	private int defaultSideLength = 64;
 	public void createRegion(Picture picture, int x, int y) {
 		Region region = new Region();
-		region.setCenterX(x);
-		region.setCenterY(y);
+		region.setCenter(x, y);
 		region.setHeight(defaultSideLength);
 		region.setWidth(defaultSideLength);
 		region.setPicture(picture);
@@ -33,8 +36,7 @@ public class RegionController {
 		region.updateRegionFromCorners();
 	}
 	public void moveRegion(Region region, int x, int y) {
-		region.setCenterX(x);
-		region.setCenterY(y);
+		region.setCenter(x,y);
 		region.updateRegionFromCenter();
 	}
 	public void removeRegion(Region region) {

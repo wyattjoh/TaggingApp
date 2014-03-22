@@ -62,6 +62,7 @@ public class TagAndPhoto extends Activity {
 		TagAndPhoto.this.finish();
 	}
 	
+	@Override
 	public void onPause() {
 	     super.onPause();
 	     overridePendingTransition(0, 0);

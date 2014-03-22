@@ -43,6 +43,7 @@ public class TagsListFragment extends Fragment {
         
         listView.setOnItemClickListener(new OnItemClickListener()
 		{
+			@Override
 			public void onItemClick(AdapterView<?> parent,
 					View v, int position, long id)
 			{
