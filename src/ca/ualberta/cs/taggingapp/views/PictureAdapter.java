@@ -19,11 +19,11 @@ import android.widget.ImageView;
  * 
  */
 
-public class ImageAdapter extends BaseAdapter {
+public class PictureAdapter extends BaseAdapter {
 	private Context mContext;
 	private ArrayList<Bitmap> photos;
 
-	public ImageAdapter(Context c) {
+	public PictureAdapter(Context c) {
 		mContext = c;
 		photos = new ArrayList<Bitmap>();
 	}

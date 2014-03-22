@@ -20,7 +20,7 @@ public class Picture {
 	public String getPicture() {
 		return picture;
 	}
-	public void setPicture(String picture) {
+	public void setBitmap(String picture) {
 		this.picture = picture;
 	}
 }
