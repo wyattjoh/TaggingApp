@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import ca.ualberta.cs.taggingapp.R;
+import ca.ualberta.cs.taggingapp.controllers.RegionController;
 import ca.ualberta.cs.taggingapp.models.Picture;
 import ca.ualberta.cs.taggingapp.models.PictureList;
 
@@ -59,6 +60,11 @@ public class TagAndPhoto extends Activity {
 		i.putExtra("tagName", tag);
 		startActivity(i);
 		TagAndPhoto.this.finish();
+	}
+	
+	public void deleteTag(View view) {
+		RegionController rc = new RegionController();
+		//rc.removeRegion();
 	}
 	
 	@Override
