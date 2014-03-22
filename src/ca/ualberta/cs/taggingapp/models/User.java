@@ -7,6 +7,8 @@ public class User {
 	private String password = null;
 	private ArrayList<Picture> pictures = new ArrayList<Picture>();
 	private String boundingBoxSetting = "DEFAULT_TAP";
+	
+	//Start of getters and setters
 	public String getEmail() {
 		return email;
 	}
@@ -34,4 +36,5 @@ public class User {
 	public void setBoundingBoxSetting(String boundingBoxSetting) {
 		this.boundingBoxSetting = boundingBoxSetting;
 	}
+	//End of getters and setters
 }
