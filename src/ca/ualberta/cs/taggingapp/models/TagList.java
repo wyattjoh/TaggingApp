@@ -7,12 +7,16 @@ public class TagList {
 	public ArrayList<Tag> getTags() {
 		return tags;
 	}
+	
+	//These methods add or remove tags from the TagList
 	public void addTag(Tag tag) {
 		this.tags.add(tag);
 	}
 	public void removeTag(Tag tag) {
 		this.tags.remove(tag);
 	}
+	
+	//This method allows for searching the TagList
 	public Tag findTag(String tag) {
 		Tag foundTag = null;
 		for(int i = 0; i < this.tags.size(); i++) {

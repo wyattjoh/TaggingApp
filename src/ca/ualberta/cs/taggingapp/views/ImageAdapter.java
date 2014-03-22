@@ -2,6 +2,8 @@ package ca.ualberta.cs.taggingapp.views;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
+
+import ca.ualberta.cs.taggingapp.models.Picture;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;

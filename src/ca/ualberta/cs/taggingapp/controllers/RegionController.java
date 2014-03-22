@@ -8,6 +8,8 @@ import ca.ualberta.cs.taggingapp.models.Tag;
  * This class sets up and modifies Regions given either a center point or
  * opposing corners of the desired region
  */
+
+//Region factories
 public class RegionController {
 	private int defaultSideLength = 64;
 	public void createRegion(Picture picture, int x, int y) {
@@ -27,6 +29,8 @@ public class RegionController {
 		region.updateRegionFromCorners();
 		picture.addRegion(region);
 	}
+	
+	//Region edit methods
 	public void moveUpperLeftRegionCorner(Region region, int x, int y) {
 		region.setUpperLeftCorner(x,y);
 		region.updateRegionFromCorners();

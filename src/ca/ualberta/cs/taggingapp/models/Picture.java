@@ -1,10 +1,13 @@
 package ca.ualberta.cs.taggingapp.models;
 
 import java.util.ArrayList;
+import android.graphics.Bitmap;
 
 public class Picture {
 	private ArrayList<Region> regions = new ArrayList<Region>();
-	private String picture = null;
+	private Bitmap picture = null;
+	
+	//Start of getters and setters
 	public ArrayList<Region> getRegions() {
 		return regions;
 	}
@@ -17,10 +20,11 @@ public class Picture {
 	public void removeAllRegions() {
 		this.regions.clear();
 	}
-	public String getPicture() {
+	public Bitmap getPicture() {
 		return picture;
 	}
-	public void setPicture(String picture) {
+	public void setPicture(Bitmap picture) {
 		this.picture = picture;
 	}
+	//End of getters and setters
 }

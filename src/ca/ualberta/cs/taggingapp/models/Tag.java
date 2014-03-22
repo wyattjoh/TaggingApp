@@ -6,6 +6,8 @@ public class Tag {
 	private String name = null;
 	private String URL = null;
 	private ArrayList<Region> taggedRegions = new ArrayList<Region>();
+	
+	//Start of getters and setters
 	public String getName() {
 		return name;
 	}
@@ -21,6 +23,9 @@ public class Tag {
 	public ArrayList<Region> getTaggedRegions() {
 		return taggedRegions;
 	}
+	//End of getters and setters
+	
+	//These methods associates or dissociates a region with a tag
 	public void addTaggedRegion(Region region) {
 		this.taggedRegions.add(region);
 	}

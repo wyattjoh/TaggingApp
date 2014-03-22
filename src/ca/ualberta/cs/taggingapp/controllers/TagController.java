@@ -4,6 +4,8 @@ import ca.ualberta.cs.taggingapp.models.Region;
 import ca.ualberta.cs.taggingapp.models.Tag;
 
 public class TagController {
+	
+	//Tag factory
 	public Tag createNewTag(Region region, String name, String URL) {
 		Tag tag = new Tag();
 		tag.addTaggedRegion(region);
@@ -11,6 +13,8 @@ public class TagController {
 		tag.setURL(URL);
 		return tag;
 	}
+	
+	//Tag edit methods
 	public void editTagName(Tag tag, String name) {
 		tag.setName(name);
 	}
