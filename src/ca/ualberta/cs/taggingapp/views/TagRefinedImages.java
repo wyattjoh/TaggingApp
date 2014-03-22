@@ -1,5 +1,7 @@
 package ca.ualberta.cs.taggingapp.views;
 
+import ca.ualberta.cs.taggingapp.R;
+import ca.ualberta.cs.taggingapp.models.PictureList;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,7 +11,6 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 import android.widget.TextView;
-import ca.ualberta.cs.taggingapp.R;
 
 public class TagRefinedImages extends Activity {
 
@@ -41,7 +42,11 @@ public class TagRefinedImages extends Activity {
 					View v, int position, long id)
 			{
 				Intent i = new Intent(TagRefinedImages.this, ViewFullPic.class);
-//				i.putExtra("imageName", (Integer)gia.getItem(position));
+
+				Integer imagePosition = (Integer) v.getTag();
+
+				PictureList.getInstance().setSelected(imagePosition);
+				
 				startActivity(i);
 				/*
 				Toast.makeText(rootView.getContext(),
