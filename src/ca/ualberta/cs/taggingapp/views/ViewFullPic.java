@@ -68,6 +68,7 @@ public class ViewFullPic extends Activity {
 		return true;
 	}
 	
+	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 	    // Handles presses on the action bar items
 	    switch (item.getItemId()) {
