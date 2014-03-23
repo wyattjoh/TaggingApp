@@ -1,22 +1,18 @@
 package ca.ualberta.cs.taggingapp.views;
 
-import ca.ualberta.cs.taggingapp.R;
-import ca.ualberta.cs.taggingapp.models.DummyPictureListFactory;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+import ca.ualberta.cs.taggingapp.R;
+import ca.ualberta.cs.taggingapp.models.ActiveUserModel;
+import ca.ualberta.cs.taggingapp.models.DummyPictureListFactory;
 
 public class MainActivity extends Activity {
-	
-	String VALID_USER = "guest";
-	String VALID_PASS = "1234";
-	
-	String	 	email,
-				password;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +21,18 @@ public class MainActivity extends Activity {
 		setTitle("Tagging App");
 		
 		DummyPictureListFactory.createDummyPictures(getApplicationContext());
+		
+		// Create the active user model
+		ActiveUserModel.createShared(getApplicationContext());
+		
+		// Check if logged in already
+		if (ActiveUserModel.getShared().isLoggedIn()) {
+			Log.w("MainActivity", "Logged in user found, continueing to main screen.");
+			continueToSwipeSuper();
+		}
+		else {
+			Log.w("MainActivity", "Logged in user not found.");
+		}
 	}
 
 	@Override
@@ -35,16 +43,17 @@ public class MainActivity extends Activity {
 	}
 
 	public void loginGuest(View view) {
+		// Create the user
+		ActiveUserModel.getShared().performLogin("guest@example.com", "password");
+		
 		Intent i = new Intent(MainActivity.this, SwipeSuper.class);
 		startActivity(i);
 		MainActivity.this.finish();
 	}
 	
 	public void loginUser(View view) {
-		if (this.verify()) {
-			Intent i = new Intent(MainActivity.this, SwipeSuper.class);
-			startActivity(i);
-			MainActivity.this.finish();
+		if (this.verifyLoginDetails()) {
+			continueToSwipeSuper();
 		}
 		else {
 			String s = "Invalid Username/Password";
@@ -52,22 +61,31 @@ public class MainActivity extends Activity {
 		}
 	}
 	
+	private void continueToSwipeSuper() {
+		Intent i = new Intent(MainActivity.this, SwipeSuper.class);
+		startActivity(i);
+		finish();
+	}
+	
 	public void signUp(View view) {
+		EditText emailField = (EditText) findViewById(R.id.email);
+		
 		Intent i = new Intent(MainActivity.this, SignUp.class);
+		
+		String emailString = emailField.getText().toString();
+		if (emailString.length() > 0) {
+			i.putExtra(SignUp.EMAIL_FIELD_EXTRA_KEY, emailString);
+		}
+				
 		startActivity(i);
 	}
 	
-	public boolean verify() {
-		
+	public boolean verifyLoginDetails() {
 		// this method should verify if the email and password are a valid combination
-		email = ((EditText) findViewById(R.id.email)).getText().toString();
-		password = ((EditText) findViewById(R.id.password)).getText().toString();
+		String email = ((EditText) findViewById(R.id.email)).getText().toString();
+		String password = ((EditText) findViewById(R.id.password)).getText().toString();
 		
-		if (email.equals(VALID_USER) && password.equals(VALID_PASS)) {
-			return true;
-		}
-		
-		return false;
+		return ActiveUserModel.getShared().performLogin(email, password);
 	}
 	
 }

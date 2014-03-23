@@ -2,36 +2,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#070924"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="#070924"
     tools:context=".SignUp" >
-
-    <EditText
-        android:id="@+id/password"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:ems="10"
-        android:textColorHint="#AAAAAA"
-        android:gravity="center_horizontal"
-        android:hint="@string/passHint"
-        android:inputType="textPassword"
-        android:textColor="#FFFFFF"
-        android:maxLines="1" />
 
     <EditText
         android:id="@+id/email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/password"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginBottom="84dp"
+        android:layout_alignLeft="@+id/SignUp"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/SignUp"
+        android:layout_marginTop="92dp"
         android:ems="10"
         android:gravity="center_horizontal"
         android:hint="@string/emailHint"
@@ -41,13 +26,31 @@
         android:textColorHint="#AAAAAA" />
 
     <EditText
+        android:id="@+id/password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/email"
+        android:layout_alignRight="@+id/email"
+        android:layout_below="@+id/email"
+        android:layout_marginTop="38dp"
+        android:ems="10"
+        android:gravity="center_horizontal"
+        android:hint="@string/passHint"
+        android:inputType="textPassword"
+        android:maxLines="1"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#AAAAAA" >
+
+        <requestFocus />
+    </EditText>
+
+    <EditText
         android:id="@+id/confirmPass"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/password"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginBottom="22dp"
+        android:layout_alignLeft="@+id/email"
+        android:layout_alignRight="@+id/password"
+        android:layout_below="@+id/password"
         android:ems="10"
         android:gravity="center_horizontal"
         android:hint="@string/confirmPass"
@@ -63,9 +66,9 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:text="@string/signup"
-        android:textColor="#FFFFFF"
         android:background="@android:color/transparent"
-        android:onClick="createUser" />
+        android:onClick="createUser"
+        android:text="@string/signup"
+        android:textColor="#FFFFFF" />
 
 </RelativeLayout>
