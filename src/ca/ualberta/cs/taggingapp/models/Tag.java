@@ -12,7 +12,7 @@ public class Tag {
 		return name;
 	}
 	public void setName(String name) {
-		this.name = name;
+		this.name = name.toLowerCase();
 	}
 	public String getURL() {
 		return URL;
@@ -31,5 +31,24 @@ public class Tag {
 	}
 	public void removeTaggedRegion(Region region) {
 		this.taggedRegions.remove(region);
+	}
+	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object o) {
+		if (o == null || !(o instanceof Tag)) {
+			return false;
+		}
+		
+		Tag object = (Tag) o;
+		
+		if (object.getName().equals(name)) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 }

@@ -7,7 +7,7 @@ import ca.ualberta.cs.taggingapp.models.TagList;
 public class TagListController {
 	
 	//This class allows easy editing and setup of TagLists and TagControllers
-	private TagList tags = new TagList();
+	private TagList tags = TagList.getInstance();
 	private TagController controller = new TagController();
 	
 	//Tag list edit methods

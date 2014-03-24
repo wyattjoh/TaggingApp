@@ -12,6 +12,7 @@ import ca.ualberta.cs.taggingapp.R;
 import ca.ualberta.cs.taggingapp.models.ActiveUserModel;
 import ca.ualberta.cs.taggingapp.models.DummyPictureListFactory;
 import ca.ualberta.cs.taggingapp.models.PictureList;
+import ca.ualberta.cs.taggingapp.models.TagList;
 
 public class MainActivity extends Activity {
 	
@@ -21,8 +22,9 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);
 		setTitle("Tagging App");
 		
-		// Create the picture list
+		// Create the picture and tags list
 		PictureList.createInstance(getApplicationContext());
+		TagList.createInstance(getApplicationContext());
 		
 		DummyPictureListFactory.createDummyPictures(getApplicationContext());
 		
