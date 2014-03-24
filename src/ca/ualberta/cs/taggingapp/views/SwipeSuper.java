@@ -85,7 +85,7 @@ public class SwipeSuper extends FragmentActivity implements
 			// openCamera();
 			Intent i = new Intent(SwipeSuper.this, CameraAndPhoto.class);
 			startActivity(i);
-			finish();
+			//finish();
 			return true;
 		case R.id.logout:
 			logout();

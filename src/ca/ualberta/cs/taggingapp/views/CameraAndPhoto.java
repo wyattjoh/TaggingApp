@@ -3,12 +3,15 @@ package ca.ualberta.cs.taggingapp.views;
 import java.io.File;
 import java.util.ArrayList;
 
+import ca.ualberta.cs.taggingapp.R;
+
 //import taggingapp.views.ImageAdapter;
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.provider.MediaStore.MediaColumns;
@@ -45,8 +48,11 @@ public class CameraAndPhoto extends Activity {
 	 * Create a file where the camera will save the picture and start the
 	 * camera.
 	 */
-	public void takeAPhoto() {
-
+	//public void takeAPhoto() {
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		//setContentView(R.layout.activity_camera_and_photo_view);
+		
 		String folder = Environment.getExternalStorageDirectory()
 				.getAbsolutePath() + "/tmp";
 		File folderF = new File(folder);
@@ -72,6 +78,7 @@ public class CameraAndPhoto extends Activity {
 		intentC.putExtra(MediaStore.EXTRA_OUTPUT, imageFileUri);
 
 		startActivityForResult(intentC, TAKE_PICTURE);
+		finish();
 
 	}
 	
