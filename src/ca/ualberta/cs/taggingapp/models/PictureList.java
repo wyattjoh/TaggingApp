@@ -2,6 +2,8 @@ package ca.ualberta.cs.taggingapp.models;
 
 import java.util.ArrayList;
 
+import android.content.Context;
+
 /**
  * @author Wyatt Johnson
  */
@@ -10,14 +12,35 @@ public class PictureList {
 	private static PictureList singleton = null;
 	private ArrayList<Picture> pictureList;
 	private Picture selectedPicture = null;
+	private Context theContext;
 	
 	private PictureList() {
 		this.pictureList = new ArrayList<Picture>();
 	}
 	
+	/**
+	 * @return the theContext
+	 */
+	public Context getTheContext() {
+		return theContext;
+	}
+
+	/**
+	 * @param theContext the theContext to set
+	 */
+	public void setTheContext(Context theContext) {
+		this.theContext = theContext;
+	}
+
+	public static PictureList createInstance(Context applicationContext) {
+		singleton = new PictureList();
+		singleton.setTheContext(applicationContext);
+		return singleton;
+	}
+	
 	public static PictureList getInstance() {
 		if (singleton == null) {
-			singleton = new PictureList();
+			throw new RuntimeException("No instance created!");
 		}
 		return singleton;
 	}
