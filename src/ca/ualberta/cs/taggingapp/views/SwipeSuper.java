@@ -81,11 +81,9 @@ public class SwipeSuper extends FragmentActivity implements
 		// Handles presses on the action bar items
 		switch (item.getItemId()) {
 		case R.id.camera:
-			// the openCamera() method calls katherines code
-			// openCamera();
+			// calls camera code
 			Intent i = new Intent(SwipeSuper.this, CameraAndPhoto.class);
 			startActivity(i);
-			//finish();
 			return true;
 		case R.id.logout:
 			logout();

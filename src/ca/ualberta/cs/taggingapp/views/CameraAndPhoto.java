@@ -3,7 +3,7 @@ package ca.ualberta.cs.taggingapp.views;
 import java.io.File;
 import java.util.ArrayList;
 
-import ca.ualberta.cs.taggingapp.R;
+//import ca.ualberta.cs.taggingapp.R;
 
 //import taggingapp.views.ImageAdapter;
 import android.app.Activity;
@@ -29,20 +29,6 @@ public class CameraAndPhoto extends Activity {
 	public static final int TAKE_PICTURE = 2;
 	public static final int RETURN_PICTURES = 3;
 	
-	
-	
-	/**
-	 * Start an activity that selects a photo from the gallery.
-	 */
-	public void selectPhoto() {
-
-		Intent intent = new Intent(Intent.ACTION_PICK,
-				android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-
-		// returns the path of the photo selected from gallery
-		startActivityForResult(intent, SHOW_PICTURES_IN_GALLERY);
-
-	}
 	
 	/**
 	 * Create a file where the camera will save the picture and start the
@@ -79,6 +65,20 @@ public class CameraAndPhoto extends Activity {
 
 		startActivityForResult(intentC, TAKE_PICTURE);
 		finish();
+
+	}
+	
+
+	/**
+	 * Start an activity that selects a photo from the gallery.
+	 */
+	public void selectPhoto() {
+
+		Intent intent = new Intent(Intent.ACTION_PICK,
+				android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+
+		// returns the path of the photo selected from gallery
+		startActivityForResult(intent, SHOW_PICTURES_IN_GALLERY);
 
 	}
 	
