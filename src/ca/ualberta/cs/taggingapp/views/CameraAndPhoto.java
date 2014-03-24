@@ -33,10 +33,8 @@ public class CameraAndPhoto extends Activity {
 	 * Create a file where the camera will save the picture and start the
 	 * camera.
 	 */
-	//public void takeAPhoto() {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		//setContentView(R.layout.activity_camera_and_photo_view);
 		
 		String folder = Environment.getExternalStorageDirectory()
 				.getAbsolutePath() + "/tmp";
@@ -64,7 +62,6 @@ public class CameraAndPhoto extends Activity {
 
 		startActivityForResult(intentC, TAKE_PICTURE);
 		finish();
-
 	}
 	
 
