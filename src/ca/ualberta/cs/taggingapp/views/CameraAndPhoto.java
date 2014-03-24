@@ -5,7 +5,6 @@ import java.util.ArrayList;
 
 //import ca.ualberta.cs.taggingapp.R;
 
-//import taggingapp.views.ImageAdapter;
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;

@@ -62,6 +62,9 @@
             android:name="ca.ualberta.cs.taggingapp.views.AddTag"
             android:label="@string/title_activity_add_tag" >
         </activity>
+                <activity
+            android:name="ca.ualberta.cs.taggingapp.views.CameraAndPhoto" >
+        </activity>
     </application>
 
 </manifest>
