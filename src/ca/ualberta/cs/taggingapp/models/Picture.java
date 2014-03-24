@@ -4,8 +4,13 @@ import java.util.ArrayList;
 import android.graphics.Bitmap;
 
 public class Picture {
-	private ArrayList<Region> regions = new ArrayList<Region>();
-	private Bitmap picture = null;
+	private ArrayList<Region> regions;
+	private transient Bitmap picture = null;
+	private String pictureUri = null;
+	
+	public Picture() {
+		regions = new ArrayList<Region>();
+	}
 	
 	//Start of getters and setters
 	public ArrayList<Region> getRegions() {
@@ -21,6 +26,10 @@ public class Picture {
 		this.regions.clear();
 	}
 	public Bitmap getPicture() {
+		if (picture == null && pictureUri != null) {
+			// TODO: Load the picture from the URI
+		}
+		
 		return picture;
 	}
 
