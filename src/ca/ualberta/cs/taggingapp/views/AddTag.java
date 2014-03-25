@@ -38,7 +38,8 @@ public class AddTag extends Activity {
 		// Handles presses on the action bar items
 		switch (item.getItemId()) {
 		case R.id.accept:
-			
+			Intent i = new Intent(AddTag.this, AddNameToTag.class);
+			startActivity(i);
 			return true;
 		case R.id.decline:
 			
