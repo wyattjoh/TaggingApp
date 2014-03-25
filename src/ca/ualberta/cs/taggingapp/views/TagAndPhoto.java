@@ -62,7 +62,6 @@ public class TagAndPhoto extends Activity {
 	}
 	
 	public void deleteTag(View view) {
-		//Need to re-implement after region controller refactor
 	}
 	
 	@Override
