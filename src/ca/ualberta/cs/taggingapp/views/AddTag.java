@@ -1,9 +1,12 @@
 package ca.ualberta.cs.taggingapp.views;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import ca.ualberta.cs.taggingapp.R;
 import ca.ualberta.cs.taggingapp.models.DrawImageView;
 import ca.ualberta.cs.taggingapp.models.Picture;
@@ -24,9 +27,26 @@ public class AddTag extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.add_tag, menu);
-
-		return true;
+		//		getMenuInflater().inflate(R.menu.add_tag, menu);
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.add_tag_action_bar, menu);
+		return super.onCreateOptionsMenu(menu);
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// Handles presses on the action bar items
+		switch (item.getItemId()) {
+		case R.id.accept:
+			Intent i = new Intent(AddTag.this, AddNameToTag.class);
+			startActivity(i);
+			return true;
+		case R.id.decline:
+			
+			return true;
+		default:
+			return super.onOptionsItemSelected(item);
+		}
 	}
 
 	@Override

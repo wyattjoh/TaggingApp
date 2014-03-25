@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#070924" >
+
+    <EditText
+        android:id="@+id/tag_name"
+        android:layout_width="fill_parent"
+        android:hint="Enter Tag Name"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#AAAAAA"
+        android:gravity="center_horizontal"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:id="@+id/tag_url"
+        android:layout_width="fill_parent"
+        android:hint="Enter Tag URL"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#AAAAAA"
+        android:gravity="center_horizontal"
+        android:layout_below="@+id/tag_name"
+        android:layout_height="wrap_content" />
+    
+    <ListView
+        android:id="@+id/tags_list_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/tag_url" >
+
+    </ListView>
+ 
+</RelativeLayout>
