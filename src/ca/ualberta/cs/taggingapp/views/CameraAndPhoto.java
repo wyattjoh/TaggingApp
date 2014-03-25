@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
@@ -52,9 +53,11 @@ public class CameraAndPhoto extends Activity {
 		imageFileUri = Uri.fromFile(imageFile);
 
 		// refresh
-		sendBroadcast(new Intent(
-				Intent.ACTION_MEDIA_SCANNER_SCAN_FILE,
-				Uri.parse("file://" + Environment.getExternalStorageDirectory())));
+//		sendBroadcast(new Intent(
+//				//Intent.ACTION_MEDIA_MOUNTED
+//				
+//				Intent.ACTION_MEDIA_SCANNER_SCAN_FILE,
+//				Uri.parse("file://" + Environment.getExternalStorageDirectory())));
 
 		// intentC has information about image and is set to start the camera
 		Intent intentC = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -107,6 +110,9 @@ public class CameraAndPhoto extends Activity {
 			else if (requestCode == TAKE_PICTURE) {
 			String path = imageFileUri.toString();
 			this.fillData(path.replace("file://", ""));
+			
+			Bitmap image = (Bitmap) data.getExtras().get("data");
+			MediaStore.Images.Media.insertImage(getContentResolver(), image, "title", "description");
 		}
 
 	}
