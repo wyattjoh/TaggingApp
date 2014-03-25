@@ -1,6 +1,7 @@
 package ca.ualberta.cs.taggingapp.views;
 
 import android.app.Activity;
+import android.graphics.Canvas;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MotionEvent;
@@ -22,7 +23,7 @@ public class AddTag extends Activity {
 		setContentView(R.layout.activity_add_tag);
 		setTitle("Tagging App");
 		Picture thePicture = PictureList.getInstance().getSelected();
-		DrawImageView picture= new DrawImageView(this);
+		DrawImageView picture = new DrawImageView(this);
 		picture.setImageBitmap(thePicture.getPicture());
 		picture.setOnTouchListener(new OnTouchListener() {
 
