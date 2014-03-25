@@ -30,6 +30,7 @@ public class ViewFullPic extends Activity {
 		ImageView img= (ImageView) findViewById(R.id.picViewer);
 		img.setImageBitmap(thePicture.getPicture());
 		TaggedImageView picture = (TaggedImageView) findViewById(R.id.taggedImageView1);
+		picture.setPicture(thePicture);
 		picture.setBackground(new BitmapDrawable(getResources(), thePicture.getPicture()));
 		
 		ListView miniTagsList = (ListView) this.findViewById(R.id.miniTagsList);

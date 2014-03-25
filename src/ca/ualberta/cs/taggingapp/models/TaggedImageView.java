@@ -14,20 +14,23 @@ public class TaggedImageView extends ImageView {
 	private Paint paint;
 	private Picture picture;
 
-    public TaggedImageView(Context context, AttributeSet attrs, Picture picture)
+    public TaggedImageView(Context context, AttributeSet attrs)
     {
         super(context, attrs);
-        init(picture);
+        init();
     }
 
-    private void init(Picture picture)
+    private void init()
     {
-    	this.picture = picture;
         paint = new Paint();
         paint.setColor(Color.WHITE);
         paint.setStyle(Style.STROKE);
         paint.setStrokeWidth(2);
         paint.setAntiAlias(true);
+    }
+    
+    public void setPicture(Picture picture) {
+    	this.picture = picture;
     }
     
     @Override
