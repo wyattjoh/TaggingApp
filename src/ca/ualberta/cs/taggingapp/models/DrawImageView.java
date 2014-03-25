@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.PointF;
+import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.widget.ImageView;
 
@@ -16,16 +17,16 @@ public class DrawImageView extends ImageView {
     private PointF startPoint, endPoint;
     private boolean isDrawing;
 
-    public DrawImageView(Context context)
+    public DrawImageView(Context context, AttributeSet attrs)
     {
-        super(context);
+        super(context, attrs);
         init();
     }
 
     private void init()
     {
         paint = new Paint();
-        paint.setColor(Color.RED);
+        paint.setColor(Color.WHITE);
         paint.setStyle(Style.STROKE);
         paint.setStrokeWidth(2);
         paint.setAntiAlias(true);
@@ -36,7 +37,7 @@ public class DrawImageView extends ImageView {
     {
         if(isDrawing)
         {
-            canvas.drawLine(startPoint.x, startPoint.y, endPoint.x, endPoint.y, paint);
+            canvas.drawRect(startPoint.x, startPoint.y, endPoint.x, endPoint.y, paint);
         }
     }
 
@@ -64,7 +65,6 @@ public class DrawImageView extends ImageView {
                 {
                     endPoint.x = event.getX();
                     endPoint.y = event.getY();
-                    isDrawing = false;
                     invalidate();
                 }
                 break;
