@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.provider.MediaStore.MediaColumns;
+import android.util.Log;
 import android.widget.GridView;
 
 public class CameraAndPhoto extends Activity {
@@ -111,15 +112,15 @@ public class CameraAndPhoto extends Activity {
 			String path = imageFileUri.toString();
 			this.fillData(path.replace("file://", ""));
 			
-			System.out.println("I GET HERE!!!");
+			Log.w("CameraAndPhoto","I GET HERE!!!");
 			
 			Bitmap image = (Bitmap) data.getExtras().get("data");
 			
-			System.out.println("BITMAP:" + image);
+			Log.w("CameraAndPhoto","BITMAP:" + image);
 			
 			MediaStore.Images.Media.insertImage(getContentResolver(), image, "title", "description");
 			
-			System.out.println("I SHOULD HAVE SAVED!!!!");
+			Log.w("CameraAndPhoto","I SHOULD HAVE SAVED!!!!");
 		}
 
 	}
