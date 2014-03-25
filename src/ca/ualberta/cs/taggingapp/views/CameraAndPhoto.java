@@ -91,8 +91,8 @@ public class CameraAndPhoto extends Activity {
 
 		super.onActivityResult(requestCode, resultCode, data);
 
-		if (resultCode != RESULT_OK)
-			return;
+//		if (resultCode != RESULT_OK)
+//			return;
 
 		if (requestCode == SHOW_PICTURES_IN_GALLERY) {
 
@@ -109,8 +109,8 @@ public class CameraAndPhoto extends Activity {
 
 		} 
 			else if (requestCode == TAKE_PICTURE) {
-			String path = imageFileUri.toString();
-			this.fillData(path.replace("file://", ""));
+			//String path = imageFileUri.toString();
+			//this.fillData(path.replace("file://", ""));
 			
 			Log.w("CameraAndPhoto","I GET HERE!!!");
 			
