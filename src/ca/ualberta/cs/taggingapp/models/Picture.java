@@ -1,7 +1,10 @@
 package ca.ualberta.cs.taggingapp.models;
 
 import java.util.ArrayList;
+
+import ca.ualberta.cs.taggingapp.views.PictureAdapter;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 
 public class Picture {
 	private ArrayList<Region> regions;
@@ -28,6 +31,7 @@ public class Picture {
 	public Bitmap getPicture() {
 		if (picture == null && pictureUri != null) {
 			// TODO: Load the picture from the URI
+			
 		}
 		
 		return picture;

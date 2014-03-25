@@ -22,7 +22,7 @@ public class CameraAndPhoto extends Activity {
 	
 	private ArrayList<String> imageUrls = new ArrayList<String>();
 	private PictureAdapter myAdapter = new PictureAdapter(this);
-	private GridView gridView;
+	private GridView gridView; 
 	
 	public static final int SHOW_PICTURES_IN_GALLERY = 1;
 	public static final int TAKE_PICTURE = 2;
@@ -53,7 +53,7 @@ public class CameraAndPhoto extends Activity {
 
 		// refresh
 		sendBroadcast(new Intent(
-				Intent.ACTION_MEDIA_MOUNTED,
+				Intent.ACTION_MEDIA_SCANNER_SCAN_FILE,
 				Uri.parse("file://" + Environment.getExternalStorageDirectory())));
 
 		// intentC has information about image and is set to start the camera
