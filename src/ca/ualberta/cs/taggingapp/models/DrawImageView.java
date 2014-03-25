@@ -65,6 +65,11 @@ public class DrawImageView extends ImageView {
                 {
                     endPoint.x = event.getX();
                     endPoint.y = event.getY();
+                    if (endPoint.x > startPoint.x) {
+                    	float temp = endPoint.x;
+                    	endPoint.x = startPoint.x;
+                    	startPoint.x = temp;
+                    }
                     invalidate();
                 }
                 break;
