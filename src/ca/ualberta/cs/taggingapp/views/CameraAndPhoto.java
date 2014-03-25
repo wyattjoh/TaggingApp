@@ -65,7 +65,7 @@ public class CameraAndPhoto extends Activity {
 		intentC.putExtra(MediaStore.EXTRA_OUTPUT, imageFileUri);
 
 		startActivityForResult(intentC, TAKE_PICTURE);
-		finish();
+		//finish();
 	}
 	
 
@@ -121,6 +121,7 @@ public class CameraAndPhoto extends Activity {
 			MediaStore.Images.Media.insertImage(getContentResolver(), image, "title", "description");
 			
 			Log.w("CameraAndPhoto","I SHOULD HAVE SAVED!!!!");
+			finish();
 		}
 
 	}
