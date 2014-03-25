@@ -62,8 +62,7 @@ public class TagAndPhoto extends Activity {
 	}
 	
 	public void deleteTag(View view) {
-		RegionController rc = new RegionController();
-		//rc.removeRegion();
+
 	}
 	
 	@Override

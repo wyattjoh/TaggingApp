@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.ListView;
 import ca.ualberta.cs.taggingapp.R;
+import ca.ualberta.cs.taggingapp.controllers.TagListController;
 import ca.ualberta.cs.taggingapp.models.Picture;
 import ca.ualberta.cs.taggingapp.models.PictureList;
 import ca.ualberta.cs.taggingapp.models.Region;
@@ -35,7 +36,11 @@ public class AddNameToTag extends Activity {
 		Point bottomRight = (Point) extras.get("lowerRight");
 		
 		Region region  = new Region(pic, topLeft.x, topLeft.y, bottomRight.x, bottomRight.y);
-		Tag tag = new Tag();
+		
+		TagListController tlc = new TagListController();
+		Tag tag = tlc.addNewTag(region, tagName.getText().toString(), tagURL.getText().toString());
+		
+		region.editRegionTag(tag);
 		
 	}
 
