@@ -40,9 +40,8 @@ public class AddTag extends Activity {
 		switch (item.getItemId()) {
 		case R.id.accept:
 			Intent i = new Intent(AddTag.this, AddNameToTag.class);
-			//i.putExtra("upperLeft", picture.getUpperLeftPoint());
-			//i.putExtra("lowerRight", picture.getLowerRightPoint());
 			startActivity(i);
+			AddTag.this.finish();
 			return true;
 		case R.id.decline:
 			

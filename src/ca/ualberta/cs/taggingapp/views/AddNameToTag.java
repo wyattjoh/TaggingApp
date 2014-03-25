@@ -1,6 +1,7 @@
 package ca.ualberta.cs.taggingapp.views;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.view.Menu;
@@ -57,10 +58,14 @@ public class AddNameToTag extends Activity {
 		// Handles presses on the action bar items
 		switch (item.getItemId()) {
 		case R.id.accept:
-				
+			//Intent i = new Intent(AddNameToTag.this, ViewFullPic.class);
+			//startActivity(i);
+			AddNameToTag.this.finish();
 			return true;
 		case R.id.decline:
-			
+			//Intent j = new Intent(AddNameToTag.this, ViewFullPic.class);
+			//startActivity(j);
+			AddNameToTag.this.finish();
 			return true;
 		default:
 			return super.onOptionsItemSelected(item);
