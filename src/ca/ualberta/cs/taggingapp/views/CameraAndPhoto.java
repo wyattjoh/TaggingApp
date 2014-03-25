@@ -111,8 +111,15 @@ public class CameraAndPhoto extends Activity {
 			String path = imageFileUri.toString();
 			this.fillData(path.replace("file://", ""));
 			
+			System.out.println("I GET HERE!!!");
+			
 			Bitmap image = (Bitmap) data.getExtras().get("data");
+			
+			System.out.println("BITMAP:" + image);
+			
 			MediaStore.Images.Media.insertImage(getContentResolver(), image, "title", "description");
+			
+			System.out.println("I SHOULD HAVE SAVED!!!!");
 		}
 
 	}
