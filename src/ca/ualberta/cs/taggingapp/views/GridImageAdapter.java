@@ -17,8 +17,9 @@ public class GridImageAdapter extends BaseAdapter {
 	private Context theContext;
  
 	public GridImageAdapter(Activity theActivity) {
-		thePictureList = PictureList.getInstance().getPictureList();
 		theContext = theActivity.getApplicationContext();
+		
+		thePictureList = PictureList.getInstance().getPictureList();
 	}
 
 	@Override

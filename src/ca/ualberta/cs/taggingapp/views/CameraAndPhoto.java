@@ -1,11 +1,13 @@
 package ca.ualberta.cs.taggingapp.views;
 
 import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-
+import java.util.Date;
 //import ca.ualberta.cs.taggingapp.R;
-
 import android.app.Activity;
+
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -19,17 +21,10 @@ import android.util.Log;
 import android.widget.GridView;
 
 public class CameraAndPhoto extends Activity {
+	Uri mCurrentPhotoUri;
+	String mCurrentPhotoPath;
 	
-	Uri imageFileUri;
-	
-	private ArrayList<String> imageUrls = new ArrayList<String>();
-	private PictureAdapter myAdapter = new PictureAdapter(this);
-	private GridView gridView; 
-	
-	public static final int SHOW_PICTURES_IN_GALLERY = 1;
-	public static final int TAKE_PICTURE = 2;
-	public static final int RETURN_PICTURES = 3;
-	
+	static final int REQUEST_TAKE_PHOTO = 1;
 	
 	/**
 	 * Create a file where the camera will save the picture and start the
@@ -38,105 +33,74 @@ public class CameraAndPhoto extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-		String folder = Environment.getExternalStorageDirectory()
-				.getAbsolutePath() + "/tmp";
-		File folderF = new File(folder);
-
-		// if file doesn't exist create a file
-		if (!folderF.exists()) {
-			folderF.mkdir();
-		}
-
-		// save file with the current time
-		String imageFilePath = folder + "/" + System.currentTimeMillis()
-				+ ".jpg";
-		File imageFile = new File(imageFilePath);
-		imageFileUri = Uri.fromFile(imageFile);
-
-		// refresh
-//		sendBroadcast(new Intent(
-//				//Intent.ACTION_MEDIA_MOUNTED
-//				
-//				Intent.ACTION_MEDIA_SCANNER_SCAN_FILE,
-//				Uri.parse("file://" + Environment.getExternalStorageDirectory())));
-
-		// intentC has information about image and is set to start the camera
-		Intent intentC = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-		intentC.putExtra(MediaStore.EXTRA_OUTPUT, imageFileUri);
-
-		startActivityForResult(intentC, TAKE_PICTURE);
-		//finish();
+		dispatchTakePictureIntent();
 	}
-	
 
-	/**
-	 * Start an activity that selects a photo from the gallery.
-	 */
-	public void selectPhoto() {
-
-		Intent intent = new Intent(Intent.ACTION_PICK,
-				android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-
-		// returns the path of the photo selected from gallery
-		startActivityForResult(intent, SHOW_PICTURES_IN_GALLERY);
-
-	}
-	
-	/**
-	 * Fill the grid view with the picture obtained from the gallery or from the
-	 * camera.
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onActivityResult(int, int, android.content.Intent)
 	 */
 	@Override
-	public void onActivityResult(int requestCode, int resultCode, Intent data) {
-
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
-
-//		if (resultCode != RESULT_OK)
-//			return;
-
-		if (requestCode == SHOW_PICTURES_IN_GALLERY) {
-
-			Cursor cursor = getContentResolver().query(data.getData(),
-					new String[] { MediaColumns.DATA }, null, null, null);
-			if (!cursor.moveToFirst())
-				return;
-
-			String filePath = cursor.getString(cursor
-					.getColumnIndex(MediaColumns.DATA));
-			cursor.close();
-
-			this.fillData(filePath);
-
-		} 
-			else if (requestCode == TAKE_PICTURE) {
-			//String path = imageFileUri.toString();
-			//this.fillData(path.replace("file://", ""));
+		
+		if (requestCode == REQUEST_TAKE_PHOTO) {
 			
-			Log.w("CameraAndPhoto","I GET HERE!!!");
+			// Add the pic to the gallery
+			galleryAddPic();
 			
-			Bitmap image = (Bitmap) data.getExtras().get("data");
-			
-			Log.w("CameraAndPhoto","BITMAP:" + image);
-			
-			MediaStore.Images.Media.insertImage(getContentResolver(), image, "title", "description");
-			
-			Log.w("CameraAndPhoto","I SHOULD HAVE SAVED!!!!");
+			// Finish
 			finish();
 		}
-
 	}
-	
+
 	/**
-	 * Add the file path to the list of URLs and add the corresponding photo to
-	 * the grid view.
-	 * 
-	 * @param filePath
+	 * @return ImageFile
+	 * @throws IOException
 	 */
+	private File createImageFile() throws IOException {
+		// Create an image file name
+		String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss")
+				.format(new Date());
+		String imageFileName = "JPEG_" + timeStamp + "_";
+		File storageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+		File image = File.createTempFile(imageFileName, /* prefix */
+				".jpg", /* suffix */
+				storageDir /* directory */
+		);
 
-	private void fillData(String filePath) {
-		this.imageUrls.add(filePath);
-		this.myAdapter.addPhoto(BitmapFactory.decodeFile(filePath));
-		this.gridView.setAdapter(myAdapter);
+		// Save a file: path for use with ACTION_VIEW intents
+		mCurrentPhotoPath = "file:" + image.getAbsolutePath();
+		
+		// Save the Uri
+		mCurrentPhotoUri = Uri.fromFile(image);
+		
+		return image;
 	}
 
+	private void dispatchTakePictureIntent() {
+		Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+		// Ensure that there's a camera activity to handle the intent
+		if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+			// Create the File where the photo should go
+			File photoFile = null;
+			try {
+				photoFile = createImageFile();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			// Continue only if the File was successfully created
+			if (photoFile != null) {
+				takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT,
+						Uri.fromFile(photoFile));
+				startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO);
+			}
+		}
+	}
+
+	private void galleryAddPic() {
+		Log.w("CameraAndPhoto", "Photo saved to: " + mCurrentPhotoPath);
+		Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, mCurrentPhotoUri);
+		getApplicationContext().sendBroadcast(mediaScanIntent);
+	}
 }
