@@ -2,12 +2,14 @@ package ca.ualberta.cs.taggingapp.views;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ImageView;
 import android.widget.ListView;
 import ca.ualberta.cs.taggingapp.R;
 import ca.ualberta.cs.taggingapp.models.Picture;
@@ -25,8 +27,10 @@ public class ViewFullPic extends Activity {
 		
 		Picture thePicture = PictureList.getInstance().getSelected();
 		
-		TaggedImageView img= (TaggedImageView) findViewById(R.id.picViewer);
+		ImageView img= (ImageView) findViewById(R.id.picViewer);
 		img.setImageBitmap(thePicture.getPicture());
+		TaggedImageView picture = (TaggedImageView) findViewById(R.id.taggedImageView1);
+		picture.setBackground(new BitmapDrawable(getResources(), thePicture.getPicture()));
 		
 		ListView miniTagsList = (ListView) this.findViewById(R.id.miniTagsList);
 

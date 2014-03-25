@@ -15,10 +15,27 @@ public class Region {
 	private Tag tag = null;
 	private Picture picture = null;
 	
+	public Region(Picture picture, int upperLeftX, int upperLeftY, int lowerRightX, int lowerRightY) {
+		this.picture = picture;
+		this.upperLeftCorner.x = upperLeftX;
+		this.upperLeftCorner.y = upperLeftY;
+		this.lowerRightCorner.x = lowerRightX;
+		this.lowerRightCorner.y = lowerRightY;
+		this.updateRegionFromCorners();
+	}
+	
+	public Region(Picture picture, int x, int y) {
+		this.height = 64;
+		this.width = 64;
+		this.picture = picture;
+		this.setCenter(x, y);
+	}
+	
 	//Start of getters and setters
 	public void setCenter(int x, int y) {
 		this.center.x = x;
 		this.center.y = y;
+		this.updateRegionFromCenter();
 	}
 	public Point getCenter() {
 		return center;
@@ -38,6 +55,7 @@ public class Region {
 	public void setUpperLeftCorner(int x, int y) {
 		this.upperLeftCorner.x = x;
 		this.upperLeftCorner.y = y;
+		this.updateRegionFromCorners();
 	}
 	public Point getUpperLeftCorner() {
 		return upperLeftCorner;
@@ -45,6 +63,7 @@ public class Region {
 	public void setLowerRightCorner(int x, int y) {
 		this.lowerRightCorner.x = x;
 		this.lowerRightCorner.y = y;
+		this.updateRegionFromCorners();
 	}
 	public Point getLowerRightCorner() {
 		return lowerRightCorner;
@@ -62,6 +81,21 @@ public class Region {
 		this.picture = picture;
 	}
 	//End of getters and setters
+	
+	public void removeRegion() {
+		this.getPicture().removeRegion(this);
+		if(this.getTag() != null) {
+			this.getTag().removeTaggedRegion(this);
+		}
+	}
+	
+	public void editRegionTag(Tag tag) {
+		if(this.getTag() != null) {
+			this.getTag().removeTaggedRegion(this);
+		}
+		this.setTag(tag);
+		this.tag.addTaggedRegion(this);
+	}
 	
 	/*
 	 * These methods update the attributes of the region based on input from the
