@@ -14,9 +14,10 @@ public class TagListController {
 	public void addExistingTag(Tag tag) {
 		tags.addTag(tag);
 	}
-	public void addNewTag(Region region, String name, String URL) {
+	public Tag addNewTag(Region region, String name, String URL) {
 		Tag tag = controller.createNewTag(region, name, URL);
 		tags.addTag(tag);
+		return tag;
 	}
 	public void removeTag(Tag tag) {
 		tags.removeTag(tag);

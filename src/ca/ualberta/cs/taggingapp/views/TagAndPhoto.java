@@ -62,7 +62,6 @@ public class TagAndPhoto extends Activity {
 	}
 	
 	public void deleteTag(View view) {
-
 	}
 	
 	@Override
