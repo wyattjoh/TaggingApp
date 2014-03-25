@@ -14,13 +14,14 @@ import ca.ualberta.cs.taggingapp.models.PictureList;
 
 public class AddTag extends Activity {
 
+	DrawImageView picture;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_tag);
 		setTitle("Tagging App");
 		Picture thePicture = PictureList.getInstance().getSelected();
-		DrawImageView picture = (DrawImageView) findViewById(R.id.drawImageView1);
+		picture = (DrawImageView) findViewById(R.id.drawImageView1);
 		picture.setBackground(new BitmapDrawable(getResources(), thePicture.getPicture()));
 	}
 
@@ -39,6 +40,8 @@ public class AddTag extends Activity {
 		switch (item.getItemId()) {
 		case R.id.accept:
 			Intent i = new Intent(AddTag.this, AddNameToTag.class);
+			i.putExtra("upperLeft", picture.getUpperLeftPoint());
+			i.putExtra("lowerRight", picture.getLowerRightPoint());
 			startActivity(i);
 			return true;
 		case R.id.decline:

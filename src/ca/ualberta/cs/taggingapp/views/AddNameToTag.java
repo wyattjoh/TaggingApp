@@ -1,6 +1,7 @@
 package ca.ualberta.cs.taggingapp.views;
 
 import android.app.Activity;
+import android.graphics.Point;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -8,6 +9,10 @@ import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.ListView;
 import ca.ualberta.cs.taggingapp.R;
+import ca.ualberta.cs.taggingapp.models.Picture;
+import ca.ualberta.cs.taggingapp.models.PictureList;
+import ca.ualberta.cs.taggingapp.models.Region;
+import ca.ualberta.cs.taggingapp.models.Tag;
 
 public class AddNameToTag extends Activity {
 
@@ -20,9 +25,17 @@ public class AddNameToTag extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_name_to_tag);
 		
+		Picture pic = PictureList.getInstance().getSelected();
 		tagName = (EditText) this.findViewById(R.id.tag_name);
 		tagURL = (EditText) this.findViewById(R.id.tag_url);
 		tagList = (ListView) this.findViewById(R.id.tags_list_view);
+		
+		Bundle extras = getIntent().getExtras();
+		Point topLeft = (Point) extras.get("upperLeft");
+		Point bottomRight = (Point) extras.get("lowerRight");
+		
+		Region region  = new Region(pic, topLeft.x, topLeft.y, bottomRight.x, bottomRight.y);
+		Tag tag = new Tag();
 		
 	}
 

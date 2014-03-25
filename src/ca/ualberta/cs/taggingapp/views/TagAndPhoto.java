@@ -9,7 +9,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import ca.ualberta.cs.taggingapp.R;
-import ca.ualberta.cs.taggingapp.controllers.RegionController;
 import ca.ualberta.cs.taggingapp.models.Picture;
 import ca.ualberta.cs.taggingapp.models.PictureList;
 
