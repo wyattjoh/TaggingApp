@@ -35,12 +35,12 @@ public class AddNameToTag extends Activity {
 		Point topLeft = (Point) extras.get("upperLeft");
 		Point bottomRight = (Point) extras.get("lowerRight");
 		
-		Region region  = new Region(pic, topLeft.x, topLeft.y, bottomRight.x, bottomRight.y);
+		//Region region  = new Region(pic, (int)topLeft.x, (int)topLeft.y, (int)bottomRight.x, (int)bottomRight.y);
 		
-		TagListController tlc = new TagListController();
-		Tag tag = tlc.addNewTag(region, tagName.getText().toString(), tagURL.getText().toString());
+		//TagListController tlc = new TagListController();
+		//Tag tag = tlc.addNewTag(region, tagName.getText().toString(), tagURL.getText().toString());
 		
-		region.editRegionTag(tag);
+		//region.editRegionTag(tag);
 		
 	}
 
