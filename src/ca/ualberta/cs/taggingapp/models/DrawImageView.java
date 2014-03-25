@@ -79,7 +79,6 @@ public class DrawImageView extends ImageView {
                     	endPoint.x = startPoint.x;
                     	startPoint.x = temp;
                     }
-                    
                 }
                 break;
             default:
