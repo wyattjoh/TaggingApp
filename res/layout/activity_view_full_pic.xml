@@ -2,11 +2,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#070924"
     android:paddingBottom="0dp"
-    android:paddingTop="0dp"
     android:paddingLeft="0dp"
     android:paddingRight="0dp"
-    android:background="#070924"
+    android:paddingTop="0dp"
     tools:context=".ViewFullPic" >
 
     <ImageView
@@ -39,5 +39,14 @@
         android:layout_below="@+id/listTitle" >
     </ListView>
 
+    <ca.ualberta.cs.taggingapp.models.TaggedImageView
+        android:id="@+id/taggedImageView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/picViewer"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/ic_launcher" />
 
 </RelativeLayout>

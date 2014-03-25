@@ -8,14 +8,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.ListView;
 import ca.ualberta.cs.taggingapp.R;
 import ca.ualberta.cs.taggingapp.models.Picture;
 import ca.ualberta.cs.taggingapp.models.PictureList;
-import ca.ualberta.cs.taggingapp.models.Tag;
 import ca.ualberta.cs.taggingapp.models.TagList;
+import ca.ualberta.cs.taggingapp.models.TaggedImageView;
 
 public class ViewFullPic extends Activity {
 
@@ -27,7 +25,7 @@ public class ViewFullPic extends Activity {
 		
 		Picture thePicture = PictureList.getInstance().getSelected();
 		
-		ImageView img= (ImageView) findViewById(R.id.picViewer);
+		TaggedImageView img= (TaggedImageView) findViewById(R.id.picViewer);
 		img.setImageBitmap(thePicture.getPicture());
 		
 		ListView miniTagsList = (ListView) this.findViewById(R.id.miniTagsList);

@@ -31,7 +31,15 @@ public class DrawImageView extends ImageView {
         paint.setStrokeWidth(2);
         paint.setAntiAlias(true);
     }
-
+    
+    public PointF getUpperLeftPoint() {
+    	return startPoint;
+    }
+    
+    public PointF getLowerRightPoint() {
+    	return endPoint;
+    }
+    
     @Override
     protected void onDraw(Canvas canvas)
     {
