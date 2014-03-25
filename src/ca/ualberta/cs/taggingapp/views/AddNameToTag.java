@@ -31,9 +31,9 @@ public class AddNameToTag extends Activity {
 		tagURL = (EditText) this.findViewById(R.id.tag_url);
 		tagList = (ListView) this.findViewById(R.id.tags_list_view);
 		
-		Bundle extras = getIntent().getExtras();
-		Point topLeft = (Point) extras.get("upperLeft");
-		Point bottomRight = (Point) extras.get("lowerRight");
+		//Bundle extras = getIntent().getExtras();
+		//Point topLeft = (Point) extras.get("upperLeft");
+		//Point bottomRight = (Point) extras.get("lowerRight");
 		
 		//Region region  = new Region(pic, (int)topLeft.x, (int)topLeft.y, (int)bottomRight.x, (int)bottomRight.y);
 		
