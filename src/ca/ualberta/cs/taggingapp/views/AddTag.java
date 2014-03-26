@@ -29,6 +29,7 @@ public class AddTag extends Activity {
 		// Drop down menu
 		SpinnerAdapter mSpinnerAdapter = ArrayAdapter.createFromResource(this, R.array.action_list,
 		          android.R.layout.simple_spinner_dropdown_item);
+		
 	}
 
 	@Override
