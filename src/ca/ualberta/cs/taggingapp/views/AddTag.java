@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.SpinnerAdapter;
 import ca.ualberta.cs.taggingapp.R;
 import ca.ualberta.cs.taggingapp.models.DrawImageView;
 import ca.ualberta.cs.taggingapp.models.Picture;
@@ -23,6 +25,10 @@ public class AddTag extends Activity {
 		Picture thePicture = PictureList.getInstance().getSelected();
 		picture = (DrawImageView) findViewById(R.id.drawImageView1);
 		picture.setBackground(new BitmapDrawable(getResources(), thePicture.getPicture()));
+		
+		// Drop down menu
+		SpinnerAdapter mSpinnerAdapter = ArrayAdapter.createFromResource(this, R.array.action_list,
+		          android.R.layout.simple_spinner_dropdown_item);
 	}
 
 	@Override
