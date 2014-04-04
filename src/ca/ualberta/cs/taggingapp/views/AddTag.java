@@ -40,9 +40,8 @@ public class AddTag extends Activity implements OnNavigationListener {
 		itemList.add("Zoom Tag");
 		ArrayAdapter<String> aAdpt = new ArrayAdapter<String>(this, R.layout.spinner_item, itemList);
 		actionBar.setListNavigationCallbacks(aAdpt, this);
-
-		
 	}
+	
 	public boolean onNavigationItemSelected(int position, long id) {
 		Toast.makeText(getBaseContext(), "postion" + position, Toast.LENGTH_LONG).show();
 		return false;
