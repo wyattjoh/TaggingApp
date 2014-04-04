@@ -7,6 +7,11 @@ public class Tag {
 	private String URL = null;
 	private ArrayList<Region> taggedRegions = new ArrayList<Region>();
 	
+	
+	public Tag(String name, String URL) {
+		this.name = name;
+		this.URL = URL;
+	}
 	//Start of getters and setters
 	public String getName() {
 		return name;

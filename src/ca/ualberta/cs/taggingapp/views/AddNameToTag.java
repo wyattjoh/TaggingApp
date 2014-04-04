@@ -15,6 +15,7 @@ import ca.ualberta.cs.taggingapp.models.Picture;
 import ca.ualberta.cs.taggingapp.models.PictureList;
 import ca.ualberta.cs.taggingapp.models.Region;
 import ca.ualberta.cs.taggingapp.models.Tag;
+import ca.ualberta.cs.taggingapp.models.TagList;
 
 public class AddNameToTag extends Activity {
 
@@ -58,8 +59,9 @@ public class AddNameToTag extends Activity {
 		// Handles presses on the action bar items
 		switch (item.getItemId()) {
 		case R.id.accept:
-			//Intent i = new Intent(AddNameToTag.this, ViewFullPic.class);
-			//startActivity(i);
+			// Create tag and region and hopefully save it here
+			Tag tag = new Tag(tagName.getText().toString(), tagURL.getText().toString());
+			TagList.getInstance().addTag(tag);
 			AddNameToTag.this.finish();
 			return true;
 		case R.id.decline:
