@@ -1,5 +1,9 @@
 package ca.ualberta.cs.taggingapp.views;
 
+import java.util.ArrayList;
+
+import android.app.ActionBar;
+import android.app.ActionBar.OnNavigationListener;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
@@ -8,13 +12,13 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
-import android.widget.SpinnerAdapter;
+import android.widget.Toast;
 import ca.ualberta.cs.taggingapp.R;
 import ca.ualberta.cs.taggingapp.models.DrawImageView;
 import ca.ualberta.cs.taggingapp.models.Picture;
 import ca.ualberta.cs.taggingapp.models.PictureList;
 
-public class AddTag extends Activity {
+public class AddTag extends Activity implements OnNavigationListener {
 
 	DrawImageView picture;
 	@Override
@@ -27,10 +31,24 @@ public class AddTag extends Activity {
 		picture.setBackground(new BitmapDrawable(getResources(), thePicture.getPicture()));
 		
 		// Drop down menu
-		SpinnerAdapter mSpinnerAdapter = ArrayAdapter.createFromResource(this, R.array.action_list,
-		          android.R.layout.simple_spinner_dropdown_item);
+		final ActionBar actionBar = getActionBar();
+		actionBar.setDisplayShowTitleEnabled(false);
+		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
+		ArrayList<String> itemList = new ArrayList<String>();
+		itemList.add("Tap Tag");
+		itemList.add("Drag Tag");
+		itemList.add("Zoom Tag");
+		ArrayAdapter<String> aAdpt = new ArrayAdapter<String>(this, R.layout.spinner_item, itemList);
+		actionBar.setListNavigationCallbacks(aAdpt, this);
+
 		
 	}
+	public boolean onNavigationItemSelected(int position, long id) {
+		Toast.makeText(getBaseContext(), "postion" + position, Toast.LENGTH_LONG).show();
+		return false;
+	  // Our logic
+	}
+
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

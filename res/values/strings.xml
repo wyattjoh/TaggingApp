@@ -24,6 +24,7 @@
     <string name="decline">Decline</string>
     <string name="title_activity_add_name_to_tag">AddNameToTag</string>
     <string name="hello_world">Hello world!</string>
+    <string name="test_prompt">Prompt"</string>
 
     <string-array name="action_list">
         <item>Zoom</item>
