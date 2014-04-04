@@ -14,14 +14,12 @@ public class TaggedImageView extends ImageView {
 	private Paint paint;
 	private Picture picture;
 
-    public TaggedImageView(Context context, AttributeSet attrs)
-    {
+    public TaggedImageView(Context context, AttributeSet attrs) {
         super(context, attrs);
         init();
     }
 
-    private void init()
-    {
+    private void init() {
         paint = new Paint();
         paint.setColor(Color.WHITE);
         paint.setStyle(Style.STROKE);
@@ -34,10 +32,8 @@ public class TaggedImageView extends ImageView {
     }
     
     @Override
-    protected void onDraw(Canvas canvas)
-    {
-        if(!this.picture.getRegions().isEmpty())
-        {
+    protected void onDraw(Canvas canvas) {
+        if(!this.picture.getRegions().isEmpty()) {
         	for(Region region:this.picture.getRegions()) {
         		canvas.drawRect(region.getUpperLeftCorner().x, region.getUpperLeftCorner().y,
         				region.getLowerRightCorner().x, region.getLowerRightCorner().y, paint);

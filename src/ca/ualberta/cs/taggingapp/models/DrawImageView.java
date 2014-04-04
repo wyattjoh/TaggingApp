@@ -61,25 +61,29 @@ public class DrawImageView extends ImageView {
                 isDrawing = true;
                 break;
             case MotionEvent.ACTION_MOVE:
-                if(isDrawing)
-                {
+                if(isDrawing) {
                     endPoint.x = event.getX();
                     endPoint.y = event.getY();
                     invalidate();
                 }
                 break;
             case MotionEvent.ACTION_UP:
-                if(isDrawing)
-                {
+                if(isDrawing) {
                     endPoint.x = event.getX();
                     endPoint.y = event.getY();
                     invalidate();
-                    if (endPoint.x > startPoint.x) {
+                    if (endPoint.x < startPoint.x) {
                     	float temp = endPoint.x;
                     	endPoint.x = startPoint.x;
                     	startPoint.x = temp;
                     }
+                    if (endPoint.y < startPoint.y) {
+                    	float temp = endPoint.y;
+                    	endPoint.y = startPoint.y;
+                    	startPoint.y = temp;
+                    }
                 }
+                isDrawing = true;
                 break;
             default:
                 break;
