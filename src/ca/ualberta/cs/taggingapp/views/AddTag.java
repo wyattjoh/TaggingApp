@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 import ca.ualberta.cs.taggingapp.R;
+import ca.ualberta.cs.taggingapp.controllers.Logger;
 import ca.ualberta.cs.taggingapp.models.DrawImageView;
 import ca.ualberta.cs.taggingapp.models.Picture;
 import ca.ualberta.cs.taggingapp.models.PictureList;
@@ -44,6 +45,7 @@ public class AddTag extends Activity implements OnNavigationListener {
 	
 	public boolean onNavigationItemSelected(int position, long id) {
 		Toast.makeText(getBaseContext(), "postion" + position, Toast.LENGTH_LONG).show();
+		Logger.start("user");
 		return false;
 	  // Our logic
 	}

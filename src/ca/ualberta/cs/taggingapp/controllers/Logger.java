@@ -4,16 +4,13 @@ import java.util.Date;
 
 import android.util.Log;
 
-public class SubjectLogger {
+public class Logger {
 
 	public static void log(String tagType, String user, String action) {
 		
 		long timeStamp = new Date().getTime();
 		
 		Log.w(user, tagType + action + timeStamp);
-		
-		
-		
 		
 		
 	}
