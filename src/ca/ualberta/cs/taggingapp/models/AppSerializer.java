@@ -32,11 +32,14 @@ public class AppSerializer {
 	public void load() {
 		if (!savedTags.isEmpty()) {
 			for (SavedTag tagToLoad : savedTags) {
-				
+				Tag tag = tagToLoad.loadTag();
+				TagList.getInstance().addTag(tag);
 			}
 		}
 		if (!savedPictures.isEmpty()) {
-			
+			for (SavedPicture pictureToLoad : savedPictures) {
+				Picture picture = pictureToLoad.loadPicture();
+				PictureList.getInstance().addPicture(picture);			}
 		}
 	}
 	
