@@ -6,13 +6,13 @@ import ca.ualberta.cs.taggingapp.models.Tag;
 public class TagController {
 	
 	//Tag factory
-	public Tag createNewTag(Region region, String name, String URL) {
-		Tag tag = new Tag();
-		tag.addTaggedRegion(region);
-		tag.setName(name);
-		tag.setURL(URL);
-		return tag;
-	}
+	//public Tag createNewTag(Region region, String name, String URL) {
+		//Tag tag = new Tag();
+	//	tag.addTaggedRegion(region);
+		//tag.setName(name);
+	//	tag.setURL(URL);
+		//return tag;
+	//}
 	
 	//Tag edit methods
 	public void editTagName(Tag tag, String name) {

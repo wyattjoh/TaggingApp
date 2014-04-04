@@ -1,8 +1,9 @@
 package ca.ualberta.cs.taggingapp.views;
 
+import java.util.ArrayList;
+import java.util.Collections;
+
 import android.app.Activity;
-import android.content.Intent;
-import android.graphics.Point;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -10,7 +11,6 @@ import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.ListView;
 import ca.ualberta.cs.taggingapp.R;
-import ca.ualberta.cs.taggingapp.controllers.TagListController;
 import ca.ualberta.cs.taggingapp.models.Picture;
 import ca.ualberta.cs.taggingapp.models.PictureList;
 import ca.ualberta.cs.taggingapp.models.Region;
@@ -23,6 +23,8 @@ public class AddNameToTag extends Activity {
 	EditText tagURL;
 	ListView tagList;
 	
+	Region region;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -33,16 +35,10 @@ public class AddNameToTag extends Activity {
 		tagURL = (EditText) this.findViewById(R.id.tag_url);
 		tagList = (ListView) this.findViewById(R.id.tags_list_view);
 		
-		//Bundle extras = getIntent().getExtras();
 		//Point topLeft = (Point) extras.get("upperLeft");
 		//Point bottomRight = (Point) extras.get("lowerRight");
-		
 		//Region region  = new Region(pic, (int)topLeft.x, (int)topLeft.y, (int)bottomRight.x, (int)bottomRight.y);
-		
-		//TagListController tlc = new TagListController();
-		//Tag tag = tlc.addNewTag(region, tagName.getText().toString(), tagURL.getText().toString());
-		
-		//region.editRegionTag(tag);
+	
 		
 	}
 
@@ -61,6 +57,9 @@ public class AddNameToTag extends Activity {
 		case R.id.accept:
 			// Create tag and region and hopefully save it here
 			Tag tag = new Tag(tagName.getText().toString(), tagURL.getText().toString());
+			ArrayList <Region> regList = PictureList.getInstance().getSelected().getRegions();
+			Collections.reverse(regList);
+			tag.addTaggedRegion(regList.get(0));
 			TagList.getInstance().addTag(tag);
 			AddNameToTag.this.finish();
 			return true;

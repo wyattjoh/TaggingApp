@@ -18,6 +18,7 @@ import ca.ualberta.cs.taggingapp.controllers.Logger;
 import ca.ualberta.cs.taggingapp.models.DrawImageView;
 import ca.ualberta.cs.taggingapp.models.Picture;
 import ca.ualberta.cs.taggingapp.models.PictureList;
+import ca.ualberta.cs.taggingapp.models.Region;
 
 public class AddTag extends Activity implements OnNavigationListener {
 
@@ -74,6 +75,10 @@ public class AddTag extends Activity implements OnNavigationListener {
 		// Handles presses on the action bar items
 		switch (item.getItemId()) {
 		case R.id.accept:
+			Picture pic = PictureList.getInstance().getSelected();
+			Region region = new Region(pic, (int)picture.getUpperLeftPoint().x, (int)picture.getUpperLeftPoint().x,
+					(int)picture.getLowerRightPoint().x, (int)picture.getLowerRightPoint().x);
+			pic.addRegion(region);
 			Intent i = new Intent(AddTag.this, AddNameToTag.class);
 			startActivity(i);
 			AddTag.this.finish();
