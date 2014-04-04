@@ -2,9 +2,7 @@ package ca.ualberta.cs.taggingapp.models;
 
 import java.util.ArrayList;
 
-import ca.ualberta.cs.taggingapp.views.PictureAdapter;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 
 public class Picture {
 	private ArrayList<Region> regions;
@@ -27,6 +25,12 @@ public class Picture {
 	}
 	public void removeAllRegions() {
 		this.regions.clear();
+	}
+	public String getPictureUri() {
+		return this.pictureUri;
+	}
+	public void setPictureUri(String uri) {
+		this.pictureUri = uri;
 	}
 	public Bitmap getPicture() {
 		if (picture == null && pictureUri != null) {
