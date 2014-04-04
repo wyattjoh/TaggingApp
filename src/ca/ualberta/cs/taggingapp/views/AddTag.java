@@ -22,6 +22,7 @@ import ca.ualberta.cs.taggingapp.models.PictureList;
 public class AddTag extends Activity implements OnNavigationListener {
 
 	DrawImageView picture;
+	int tagType = 0;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -45,7 +46,15 @@ public class AddTag extends Activity implements OnNavigationListener {
 	
 	public boolean onNavigationItemSelected(int position, long id) {
 		Toast.makeText(getBaseContext(), "postion" + position, Toast.LENGTH_LONG).show();
-		Logger.start("user");
+		if (tagType == position) {
+			tagType = position;
+			Logger.start("user", tagType);
+		} else {
+			Logger.event("Invalid test");
+			Logger.end();
+			Logger.start("user", tagType);
+		}
+		
 		return false;
 	  // Our logic
 	}
@@ -68,6 +77,7 @@ public class AddTag extends Activity implements OnNavigationListener {
 			Intent i = new Intent(AddTag.this, AddNameToTag.class);
 			startActivity(i);
 			AddTag.this.finish();
+			Logger.end();
 			return true;
 		case R.id.decline:
 			
