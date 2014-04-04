@@ -66,4 +66,10 @@ public class SavedRegion {
 		this.tagID = tagID;
 	}
 	
+	public Region loadRegion(Picture picture) {
+		Region region = new Region(picture, this.upperLeftX, this.upperLeftY, this.lowerRightX, this.lowerRightY);
+		Tag tag = TagList.getInstance().findTag(this.tagID);
+		region.editRegionTag(tag);
+		return region;
+	}
 }

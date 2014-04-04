@@ -6,6 +6,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
+import android.graphics.Point;
 import android.graphics.PointF;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
@@ -32,12 +33,18 @@ public class DrawImageView extends ImageView {
         paint.setAntiAlias(true);
     }
     
-    public PointF getUpperLeftPoint() {
-    	return startPoint;
+    public Point getUpperLeftPoint() {
+    	int x = Math.round(startPoint.x);
+    	int y = Math.round(startPoint.y);
+    	Point point = new Point(x, y);
+    	return point;
     }
     
-    public PointF getLowerRightPoint() {
-    	return endPoint;
+    public Point getLowerRightPoint() {
+    	int x = Math.round(endPoint.x);
+    	int y = Math.round(endPoint.y);
+    	Point point = new Point(x, y);
+    	return point;
     }
     
     @Override

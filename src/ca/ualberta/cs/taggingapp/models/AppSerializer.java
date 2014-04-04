@@ -4,22 +4,55 @@ import java.util.ArrayList;
 
 
 public class AppSerializer {
-	private ArrayList<Picture> savedPictures = new ArrayList<Picture>();
-	private ArrayList<Tag> savedTags = new ArrayList<Tag>();
+	private ArrayList<SavedPicture> savedPictures;
+	private ArrayList<SavedTag> savedTags;
+	
+	public AppSerializer() {
+		this.savedPictures = new ArrayList<SavedPicture>();
+		this.savedTags = new ArrayList<SavedTag>();
+	}
 	
 	public void save() {
-		savedPictures.addAll(PictureList.getInstance());
-		savedTags.addAll(TagList.getInstance());
-		for (Picture picture : savedPictures) {
-			if (!picture.getRegions().isEmpty()) {
-				for (Region region : picture.getRegions()) {
-					region.
-				}
+		ArrayList<Picture> picturesToSave = PictureList.getInstance().getPictureList();
+		ArrayList<Tag> tagsToSave = TagList.getInstance().getTags();
+		if (!picturesToSave.isEmpty()) {
+			for (Picture picture : picturesToSave) {
+				SavedPicture savedPicture = new SavedPicture(picture);
+				savedPictures.add(savedPicture);
+			}	
+		}
+		if (!tagsToSave.isEmpty()) {
+			for (Tag tag : tagsToSave) {
+				SavedTag savedTag = new SavedTag(tag);
+				savedTags.add(savedTag);
 			}
 		}
 	}
 	
 	public void load() {
-		
+		if (!savedTags.isEmpty()) {
+			for (SavedTag tagToLoad : savedTags) {
+				
+			}
+		}
+		if (!savedPictures.isEmpty()) {
+			
+		}
+	}
+	
+	public ArrayList<SavedPicture> getSavedPictures() {	
+		return savedPictures;
+	}
+
+	public void setSavedPictures(ArrayList<SavedPicture> savedPictures) {
+		this.savedPictures = savedPictures;
+	}
+	
+	public ArrayList<SavedTag> getSavedTags() {	
+		return savedTags;
+	}
+
+	public void setSavedTags(ArrayList<SavedTag> savedTags) {	
+		this.savedTags = savedTags;
 	}
 }

@@ -45,4 +45,16 @@ public class SavedPicture {
 		this.savedPictureUri = savedPictureUri;
 	}
 	
+	public Picture loadPicture() {
+		Picture picture = new Picture();
+		picture.setPicture(this.savedPicture);
+		picture.setPictureUri(this.savedPictureUri);
+		if (!this.savedRegions.isEmpty()) {
+			for (SavedRegion savedRegion : this.savedRegions) {
+				Region loadedRegion = savedRegion.loadRegion(picture);
+				picture.addRegion(loadedRegion);
+			}
+		}
+		return picture;
+	}
 }
