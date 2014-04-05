@@ -34,9 +34,9 @@ public class ViewFullPic extends Activity {
 		
 		ListView miniTagsList = (ListView) this.findViewById(R.id.miniTagsList);
 
-        adapter = new TagsListAdapter(getApplicationContext(), R.layout.list_item, TagList.getInstance().getTags());
+        //adapter = new TagsListAdapter(getApplicationContext(), R.layout.list_item, TagList.getInstance().getTags());
         
-        miniTagsList.setAdapter(adapter); 
+        //miniTagsList.setAdapter(adapter); 
         
         miniTagsList.setOnItemClickListener(new OnItemClickListener()
 		{
@@ -45,7 +45,7 @@ public class ViewFullPic extends Activity {
 					View v, int position, long id)
 			{
 				Intent i = new Intent(ViewFullPic.this, TagAndPhoto.class);
-//				i.putExtra("tagName", adapter.getItem(position));
+				//i.putExtra("tagName", adapter.getItem(position));
 				i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
 				startActivity(i);
 				//ViewFullPic.this.finish();
@@ -75,7 +75,7 @@ public class ViewFullPic extends Activity {
 	@Override
 	public void onResume() {
 		super.onResume();
-		adapter.notifyDataSetChanged();
+		//adapter.notifyDataSetChanged();
 	}
 
 }
