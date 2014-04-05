@@ -76,8 +76,8 @@ public class AddTag extends Activity implements OnNavigationListener {
 		switch (item.getItemId()) {
 		case R.id.accept:
 			Picture pic = PictureList.getInstance().getSelected();
-			Region region = new Region(pic, (int)picture.getUpperLeftPoint().x, (int)picture.getUpperLeftPoint().x,
-					(int)picture.getLowerRightPoint().x, (int)picture.getLowerRightPoint().x);
+			Region region = new Region(pic, (int)picture.getUpperLeftPoint().x, (int)picture.getUpperLeftPoint().y,
+					(int)picture.getLowerRightPoint().x, (int)picture.getLowerRightPoint().y);
 			pic.addRegion(region);
 			Intent i = new Intent(AddTag.this, AddNameToTag.class);
 			startActivity(i);
