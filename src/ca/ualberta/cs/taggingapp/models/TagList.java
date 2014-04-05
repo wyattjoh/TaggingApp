@@ -23,12 +23,17 @@ public class TagList {
 		this.tagList = new ArrayList<Tag>();
 	}
 	
-	private TagList(Context theContext) {
+	public void setTheContext(Context theContext) {
 		this.theContext = theContext;
 	}
 	
+	public Context getTheContext() {
+		return this.theContext;
+	}
+	
 	public static TagList createInstance(Context theContext) {
-		singleton = new TagList(theContext);
+		singleton = new TagList();
+		singleton.setTheContext(theContext);
 		return singleton;
 	}
 	
