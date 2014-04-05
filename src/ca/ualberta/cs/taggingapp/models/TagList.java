@@ -16,6 +16,7 @@ public class TagList {
 	private final static String FILENAME = "TagList.json"; 
 	private static TagList singleton = null;
 	private ArrayList<Tag> tags = new ArrayList<Tag>();
+	private Tag selectedTag = null;
 	private Context theContext;
 	
 	private TagList(Context theContext) {
@@ -40,14 +41,26 @@ public class TagList {
 	
 	//These methods add or remove tags from the TagList
 	public void addTag(Tag tag) {
-		this.tags.add(tag);
-		save();
+		this.tags.add(0, tag);
+		//save();
 	}
 	
 	public void removeTag(Tag tag) {
 		this.tags.remove(tag);
 		
-		save();
+		//save();
+	}
+	
+	public Tag getTag(int position) {
+		return this.tags.get(position);
+	}
+	
+	public void setSelected(int position) {
+		selectedTag = this.tags.get(position);
+	}
+	
+	public Tag getSelected() {
+		return selectedTag;
 	}
 	
 	//This method allows for searching the TagList
