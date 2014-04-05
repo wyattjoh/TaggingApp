@@ -19,6 +19,8 @@ import ca.ualberta.cs.taggingapp.models.TaggedImageView;
 
 public class ViewFullPic extends Activity {
 
+	TagsListAdapter adapter;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -32,7 +34,7 @@ public class ViewFullPic extends Activity {
 		
 		ListView miniTagsList = (ListView) this.findViewById(R.id.miniTagsList);
 
-        final TagsListAdapter adapter = new TagsListAdapter(getApplicationContext(), R.layout.list_item, TagList.getInstance().getTags());
+        adapter = new TagsListAdapter(getApplicationContext(), R.layout.list_item, TagList.getInstance().getTags());
         
         miniTagsList.setAdapter(adapter); 
         
@@ -69,6 +71,11 @@ public class ViewFullPic extends Activity {
 	        default:
 	            return super.onOptionsItemSelected(item);
 	    }
+	}
+	@Override
+	public void onResume() {
+		super.onResume();
+		adapter.notifyDataSetChanged();
 	}
 
 }

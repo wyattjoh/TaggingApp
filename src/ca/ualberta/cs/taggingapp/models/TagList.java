@@ -41,7 +41,6 @@ public class TagList {
 	//These methods add or remove tags from the TagList
 	public void addTag(Tag tag) {
 		this.tags.add(tag);
-		
 		save();
 	}
 	
@@ -84,10 +83,10 @@ public class TagList {
 			fos.close();
 
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
+			System.err.println("FILE WASN'T FOUND");
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			System.err.println("IO ERROR");
 			e.printStackTrace();
 		}
 	}

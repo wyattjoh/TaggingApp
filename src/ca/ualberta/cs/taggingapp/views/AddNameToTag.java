@@ -22,21 +22,21 @@ public class AddNameToTag extends Activity {
 	EditText tagName;
 	EditText tagURL;
 	ListView tagList;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_name_to_tag);
-		
+
 		tagName = (EditText) this.findViewById(R.id.tag_name);
 		tagURL = (EditText) this.findViewById(R.id.tag_url);
 		tagList = (ListView) this.findViewById(R.id.tags_list_view);
-		
+
 		//Point topLeft = (Point) extras.get("upperLeft");
 		//Point bottomRight = (Point) extras.get("lowerRight");
 		//Region region  = new Region(pic, (int)topLeft.x, (int)topLeft.y, (int)bottomRight.x, (int)bottomRight.y);
-	
-		
+
+
 	}
 
 	@Override
@@ -57,6 +57,14 @@ public class AddNameToTag extends Activity {
 			ArrayList <Region> regList = PictureList.getInstance().getSelected().getRegions();
 			Collections.reverse(regList);
 			tag.addTaggedRegion(regList.get(0));
+
+			// Error tracking println
+			System.out.println(tag.getName());
+			System.out.println(tag.getURL());
+			ArrayList<Region> regs = tag.getTaggedRegions();
+			for (int i = 0; i < regs.size(); i++)
+				System.out.println(regs.get(i).getLowerRightCorner().x);
+
 			TagList.getInstance().addTag(tag);
 			AddNameToTag.this.finish(); //This probably needs to go to the ViewFullPic activity
 			return true;
