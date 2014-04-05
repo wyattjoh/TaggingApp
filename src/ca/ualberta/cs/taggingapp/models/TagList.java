@@ -55,7 +55,7 @@ public class TagList {
 	public Tag findTag(String tagName) {
 		Tag foundTag = null;
 		
-		Tag searchTag = new Tag(tagName, "lll");
+		Tag searchTag = new Tag(tagName);
 		
 		
 		for (Tag tag : this.tags) {

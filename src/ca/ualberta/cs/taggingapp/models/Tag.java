@@ -3,8 +3,8 @@ package ca.ualberta.cs.taggingapp.models;
 import java.util.ArrayList;
 
 public class Tag {
-	private String name = null;
-	private String URL = null;
+	private String name;
+	private String URL;
 	private ArrayList<Region> taggedRegions = new ArrayList<Region>();
 	
 	
@@ -12,6 +12,17 @@ public class Tag {
 		this.name = name;
 		this.URL = URL;
 	}
+	
+	public Tag(String name) {
+		this.name = name;
+		this.URL = null;
+	}
+	
+	public Tag() {
+		this.name = null;
+		this.URL = null;
+	}
+	
 	//Start of getters and setters
 	public String getName() {
 		return name;

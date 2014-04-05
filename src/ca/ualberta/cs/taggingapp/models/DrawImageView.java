@@ -20,8 +20,8 @@ public class DrawImageView extends ImageView {
     private boolean isDrawing;
     // Pinch Code
     private static final int INVALID_POINTER_ID = -1;
- // The ‘active pointer’ is the one currently moving our object.
- private int mActivePointerId = INVALID_POINTER_ID;
+    // The ‘active pointer’ is the one currently moving our object.
+    private int mActivePointerId = INVALID_POINTER_ID;
     private float mPosX;
     private float mPosY;
     private float mLastTouchX;

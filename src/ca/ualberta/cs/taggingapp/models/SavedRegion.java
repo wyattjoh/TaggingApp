@@ -1,61 +1,34 @@
 package ca.ualberta.cs.taggingapp.models;
 
+import android.graphics.Point;
+
 
 public class SavedRegion {
-	private int upperLeftX;
-	private int upperLeftY;
-	private int lowerRightX;
-	private int lowerRightY;
+	private Point upperLeft;
+	private Point lowerRight;
 	private String tagID = null;
 	
 	public SavedRegion(Region region) {
-		this.upperLeftX = region.getUpperLeftCorner().x;
-		this.upperLeftY = region.getUpperLeftCorner().y;
-		this.lowerRightX = region.getLowerRightCorner().x;
-		this.lowerRightY = region.getLowerRightCorner().y;
+		this.upperLeft = new Point(region.getUpperLeftCorner());
+		this.lowerRight = new Point(region.getLowerRightCorner());
 		this.tagID = region.getTag().getName();
 	}
-
 	
-	public int getUpperLeftX() {
-		return upperLeftX;
+	public Point getUpperLeft() {
+		return upperLeft;
+	}
+	
+	public void setUpperLeft(Point upperLeft) {
+		this.upperLeft = upperLeft;
 	}
 
-	
-	public void setUpperLeftX(int upperLeftX) {
-		this.upperLeftX = upperLeftX;
+	public Point getLowerRight() {
+		return lowerRight;
 	}
-
 	
-	public int getUpperLeftY() {
-		return upperLeftY;
+	public void setLowerRight(Point lowerRight) {
+		this.lowerRight = lowerRight;
 	}
-
-	
-	public void setUpperLeftY(int upperLeftY) {
-		this.upperLeftY = upperLeftY;
-	}
-
-	
-	public int getLowerRightX() {
-		return lowerRightX;
-	}
-
-	
-	public void setLowerRightX(int lowerRightX) {
-		this.lowerRightX = lowerRightX;
-	}
-
-	
-	public int getLowerRightY() {
-		return lowerRightY;
-	}
-
-	
-	public void setLowerRightY(int lowerRightY) {
-		this.lowerRightY = lowerRightY;
-	}
-
 	
 	public String getTagID() {
 		return tagID;
@@ -67,7 +40,7 @@ public class SavedRegion {
 	}
 	
 	public Region loadRegion(Picture picture) {
-		Region region = new Region(picture, this.upperLeftX, this.upperLeftY, this.lowerRightX, this.lowerRightY);
+		Region region = new Region(picture, this.upperLeft, this.lowerRight);
 		Tag tag = TagList.getInstance().findTag(this.tagID);
 		region.editRegionTag(tag);
 		return region;

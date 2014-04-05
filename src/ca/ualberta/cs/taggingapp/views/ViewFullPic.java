@@ -26,9 +26,6 @@ public class ViewFullPic extends Activity {
 		setTitle("Tagging App");
 		
 		Picture thePicture = PictureList.getInstance().getSelected();
-		
-		ImageView img= (ImageView) findViewById(R.id.picViewer);
-		img.setImageBitmap(thePicture.getPicture());
 		TaggedImageView picture = (TaggedImageView) findViewById(R.id.taggedImageView1);
 		picture.setPicture(thePicture);
 		picture.setBackground(new BitmapDrawable(getResources(), thePicture.getPicture()));

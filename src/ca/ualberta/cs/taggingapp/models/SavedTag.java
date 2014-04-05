@@ -27,9 +27,7 @@ public class SavedTag {
 	}
 	
 	public Tag loadTag() {
-		Tag tag = new Tag();
-		tag.setName(this.name);
-		tag.setURL(this.URL);
+		Tag tag = new Tag(this.name, this.URL);
 		return tag;
 	}
 }

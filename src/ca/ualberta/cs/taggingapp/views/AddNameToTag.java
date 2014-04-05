@@ -23,14 +23,11 @@ public class AddNameToTag extends Activity {
 	EditText tagURL;
 	ListView tagList;
 	
-	Region region;
-	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_name_to_tag);
 		
-		Picture pic = PictureList.getInstance().getSelected();
 		tagName = (EditText) this.findViewById(R.id.tag_name);
 		tagURL = (EditText) this.findViewById(R.id.tag_url);
 		tagList = (ListView) this.findViewById(R.id.tags_list_view);
@@ -61,7 +58,7 @@ public class AddNameToTag extends Activity {
 			Collections.reverse(regList);
 			tag.addTaggedRegion(regList.get(0));
 			TagList.getInstance().addTag(tag);
-			AddNameToTag.this.finish();
+			AddNameToTag.this.finish(); //This probably needs to go to the ViewFullPic activity
 			return true;
 		case R.id.decline:
 			//Intent j = new Intent(AddNameToTag.this, ViewFullPic.class);

@@ -2,10 +2,6 @@ package ca.ualberta.cs.taggingapp.models;
 
 import android.graphics.Point;
 
-/*
- * This class represents a tagged area on a photo, it's constructed using the
- * RegionController rather than a constructor since it has a complicated setup
- */
 public class Region {
 	private Point center = new Point(0,0);
 	private int width = 0;
@@ -24,11 +20,25 @@ public class Region {
 		this.updateRegionFromCorners();
 	}
 	
+	public Region(Picture picture, Point upperLeft, Point lowerRight) {
+		this.picture = picture;
+		this.upperLeftCorner = upperLeft;
+		this.lowerRightCorner = lowerRight;
+		this.updateRegionFromCorners();
+	}
+	
 	public Region(Picture picture, int x, int y) {
 		this.height = 64;
 		this.width = 64;
 		this.picture = picture;
 		this.setCenter(x, y);
+	}
+	
+	public Region(Picture picture, Point center) {
+		this.height = 64;
+		this.width = 64;
+		this.picture = picture;
+		this.setCenter(center);
 	}
 	
 	//Start of getters and setters
@@ -37,46 +47,74 @@ public class Region {
 		this.center.y = y;
 		this.updateRegionFromCenter();
 	}
+	
+	public void setCenter(Point point) {
+		this.center = point;
+		this.updateRegionFromCenter();
+	}
+	
 	public Point getCenter() {
 		return center;
 	}
+	
 	public int getWidth() {
 		return width;
 	}
+	
 	public void setWidth(int width) {
 		this.width = width;
 	}
+	
 	public int getHeight() {
 		return height;
 	}
+	
 	public void setHeight(int height) {
 		this.height = height;
 	}
+	
 	public void setUpperLeftCorner(int x, int y) {
 		this.upperLeftCorner.x = x;
 		this.upperLeftCorner.y = y;
 		this.updateRegionFromCorners();
 	}
+	
+	public void setUpperLeftCorner(Point point) {
+		this.upperLeftCorner = point;
+		this.updateRegionFromCorners();
+	}
+	
 	public Point getUpperLeftCorner() {
 		return upperLeftCorner;
 	}
+	
 	public void setLowerRightCorner(int x, int y) {
 		this.lowerRightCorner.x = x;
 		this.lowerRightCorner.y = y;
 		this.updateRegionFromCorners();
 	}
+	
+	public void setLowerRightCorner(Point point) {
+		this.lowerRightCorner = point;
+		this.updateRegionFromCorners();
+	}
+	
 	public Point getLowerRightCorner() {
 		return lowerRightCorner;
 	}
+	
 	public Tag getTag() {
 		return tag;
 	}
+	
 	public void setTag(Tag tag) {
 		this.tag = tag;
 	}
+	
 	public Picture getPicture() {
 		return picture;
 	}
+	
 	public void setPicture(Picture picture) {
 		this.picture = picture;
 	}
@@ -108,17 +146,20 @@ public class Region {
 		int centerY = (this.lowerRightCorner.y + this.upperLeftCorner.y) / 2;
 		int height = this.lowerRightCorner.y - this.upperLeftCorner.y;
 		int width = this.lowerRightCorner.x - this.upperLeftCorner.x;
-		this.setCenter(centerX, centerY);
+		this.center = new Point(centerX, centerY);
 		this.setHeight(height);
 		this.setWidth(width);
 	}
+	
 	//Updates the corner points given a new center, using the current width and height
 	public void updateRegionFromCenter() {
 		int lowerRightCornerX = this.center.x + (this.width / 2);
 		int lowerRightCornerY = this.center.y + (this.height / 2);
 		int upperLeftCornerX = this.center.x - (this.width / 2);
 		int upperLeftCornerY = this.center.y - (this.height / 2);
-		this.setLowerRightCorner(lowerRightCornerX, lowerRightCornerY);
-		this.setUpperLeftCorner(upperLeftCornerX, upperLeftCornerY);
+		Point upperLeft = new Point(upperLeftCornerX, upperLeftCornerY);
+		Point lowerRight = new Point(lowerRightCornerX, lowerRightCornerY);
+		this.upperLeftCorner = upperLeft;
+		this.lowerRightCorner = lowerRight;
 	}
 }
