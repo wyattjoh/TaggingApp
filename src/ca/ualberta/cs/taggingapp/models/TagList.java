@@ -15,9 +15,13 @@ import android.content.Context;
 public class TagList {
 	private final static String FILENAME = "TagList.json"; 
 	private static TagList singleton = null;
-	private ArrayList<Tag> tags = new ArrayList<Tag>();
+	private ArrayList<Tag> tagList;
 	private Tag selectedTag = null;
 	private Context theContext;
+	
+	private TagList() {
+		this.tagList = new ArrayList<Tag>();
+	}
 	
 	private TagList(Context theContext) {
 		this.theContext = theContext;
@@ -36,27 +40,27 @@ public class TagList {
 	}
 	
 	public ArrayList<Tag> getTags() {
-		return tags;
+		return tagList;
 	}
 	
 	//These methods add or remove tags from the TagList
 	public void addTag(Tag tag) {
-		this.tags.add(0, tag);
+		this.tagList.add(0, tag);
 		//save();
 	}
 	
 	public void removeTag(Tag tag) {
-		this.tags.remove(tag);
+		this.tagList.remove(tag);
 		
 		//save();
 	}
 	
 	public Tag getTag(int position) {
-		return this.tags.get(position);
+		return this.tagList.get(position);
 	}
 	
 	public void setSelected(int position) {
-		selectedTag = this.tags.get(position);
+		selectedTag = this.tagList.get(position);
 	}
 	
 	public Tag getSelected() {
@@ -70,7 +74,7 @@ public class TagList {
 		Tag searchTag = new Tag(tagName);
 		
 		
-		for (Tag tag : this.tags) {
+		for (Tag tag : this.tagList) {
 			if (tag.equals(searchTag)) {
 				foundTag = tag;
 				break;
@@ -83,7 +87,7 @@ public class TagList {
 	private void save() {
 		Gson gson = new Gson();
 		
-		Tag[] dataToSave = this.tags.toArray(new Tag[0]);
+		Tag[] dataToSave = this.tagList.toArray(new Tag[0]);
 
 		try {
 			FileOutputStream fos = theContext.openFileOutput(FILENAME,
