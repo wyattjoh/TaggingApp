@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 import ca.ualberta.cs.taggingapp.R;
 import ca.ualberta.cs.taggingapp.models.ActiveUserModel;
+import ca.ualberta.cs.taggingapp.models.ApplicationState;
 import ca.ualberta.cs.taggingapp.models.DummyPictureListFactory;
 import ca.ualberta.cs.taggingapp.models.PictureList;
 import ca.ualberta.cs.taggingapp.models.TagList;
@@ -30,6 +31,9 @@ public class MainActivity extends Activity {
 		
 		// Create the active user model
 		ActiveUserModel.createShared(getApplicationContext());
+		
+		// Create the ApplicationState
+		ApplicationState.createInstance(getApplicationContext());
 		
 		// Check if logged in already
 		if (ActiveUserModel.getShared().isLoggedIn()) {
