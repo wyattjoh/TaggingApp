@@ -11,7 +11,7 @@ import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.ListView;
 import ca.ualberta.cs.taggingapp.R;
-import ca.ualberta.cs.taggingapp.models.Picture;
+import ca.ualberta.cs.taggingapp.models.ApplicationState;
 import ca.ualberta.cs.taggingapp.models.PictureList;
 import ca.ualberta.cs.taggingapp.models.Region;
 import ca.ualberta.cs.taggingapp.models.Tag;
@@ -56,6 +56,7 @@ public class AddNameToTag extends Activity {
 			Tag tag = new Tag(tagName.getText().toString(), tagURL.getText().toString());
 			ArrayList <Region> regList = PictureList.getInstance().getSelected().getRegions();
 			Collections.reverse(regList);
+			regList.get(0).setTag(tag);
 			tag.addTaggedRegion(regList.get(0));
 
 			// Error tracking println
@@ -66,6 +67,10 @@ public class AddNameToTag extends Activity {
 				System.out.println(regs.get(i).getLowerRightCorner().x);
 
 			TagList.getInstance().addTag(tag);
+			//PictureList.getInstance().updatePic(0, pic)
+			
+			ApplicationState.getInstance().save();
+			
 			AddNameToTag.this.finish(); //This probably needs to go to the ViewFullPic activity
 			return true;
 		case R.id.decline:

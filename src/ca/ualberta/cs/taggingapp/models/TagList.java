@@ -49,7 +49,7 @@ public class TagList {
 	//These methods add or remove tags from the TagList
 	public void addTag(Tag tag) {
 		this.tagList.add(tag);
-		save();
+		//save();
 	}
 
 	public void removeTag(Tag tag) {

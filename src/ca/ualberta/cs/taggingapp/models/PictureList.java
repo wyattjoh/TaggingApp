@@ -45,6 +45,10 @@ public class PictureList {
 		return singleton;
 	}
 	
+	public void updatePic(int index, Picture pic) {
+		this.pictureList.set(index, pic);
+	}
+	
 	/*
 	 * Inserts the picture at the top of the list
 	 */

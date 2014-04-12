@@ -11,10 +11,14 @@ public class SavedPicture {
 	private String savedPictureUri = null;
 	
 	public SavedPicture(Picture pictureToSave) {
+		
+		this.savedRegions = new ArrayList<SavedRegion>();
+		
 		if (!pictureToSave.getRegions().isEmpty()) {
 			for (Region regionToSave : pictureToSave.getRegions()) {
 				SavedRegion savedRegion = new SavedRegion(regionToSave);
-				this.savedRegions.add(savedRegion);
+					this.savedRegions.add(savedRegion);
+				
 			}
 		}
 		this.savedPicture = pictureToSave.getPicture();

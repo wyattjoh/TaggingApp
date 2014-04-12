@@ -2,6 +2,7 @@ package ca.ualberta.cs.taggingapp.views;
 
 import android.content.Intent;
 import ca.ualberta.cs.taggingapp.R;
+import ca.ualberta.cs.taggingapp.models.ApplicationState;
 import ca.ualberta.cs.taggingapp.models.PictureList;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -17,6 +18,8 @@ public class GridViewFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
+		
+		//ApplicationState.getInstance().load();
 
 		final View rootView = inflater.inflate(R.layout.grid_layout, container,
 				false);
