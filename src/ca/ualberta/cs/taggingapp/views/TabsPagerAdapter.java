@@ -8,7 +8,6 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 public class TabsPagerAdapter extends FragmentPagerAdapter {
 
-	
 	/* Default constructor calls the superclass */
 	public TabsPagerAdapter(FragmentManager fm) {
 		super(fm);
@@ -19,14 +18,14 @@ public class TabsPagerAdapter extends FragmentPagerAdapter {
 		switch (i) {
 		case 0:
 			return new GridViewFragment();
-			//break;
+			// break;
 		case 1:
 			return new TagsListFragment();
-			//break;
+			// break;
 		}
-		
+
 		return null;
-				
+
 	}
 
 	/* Return the count: always 2 */

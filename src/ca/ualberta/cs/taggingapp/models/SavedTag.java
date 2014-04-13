@@ -1,10 +1,9 @@
 package ca.ualberta.cs.taggingapp.models;
 
-
 public class SavedTag {
 	private String name = null;
 	private String URL = null;
-	
+
 	public SavedTag(Tag tagToSave) {
 		this.name = tagToSave.getName();
 		this.URL = tagToSave.getURL();
@@ -13,7 +12,7 @@ public class SavedTag {
 	public String getName() {
 		return name;
 	}
-	
+
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -25,7 +24,7 @@ public class SavedTag {
 	public void setURL(String uRL) {
 		URL = uRL;
 	}
-	
+
 	public Tag loadTag() {
 		Tag tag = new Tag(this.name, this.URL);
 		return tag;

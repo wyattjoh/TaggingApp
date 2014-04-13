@@ -18,13 +18,13 @@ public class SavedApplicationState {
 	public SavedApplicationState(Context theContext) {
 		this.theContext = theContext;
 	}
-	
+
 	public void save(ApplicationState theApplicationState) {
 		try {
 			Gson gson = new Gson();
 
-			FileOutputStream fos = theContext.openFileOutput(
-					FILENAME, Context.MODE_PRIVATE);
+			FileOutputStream fos = theContext.openFileOutput(FILENAME,
+					Context.MODE_PRIVATE);
 			fos.getChannel().lock();
 			OutputStreamWriter osw = new OutputStreamWriter(fos);
 
@@ -40,13 +40,13 @@ public class SavedApplicationState {
 			ee.printStackTrace();
 		}
 	}
-	
+
 	public ApplicationState load() {
 		ApplicationState theState = null;
-		
+
 		try {
 			Gson gson = new Gson();
-			
+
 			FileInputStream fis = theContext.openFileInput(FILENAME);
 			InputStreamReader isr = new InputStreamReader(fis);
 
@@ -56,15 +56,15 @@ public class SavedApplicationState {
 			fis.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
-			
+
 			theState = new ApplicationState();
 
 		} catch (IOException e) {
 			e.printStackTrace();
-			
+
 			theState = new ApplicationState();
 		}
-		
+
 		return theState;
 	}
 

@@ -32,10 +32,10 @@ public class AddNameToTag extends Activity {
 		tagURL = (EditText) this.findViewById(R.id.tag_url);
 		tagList = (ListView) this.findViewById(R.id.tags_list_view);
 
-		//Point topLeft = (Point) extras.get("upperLeft");
-		//Point bottomRight = (Point) extras.get("lowerRight");
-		//Region region  = new Region(pic, (int)topLeft.x, (int)topLeft.y, (int)bottomRight.x, (int)bottomRight.y);
-
+		// Point topLeft = (Point) extras.get("upperLeft");
+		// Point bottomRight = (Point) extras.get("lowerRight");
+		// Region region = new Region(pic, (int)topLeft.x, (int)topLeft.y,
+		// (int)bottomRight.x, (int)bottomRight.y);
 
 	}
 
@@ -53,8 +53,10 @@ public class AddNameToTag extends Activity {
 		switch (item.getItemId()) {
 		case R.id.accept:
 			// Create tag and region and hopefully save it here
-			Tag tag = new Tag(tagName.getText().toString(), tagURL.getText().toString());
-			ArrayList <Region> regList = PictureList.getInstance().getSelected().getRegions();
+			Tag tag = new Tag(tagName.getText().toString(), tagURL.getText()
+					.toString());
+			ArrayList<Region> regList = PictureList.getInstance().getSelected()
+					.getRegions();
 			Collections.reverse(regList);
 			regList.get(0).setTag(tag);
 			tag.addTaggedRegion(regList.get(0));
@@ -67,15 +69,16 @@ public class AddNameToTag extends Activity {
 				System.out.println(regs.get(i).getLowerRightCorner().x);
 
 			TagList.getInstance().addTag(tag);
-			//PictureList.getInstance().updatePic(0, pic)
-			
+			// PictureList.getInstance().updatePic(0, pic)
+
 			ApplicationState.getInstance().save();
-			
-			AddNameToTag.this.finish(); //This probably needs to go to the ViewFullPic activity
+
+			AddNameToTag.this.finish(); // This probably needs to go to the
+										// ViewFullPic activity
 			return true;
 		case R.id.decline:
-			//Intent j = new Intent(AddNameToTag.this, ViewFullPic.class);
-			//startActivity(j);
+			// Intent j = new Intent(AddNameToTag.this, ViewFullPic.class);
+			// startActivity(j);
 			AddNameToTag.this.finish();
 			return true;
 		default:

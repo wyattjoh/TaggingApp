@@ -17,34 +17,34 @@ import ca.ualberta.cs.taggingapp.models.PictureList;
 import ca.ualberta.cs.taggingapp.models.TagList;
 
 public class MainActivity extends Activity {
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		setTitle("Tagging App");
-		
+
 		// Create the picture and tags list
 		PictureList.createInstance(getApplicationContext());
 		TagList.createInstance(getApplicationContext());
-		
+
 		DummyPictureListFactory.createDummyPictures(getApplicationContext());
-		
+
 		// Create the active user model
 		ActiveUserModel.createShared(getApplicationContext());
-		
+
 		// Create the ApplicationState
 		ApplicationState.createInstance(getApplicationContext());
-		
+
 		// Create the ImageLoadingFactory
 		ImageLoadingFactory.createInstance(getApplicationContext());
-		
+
 		// Check if logged in already
 		if (ActiveUserModel.getShared().isLoggedIn()) {
-			Log.w("MainActivity", "Logged in user found, continueing to main screen.");
+			Log.w("MainActivity",
+					"Logged in user found, continueing to main screen.");
 			continueToSwipeSuper();
-		}
-		else {
+		} else {
 			Log.w("MainActivity", "Logged in user not found.");
 		}
 	}
@@ -58,48 +58,51 @@ public class MainActivity extends Activity {
 
 	public void loginGuest(View view) {
 		// Create the user
-		ActiveUserModel.getShared().performLogin("guest@example.com", "password");
-		
+		ActiveUserModel.getShared().performLogin("guest@example.com",
+				"password");
+
 		Intent i = new Intent(MainActivity.this, SwipeSuper.class);
 		startActivity(i);
 		MainActivity.this.finish();
 	}
-	
+
 	public void loginUser(View view) {
 		if (this.verifyLoginDetails()) {
 			continueToSwipeSuper();
-		}
-		else {
+		} else {
 			String s = "Invalid Username/Password";
 			Toast.makeText(getBaseContext(), s, Toast.LENGTH_LONG).show();
 		}
 	}
-	
+
 	private void continueToSwipeSuper() {
 		Intent i = new Intent(MainActivity.this, SwipeSuper.class);
 		startActivity(i);
 		finish();
 	}
-	
+
 	public void signUp(View view) {
 		EditText emailField = (EditText) findViewById(R.id.email);
-		
+
 		Intent i = new Intent(MainActivity.this, SignUp.class);
-		
+
 		String emailString = emailField.getText().toString();
 		if (emailString.length() > 0) {
 			i.putExtra(SignUp.EMAIL_FIELD_EXTRA_KEY, emailString);
 		}
-				
+
 		startActivity(i);
 	}
-	
+
 	public boolean verifyLoginDetails() {
-		// this method should verify if the email and password are a valid combination
-		String email = ((EditText) findViewById(R.id.email)).getText().toString();
-		String password = ((EditText) findViewById(R.id.password)).getText().toString();
-		
+		// this method should verify if the email and password are a valid
+		// combination
+		String email = ((EditText) findViewById(R.id.email)).getText()
+				.toString();
+		String password = ((EditText) findViewById(R.id.password)).getText()
+				.toString();
+
 		return ActiveUserModel.getShared().performLogin(email, password);
 	}
-	
+
 }

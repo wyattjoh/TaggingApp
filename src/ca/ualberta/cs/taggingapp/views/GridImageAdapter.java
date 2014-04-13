@@ -13,14 +13,14 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import ca.ualberta.cs.taggingapp.models.Picture;
 import ca.ualberta.cs.taggingapp.models.PictureList;
- 
+
 public class GridImageAdapter extends BaseAdapter {
 	private ArrayList<Picture> thePictureList;
 	private Context theContext;
- 
+
 	public GridImageAdapter(Activity theActivity) {
 		theContext = theActivity.getApplicationContext();
-		
+
 		thePictureList = PictureList.getInstance().getPictureList();
 	}
 
@@ -42,12 +42,12 @@ public class GridImageAdapter extends BaseAdapter {
 		return arg0;
 	}
 
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        ImageView imageView = new ImageView(theContext);
-        Picture thePictue = getItem(position);
-        
-        try {
+	@Override
+	public View getView(int position, View convertView, ViewGroup parent) {
+		ImageView imageView = new ImageView(theContext);
+		Picture thePictue = getItem(position);
+
+		try {
 			imageView.setImageBitmap(thePictue.getPicture());
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -56,11 +56,11 @@ public class GridImageAdapter extends BaseAdapter {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-        imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-        imageView.setLayoutParams(new GridView.LayoutParams(160, 160));
-        imageView.setTag(position);
-        
-        return imageView;
-    }
- 
+		imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+		imageView.setLayoutParams(new GridView.LayoutParams(160, 160));
+		imageView.setTag(position);
+
+		return imageView;
+	}
+
 }

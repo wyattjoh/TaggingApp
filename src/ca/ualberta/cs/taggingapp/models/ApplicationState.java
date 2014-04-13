@@ -4,46 +4,48 @@ import java.util.ArrayList;
 
 import android.content.Context;
 
-
 public class ApplicationState {
 	private static transient ApplicationState singleton = null;
-	
+
 	private transient SavedApplicationState theSavedApplicationState;
 	private ArrayList<SavedPicture> savedPictures;
 	private ArrayList<SavedTag> savedTags;
-	
+
 	public ApplicationState(Context applicationContext) {
 		this();
-		this.theSavedApplicationState = new SavedApplicationState(applicationContext);
+		this.theSavedApplicationState = new SavedApplicationState(
+				applicationContext);
 	}
-	
+
 	public ApplicationState() {
 		this.savedPictures = new ArrayList<SavedPicture>();
 		this.savedTags = new ArrayList<SavedTag>();
 	}
-	
+
 	public static ApplicationState createInstance(Context theContext) {
 		if (singleton == null) {
 			singleton = new ApplicationState(theContext);
 		}
 		return singleton;
 	}
-	
+
 	public static ApplicationState getInstance() {
 		if (singleton == null) {
-			throw new RuntimeException("Cant get ApplicationState before none created!");
+			throw new RuntimeException(
+					"Cant get ApplicationState before none created!");
 		}
 		return singleton;
 	}
-	
+
 	public void save() {
-		ArrayList<Picture> picturesToSave = PictureList.getInstance().getPictureList();
+		ArrayList<Picture> picturesToSave = PictureList.getInstance()
+				.getPictureList();
 		ArrayList<Tag> tagsToSave = TagList.getInstance().getTags();
 		if (!picturesToSave.isEmpty()) {
 			for (Picture picture : picturesToSave) {
 				SavedPicture savedPicture = new SavedPicture(picture);
 				savedPictures.add(savedPicture);
-			}	
+			}
 		}
 		if (!tagsToSave.isEmpty()) {
 			for (Tag tag : tagsToSave) {
@@ -51,10 +53,10 @@ public class ApplicationState {
 				savedTags.add(savedTag);
 			}
 		}
-		
+
 		this.theSavedApplicationState.save(this);
 	}
-	
+
 	public void load() {
 		ApplicationState savedAppState = this.theSavedApplicationState.load();
 
@@ -67,23 +69,24 @@ public class ApplicationState {
 		if (!savedAppState.getSavedPictures().isEmpty()) {
 			for (SavedPicture pictureToLoad : savedAppState.getSavedPictures()) {
 				Picture picture = pictureToLoad.loadPicture();
-				PictureList.getInstance().addPicture(picture);			}
+				PictureList.getInstance().addPicture(picture);
+			}
 		}
 	}
-	
-	public ArrayList<SavedPicture> getSavedPictures() {	
+
+	public ArrayList<SavedPicture> getSavedPictures() {
 		return savedPictures;
 	}
 
 	public void setSavedPictures(ArrayList<SavedPicture> savedPictures) {
 		this.savedPictures = savedPictures;
 	}
-	
-	public ArrayList<SavedTag> getSavedTags() {	
+
+	public ArrayList<SavedTag> getSavedTags() {
 		return savedTags;
 	}
 
-	public void setSavedTags(ArrayList<SavedTag> savedTags) {	
+	public void setSavedTags(ArrayList<SavedTag> savedTags) {
 		this.savedTags = savedTags;
 	}
 }

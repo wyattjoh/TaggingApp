@@ -24,12 +24,13 @@ public class DummyPictureListFactory {
 
 		for (Integer pictureId : picIDs) {
 			Picture thePicture = new Picture();
-			Bitmap icon = ResizedBitmapFactory.decodeSampledBitmapFromResource(context.getResources(), pictureId, 100, 100);
+			Bitmap icon = ResizedBitmapFactory.decodeSampledBitmapFromResource(
+					context.getResources(), pictureId, 100, 100);
 			thePicture.setPicture(icon);
 
 			thePictureListPrimative.add(thePicture);
 		}
-		
+
 		thePictureList.setPictureList(thePictureListPrimative);
 	}
 }

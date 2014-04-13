@@ -18,19 +18,19 @@ import ca.ualberta.cs.taggingapp.models.PictureList;
 public class TagAndPhoto extends Activity {
 	Picture thePicture;
 	String tag;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_tag_and_photo);
 		setTitle("Tagging App");
-		
+
 		Bundle extras = getIntent().getExtras();
 		thePicture = PictureList.getInstance().getSelected();
-		
+
 		tag = extras.getString("tagName");
-		
-		ImageView img= (ImageView) findViewById(R.id.picViewer);
+
+		ImageView img = (ImageView) findViewById(R.id.picViewer);
 		try {
 			img.setImageBitmap(thePicture.getPicture());
 		} catch (FileNotFoundException e) {
@@ -40,13 +40,13 @@ public class TagAndPhoto extends Activity {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		TextView tagName = (TextView) findViewById(R.id.tag);
 		tagName.append(tag);
-		
+
 		TextView tagURL = (TextView) findViewById(R.id.tagURL);
 		tagURL.append("https://stackoverflow.com");
-		
+
 		Button moreImages = (Button) findViewById(R.id.morePhotosWTag);
 		moreImages.append(tag);
 	}
@@ -57,28 +57,28 @@ public class TagAndPhoto extends Activity {
 		getMenuInflater().inflate(R.menu.tag_and_photo, menu);
 		return true;
 	}
-	
+
 	public void morePhotos(View view) {
 		Intent i = new Intent(TagAndPhoto.this, TagRefinedImages.class);
 		i.putExtra("tagName", tag);
 		startActivity(i);
 		TagAndPhoto.this.finish();
 	}
-	
+
 	public void editTag(View view) {
 		Intent i = new Intent(TagAndPhoto.this, EditTag.class);
 		i.putExtra("tagName", tag);
 		startActivity(i);
 		TagAndPhoto.this.finish();
 	}
-	
+
 	public void deleteTag(View view) {
 	}
-	
+
 	@Override
 	public void onPause() {
-	     super.onPause();
-	     overridePendingTransition(0, 0);
-	 }
+		super.onPause();
+		overridePendingTransition(0, 0);
+	}
 
 }

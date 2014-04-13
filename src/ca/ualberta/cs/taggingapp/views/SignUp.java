@@ -61,7 +61,7 @@ public class SignUp extends Activity {
 		} else {
 			String s = "Password did not match";
 			Toast.makeText(getBaseContext(), s, Toast.LENGTH_LONG).show();
-			
+
 			// Clear the eneterd passwords
 			passwordText.setText("");
 			confirmPasswordText.setText("");

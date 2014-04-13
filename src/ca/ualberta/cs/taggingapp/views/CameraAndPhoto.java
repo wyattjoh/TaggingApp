@@ -3,22 +3,16 @@ package ca.ualberta.cs.taggingapp.views;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 //import ca.ualberta.cs.taggingapp.R;
 import android.app.Activity;
 
 import android.content.Intent;
-import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.provider.MediaStore.MediaColumns;
 import android.util.Log;
-import android.widget.GridView;
 
 public class CameraAndPhoto extends Activity {
 	Uri mCurrentPhotoUri;
@@ -31,6 +25,7 @@ public class CameraAndPhoto extends Activity {
 	 * Create a file where the camera will save the picture and start the
 	 * camera.
 	 */
+	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 

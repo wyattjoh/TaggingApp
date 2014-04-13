@@ -39,37 +39,40 @@ public class EditTag extends Activity {
 	}
 
 	public void deleteTag(View view) {
-		
-		// The following block of code creates the dialogue box to confirm the delete
-		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
-				this);
+
+		// The following block of code creates the dialogue box to confirm the
+		// delete
+		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
 
 		// set title
 		alertDialogBuilder.setTitle("Delete Tag?");
 
 		// set dialog message
 		alertDialogBuilder
-		.setMessage("Deleting this tag also will delete its references to any photos.")
-		.setCancelable(false)
-		.setPositiveButton("Yes",new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog,int id) {
-				// if this button is clicked, close
-				// current activity
-				Intent i = new Intent(EditTag.this, ViewFullPic.class);
-				i.putExtra("tagName", tagName);
-				startActivity(i);
-				EditTag.this.finish();
-			}
-		})
-		.setNegativeButton("No",new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog,int id) {
-				// if this button is clicked, just close
-				// the dialog box and do nothing
-				dialog.cancel();
-			}
-		});
+				.setMessage(
+						"Deleting this tag also will delete its references to any photos.")
+				.setCancelable(false)
+				.setPositiveButton("Yes",
+						new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog, int id) {
+								// if this button is clicked, close
+								// current activity
+								Intent i = new Intent(EditTag.this,
+										ViewFullPic.class);
+								i.putExtra("tagName", tagName);
+								startActivity(i);
+								EditTag.this.finish();
+							}
+						})
+				.setNegativeButton("No", new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int id) {
+						// if this button is clicked, just close
+						// the dialog box and do nothing
+						dialog.cancel();
+					}
+				});
 
 		// create alert dialog
 		AlertDialog alertDialog = alertDialogBuilder.create();

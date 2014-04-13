@@ -3,7 +3,6 @@ package ca.ualberta.cs.taggingapp.views;
 import java.util.ArrayList;
 
 import android.app.Activity;
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,12 +14,13 @@ public class TagAdapter extends BaseAdapter {
 	private int theLayout;
 	private LayoutInflater layoutInflater = null;
 
-	public TagAdapter(Activity theActivity, int theLayout, ArrayList<Tag> theTags) {
+	public TagAdapter(Activity theActivity, int theLayout,
+			ArrayList<Tag> theTags) {
 		this.layoutInflater = theActivity.getLayoutInflater();
 		this.theLayout = theLayout;
 		this.theTags = theTags;
 	}
-	
+
 	@Override
 	public int getCount() {
 		// TODO Auto-generated method stub

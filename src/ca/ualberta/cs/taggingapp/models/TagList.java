@@ -11,7 +11,7 @@ import android.content.Context;
 import com.google.gson.Gson;
 
 public class TagList {
-	private final static String FILENAME = "TagList.json"; 
+	private final static String FILENAME = "TagList.json";
 	private static TagList singleton = null;
 	private ArrayList<Tag> tagList;
 	private Tag selectedTag = null;
@@ -37,7 +37,8 @@ public class TagList {
 
 	public static TagList getInstance() {
 		if (singleton == null) {
-			throw new RuntimeException("Cannot get shared of TagList when none created!");
+			throw new RuntimeException(
+					"Cannot get shared of TagList when none created!");
 		}
 		return singleton;
 	}
@@ -46,16 +47,16 @@ public class TagList {
 		return tagList;
 	}
 
-	//These methods add or remove tags from the TagList
+	// These methods add or remove tags from the TagList
 	public void addTag(Tag tag) {
 		this.tagList.add(tag);
-		//save();
+		// save();
 	}
 
 	public void removeTag(Tag tag) {
 		this.tagList.remove(tag);
 
-		//save();
+		// save();
 	}
 
 	public Tag getTag(int position) {
@@ -70,12 +71,11 @@ public class TagList {
 		return selectedTag;
 	}
 
-	//This method allows for searching the TagList
+	// This method allows for searching the TagList
 	public Tag findTag(String tagName) {
 		Tag foundTag = null;
 
 		Tag searchTag = new Tag(tagName);
-
 
 		for (Tag tag : this.tagList) {
 			if (tag.equals(searchTag)) {
@@ -103,39 +103,32 @@ public class TagList {
 		try {
 			FileOutputStream outputStream;
 
-
-			outputStream = theContext.openFileOutput(FILENAME, Context.MODE_PRIVATE);
+			outputStream = theContext.openFileOutput(FILENAME,
+					Context.MODE_PRIVATE);
 			outputStream.write(s.getBytes());
 			outputStream.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		/*
-		Gson gson = new Gson();
-
-		//Tag[] dataToSave = this.tagList.toArray(new Tag[0]);
-		Tag[] dataToSave = new Tag[tagList.size()];
-		for (int i = 0; i < tagList.size(); i++) {
-			dataToSave[i] = this.tagList.get(i);
-		}
-
-		try {
-			FileOutputStream fos = theContext.openFileOutput(FILENAME,
-					Context.MODE_PRIVATE);
-			OutputStreamWriter osw = new OutputStreamWriter(fos);
-
-			gson.toJson(dataToSave, osw);
-
-			osw.close();
-			fos.close();
-
-		} catch (FileNotFoundException e) {
-			System.err.println("FILE WASN'T FOUND");
-			e.printStackTrace();
-		} catch (IOException e) {
-			System.err.println("IO ERROR");
-			e.printStackTrace();
-		}
+		 * Gson gson = new Gson();
+		 * 
+		 * //Tag[] dataToSave = this.tagList.toArray(new Tag[0]); Tag[]
+		 * dataToSave = new Tag[tagList.size()]; for (int i = 0; i <
+		 * tagList.size(); i++) { dataToSave[i] = this.tagList.get(i); }
+		 * 
+		 * try { FileOutputStream fos = theContext.openFileOutput(FILENAME,
+		 * Context.MODE_PRIVATE); OutputStreamWriter osw = new
+		 * OutputStreamWriter(fos);
+		 * 
+		 * gson.toJson(dataToSave, osw);
+		 * 
+		 * osw.close(); fos.close();
+		 * 
+		 * } catch (FileNotFoundException e) {
+		 * System.err.println("FILE WASN'T FOUND"); e.printStackTrace(); } catch
+		 * (IOException e) { System.err.println("IO ERROR");
+		 * e.printStackTrace(); }
 		 */
 	}
 
@@ -161,30 +154,23 @@ public class TagList {
 			save();
 		}
 		/*
-		Gson gson = new Gson();
-		ArrayList<Tag> dataThatLoaded = new ArrayList<Tag>();
-
-		try {
-			FileInputStream fis = theContext.openFileInput(FILENAME);
-			InputStreamReader isr = new InputStreamReader(fis);
-
-			Tag[] thePrimative = gson.fromJson(isr, Tag[].class);
-
-			isr.close();
-			fis.close();
-
-			for(int i = 0; i < thePrimative.length; i++) {
-				dataThatLoaded.add(thePrimative[i]);
-			}
-
-
-		} catch (FileNotFoundException e) {
-			// File was not found! Create it!
-			save();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		 * Gson gson = new Gson(); ArrayList<Tag> dataThatLoaded = new
+		 * ArrayList<Tag>();
+		 * 
+		 * try { FileInputStream fis = theContext.openFileInput(FILENAME);
+		 * InputStreamReader isr = new InputStreamReader(fis);
+		 * 
+		 * Tag[] thePrimative = gson.fromJson(isr, Tag[].class);
+		 * 
+		 * isr.close(); fis.close();
+		 * 
+		 * for(int i = 0; i < thePrimative.length; i++) {
+		 * dataThatLoaded.add(thePrimative[i]); }
+		 * 
+		 * 
+		 * } catch (FileNotFoundException e) { // File was not found! Create it!
+		 * save(); } catch (IOException e) { // TODO Auto-generated catch block
+		 * e.printStackTrace(); }
 		 */
 	}
 }

@@ -3,7 +3,6 @@ package ca.ualberta.cs.taggingapp.views;
 import android.app.Activity;
 import android.content.Intent;
 import ca.ualberta.cs.taggingapp.R;
-import ca.ualberta.cs.taggingapp.models.ApplicationState;
 import ca.ualberta.cs.taggingapp.models.PictureList;
 import android.net.Uri;
 import android.os.Bundle;
@@ -19,22 +18,24 @@ import android.widget.GridView;
 public class GridViewFragment extends Fragment {
 	private GridImageAdapter gia = null;
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.support.v4.app.Fragment#onCreate(android.os.Bundle)
 	 */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		
+
 		setHasOptionsMenu(true);
 	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		
-		//ApplicationState.getInstance().load();
+
+		// ApplicationState.getInstance().load();
 
 		final View rootView = inflater.inflate(R.layout.grid_layout, container,
 				false);
@@ -101,16 +102,16 @@ public class GridViewFragment extends Fragment {
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (requestCode == CameraAndPhoto.REQUEST_TAKE_PHOTO) {
 			if (resultCode == Activity.RESULT_OK) {
-	
+
 				Uri photoUri = Uri.parse(data
 						.getStringExtra(CameraAndPhoto.PHOTO_URI));
 				PictureList.getInstance().addPicture(photoUri);
 				gia.notifyDataSetChanged();
-	
+
 			} else if (resultCode == Activity.RESULT_CANCELED) {
-	
+
 			} else {
-	
+
 			}
 		}
 	}

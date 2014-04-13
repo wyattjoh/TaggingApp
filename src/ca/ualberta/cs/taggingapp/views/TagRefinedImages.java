@@ -19,39 +19,38 @@ public class TagRefinedImages extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_tag_refined_images);
 		setTitle("Tagging App");
-		
+
 		Bundle extras = getIntent().getExtras();
 		String tag = extras.getString("tagName");
-		
+
 		TextView tagName = (TextView) findViewById(R.id.tag);
 		tagName.append(tag);
-		
+
 		TextView tagURL = (TextView) findViewById(R.id.tagURL);
 		tagURL.append("https://stackoverflow.com");
-		
-		GridView gridView = (GridView) this.findViewById(R.id.refinedImgGridView);
+
+		GridView gridView = (GridView) this
+				.findViewById(R.id.refinedImgGridView);
 
 		// Instance of ImageAdapter Class
 		final GridImageAdapter gia = new GridImageAdapter(this);
 		gridView.setAdapter(gia);
 
-		gridView.setOnItemClickListener(new OnItemClickListener()
-		{
+		gridView.setOnItemClickListener(new OnItemClickListener() {
 			@Override
-			public void onItemClick(AdapterView<?> parent,
-					View v, int position, long id)
-			{
+			public void onItemClick(AdapterView<?> parent, View v,
+					int position, long id) {
 				Intent i = new Intent(TagRefinedImages.this, ViewFullPic.class);
 
 				Integer imagePosition = (Integer) v.getTag();
 
 				PictureList.getInstance().setSelected(imagePosition);
-				
+
 				startActivity(i);
 				/*
-				Toast.makeText(rootView.getContext(),
-						"pic" + (gia.getItem(position)) +" selected",
-						Toast.LENGTH_SHORT).show();
+				 * Toast.makeText(rootView.getContext(), "pic" +
+				 * (gia.getItem(position)) +" selected",
+				 * Toast.LENGTH_SHORT).show();
 				 */
 			}
 		});

@@ -26,6 +26,7 @@ public class AddTag extends Activity implements OnNavigationListener {
 
 	DrawImageView picture;
 	int tagType = 0;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -33,9 +34,10 @@ public class AddTag extends Activity implements OnNavigationListener {
 		setTitle("Tagging App");
 		Picture thePicture = PictureList.getInstance().getSelected();
 		picture = (DrawImageView) findViewById(R.id.drawImageView1);
-		
+
 		try {
-			picture.setBackground(new BitmapDrawable(getResources(), thePicture.getPicture()));
+			picture.setBackground(new BitmapDrawable(getResources(), thePicture
+					.getPicture()));
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -43,7 +45,7 @@ public class AddTag extends Activity implements OnNavigationListener {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		// Drop down menu
 		final ActionBar actionBar = getActionBar();
 		actionBar.setDisplayShowTitleEnabled(false);
@@ -52,12 +54,15 @@ public class AddTag extends Activity implements OnNavigationListener {
 		itemList.add("Tap Tag");
 		itemList.add("Drag Tag");
 		itemList.add("Zoom Tag");
-		ArrayAdapter<String> aAdpt = new ArrayAdapter<String>(this, R.layout.spinner_item, itemList);
+		ArrayAdapter<String> aAdpt = new ArrayAdapter<String>(this,
+				R.layout.spinner_item, itemList);
 		actionBar.setListNavigationCallbacks(aAdpt, this);
 	}
-	
+
+	@Override
 	public boolean onNavigationItemSelected(int position, long id) {
-		Toast.makeText(getBaseContext(), "postion" + position, Toast.LENGTH_LONG).show();
+		Toast.makeText(getBaseContext(), "postion" + position,
+				Toast.LENGTH_LONG).show();
 		if (tagType == position) {
 			tagType = position;
 			Logger.start("user", tagType);
@@ -66,28 +71,28 @@ public class AddTag extends Activity implements OnNavigationListener {
 			Logger.end();
 			Logger.start("user", tagType);
 		}
-		
-		return false;
-	  // Our logic
-	}
 
+		return false;
+		// Our logic
+	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		//		getMenuInflater().inflate(R.menu.add_tag, menu);
+		// getMenuInflater().inflate(R.menu.add_tag, menu);
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.add_tag_action_bar, menu);
 		return super.onCreateOptionsMenu(menu);
 	}
-	
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// Handles presses on the action bar items
 		switch (item.getItemId()) {
 		case R.id.accept:
 			Picture pic = PictureList.getInstance().getSelected();
-			Region region = new Region(pic, picture.getUpperLeftPoint(), picture.getLowerRightPoint());
+			Region region = new Region(pic, picture.getUpperLeftPoint(),
+					picture.getLowerRightPoint());
 			pic.addRegion(region);
 			Intent i = new Intent(AddTag.this, AddNameToTag.class);
 			startActivity(i);
@@ -95,7 +100,7 @@ public class AddTag extends Activity implements OnNavigationListener {
 			Logger.end();
 			return true;
 		case R.id.decline:
-			
+
 			return true;
 		default:
 			return super.onOptionsItemSelected(item);
