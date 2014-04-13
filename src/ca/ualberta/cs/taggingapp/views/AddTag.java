@@ -1,5 +1,7 @@
 package ca.ualberta.cs.taggingapp.views;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import android.app.ActionBar;
@@ -31,7 +33,16 @@ public class AddTag extends Activity implements OnNavigationListener {
 		setTitle("Tagging App");
 		Picture thePicture = PictureList.getInstance().getSelected();
 		picture = (DrawImageView) findViewById(R.id.drawImageView1);
-		picture.setBackground(new BitmapDrawable(getResources(), thePicture.getPicture()));
+		
+		try {
+			picture.setBackground(new BitmapDrawable(getResources(), thePicture.getPicture()));
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		// Drop down menu
 		final ActionBar actionBar = getActionBar();

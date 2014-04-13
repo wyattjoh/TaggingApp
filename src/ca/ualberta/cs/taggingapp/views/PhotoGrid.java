@@ -11,17 +11,16 @@ public class PhotoGrid extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		//setContentView(R.layout.activity_photo_grid);
-		
+		// setContentView(R.layout.activity_photo_grid);
+
 		setContentView(R.layout.grid_layout);
-		 
-        GridView gridView = (GridView) findViewById(R.id.photo_grid_view);
- 
-        // Instance of ImageAdapter Class
-        gridView.setAdapter(new GridImageAdapter(this));
-        
+
+		GridView gridView = (GridView) findViewById(R.id.photo_grid_view);
+
+		// Instance of ImageAdapter Class
+		gridView.setAdapter(new GridImageAdapter(this));
+
 	}
-	
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

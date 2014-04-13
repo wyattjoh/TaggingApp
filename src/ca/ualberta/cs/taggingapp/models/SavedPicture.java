@@ -3,12 +3,12 @@ package ca.ualberta.cs.taggingapp.models;
 import java.util.ArrayList;
 
 import android.graphics.Bitmap;
+import android.net.Uri;
 
 
 public class SavedPicture {
 	private ArrayList<SavedRegion> savedRegions;
-	private transient Bitmap savedPicture = null;
-	private String savedPictureUri = null;
+	private Uri savedPictureUri = null;
 	
 	public SavedPicture(Picture pictureToSave) {
 		
@@ -21,7 +21,6 @@ public class SavedPicture {
 				
 			}
 		}
-		this.savedPicture = pictureToSave.getPicture();
 		this.savedPictureUri = pictureToSave.getPictureUri();
 	}
 
@@ -32,25 +31,17 @@ public class SavedPicture {
 	public void setSavedRegions(ArrayList<SavedRegion> savedRegions) {
 		this.savedRegions = savedRegions;
 	}
-
-	public Bitmap getSavedPicture() {
-		return savedPicture;
-	}
 	
-	public void setSavedPicture(Bitmap savedPicture) {
-		this.savedPicture = savedPicture;
-	}
-	
-	public String getSavedPictureUri() {
+	public Uri getSavedPictureUri() {
 		return savedPictureUri;
 	}
 
-	public void setSavedPictureUri(String savedPictureUri) {
+	public void setSavedPictureUri(Uri savedPictureUri) {
 		this.savedPictureUri = savedPictureUri;
 	}
 	
 	public Picture loadPicture() {
-		Picture picture = new Picture(this.savedPicture, this.savedPictureUri);
+		Picture picture = new Picture(this.savedPictureUri);
 		if (!this.savedRegions.isEmpty()) {
 			for (SavedRegion savedRegion : this.savedRegions) {
 				Region loadedRegion = savedRegion.loadRegion(picture);

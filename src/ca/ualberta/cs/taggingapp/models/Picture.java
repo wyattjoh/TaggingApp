@@ -1,13 +1,17 @@
 package ca.ualberta.cs.taggingapp.models;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import android.graphics.Bitmap;
+import android.net.Uri;
+import android.util.Log;
 
 public class Picture {
 	private ArrayList<Region> regions;
 	private transient Bitmap picture = null;
-	private String pictureUri = null;
+	private Uri pictureUri = null;
 	
 	public Picture() {
 		this.regions = new ArrayList<Region>();
@@ -18,12 +22,12 @@ public class Picture {
 		this.picture = bitmap;
 	}
 	
-	public Picture(String uri) {
+	public Picture(Uri uri) {
 		this.regions = new ArrayList<Region>();
 		this.pictureUri = uri;
 	}
 	
-	public Picture(Bitmap bitmap, String uri) {
+	public Picture(Bitmap bitmap, Uri uri) {
 		this.regions = new ArrayList<Region>();
 		this.picture = bitmap;
 		this.pictureUri = uri;
@@ -46,18 +50,19 @@ public class Picture {
 		this.regions.clear();
 	}
 	
-	public String getPictureUri() {
+	public Uri getPictureUri() {
 		return this.pictureUri;
 	}
 	
-	public void setPictureUri(String uri) {
+	public void setPictureUri(Uri uri) {
 		this.pictureUri = uri;
 	}
 	
-	public Bitmap getPicture() {
+	public Bitmap getPicture() throws FileNotFoundException, IOException {
 		if (picture == null && pictureUri != null) {
 			// TODO: Load the picture from the URI
-			
+			Log.w("Picture", "Photo loaded from factory");
+			picture = ImageLoadingFactory.getImageFromUri(pictureUri);
 		}
 		
 		return picture;

@@ -1,5 +1,8 @@
 package ca.ualberta.cs.taggingapp.views;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -28,7 +31,15 @@ public class TagAndPhoto extends Activity {
 		tag = extras.getString("tagName");
 		
 		ImageView img= (ImageView) findViewById(R.id.picViewer);
-		img.setImageBitmap(thePicture.getPicture());
+		try {
+			img.setImageBitmap(thePicture.getPicture());
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		TextView tagName = (TextView) findViewById(R.id.tag);
 		tagName.append(tag);

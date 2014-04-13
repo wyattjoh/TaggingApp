@@ -1,7 +1,5 @@
 package ca.ualberta.cs.taggingapp.views;
 
-import ca.ualberta.cs.taggingapp.R;
-import ca.ualberta.cs.taggingapp.controllers.UserController;
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.app.AlertDialog;
@@ -14,6 +12,8 @@ import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import ca.ualberta.cs.taggingapp.R;
+import ca.ualberta.cs.taggingapp.controllers.UserController;
 
 public class SwipeSuper extends FragmentActivity implements
 		ActionBar.TabListener {
@@ -80,11 +80,6 @@ public class SwipeSuper extends FragmentActivity implements
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// Handles presses on the action bar items
 		switch (item.getItemId()) {
-		case R.id.camera:
-			// calls camera code
-			Intent i = new Intent(SwipeSuper.this, CameraAndPhoto.class);
-			startActivity(i);
-			return true;
 		case R.id.logout:
 			logout();
 			return true;

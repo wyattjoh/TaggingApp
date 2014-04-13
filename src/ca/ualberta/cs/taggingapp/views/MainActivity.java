@@ -12,6 +12,7 @@ import ca.ualberta.cs.taggingapp.R;
 import ca.ualberta.cs.taggingapp.models.ActiveUserModel;
 import ca.ualberta.cs.taggingapp.models.ApplicationState;
 import ca.ualberta.cs.taggingapp.models.DummyPictureListFactory;
+import ca.ualberta.cs.taggingapp.models.ImageLoadingFactory;
 import ca.ualberta.cs.taggingapp.models.PictureList;
 import ca.ualberta.cs.taggingapp.models.TagList;
 
@@ -34,6 +35,9 @@ public class MainActivity extends Activity {
 		
 		// Create the ApplicationState
 		ApplicationState.createInstance(getApplicationContext());
+		
+		// Create the ImageLoadingFactory
+		ImageLoadingFactory.createInstance(getApplicationContext());
 		
 		// Check if logged in already
 		if (ActiveUserModel.getShared().isLoggedIn()) {

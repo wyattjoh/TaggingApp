@@ -3,6 +3,7 @@ package ca.ualberta.cs.taggingapp.models;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.net.Uri;
 
 /**
  * @author Wyatt Johnson
@@ -54,6 +55,14 @@ public class PictureList {
 	 */
 	public void addPicture(Picture thePicture) {
 		this.pictureList.add(0, thePicture);
+	}
+	
+	/*
+	 * Gets the photo at the designated location and adds it to the list
+	 */
+	public void addPicture(Uri location) {
+		Picture newPicture = new Picture(location);
+		this.pictureList.add(0, newPicture);
 	}
 	
 	/*

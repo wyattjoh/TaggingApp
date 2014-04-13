@@ -1,5 +1,7 @@
 package ca.ualberta.cs.taggingapp.views;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import android.app.Activity;
@@ -36,7 +38,15 @@ public class ViewFullPic extends Activity {
 		Picture thePicture = PictureList.getInstance().getSelected();
 		TaggedImageView picture = (TaggedImageView) findViewById(R.id.taggedImageView1);
 		picture.setPicture(thePicture);
-		picture.setBackground(new BitmapDrawable(getResources(), thePicture.getPicture()));
+		try {
+			picture.setBackground(new BitmapDrawable(getResources(), thePicture.getPicture()));
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		miniTagsList = (ListView) this.findViewById(R.id.miniTagsList);
 		

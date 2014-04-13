@@ -1,5 +1,7 @@
 package ca.ualberta.cs.taggingapp.views;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import android.app.Activity;
@@ -45,7 +47,15 @@ public class GridImageAdapter extends BaseAdapter {
         ImageView imageView = new ImageView(theContext);
         Picture thePictue = getItem(position);
         
-        imageView.setImageBitmap(thePictue.getPicture());
+        try {
+			imageView.setImageBitmap(thePictue.getPicture());
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
         imageView.setLayoutParams(new GridView.LayoutParams(160, 160));
         imageView.setTag(position);
