@@ -57,8 +57,8 @@ public class ViewFullPic extends Activity {
 			s.add(regs.get(i).getTag().getName());
 		}
 
-		adapter = new ArrayAdapter(getApplicationContext(), R.layout.list_item,
-				s);
+		adapter = new ArrayAdapter<String>(getApplicationContext(),
+				R.layout.list_item, s);
 
 		miniTagsList.setAdapter(adapter);
 
@@ -108,9 +108,8 @@ public class ViewFullPic extends Activity {
 			s.add(regs.get(i).getTag().getName());
 		}
 		System.out.println("SIZE OF S: " + s.size());
-		adapter = new ArrayAdapter(getApplicationContext(), R.layout.list_item,
-				s);
+		adapter = new ArrayAdapter<String>(getApplicationContext(),
+				R.layout.list_item, s);
 		miniTagsList.setAdapter(adapter);
 	}
-
 }

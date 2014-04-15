@@ -11,7 +11,6 @@ import android.widget.Toast;
 import ca.ualberta.cs.taggingapp.R;
 import ca.ualberta.cs.taggingapp.models.ActiveUserModel;
 import ca.ualberta.cs.taggingapp.models.ApplicationState;
-import ca.ualberta.cs.taggingapp.models.DummyPictureListFactory;
 import ca.ualberta.cs.taggingapp.models.ImageLoadingFactory;
 import ca.ualberta.cs.taggingapp.models.PictureList;
 import ca.ualberta.cs.taggingapp.models.TagList;
@@ -27,8 +26,6 @@ public class MainActivity extends Activity {
 		// Create the picture and tags list
 		PictureList.createInstance(getApplicationContext());
 		TagList.createInstance(getApplicationContext());
-
-		DummyPictureListFactory.createDummyPictures(getApplicationContext());
 
 		// Create the active user model
 		ActiveUserModel.createShared(getApplicationContext());
