@@ -62,7 +62,7 @@ public class Picture {
 		if (picture == null && pictureUri != null) {
 			// TODO: Load the picture from the URI
 			Log.w("Picture", "Photo loaded from factory");
-			picture = ImageLoadingFactory.getImageFromUri(pictureUri);
+			picture = ImageLoadingFactory.decodeScaledBitmapFromUri(pictureUri, 1000);
 		}
 
 		return picture;
