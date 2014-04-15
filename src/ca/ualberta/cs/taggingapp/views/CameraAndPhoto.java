@@ -42,13 +42,17 @@ public class CameraAndPhoto extends Activity {
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (requestCode == REQUEST_TAKE_PHOTO) {
 
-			// Add the pic to the gallery
-			galleryAddPic();
+			if (resultCode == RESULT_OK) {
+				// Add the pic to the gallery
+				galleryAddPic();
 
-			Intent returnIntent = new Intent();
-			returnIntent.putExtra(PHOTO_URI, mCurrentPhotoUri.toString());
-			setResult(RESULT_OK, returnIntent);
-			finish();
+				Intent returnIntent = new Intent();
+				returnIntent.putExtra(PHOTO_URI, mCurrentPhotoUri.toString());
+				setResult(RESULT_OK, returnIntent);
+				finish();
+			} else if (resultCode == RESULT_CANCELED) {
+				finish();
+			}
 		}
 	}
 
