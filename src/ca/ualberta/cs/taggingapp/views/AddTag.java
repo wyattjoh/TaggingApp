@@ -90,21 +90,25 @@ public class AddTag extends Activity implements OnNavigationListener {
 		// Handles presses on the action bar items
 		switch (item.getItemId()) {
 		case R.id.accept:
-			Picture pic = PictureList.getInstance().getSelected();
-			Region region = new Region(pic, picture.getUpperLeftPoint(),
-					picture.getLowerRightPoint());
-			pic.addRegion(region);
+			addRegion();
 			Intent i = new Intent(AddTag.this, AddNameToTag.class);
 			startActivity(i);
-			AddTag.this.finish();
+			finish();
 			Logger.end();
 			return true;
 		case R.id.decline:
-
+			finish();
 			return true;
 		default:
 			return super.onOptionsItemSelected(item);
 		}
+	}
+
+	protected void addRegion() {
+		Picture pic = PictureList.getInstance().getSelected();
+		Region region = new Region(pic, picture.getUpperLeftPoint(),
+				picture.getLowerRightPoint());
+		pic.addRegion(region);
 	}
 
 	@Override

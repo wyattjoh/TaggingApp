@@ -17,11 +17,11 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import ca.ualberta.cs.taggingapp.R;
+import ca.ualberta.cs.taggingapp.models.TagList;
 
 public class TagsListFragment extends Fragment {
 
-	private ArrayList<String> tags = new ArrayList<String>();
-	private ArrayAdapter<String> adapter;
+	private TagAdapter adapter;
 	private EditText searchView;
 	ListView listView;
 
@@ -29,19 +29,13 @@ public class TagsListFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 
-		Random randomGenerator = new Random();
-		for (int i = 0; i < 25; i++) {
-			int randomInt = randomGenerator.nextInt(10000);
-			tags.add("#" + Integer.toString(randomInt));
-		}
-
 		final View rootView = inflater.inflate(R.layout.fragment_tags_list,
 				container, false);
 		listView = (ListView) rootView.findViewById(R.id.tags_list_view);
 		searchView = (EditText) rootView.findViewById(R.id.tag_search);
 
-		adapter = new ArrayAdapter<String>(rootView.getContext(),
-				R.layout.list_item, tags);
+		adapter = new TagAdapter(getActivity(), R.layout.list_item,
+				TagList.getInstance().getTags());
 
 		listView.setAdapter(adapter);
 
@@ -51,7 +45,7 @@ public class TagsListFragment extends Fragment {
 					int position, long id) {
 				Intent i = new Intent(rootView.getContext(),
 						TagRefinedImages.class);
-				i.putExtra("tagName", adapter.getItem(position));
+				i.putExtra("tagName", adapter.getItem(position).getName());
 				startActivity(i);
 			}
 		});

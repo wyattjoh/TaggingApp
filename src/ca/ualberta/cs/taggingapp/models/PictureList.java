@@ -1,6 +1,9 @@
 package ca.ualberta.cs.taggingapp.models;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
+
+import com.google.gson.reflect.TypeToken;
 
 import android.content.Context;
 import android.net.Uri;
@@ -9,13 +12,15 @@ import android.net.Uri;
  * @author Wyatt Johnson
  */
 
-public class PictureList {
+public class PictureList extends SavedList<Picture> {
 	private static PictureList singleton = null;
+	private final static String FILENAME = "PictureListSaved.json";
 	private ArrayList<Picture> pictureList;
 	private Picture selectedPicture = null;
 	private Context theContext;
 
-	private PictureList() {
+	private PictureList(Context theContext) {
+		super(theContext);
 		this.pictureList = new ArrayList<Picture>();
 	}
 
@@ -35,8 +40,9 @@ public class PictureList {
 	}
 
 	public static PictureList createInstance(Context applicationContext) {
-		singleton = new PictureList();
+		singleton = new PictureList(applicationContext);
 		singleton.setTheContext(applicationContext);
+		singleton.pictureList = singleton.load();
 		return singleton;
 	}
 
@@ -49,6 +55,7 @@ public class PictureList {
 
 	public void updatePic(int index, Picture pic) {
 		this.pictureList.set(index, pic);
+		save(this.pictureList);
 	}
 
 	/*
@@ -56,6 +63,7 @@ public class PictureList {
 	 */
 	public void addPicture(Picture thePicture) {
 		this.pictureList.add(0, thePicture);
+		save(this.pictureList);
 	}
 
 	/*
@@ -64,6 +72,7 @@ public class PictureList {
 	public void addPicture(Uri location) {
 		Picture newPicture = new Picture(location);
 		this.pictureList.add(0, newPicture);
+		save(this.pictureList);
 	}
 
 	/*
@@ -78,6 +87,7 @@ public class PictureList {
 	 */
 	public void setPictureList(ArrayList<Picture> thePictureList) {
 		this.pictureList = thePictureList;
+		save(this.pictureList);
 	}
 
 	/*
@@ -99,5 +109,29 @@ public class PictureList {
 	 */
 	public Picture getSelected() {
 		return selectedPicture;
+	}
+
+	@Override
+	public String getFilename() {
+		return FILENAME;
+	}
+
+	public Picture getPictureFromId(String theId) {
+		for (Picture pic : this.pictureList) {
+			if (pic.getId().equals(theId)) {
+				return pic;
+			}
+		}
+		return null;
+	}
+
+	@Override
+	public Picture[] getPrimativeArray(ArrayList<Picture> orignalArray) {
+		return orignalArray.toArray(new Picture[0]);
+	}
+
+	@Override
+	public Type getType() {
+		return new TypeToken<Picture[]>(){}.getType();
 	}
 }

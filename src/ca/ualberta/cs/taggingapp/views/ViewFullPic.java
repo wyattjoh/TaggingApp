@@ -8,6 +8,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,60 +20,19 @@ import ca.ualberta.cs.taggingapp.R;
 import ca.ualberta.cs.taggingapp.models.Picture;
 import ca.ualberta.cs.taggingapp.models.PictureList;
 import ca.ualberta.cs.taggingapp.models.Region;
+import ca.ualberta.cs.taggingapp.models.Tag;
 import ca.ualberta.cs.taggingapp.models.TaggedImageView;
 
 public class ViewFullPic extends Activity {
 
 	ArrayAdapter<String> adapter;
 	ArrayList<String> s;
-	ListView miniTagsList;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_view_full_pic);
 		setTitle("Tagging App");
-
-		Picture thePicture = PictureList.getInstance().getSelected();
-		TaggedImageView picture = (TaggedImageView) findViewById(R.id.taggedImageView1);
-		picture.setPicture(thePicture);
-		try {
-			picture.setBackground(new BitmapDrawable(getResources(), thePicture
-					.getPicture()));
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		miniTagsList = (ListView) this.findViewById(R.id.miniTagsList);
-
-		ArrayList<Region> regs = PictureList.getInstance().getSelected()
-				.getRegions();
-		s = new ArrayList<String>();
-		s.add("NEW TAG");
-		for (int i = 0; i < regs.size(); i++) {
-			s.add(regs.get(i).getTag().getName());
-		}
-
-		adapter = new ArrayAdapter<String>(getApplicationContext(),
-				R.layout.list_item, s);
-
-		miniTagsList.setAdapter(adapter);
-
-		miniTagsList.setOnItemClickListener(new OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView<?> parent, View v,
-					int position, long id) {
-				Intent i = new Intent(ViewFullPic.this, TagAndPhoto.class);
-				i.putExtra("tagName", adapter.getItem(position));
-				i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-				startActivity(i);
-				ViewFullPic.this.finish();
-			}
-		});
 	}
 
 	@Override
@@ -87,9 +47,9 @@ public class ViewFullPic extends Activity {
 		// Handles presses on the action bar items
 		switch (item.getItemId()) {
 		case R.id.add:
-			Intent i = new Intent(ViewFullPic.this, AddTag.class);
-			i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-			startActivity(i);
+			Intent intent = new Intent(this, AddTag.class);
+			intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+			startActivity(intent);
 		default:
 			return super.onOptionsItemSelected(item);
 		}
@@ -98,18 +58,55 @@ public class ViewFullPic extends Activity {
 	@Override
 	public void onResume() {
 		super.onResume();
-		// ApplicationState.getInstance().load();
-		ArrayList<Region> regs = PictureList.getInstance().getSelected()
-				.getRegions();
-		s = new ArrayList<String>();
-		s.add("NEW TAG");
-		System.out.println("SIZE: " + regs.size());
-		for (int i = 0; i < regs.size(); i++) {
-			s.add(regs.get(i).getTag().getName());
+		
+		// Populate the view
+		populateView();
+	}
+
+	protected void populateView() {
+		Picture thePicture = PictureList.getInstance().getSelected();
+		TaggedImageView picture = (TaggedImageView) findViewById(R.id.taggedImageView1);
+		picture.setPicture(thePicture);
+		try {
+			picture.setBackground(new BitmapDrawable(getResources(), thePicture
+					.getPicture()));
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		System.out.println("SIZE OF S: " + s.size());
+		
+		ListView miniTagsList = (ListView) this.findViewById(R.id.miniTagsList);
+	
+		ArrayList<Region> regs = PictureList.getInstance().getSelected().getRegions();
+		s = new ArrayList<String>();
+		
+		Log.w("ViewFullPic", "Number of regions: " + Integer.toString(regs.size()));
+		for (Region region: regs) {			
+			Tag theTag = region.getTag();
+			
+			s.add(theTag.getName());
+			
+			Log.w("ViewFullPic", "The tag: " + theTag.getName());
+		}
+	
 		adapter = new ArrayAdapter<String>(getApplicationContext(),
 				R.layout.list_item, s);
+	
 		miniTagsList.setAdapter(adapter);
+	
+		miniTagsList.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View v,
+					int position, long id) {
+				Intent i = new Intent(ViewFullPic.this, TagAndPhoto.class);
+				i.putExtra("tagName", adapter.getItem(position));
+				i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+				startActivity(i);
+				finish();
+			}
+		});
 	}
 }

@@ -1,5 +1,7 @@
 package ca.ualberta.cs.taggingapp.models;
 
+import java.util.UUID;
+
 import android.graphics.Point;
 
 public class Region {
@@ -8,12 +10,14 @@ public class Region {
 	private int height = 0;
 	private Point upperLeftCorner = new Point(0, 0);
 	private Point lowerRightCorner = new Point(0, 0);
-	private Tag tag = null;
-	private Picture picture = null;
+	private String tag = null;
+	private String picture = null;
+	private String id;
 
 	public Region(Picture picture, int upperLeftX, int upperLeftY,
 			int lowerRightX, int lowerRightY) {
-		this.picture = picture;
+		this.id = UUID.randomUUID().toString();
+		this.picture = picture.getId();
 		this.upperLeftCorner.x = upperLeftX;
 		this.upperLeftCorner.y = upperLeftY;
 		this.lowerRightCorner.x = lowerRightX;
@@ -22,7 +26,7 @@ public class Region {
 	}
 
 	public Region(Picture picture, Point upperLeft, Point lowerRight) {
-		this.picture = picture;
+		this.picture = picture.getId();
 		this.upperLeftCorner = upperLeft;
 		this.lowerRightCorner = lowerRight;
 		this.updateRegionFromCorners();
@@ -31,14 +35,14 @@ public class Region {
 	public Region(Picture picture, int x, int y) {
 		this.height = 64;
 		this.width = 64;
-		this.picture = picture;
+		this.picture = picture.getId();
 		this.setCenter(x, y);
 	}
 
 	public Region(Picture picture, Point center) {
 		this.height = 64;
 		this.width = 64;
-		this.picture = picture;
+		this.picture = picture.getId();
 		this.setCenter(center);
 	}
 
@@ -105,19 +109,19 @@ public class Region {
 	}
 
 	public Tag getTag() {
-		return tag;
+		return TagList.getInstance().getTagWithId(tag);
 	}
 
 	public void setTag(Tag tag) {
-		this.tag = tag;
+		this.tag = tag.getId();
 	}
 
 	public Picture getPicture() {
-		return picture;
+		return PictureList.getInstance().getPictureFromId(picture);
 	}
 
 	public void setPicture(Picture picture) {
-		this.picture = picture;
+		this.picture = picture.getId();
 	}
 
 	// End of getters and setters
@@ -134,7 +138,10 @@ public class Region {
 			this.getTag().removeTaggedRegion(this);
 		}
 		this.setTag(tag);
-		this.tag.addTaggedRegion(this);
+		
+		Tag theTag = TagList.getInstance().getTagWithId(this.tag);
+		
+		theTag.addTaggedRegion(this);
 	}
 
 	/*

@@ -1,23 +1,29 @@
 package ca.ualberta.cs.taggingapp.models;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 public class Tag {
+	private String id;
 	private String name;
 	private String URL;
 	private ArrayList<Region> taggedRegions = new ArrayList<Region>();
 
 	public Tag(String name, String URL) {
+		this();
+		
 		this.name = name;
 		this.URL = URL;
 	}
 
 	public Tag(String name) {
+		this();
+		
 		this.name = name;
-		this.URL = null;
 	}
 
 	public Tag() {
+		this.id = UUID.randomUUID().toString();
 		this.name = null;
 		this.URL = null;
 	}
@@ -72,5 +78,19 @@ public class Tag {
 		} else {
 			return false;
 		}
+	}
+
+	/**
+	 * @return the id
+	 */
+	public String getId() {
+		return id;
+	}
+
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(String id) {
+		this.id = id;
 	}
 }

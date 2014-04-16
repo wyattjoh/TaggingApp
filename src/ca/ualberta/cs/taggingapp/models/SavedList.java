@@ -6,29 +6,37 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-
-import com.google.gson.Gson;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 
 import android.content.Context;
 
-public class SavedApplicationState {
-	private final String FILENAME = "applicationState.json";
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+public abstract class SavedList<T> {
+	
 	private Context theContext;
 
-	public SavedApplicationState(Context theContext) {
+	public SavedList(Context theContext) {
 		this.theContext = theContext;
 	}
+	
+	public abstract String getFilename();
+	public abstract T[] getPrimativeArray(ArrayList<T> orignalArray);
+	public abstract Type getType();
 
-	public void save(ApplicationState theApplicationState) {
+	protected void save(ArrayList<T> theApplicationState) {
 		try {
 			Gson gson = new Gson();
 
-			FileOutputStream fos = theContext.openFileOutput(FILENAME,
+			FileOutputStream fos = theContext.openFileOutput(getFilename(),
 					Context.MODE_PRIVATE);
 			fos.getChannel().lock();
 			OutputStreamWriter osw = new OutputStreamWriter(fos);
 
-			gson.toJson(theApplicationState, osw);
+			T[] theStateList = getPrimativeArray(theApplicationState);
+			gson.toJson(theStateList, osw);
 
 			osw.close();
 			fos.close();
@@ -41,31 +49,30 @@ public class SavedApplicationState {
 		}
 	}
 
-	public ApplicationState load() {
-		ApplicationState theState = null;
+	protected ArrayList<T> load() {
+		ArrayList<T> theState = new ArrayList<T>();
 
 		try {
 			Gson gson = new Gson();
 
-			FileInputStream fis = theContext.openFileInput(FILENAME);
+			FileInputStream fis = theContext.openFileInput(getFilename());
 			InputStreamReader isr = new InputStreamReader(fis);
-
-			theState = gson.fromJson(isr, ApplicationState.class);
+			
+			Type listofTObject = getType();
+			T[] theStateList = gson.fromJson(isr, listofTObject);
+			
+			for (T object : theStateList) {
+				theState.add(object);
+			}
 
 			isr.close();
 			fis.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
-
-			theState = new ApplicationState();
-
 		} catch (IOException e) {
 			e.printStackTrace();
-
-			theState = new ApplicationState();
 		}
 
 		return theState;
 	}
-
 }
