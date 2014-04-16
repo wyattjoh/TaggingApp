@@ -9,10 +9,14 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
 import ca.ualberta.cs.taggingapp.R;
+import ca.ualberta.cs.taggingapp.models.PictureList;
 
 public class EditTag extends Activity {
 
 	String tagName;
+	int position;
+	EditText tag;
+	EditText url;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -23,11 +27,12 @@ public class EditTag extends Activity {
 		// Get the tag name and photo id
 		Bundle extras = getIntent().getExtras();
 		tagName = extras.getString("tagName");
+		position = extras.getInt("pos");
 
-		EditText tag = (EditText) findViewById(R.id.tag_edit);
+		tag = (EditText) findViewById(R.id.tag_edit);
 		tag.append(tagName);
 
-		EditText url = (EditText) findViewById(R.id.url_edit);
+		url = (EditText) findViewById(R.id.url_edit);
 		url.append("https://stackoverflow.com");
 	}
 
@@ -82,6 +87,10 @@ public class EditTag extends Activity {
 	}
 
 	public void saveTag(View view) {
+		
+		// Horrible stringy code, forgive me
+		PictureList.getInstance().getSelected().getRegions().get(position).getTag().setName(tag.getText().toString());
+		PictureList.getInstance().getSelected().getRegions().get(position).getTag().setURL(url.getText().toString());
 		EditTag.this.finish();
 	}
 

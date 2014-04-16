@@ -68,6 +68,7 @@ public class ViewFullPic extends Activity {
 					int position, long id) {
 				Intent i = new Intent(ViewFullPic.this, TagAndPhoto.class);
 				i.putExtra("tagName", adapter.getItem(position));
+				i.putExtra("pos", position);
 				i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
 				startActivity(i);
 				ViewFullPic.this.finish();

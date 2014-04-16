@@ -1,7 +1,6 @@
 package ca.ualberta.cs.taggingapp.views;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,6 +16,9 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import ca.ualberta.cs.taggingapp.R;
+import ca.ualberta.cs.taggingapp.models.Picture;
+import ca.ualberta.cs.taggingapp.models.PictureList;
+import ca.ualberta.cs.taggingapp.models.Region;
 
 public class TagsListFragment extends Fragment {
 
@@ -24,21 +26,32 @@ public class TagsListFragment extends Fragment {
 	private ArrayAdapter<String> adapter;
 	private EditText searchView;
 	ListView listView;
+	View rootView;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 
-		Random randomGenerator = new Random();
-		for (int i = 0; i < 25; i++) {
-			int randomInt = randomGenerator.nextInt(10000);
-			tags.add("#" + Integer.toString(randomInt));
-		}
-
-		final View rootView = inflater.inflate(R.layout.fragment_tags_list,
-				container, false);
-		listView = (ListView) rootView.findViewById(R.id.tags_list_view);
-		searchView = (EditText) rootView.findViewById(R.id.tag_search);
+		/* Random taglist generator code 
+     	Random randomGenerator = new Random();
+         for (int i = 0; i < 25; i++){
+           int randomInt = randomGenerator.nextInt(10000);
+           tags.add("#" + Integer.toString(randomInt));
+         }
+        */
+    	ArrayList <Picture> pics = PictureList.getInstance().getPictureList();
+    	ArrayList <Region> regs;
+    	for (int i = 0; i < pics.size(); i++) {
+    		regs = pics.get(i).getRegions();
+    		for (int j = 0; j < regs.size(); j++) {
+    			tags.add(regs.get(j).getTag().getName());
+    		}
+    	}
+     	
+        rootView = inflater.inflate(R.layout.fragment_tags_list, container, false);
+        rootView = inflater.inflate(R.layout.fragment_tags_list, container, false);
+         listView = (ListView) rootView.findViewById(R.id.tags_list_view);
+         searchView = (EditText) rootView.findViewById(R.id.tag_search);
 
 		adapter = new ArrayAdapter<String>(rootView.getContext(),
 				R.layout.list_item, tags);
@@ -79,5 +92,23 @@ public class TagsListFragment extends Fragment {
 		});
 
 		return rootView;
+	}
+	
+	@Override
+	public void onResume() {
+		super.onResume();
+		ArrayList <Picture> pics = PictureList.getInstance().getPictureList();
+    	ArrayList <Region> regs;
+    	tags.clear();
+    	for (int i = 0; i < pics.size(); i++) {
+    		regs = pics.get(i).getRegions();
+    		for (int j = 0; j < regs.size(); j++) {
+    			tags.add(regs.get(j).getTag().getName());
+    		}
+    	}
+    	adapter = new ArrayAdapter<String>(rootView.getContext(),
+                R.layout.list_item, tags);
+        
+        listView.setAdapter(adapter); 
 	}
 }
