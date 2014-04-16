@@ -33,7 +33,7 @@ public class TagRefinedImages extends Activity {
 				.findViewById(R.id.refinedImgGridView);
 
 		// Instance of ImageAdapter Class
-		final GridImageAdapter gia = new GridImageAdapter(this);
+		final GridImageAdapter gia = new GridImageAdapter(this, tag);
 		gridView.setAdapter(gia);
 
 		gridView.setOnItemClickListener(new OnItemClickListener() {

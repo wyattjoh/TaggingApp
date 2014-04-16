@@ -1,5 +1,7 @@
 package ca.ualberta.cs.taggingapp.views;
 
+import java.util.ArrayList;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -10,14 +12,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import ca.ualberta.cs.taggingapp.R;
+import ca.ualberta.cs.taggingapp.models.Tag;
 import ca.ualberta.cs.taggingapp.models.TagList;
 
 public class TagsListFragment extends Fragment {
 
-	private TagAdapter adapter;
+	private ArrayAdapter adapter;
 	private EditText searchView;
 	ListView listView;
 
@@ -29,9 +33,12 @@ public class TagsListFragment extends Fragment {
 				container, false);
 		listView = (ListView) rootView.findViewById(R.id.tags_list_view);
 		searchView = (EditText) rootView.findViewById(R.id.tag_search);
-
-		adapter = new TagAdapter(getActivity(), R.layout.list_item, TagList
-				.getInstance().getTags());
+		
+		ArrayList<String> tags = new ArrayList<String>();
+		for (int i = 0; i < TagList.getInstance().getTags().size(); i++) {
+			tags.add(TagList.getInstance().getTags().get(i).getName());
+		}
+		adapter = new ArrayAdapter(getActivity(), R.layout.list_item, tags);
 
 		listView.setAdapter(adapter);
 
@@ -41,7 +48,7 @@ public class TagsListFragment extends Fragment {
 					int position, long id) {
 				Intent i = new Intent(rootView.getContext(),
 						TagRefinedImages.class);
-				i.putExtra("tagName", adapter.getItem(position).getName());
+				i.putExtra("tagName", TagList.getInstance().getTags().get(position).getName());
 				startActivity(i);
 			}
 		});
@@ -75,8 +82,11 @@ public class TagsListFragment extends Fragment {
 	public void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
-		adapter = new TagAdapter(getActivity(), R.layout.list_item, TagList
-				.getInstance().getTags());
+		ArrayList<String> tags = new ArrayList<String>();
+		for (int i = 0; i < TagList.getInstance().getTags().size(); i++) {
+			tags.add(TagList.getInstance().getTags().get(i).getName());
+		}
+		adapter = new ArrayAdapter(getActivity(), R.layout.list_item, tags);
 
 		listView.setAdapter(adapter);
 	}

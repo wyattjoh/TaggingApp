@@ -13,15 +13,29 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import ca.ualberta.cs.taggingapp.models.Picture;
 import ca.ualberta.cs.taggingapp.models.PictureList;
+import ca.ualberta.cs.taggingapp.models.Region;
 
 public class GridImageAdapter extends BaseAdapter {
 	private ArrayList<Picture> thePictureList;
 	private Context theContext;
 
-	public GridImageAdapter(Activity theActivity) {
+	public GridImageAdapter(Activity theActivity, String tagName) {
 		theContext = theActivity.getApplicationContext();
-
-		thePictureList = PictureList.getInstance().getPictureList();
+		ArrayList<Picture> pics = PictureList.getInstance().getPictureList();
+		if (tagName == null) {
+			thePictureList = pics;
+		}
+		else {
+			thePictureList = new ArrayList<Picture>();
+			for (int i = 0; i < pics.size(); i++) {
+				ArrayList<Region> regs = pics.get(i).getRegions();
+				for (int j = 0; j < regs.size(); j++) {
+					if (regs.get(j).getTag().getName().equals(tagName)) {
+						thePictureList.add(pics.get(i));
+					}
+				}
+			}
+		}
 	}
 
 	@Override

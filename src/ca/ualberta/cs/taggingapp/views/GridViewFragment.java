@@ -43,7 +43,7 @@ public class GridViewFragment extends Fragment {
 				.findViewById(R.id.photo_grid_view);
 
 		// Instance of ImageAdapter Class
-		gia = new GridImageAdapter(getActivity());
+		gia = new GridImageAdapter(getActivity(),null);
 		gridView.setAdapter(gia);
 
 		gridView.setOnItemClickListener(new OnItemClickListener() {
