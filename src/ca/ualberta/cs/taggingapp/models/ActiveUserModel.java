@@ -74,6 +74,8 @@ public class ActiveUserModel {
 
 		// Remove the user from preferences
 		theSavedUserModel.remove();
+		TagList.getInstance().remove();
+		PictureList.getInstance().remove();
 	}
 
 	public Boolean isLoggedIn() {

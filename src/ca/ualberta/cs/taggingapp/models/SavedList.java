@@ -49,6 +49,11 @@ public abstract class SavedList<T> {
 			ee.printStackTrace();
 		}
 	}
+	
+	public void remove() {
+		this.theList = new ArrayList<T>();
+		save();
+	}
 
 	protected ArrayList<T> load() {
 		ArrayList<T> theState = new ArrayList<T>();
