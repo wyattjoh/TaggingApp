@@ -84,7 +84,7 @@ public class AddNameToTag extends Activity {
 			System.out.println(regs.get(i).getLowerRightCorner().x);
 
 		TagList.getInstance().addTag(tag);
-		
+
 		TagList.getInstance().save();
 		PictureList.getInstance().save();
 	}

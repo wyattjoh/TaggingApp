@@ -12,19 +12,20 @@ import java.util.ArrayList;
 import android.content.Context;
 
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 public abstract class SavedList<T> {
-	
+
 	private Context theContext;
 	protected ArrayList<T> theList;
 
 	public SavedList(Context theContext) {
 		this.theContext = theContext;
 	}
-	
+
 	public abstract String getFilename();
+
 	public abstract T[] getPrimativeArray(ArrayList<T> orignalArray);
+
 	public abstract Type getType();
 
 	public void save() {
@@ -49,7 +50,7 @@ public abstract class SavedList<T> {
 			ee.printStackTrace();
 		}
 	}
-	
+
 	public void remove() {
 		this.theList = new ArrayList<T>();
 		save();
@@ -63,10 +64,10 @@ public abstract class SavedList<T> {
 
 			FileInputStream fis = theContext.openFileInput(getFilename());
 			InputStreamReader isr = new InputStreamReader(fis);
-			
+
 			Type listofTObject = getType();
 			T[] theStateList = gson.fromJson(isr, listofTObject);
-			
+
 			for (T object : theStateList) {
 				theState.add(object);
 			}

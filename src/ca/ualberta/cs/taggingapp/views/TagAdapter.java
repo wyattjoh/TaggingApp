@@ -56,10 +56,11 @@ public class TagAdapter extends ArrayAdapter<Tag> {
 	}
 
 	private void populateRowView(View postRowView, int thePosition) {
-		TextView theTextView = (TextView) postRowView.findViewById(R.id.theRowText);
-		
+		TextView theTextView = (TextView) postRowView
+				.findViewById(R.id.theRowText);
+
 		Tag theTag = getItem(thePosition);
-		
+
 		theTextView.setText(theTag.getName());
 	}
 

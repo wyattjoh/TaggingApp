@@ -131,6 +131,7 @@ public class PictureList extends SavedList<Picture> {
 
 	@Override
 	public Type getType() {
-		return new TypeToken<Picture[]>(){}.getType();
+		return new TypeToken<Picture[]>() {
+		}.getType();
 	}
 }

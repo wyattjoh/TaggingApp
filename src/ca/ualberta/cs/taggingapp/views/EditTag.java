@@ -87,10 +87,12 @@ public class EditTag extends Activity {
 	}
 
 	public void saveTag(View view) {
-		
+
 		// Horrible stringy code, forgive me
-		PictureList.getInstance().getSelected().getRegions().get(position).getTag().setName(tag.getText().toString());
-		PictureList.getInstance().getSelected().getRegions().get(position).getTag().setURL(url.getText().toString());
+		PictureList.getInstance().getSelected().getRegions().get(position)
+				.getTag().setName(tag.getText().toString());
+		PictureList.getInstance().getSelected().getRegions().get(position)
+				.getTag().setURL(url.getText().toString());
 		EditTag.this.finish();
 	}
 

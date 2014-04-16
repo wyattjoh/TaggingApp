@@ -138,9 +138,9 @@ public class Region {
 			this.getTag().removeTaggedRegion(this);
 		}
 		this.setTag(tag);
-		
+
 		Tag theTag = TagList.getInstance().getTagWithId(this.tag);
-		
+
 		theTag.addTaggedRegion(this);
 	}
 

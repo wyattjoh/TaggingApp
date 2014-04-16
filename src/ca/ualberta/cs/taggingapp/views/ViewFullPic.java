@@ -58,7 +58,7 @@ public class ViewFullPic extends Activity {
 	@Override
 	public void onResume() {
 		super.onResume();
-		
+
 		// Populate the view
 		populateView();
 	}
@@ -77,26 +77,28 @@ public class ViewFullPic extends Activity {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		ListView miniTagsList = (ListView) this.findViewById(R.id.miniTagsList);
-	
-		ArrayList<Region> regs = PictureList.getInstance().getSelected().getRegions();
+
+		ArrayList<Region> regs = PictureList.getInstance().getSelected()
+				.getRegions();
 		s = new ArrayList<String>();
-		
-		Log.w("ViewFullPic", "Number of regions: " + Integer.toString(regs.size()));
-		for (Region region: regs) {			
+
+		Log.w("ViewFullPic",
+				"Number of regions: " + Integer.toString(regs.size()));
+		for (Region region : regs) {
 			Tag theTag = region.getTag();
-			
+
 			s.add(theTag.getName());
-			
+
 			Log.w("ViewFullPic", "The tag: " + theTag.getName());
 		}
-	
+
 		adapter = new ArrayAdapter<String>(getApplicationContext(),
 				R.layout.list_item, s);
-	
+
 		miniTagsList.setAdapter(adapter);
-	
+
 		miniTagsList.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View v,

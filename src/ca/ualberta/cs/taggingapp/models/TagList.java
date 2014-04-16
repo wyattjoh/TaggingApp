@@ -8,7 +8,7 @@ import com.google.gson.reflect.TypeToken;
 import android.content.Context;
 import android.util.Log;
 
-public class TagList extends SavedList<Tag>{
+public class TagList extends SavedList<Tag> {
 	private final static String FILENAME = "TagListSaved.json";
 	private static TagList singleton = null;
 	private Tag selectedTag = null;
@@ -84,9 +84,9 @@ public class TagList extends SavedList<Tag>{
 
 		return foundTag;
 	}
-	
+
 	public Tag getTagWithId(String theId) {
-		for (Tag tag: this.theList) {
+		for (Tag tag : this.theList) {
 			if (tag.getId().equals(theId)) {
 				return tag;
 			}
@@ -107,6 +107,7 @@ public class TagList extends SavedList<Tag>{
 
 	@Override
 	public Type getType() {
-		return new TypeToken<Tag[]>(){}.getType();
+		return new TypeToken<Tag[]>() {
+		}.getType();
 	}
 }

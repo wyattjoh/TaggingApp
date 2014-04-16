@@ -22,19 +22,19 @@ public class Picture {
 
 	public Picture(Bitmap bitmap) {
 		this();
-		
+
 		this.picture = bitmap;
 	}
 
 	public Picture(String uri) {
 		this();
-		
+
 		this.picturePath = uri;
 	}
-	
+
 	public Picture(Uri uri) {
 		this();
-		
+
 		this.picturePath = uri.toString();
 	}
 
@@ -74,8 +74,8 @@ public class Picture {
 		if (picture == null && picturePath != null) {
 			// TODO: Load the picture from the URI
 			Log.w("Picture", "Photo loaded from factory");
-			picture = ImageLoadingFactory.decodeScaledBitmapFromUri(getPictureUri(),
-					1000);
+			picture = ImageLoadingFactory.decodeScaledBitmapFromUri(
+					getPictureUri(), 1000);
 		}
 
 		return picture;
@@ -84,6 +84,7 @@ public class Picture {
 	public void setPicture(Bitmap picture) {
 		this.picture = picture;
 	}
+
 	// End of getters and setters
 
 	/**
@@ -94,7 +95,8 @@ public class Picture {
 	}
 
 	/**
-	 * @param id the id to set
+	 * @param id
+	 *            the id to set
 	 */
 	public void setId(String id) {
 		this.id = id;

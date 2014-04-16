@@ -1,8 +1,5 @@
 package ca.ualberta.cs.taggingapp.views;
 
-import java.util.ArrayList;
-import java.util.Random;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -13,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import ca.ualberta.cs.taggingapp.R;
@@ -34,8 +30,8 @@ public class TagsListFragment extends Fragment {
 		listView = (ListView) rootView.findViewById(R.id.tags_list_view);
 		searchView = (EditText) rootView.findViewById(R.id.tag_search);
 
-		adapter = new TagAdapter(getActivity(), R.layout.list_item,
-				TagList.getInstance().getTags());
+		adapter = new TagAdapter(getActivity(), R.layout.list_item, TagList
+				.getInstance().getTags());
 
 		listView.setAdapter(adapter);
 

@@ -11,14 +11,14 @@ public class Tag {
 
 	public Tag(String name, String URL) {
 		this();
-		
+
 		this.name = name;
 		this.URL = URL;
 	}
 
 	public Tag(String name) {
 		this();
-		
+
 		this.name = name;
 	}
 
@@ -88,7 +88,8 @@ public class Tag {
 	}
 
 	/**
-	 * @param id the id to set
+	 * @param id
+	 *            the id to set
 	 */
 	public void setId(String id) {
 		this.id = id;
