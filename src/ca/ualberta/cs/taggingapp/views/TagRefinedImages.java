@@ -1,7 +1,10 @@
 package ca.ualberta.cs.taggingapp.views;
 
+import java.util.ArrayList;
+
 import ca.ualberta.cs.taggingapp.R;
 import ca.ualberta.cs.taggingapp.models.PictureList;
+import ca.ualberta.cs.taggingapp.models.Region;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -27,7 +30,12 @@ public class TagRefinedImages extends Activity {
 		tagName.append(tag);
 
 		TextView tagURL = (TextView) findViewById(R.id.tagURL);
-		tagURL.append("https://stackoverflow.com");
+		ArrayList <Region> regs = PictureList.getInstance().getSelected().getRegions();
+		for (int i = 0; i < regs.size(); i++) {
+			if (regs.get(i).getTag().getName().equals(tag)) {
+				tagURL.append(regs.get(i).getTag().getURL());
+			}
+		}
 
 		GridView gridView = (GridView) this
 				.findViewById(R.id.refinedImgGridView);

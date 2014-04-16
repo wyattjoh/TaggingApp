@@ -1,5 +1,7 @@
 package ca.ualberta.cs.taggingapp.views;
 
+import java.util.ArrayList;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -10,6 +12,8 @@ import android.view.View;
 import android.widget.EditText;
 import ca.ualberta.cs.taggingapp.R;
 import ca.ualberta.cs.taggingapp.models.PictureList;
+import ca.ualberta.cs.taggingapp.models.Region;
+import ca.ualberta.cs.taggingapp.models.TagList;
 
 public class EditTag extends Activity {
 
@@ -27,13 +31,19 @@ public class EditTag extends Activity {
 		// Get the tag name and photo id
 		Bundle extras = getIntent().getExtras();
 		tagName = extras.getString("tagName");
+		
+		url = (EditText) findViewById(R.id.url_edit);
+		ArrayList <Region> regs = PictureList.getInstance().getSelected().getRegions();
+		for (int i = 0; i < regs.size(); i++) {
+			if (regs.get(i).getTag().getName().equals(tagName)) {
+				url.append(regs.get(i).getTag().getURL());
+			}
+		}
 		position = extras.getInt("pos");
 
 		tag = (EditText) findViewById(R.id.tag_edit);
 		tag.append(tagName);
 
-		url = (EditText) findViewById(R.id.url_edit);
-		url.append("https://stackoverflow.com");
 	}
 
 	@Override
@@ -93,6 +103,8 @@ public class EditTag extends Activity {
 				.getTag().setName(tag.getText().toString());
 		PictureList.getInstance().getSelected().getRegions().get(position)
 				.getTag().setURL(url.getText().toString());
+		TagList.getInstance().save();
+		PictureList.getInstance().save();
 		EditTag.this.finish();
 	}
 

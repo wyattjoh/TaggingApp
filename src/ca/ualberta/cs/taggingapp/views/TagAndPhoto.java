@@ -2,6 +2,7 @@ package ca.ualberta.cs.taggingapp.views;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 import ca.ualberta.cs.taggingapp.R;
 import ca.ualberta.cs.taggingapp.models.Picture;
 import ca.ualberta.cs.taggingapp.models.PictureList;
+import ca.ualberta.cs.taggingapp.models.Region;
 
 public class TagAndPhoto extends Activity {
 	Picture thePicture;
@@ -45,7 +47,13 @@ public class TagAndPhoto extends Activity {
 		tagName.append(tag);
 
 		TextView tagURL = (TextView) findViewById(R.id.tagURL);
-		tagURL.append("https://stackoverflow.com");
+		
+		ArrayList <Region> regs = PictureList.getInstance().getSelected().getRegions();
+		for (int i = 0; i < regs.size(); i++) {
+			if (regs.get(i).getTag().getName().equals(tag)) {
+				tagURL.append(regs.get(i).getTag().getURL());
+			}
+		}
 
 		Button moreImages = (Button) findViewById(R.id.morePhotosWTag);
 		moreImages.append(tag);

@@ -108,7 +108,7 @@ public class ViewFullPic extends Activity {
 				i.putExtra("pos", position);
 				i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
 				startActivity(i);
-				finish();
+				//finish();
 			}
 		});
 	}
