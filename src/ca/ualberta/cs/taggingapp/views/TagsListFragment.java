@@ -70,4 +70,15 @@ public class TagsListFragment extends Fragment {
 
 		return rootView;
 	}
+	
+	@Override
+	public void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		adapter = new TagAdapter(getActivity(), R.layout.list_item, TagList
+				.getInstance().getTags());
+
+		listView.setAdapter(adapter);
+	}
+
 }
