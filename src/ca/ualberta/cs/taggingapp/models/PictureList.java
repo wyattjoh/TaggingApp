@@ -15,13 +15,12 @@ import android.net.Uri;
 public class PictureList extends SavedList<Picture> {
 	private static PictureList singleton = null;
 	private final static String FILENAME = "PictureListSaved.json";
-	private ArrayList<Picture> pictureList;
 	private Picture selectedPicture = null;
 	private Context theContext;
 
 	private PictureList(Context theContext) {
 		super(theContext);
-		this.pictureList = new ArrayList<Picture>();
+		this.theList = new ArrayList<Picture>();
 	}
 
 	/**
@@ -42,7 +41,7 @@ public class PictureList extends SavedList<Picture> {
 	public static PictureList createInstance(Context applicationContext) {
 		singleton = new PictureList(applicationContext);
 		singleton.setTheContext(applicationContext);
-		singleton.pictureList = singleton.load();
+		singleton.theList = singleton.load();
 		return singleton;
 	}
 
@@ -54,16 +53,16 @@ public class PictureList extends SavedList<Picture> {
 	}
 
 	public void updatePic(int index, Picture pic) {
-		this.pictureList.set(index, pic);
-		save(this.pictureList);
+		this.theList.set(index, pic);
+		save();
 	}
 
 	/*
 	 * Inserts the picture at the top of the list
 	 */
 	public void addPicture(Picture thePicture) {
-		this.pictureList.add(0, thePicture);
-		save(this.pictureList);
+		this.theList.add(0, thePicture);
+		save();
 	}
 
 	/*
@@ -71,37 +70,37 @@ public class PictureList extends SavedList<Picture> {
 	 */
 	public void addPicture(Uri location) {
 		Picture newPicture = new Picture(location);
-		this.pictureList.add(0, newPicture);
-		save(this.pictureList);
+		this.theList.add(0, newPicture);
+		save();
 	}
 
 	/*
 	 * Gets a picture from a specific position in the list
 	 */
 	public Picture getPicture(int position) {
-		return this.pictureList.get(position);
+		return this.theList.get(position);
 	}
 
 	/*
 	 * Sets the picture list to the input
 	 */
 	public void setPictureList(ArrayList<Picture> thePictureList) {
-		this.pictureList = thePictureList;
-		save(this.pictureList);
+		this.theList = thePictureList;
+		save();
 	}
 
 	/*
 	 * Gets the current picture list
 	 */
 	public ArrayList<Picture> getPictureList() {
-		return this.pictureList;
+		return this.theList;
 	}
 
 	/*
 	 * Sets the selected image
 	 */
 	public void setSelected(int position) {
-		selectedPicture = this.pictureList.get(position);
+		selectedPicture = this.theList.get(position);
 	}
 
 	/*
@@ -117,7 +116,7 @@ public class PictureList extends SavedList<Picture> {
 	}
 
 	public Picture getPictureFromId(String theId) {
-		for (Picture pic : this.pictureList) {
+		for (Picture pic : this.theList) {
 			if (pic.getId().equals(theId)) {
 				return pic;
 			}

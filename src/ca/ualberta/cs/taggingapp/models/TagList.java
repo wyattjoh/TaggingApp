@@ -11,13 +11,12 @@ import android.util.Log;
 public class TagList extends SavedList<Tag>{
 	private final static String FILENAME = "TagListSaved.json";
 	private static TagList singleton = null;
-	private ArrayList<Tag> tagList;
 	private Tag selectedTag = null;
 	private Context theContext;
 
 	private TagList(Context theContext) {
 		super(theContext);
-		this.tagList = new ArrayList<Tag>();
+		this.theList = new ArrayList<Tag>();
 	}
 
 	public void setTheContext(Context theContext) {
@@ -31,7 +30,7 @@ public class TagList extends SavedList<Tag>{
 	public static TagList createInstance(Context theContext) {
 		singleton = new TagList(theContext);
 		singleton.setTheContext(theContext);
-		singleton.tagList = singleton.load();
+		singleton.theList = singleton.load();
 		return singleton;
 	}
 
@@ -44,26 +43,26 @@ public class TagList extends SavedList<Tag>{
 	}
 
 	public ArrayList<Tag> getTags() {
-		return tagList;
+		return theList;
 	}
 
 	// These methods add or remove tags from the TagList
 	public void addTag(Tag tag) {
-		this.tagList.add(tag);
-		save(this.tagList);
+		this.theList.add(tag);
+		save();
 	}
 
 	public void removeTag(Tag tag) {
-		this.tagList.remove(tag);
-		save(this.tagList);
+		this.theList.remove(tag);
+		save();
 	}
 
 	public Tag getTag(int position) {
-		return this.tagList.get(position);
+		return this.theList.get(position);
 	}
 
 	public void setSelected(int position) {
-		selectedTag = this.tagList.get(position);
+		selectedTag = this.theList.get(position);
 	}
 
 	public Tag getSelected() {
@@ -76,7 +75,7 @@ public class TagList extends SavedList<Tag>{
 
 		Tag searchTag = new Tag(tagName);
 
-		for (Tag tag : this.tagList) {
+		for (Tag tag : this.theList) {
 			if (tag.equals(searchTag)) {
 				foundTag = tag;
 				break;
@@ -87,7 +86,7 @@ public class TagList extends SavedList<Tag>{
 	}
 	
 	public Tag getTagWithId(String theId) {
-		for (Tag tag: this.tagList) {
+		for (Tag tag: this.theList) {
 			if (tag.getId().equals(theId)) {
 				return tag;
 			}

@@ -51,24 +51,7 @@ public class AddNameToTag extends Activity {
 		// Handles presses on the action bar items
 		switch (item.getItemId()) {
 		case R.id.accept:
-			// Create tag and region and hopefully save it here
-			Tag tag = new Tag(tagName.getText().toString(), tagURL.getText()
-					.toString());
-			ArrayList<Region> regList = PictureList.getInstance().getSelected()
-					.getRegions();
-			Collections.reverse(regList);
-			regList.get(0).setTag(tag);
-			tag.addTaggedRegion(regList.get(0));
-
-			// Error tracking println
-			System.out.println(tag.getName());
-			System.out.println(tag.getURL());
-			ArrayList<Region> regs = tag.getTaggedRegions();
-			for (int i = 0; i < regs.size(); i++)
-				System.out.println(regs.get(i).getLowerRightCorner().x);
-
-			TagList.getInstance().addTag(tag);
-			// PictureList.getInstance().updatePic(0, pic)
+			addTextTag();
 
 			AddNameToTag.this.finish(); // This probably needs to go to the
 										// ViewFullPic activity
@@ -81,6 +64,29 @@ public class AddNameToTag extends Activity {
 		default:
 			return super.onOptionsItemSelected(item);
 		}
+	}
+
+	protected void addTextTag() {
+		// Create tag and region and hopefully save it here
+		Tag tag = new Tag(tagName.getText().toString(), tagURL.getText()
+				.toString());
+		ArrayList<Region> regList = PictureList.getInstance().getSelected()
+				.getRegions();
+		Collections.reverse(regList);
+		regList.get(0).setTag(tag);
+		tag.addTaggedRegion(regList.get(0));
+
+		// Error tracking println
+		System.out.println(tag.getName());
+		System.out.println(tag.getURL());
+		ArrayList<Region> regs = tag.getTaggedRegions();
+		for (int i = 0; i < regs.size(); i++)
+			System.out.println(regs.get(i).getLowerRightCorner().x);
+
+		TagList.getInstance().addTag(tag);
+		
+		TagList.getInstance().save();
+		PictureList.getInstance().save();
 	}
 
 }

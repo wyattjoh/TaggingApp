@@ -17,6 +17,7 @@ import com.google.gson.reflect.TypeToken;
 public abstract class SavedList<T> {
 	
 	private Context theContext;
+	protected ArrayList<T> theList;
 
 	public SavedList(Context theContext) {
 		this.theContext = theContext;
@@ -26,7 +27,7 @@ public abstract class SavedList<T> {
 	public abstract T[] getPrimativeArray(ArrayList<T> orignalArray);
 	public abstract Type getType();
 
-	protected void save(ArrayList<T> theApplicationState) {
+	public void save() {
 		try {
 			Gson gson = new Gson();
 
@@ -35,7 +36,7 @@ public abstract class SavedList<T> {
 			fos.getChannel().lock();
 			OutputStreamWriter osw = new OutputStreamWriter(fos);
 
-			T[] theStateList = getPrimativeArray(theApplicationState);
+			T[] theStateList = getPrimativeArray(theList);
 			gson.toJson(theStateList, osw);
 
 			osw.close();
