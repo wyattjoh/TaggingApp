@@ -1,5 +1,7 @@
 package ca.ualberta.cs.taggingapp.models;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import android.content.Context;
@@ -9,11 +11,11 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.util.AttributeSet;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 
 /**
- * Associated with full_view_pic. Draws the selected picture
- * on the canvas. 
+ * Associated with full_view_pic. Draws the selected picture on the canvas.
  * 
  * */
 
@@ -21,6 +23,7 @@ public class TaggedImageView extends ImageView {
 
 	private Paint paint;
 	private Picture picture;
+	private int height;
 
 	public TaggedImageView(Context context, AttributeSet attrs) {
 		super(context, attrs);
@@ -37,10 +40,27 @@ public class TaggedImageView extends ImageView {
 
 	public void setPicture(Picture picture) {
 		this.picture = picture;
+
+		Bitmap theBitmap;
+
+		try {
+			theBitmap = picture.getPicture();
+			
+			this.setImageBitmap(theBitmap);
+
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@Override
 	protected void onDraw(Canvas canvas) {
+		super.onDraw(canvas);
+
 		if (this.picture != null) {
 			ArrayList<Region> regions = this.picture.getRegions();
 			if (regions != null && !regions.isEmpty()) {
@@ -53,10 +73,5 @@ public class TaggedImageView extends ImageView {
 			}
 			invalidate();
 		}
-	}
-
-	@Override
-	public void setImageBitmap(Bitmap picture) {
-		super.setImageBitmap(picture);
 	}
 }

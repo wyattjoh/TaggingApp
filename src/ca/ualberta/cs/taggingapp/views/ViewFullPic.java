@@ -1,17 +1,16 @@
 package ca.ualberta.cs.taggingapp.views;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.ArrayList;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
@@ -33,6 +32,9 @@ public class ViewFullPic extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_view_full_pic);
 		setTitle("Tagging App");
+		
+		// Populate the view
+		populateView();
 	}
 
 	@Override
@@ -69,32 +71,24 @@ public class ViewFullPic extends Activity {
 	@Override
 	public void onResume() {
 		super.onResume();
-
-		// Populate the view
-		populateView();
 	}
 
 	protected void populateView() {
-		Picture thePicture = PictureList.getInstance().getSelected();
-		TaggedImageView picture = (TaggedImageView) findViewById(R.id.taggedImageView);
-		picture.setPicture(thePicture);
-		try {
-			picture.setBackground(new BitmapDrawable(getResources(), thePicture
-					.getPicture()));
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
 		ListView miniTagsList = (ListView) this.findViewById(R.id.miniTagsList);
-
+		
 		ArrayList<Region> regs = PictureList.getInstance().getSelected()
 				.getRegions();
 		s = new ArrayList<String>();
 
+		LayoutInflater inflater = getLayoutInflater();
+		ViewGroup header = (ViewGroup)inflater.inflate(R.layout.view_full_pic_header, miniTagsList, false);
+		miniTagsList.removeAllViewsInLayout();
+		miniTagsList.addHeaderView(header, null, false);
+		
+		Picture thePicture = PictureList.getInstance().getSelected();
+		TaggedImageView picture = (TaggedImageView) header.findViewById(R.id.taggedImageView);
+		picture.setPicture(thePicture);
+		
 		Log.w("ViewFullPic",
 				"Number of regions: " + Integer.toString(regs.size()));
 		for (Region region : regs) {
