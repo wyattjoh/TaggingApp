@@ -80,10 +80,15 @@ public class Picture {
 			// TODO: Load the picture from the URI
 			Log.w("Picture", "Photo loaded from factory");
 			picture = ImageLoadingFactory.decodeScaledBitmapFromUri(
-					getPictureUri(), 500);
+					getPictureUri(), 1000);
 		}
 
 		return picture;
+	}
+	
+	public Bitmap getSmallPicture() throws FileNotFoundException {
+		return ImageLoadingFactory.decodeScaledBitmapFromUri(
+				getPictureUri(), 200);
 	}
 
 	public void setPicture(Bitmap picture) {

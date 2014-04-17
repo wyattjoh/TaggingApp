@@ -62,7 +62,7 @@ public class GridImageAdapter extends BaseAdapter {
 		Picture thePictue = getItem(position);
 
 		try {
-			imageView.setImageBitmap(thePictue.getPicture());
+			imageView.setImageBitmap(thePictue.getSmallPicture());
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
