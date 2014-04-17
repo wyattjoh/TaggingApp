@@ -5,5 +5,9 @@
           android:icon="@drawable/ic_action_new"
           android:title="@string/add"
           android:showAsAction="ifRoom" />
+    <item android:id="@+id/discard"
+          android:icon="@drawable/ic_action_discard"
+          android:title="@string/discard"
+          android:showAsAction="ifRoom" />
 
 </menu>
