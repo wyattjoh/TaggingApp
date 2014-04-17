@@ -2,7 +2,6 @@ package ca.ualberta.cs.taggingapp.views;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
 
 import android.app.ActionBar;
 import android.app.ActionBar.OnNavigationListener;
@@ -14,9 +13,11 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
+import android.widget.SpinnerAdapter;
 import android.widget.Toast;
 import ca.ualberta.cs.taggingapp.R;
 import ca.ualberta.cs.taggingapp.controllers.Logger;
+import ca.ualberta.cs.taggingapp.models.ActiveUserModel;
 import ca.ualberta.cs.taggingapp.models.DrawImageView;
 import ca.ualberta.cs.taggingapp.models.Picture;
 import ca.ualberta.cs.taggingapp.models.PictureList;
@@ -50,13 +51,26 @@ public class AddTag extends Activity implements OnNavigationListener {
 		final ActionBar actionBar = getActionBar();
 		actionBar.setDisplayShowTitleEnabled(false);
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
-		ArrayList<String> itemList = new ArrayList<String>();
-		itemList.add("Tap Tag");
-		itemList.add("Drag Tag");
-		itemList.add("Zoom Tag");
-		ArrayAdapter<String> aAdpt = new ArrayAdapter<String>(this,
-				R.layout.spinner_item, itemList);
-		actionBar.setListNavigationCallbacks(aAdpt, this);
+		SpinnerAdapter spinner = ArrayAdapter.createFromResource(this, R.array.action_list, R.layout.spinner_item);
+		OnNavigationListener navigationListener = new OnNavigationListener() {
+			  @Override
+			  public boolean onNavigationItemSelected(int position, long itemId) {
+			    switch (position) {
+			    case 1:
+			    	ActiveUserModel.getShared().getUser().setBoundingBoxSetting("ZOOM");
+			    	return true;
+			    case 2:
+			    	ActiveUserModel.getShared().getUser().setBoundingBoxSetting("DRAG");
+			    	return true;
+			    case 3:
+			    	ActiveUserModel.getShared().getUser().setBoundingBoxSetting("DEFAULT_TAP");
+			    	return true;
+			    default:
+			    	return true;
+			    }
+			  }
+			};
+		actionBar.setListNavigationCallbacks(spinner, navigationListener);
 	}
 
 	@Override
