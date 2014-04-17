@@ -6,6 +6,11 @@ import ca.ualberta.cs.taggingapp.models.PictureList;
 
 import android.util.Log;
 
+/**
+ *  A controller class that logs the users activity.
+ * 
+ */
+
 public class Logger {
 	private static Long startTime = null;
 	private static Long endTime = null;
