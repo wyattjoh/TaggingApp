@@ -33,7 +33,7 @@ public class LoggerAsyncTask extends AsyncTask<LoggerAction, Void, Integer[]> {
 
 		try {
 			JSONObject jsonObject = new JSONObject();
-			jsonObject.accumulate("timePerformed", Long.toString(new Date().getTime()));
+			jsonObject.accumulate("timePerformed", Long.toString(theAction.getStartTime()));
 			jsonObject.accumulate("timeTaken", Long.toString(theAction.getTheTimeToFinish()));
 			jsonObject.accumulate("methodForDrag", theAction.getTheMethod());
 			jsonObject.accumulate("userEmail", theAction.getTheUser());

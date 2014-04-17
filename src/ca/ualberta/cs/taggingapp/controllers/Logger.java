@@ -12,13 +12,6 @@ import android.util.Log;
 public class Logger {
 	private static LoggerAction theAction = new LoggerAction();
 
-	public static void log(String tagType, String user, String action) {
-
-		long timeStamp = new Date().getTime();
-		Log.w(user, tagType + action + timeStamp);
-
-	}
-
 	public static void start(String theUser, String tagMethod) {
 
 		long startTime = new Date().getTime();

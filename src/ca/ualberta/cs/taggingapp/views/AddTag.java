@@ -48,11 +48,6 @@ public class AddTag extends Activity {
 			e.printStackTrace();
 		}
 
-		// Drop down menu
-		final ActionBar actionBar = getActionBar();
-		actionBar.setDisplayShowTitleEnabled(false);
-		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
-
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
 		builder.setTitle("Select Tagging Method").setItems(tagMethods,
