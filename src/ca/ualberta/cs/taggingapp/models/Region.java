@@ -74,6 +74,7 @@ public class Region {
 
 	public void setWidth(int width) {
 		this.width = width;
+		this.updateRegionFromCenter();
 	}
 
 	public int getHeight() {
@@ -82,6 +83,7 @@ public class Region {
 
 	public void setHeight(int height) {
 		this.height = height;
+		this.updateRegionFromCenter();
 	}
 
 	public void setUpperLeftCorner(int x, int y) {

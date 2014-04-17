@@ -100,8 +100,14 @@ public class AddTag extends Activity {
 
 	protected void addRegion() {
 		Picture pic = PictureList.getInstance().getSelected();
-		region = new Region(pic, picture.getUpperLeftPoint(),
-				picture.getLowerRightPoint());
+		if (ActiveUserModel.getShared().getUser().getBoundingBoxSetting() == "DRAG" || ActiveUserModel.getShared().getUser().getBoundingBoxSetting() == "DEFAULT_TAP") {
+			region = new Region(pic, picture.getUpperLeftPoint(),
+					picture.getLowerRightPoint());
+		} else {
+			region = new Region(pic, picture.getViewCenter());
+			region.setHeight(Math.round(picture.getHeight() * picture.getScale()));
+			region.setWidth(Math.round(picture.getWidth() * picture.getScale()));
+		}
 	}
 
 	@Override

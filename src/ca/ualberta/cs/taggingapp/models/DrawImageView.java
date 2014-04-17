@@ -23,7 +23,8 @@ import android.widget.ImageView;
 public class DrawImageView extends ImageView {
 
 	private Paint paint;
-	private PointF startPoint, endPoint;
+	private PointF startPoint = null;
+	private PointF endPoint = null;
 	private boolean isDrawing;
 	// Pinch Code
 	private static final int INVALID_POINTER_ID = -1;
@@ -35,6 +36,7 @@ public class DrawImageView extends ImageView {
 	private float mLastTouchY;
 	private ScaleGestureDetector mScaleDetector;
 	private float mScaleFactor = 1.f;
+	private Bitmap picture = null;
 
 	public DrawImageView(Context context, AttributeSet attrs) {
 		super(context, attrs);
@@ -65,6 +67,17 @@ public class DrawImageView extends ImageView {
 		Point point = new Point(x, y);
 		return point;
 	}
+	
+	public float getScale() {
+		return mScaleFactor;
+	}
+	
+	public Point getViewCenter() {
+		int x = Math.round(mPosX);
+		int y = Math.round(mPosY);
+		Point point = new Point(x, y);
+		return point;
+	}
 
 	@Override
 	protected void onDraw(Canvas canvas) {
@@ -72,13 +85,17 @@ public class DrawImageView extends ImageView {
 			canvas.drawRect(startPoint.x, startPoint.y, endPoint.x, endPoint.y,
 					paint);
 		}
-		super.onDraw(canvas);
 
-		canvas.save();
-		canvas.translate(mPosX, mPosY);
-		canvas.scale(mScaleFactor, mScaleFactor);
-		// mIcon.draw(canvas);
-		canvas.restore();
+		if (ActiveUserModel.getShared().getUser().getBoundingBoxSetting() == "ZOOM") {
+			canvas.save();
+			canvas.translate(mPosX, mPosY);
+			canvas.scale(mScaleFactor, mScaleFactor);
+			// mIcon.draw(canvas);
+			canvas.restore();
+			canvas.drawRect(5, 5, picture.getHeight() - 5, picture.getWidth() - 5, paint);
+		}
+		
+		super.onDraw(canvas);
 	}
 
 	@Override
@@ -88,25 +105,40 @@ public class DrawImageView extends ImageView {
 
 		switch (event.getAction() & MotionEvent.ACTION_MASK) {
 		case MotionEvent.ACTION_DOWN:
-			startPoint = new PointF(event.getX(), event.getY());
-			endPoint = new PointF();
-			isDrawing = true;
-
-			// Pinch Code
-			final float x = event.getX();
-			final float y = event.getY();
-			mLastTouchX = x;
-			mLastTouchY = y;
-			mActivePointerId = event.getPointerId(0);
+			if (ActiveUserModel.getShared().getUser().getBoundingBoxSetting() == "DRAG") {
+				startPoint = new PointF(event.getX(), event.getY());
+				endPoint = new PointF();
+				isDrawing = true;
+			}
+			
+			if (ActiveUserModel.getShared().getUser().getBoundingBoxSetting() == "DEFAULT_TAP") {
+				
+			}
+			
+			if (ActiveUserModel.getShared().getUser().getBoundingBoxSetting() == "ZOOM") {
+				// Pinch Code
+				final float x = event.getX();
+				final float y = event.getY();
+				mLastTouchX = x;
+				mLastTouchY = y;
+				mActivePointerId = event.getPointerId(0);
+			}
 
 			break;
 
 		case MotionEvent.ACTION_MOVE:
-			if (isDrawing) {
-
-				endPoint.x = event.getX();
-				endPoint.y = event.getY();
-
+			if (ActiveUserModel.getShared().getUser().getBoundingBoxSetting() == "DRAG") {
+				if (isDrawing) {
+					endPoint.x = event.getX();
+					endPoint.y = event.getY();
+				}
+			}
+			
+			if (ActiveUserModel.getShared().getUser().getBoundingBoxSetting() == "DEFAULT_TAP") {
+				
+			}
+			
+			if (ActiveUserModel.getShared().getUser().getBoundingBoxSetting() == "ZOOM") {
 				// Pinch Code
 				final int pointerIndex = event
 						.findPointerIndex(mActivePointerId);
@@ -125,44 +157,77 @@ public class DrawImageView extends ImageView {
 
 				mLastTouchX = x2;
 				mLastTouchY = y2;
-
-				invalidate();
+				
 			}
+			invalidate();
 			break;
 		case MotionEvent.ACTION_UP:
-			mActivePointerId = INVALID_POINTER_ID;
-			if (isDrawing) {
-				endPoint.x = event.getX();
-				endPoint.y = event.getY();
-				invalidate();
-				if (endPoint.x < startPoint.x) {
-					float temp = endPoint.x;
-					endPoint.x = startPoint.x;
-					startPoint.x = temp;
+			if (ActiveUserModel.getShared().getUser().getBoundingBoxSetting() == "DRAG") {
+				if (isDrawing) {
+					endPoint.x = event.getX();
+					endPoint.y = event.getY();
+					if (endPoint.x < startPoint.x) {
+						float temp = endPoint.x;
+						endPoint.x = startPoint.x;
+						startPoint.x = temp;
+					}
+					if (endPoint.y < startPoint.y) {
+						float temp = endPoint.y;
+						endPoint.y = startPoint.y;
+						startPoint.y = temp;
+					}
+					invalidate();
 				}
-				if (endPoint.y < startPoint.y) {
-					float temp = endPoint.y;
-					endPoint.y = startPoint.y;
-					startPoint.y = temp;
-				}
+				isDrawing = true;
 			}
-			isDrawing = true;
+			
+			if (ActiveUserModel.getShared().getUser().getBoundingBoxSetting() == "DEFAULT_TAP") {
+				if (startPoint == null) {
+					startPoint = new PointF(event.getX(), event.getY());
+				} else if (endPoint == null) {
+					endPoint = new PointF(event.getX(), event.getY());
+					if (endPoint.x < startPoint.x) {
+						float temp = endPoint.x;
+						endPoint.x = startPoint.x;
+						startPoint.x = temp;
+					}
+					if (endPoint.y < startPoint.y) {
+						float temp = endPoint.y;
+						endPoint.y = startPoint.y;
+						startPoint.y = temp;
+					}
+					isDrawing = true;
+				} else {
+					startPoint.x = event.getX();
+					startPoint.y = event.getY();
+					endPoint = null;
+					isDrawing = false;
+				}
+				invalidate();
+			}
+			
+			if (ActiveUserModel.getShared().getUser().getBoundingBoxSetting() == "ZOOM") {
+				mActivePointerId = INVALID_POINTER_ID;
+			}
 			break;
 		case MotionEvent.ACTION_CANCEL: {
 			mActivePointerId = INVALID_POINTER_ID;
 			break;
 		}
 		case MotionEvent.ACTION_POINTER_UP: {
-			final int pointerIndex = (event.getAction() & MotionEvent.ACTION_POINTER_INDEX_MASK) >> MotionEvent.ACTION_POINTER_INDEX_SHIFT;
-			final int pointerId = event.getPointerId(pointerIndex);
-			if (pointerId == mActivePointerId) {
-				// This was our active pointer going up. Choose a new
-				// active pointer and adjust accordingly.
-				final int newPointerIndex = pointerIndex == 0 ? 1 : 0;
-				mLastTouchX = event.getX(newPointerIndex);
-				mLastTouchY = event.getY(newPointerIndex);
-				mActivePointerId = event.getPointerId(newPointerIndex);
+			if (ActiveUserModel.getShared().getUser().getBoundingBoxSetting() == "ZOOM") {
+				final int pointerIndex = (event.getAction() & MotionEvent.ACTION_POINTER_INDEX_MASK) >> MotionEvent.ACTION_POINTER_INDEX_SHIFT;
+				final int pointerId = event.getPointerId(pointerIndex);
+				if (pointerId == mActivePointerId) {
+					// This was our active pointer going up. Choose a new
+					// active pointer and adjust accordingly.
+					final int newPointerIndex = pointerIndex == 0 ? 1 : 0;
+					mLastTouchX = event.getX(newPointerIndex);
+					mLastTouchY = event.getY(newPointerIndex);
+					mActivePointerId = event.getPointerId(newPointerIndex);
+				}
 			}
+			
 			break;
 		}
 		default:
@@ -174,6 +239,7 @@ public class DrawImageView extends ImageView {
 	@Override
 	public void setImageBitmap(Bitmap picture) {
 		super.setImageBitmap(picture);
+		this.picture = picture;
 	}
 
 	private class ScaleListener extends
