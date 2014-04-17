@@ -11,8 +11,10 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
 import ca.ualberta.cs.taggingapp.R;
+import ca.ualberta.cs.taggingapp.models.Picture;
 import ca.ualberta.cs.taggingapp.models.PictureList;
 import ca.ualberta.cs.taggingapp.models.Region;
+import ca.ualberta.cs.taggingapp.models.Tag;
 import ca.ualberta.cs.taggingapp.models.TagList;
 
 public class EditTag extends Activity {
@@ -21,12 +23,15 @@ public class EditTag extends Activity {
 	int position;
 	EditText tag;
 	EditText url;
+	Picture thePicture;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_edit_tag);
 		setTitle("Tagging App");
+		
+		thePicture = PictureList.getInstance().getSelected();
 
 		// Get the tag name and photo id
 		Bundle extras = getIntent().getExtras();
@@ -75,6 +80,7 @@ public class EditTag extends Activity {
 								// current activity
 								Intent i = new Intent(EditTag.this,
 										ViewFullPic.class);
+								delete();
 								i.putExtra("tagName", tagName);
 								startActivity(i);
 								EditTag.this.finish();
@@ -106,6 +112,31 @@ public class EditTag extends Activity {
 		TagList.getInstance().save();
 		PictureList.getInstance().save();
 		EditTag.this.finish();
+	}
+	
+	public void delete() {
+		
+		// Delete all instances of the tag from all pictures
+		ArrayList<Picture> pics = PictureList.getInstance().getPictureList();
+		for (int i = 0; i < pics.size(); i++) {
+			ArrayList<Region> regs = pics.get(i).getRegions();
+			for (int j = 0; j < regs.size(); j++) {
+				if (regs.get(j).getTag().getName().equals(tagName)) {
+					PictureList.getInstance().getPicture(i).removeRegion(regs.get(j));
+				}
+			}
+		}
+		
+		// Delete the tag from the tag list
+		ArrayList<Tag> tags = TagList.getInstance().getTags();
+		for (int k = 0; k < tags.size(); k++) {
+			if (tags.get(k).getName().equals(tagName)) {
+				TagList.getInstance().removeTag(tags.get(k));
+			}
+		}
+		
+		//TagList.getInstance().save();
+		//PictureList.getInstance().save();
 	}
 
 }
