@@ -37,8 +37,8 @@ public class AddTag extends Activity {
 	private ScaleGestureDetector SGD;
 	DrawImageView picture;
 	int tagType = 0;
-	String[] tagMethods = { "Drag" };
-	String[] tagMethodKeys = { "DRAG" };
+	String[] tagMethods = { "Zoom", "Drag", "Double Tap" };
+	String[] tagMethodKeys = { "ZOOM", "DRAG", "DEFAULT_TAP" };
 
 	private static Region region = null;
 
