@@ -56,14 +56,22 @@ public class AddTag extends Activity implements OnNavigationListener {
 			  @Override
 			  public boolean onNavigationItemSelected(int position, long itemId) {
 			    switch (position) {
+			    case 0:
+			    	return true;
 			    case 1:
 			    	ActiveUserModel.getShared().getUser().setBoundingBoxSetting("ZOOM");
+			    	Toast.makeText(getBaseContext(), "Zoom tagging selected",
+							Toast.LENGTH_LONG).show();
 			    	return true;
 			    case 2:
 			    	ActiveUserModel.getShared().getUser().setBoundingBoxSetting("DRAG");
+			    	Toast.makeText(getBaseContext(), "Drag tagging selected",
+							Toast.LENGTH_LONG).show();
 			    	return true;
 			    case 3:
 			    	ActiveUserModel.getShared().getUser().setBoundingBoxSetting("DEFAULT_TAP");
+			    	Toast.makeText(getBaseContext(), "Double tap tagging selected",
+							Toast.LENGTH_LONG).show();
 			    	return true;
 			    default:
 			    	return true;

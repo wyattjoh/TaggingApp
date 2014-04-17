@@ -27,6 +27,7 @@
     <string name="test_prompt">Prompt"</string>
 
     <string-array name="action_list">
+        <item>Select Tagging Method</item>
         <item>Zoom</item>
         <item>Drag</item>
         <item>Double Tap</item>
