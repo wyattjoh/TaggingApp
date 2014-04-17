@@ -26,6 +26,7 @@ public class ViewFullPic extends Activity {
 
 	ArrayAdapter<String> adapter;
 	ArrayList<String> s;
+	ListView miniTagsList;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -33,8 +34,20 @@ public class ViewFullPic extends Activity {
 		setContentView(R.layout.activity_view_full_pic);
 		setTitle("Tagging App");
 		
-		// Populate the view
-		populateView();
+		setupListView();
+	}
+
+	protected void setupListView() {
+		miniTagsList = (ListView) this.findViewById(R.id.miniTagsList);
+		
+		LayoutInflater inflater = getLayoutInflater();
+		ViewGroup header = (ViewGroup)inflater.inflate(R.layout.view_full_pic_header, miniTagsList, false);
+		miniTagsList.removeAllViewsInLayout();
+		miniTagsList.addHeaderView(header, null, false);
+		
+		Picture thePicture = PictureList.getInstance().getSelected();
+		TaggedImageView picture = (TaggedImageView) header.findViewById(R.id.taggedImageView);
+		picture.setPicture(thePicture);
 	}
 
 	@Override
@@ -70,23 +83,14 @@ public class ViewFullPic extends Activity {
 	@Override
 	public void onResume() {
 		super.onResume();
+		populateView();
 	}
 
 	protected void populateView() {
-		ListView miniTagsList = (ListView) this.findViewById(R.id.miniTagsList);
 		
 		ArrayList<Region> regs = PictureList.getInstance().getSelected()
 				.getRegions();
 		s = new ArrayList<String>();
-
-		LayoutInflater inflater = getLayoutInflater();
-		ViewGroup header = (ViewGroup)inflater.inflate(R.layout.view_full_pic_header, miniTagsList, false);
-		miniTagsList.removeAllViewsInLayout();
-		miniTagsList.addHeaderView(header, null, false);
-		
-		Picture thePicture = PictureList.getInstance().getSelected();
-		TaggedImageView picture = (TaggedImageView) header.findViewById(R.id.taggedImageView);
-		picture.setPicture(thePicture);
 		
 		Log.w("ViewFullPic",
 				"Number of regions: " + Integer.toString(regs.size()));
