@@ -21,7 +21,7 @@ import ca.ualberta.cs.taggingapp.models.TagList;
 
 public class TagsListFragment extends Fragment {
 
-	private ArrayAdapter adapter;
+	private ArrayAdapter <String> adapter;
 	private EditText searchView;
 	ListView listView;
 
@@ -48,7 +48,8 @@ public class TagsListFragment extends Fragment {
 					int position, long id) {
 				Intent i = new Intent(rootView.getContext(),
 						TagRefinedImages.class);
-				i.putExtra("tagName", TagList.getInstance().getTags().get(position).getName());
+				//i.putExtra("tagName", TagList.getInstance().getTags().get(position).getName());
+				i.putExtra("tagName", adapter.getItem(position));
 				startActivity(i);
 			}
 		});
