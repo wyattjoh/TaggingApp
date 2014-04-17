@@ -53,12 +53,11 @@ public class ViewFullPic extends Activity {
 			return true;
 		case R.id.discard:
 			Picture thePicture = PictureList.getInstance().getSelected();
-			if (thePicture.getRegions().isEmpty()) {
-				for (Region region : thePicture.getRegions()) {
-					region.removeRegion();
-				}
+			if (!thePicture.getRegions().isEmpty()) {
+					thePicture.removeAllRegions();
 			}
 			PictureList.getInstance().getPictureList().remove(thePicture);
+			PictureList.getInstance().save();
 			finish();
 			return true;
 		default:

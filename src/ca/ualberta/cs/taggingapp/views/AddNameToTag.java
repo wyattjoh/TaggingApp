@@ -4,12 +4,19 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.AdapterView.OnItemClickListener;
 import ca.ualberta.cs.taggingapp.R;
 import ca.ualberta.cs.taggingapp.models.Picture;
 import ca.ualberta.cs.taggingapp.models.PictureList;
@@ -22,6 +29,7 @@ public class AddNameToTag extends Activity {
 	EditText tagName;
 	EditText tagURL;
 	ListView tagList;
+	ArrayAdapter <String> adapter;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -32,10 +40,53 @@ public class AddNameToTag extends Activity {
 		tagURL = (EditText) this.findViewById(R.id.tag_url);
 		tagList = (ListView) this.findViewById(R.id.tags_list_view);
 
-		// Point topLeft = (Point) extras.get("upperLeft");
-		// Point bottomRight = (Point) extras.get("lowerRight");
-		// Region region = new Region(pic, (int)topLeft.x, (int)topLeft.y,
-		// (int)bottomRight.x, (int)bottomRight.y);
+		final ArrayList<String> tags = new ArrayList<String>();
+		for (int i = 0; i < TagList.getInstance().getTags().size(); i++) {
+			tags.add(TagList.getInstance().getTags().get(i).getName());
+		}
+		adapter = new ArrayAdapter<String>(this.getBaseContext(), R.layout.list_item, tags);
+
+		tagList.setAdapter(adapter);
+
+		tagList.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View v,
+					int position, long id) {
+				tagName.setText("");
+				adapter.getItem(position);
+				tagName.append(adapter.getItem(position));
+
+				for (int i = 0; i < TagList.getInstance().getTags().size(); i++) {
+					if (TagList.getInstance().getTags().get(i).getName().equals(adapter.getItem(position))) {
+						tagURL.setText("");
+						tagURL.append(TagList.getInstance().getTags().get(i).getURL());
+					}
+				}
+
+			}
+		});
+
+		tagName.addTextChangedListener(new TextWatcher() {
+
+			@Override
+			public void onTextChanged(CharSequence cs, int arg1, int arg2,
+					int arg3) {
+				// When user changed the Text
+				adapter.getFilter().filter(cs);
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence arg0, int arg1,
+					int arg2, int arg3) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void afterTextChanged(Editable arg0) {
+				// TODO Auto-generated method stub
+			}
+		});
 
 	}
 
@@ -55,7 +106,7 @@ public class AddNameToTag extends Activity {
 			addTextTag();
 
 			AddNameToTag.this.finish(); // This probably needs to go to the
-										// ViewFullPic activity
+			// ViewFullPic activity
 			return true;
 		case R.id.decline:
 			// Intent j = new Intent(AddNameToTag.this, ViewFullPic.class);
@@ -72,7 +123,7 @@ public class AddNameToTag extends Activity {
 		Picture pic = PictureList.getInstance().getSelected();
 		Region region = AddTag.getRegion();
 		pic.addRegion(region);
-		
+
 		Tag tag = new Tag(tagName.getText().toString(), tagURL.getText()
 				.toString());
 		ArrayList<Region> regList = PictureList.getInstance().getSelected()
@@ -92,6 +143,19 @@ public class AddNameToTag extends Activity {
 
 		TagList.getInstance().save();
 		PictureList.getInstance().save();
+	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		ArrayList<Region> regList = PictureList.getInstance().getSelected()
+				.getRegions();
+		Collections.reverse(regList);
+		if (regList.get(0).getTag().getName() == null) {
+			regList.remove(0);
+			PictureList.getInstance().save();
+		}
+
 	}
 
 }
