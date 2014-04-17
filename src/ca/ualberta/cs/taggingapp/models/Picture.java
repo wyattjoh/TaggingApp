@@ -10,7 +10,7 @@ import android.net.Uri;
 import android.util.Log;
 
 /**
- *  A picture class that models all parts of a picture.
+ *  A picture class that models all properties of a picture.
  *  
  * */
 

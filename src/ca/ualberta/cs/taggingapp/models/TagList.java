@@ -8,6 +8,11 @@ import com.google.gson.reflect.TypeToken;
 import android.content.Context;
 import android.util.Log;
 
+/**
+ *  Creates and maintains a list of tags.
+ *  
+ * */
+
 public class TagList extends SavedList<Tag> {
 	private final static String FILENAME = "TagListSaved.json";
 	private static TagList singleton = null;

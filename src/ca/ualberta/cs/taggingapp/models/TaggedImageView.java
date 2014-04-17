@@ -11,6 +11,12 @@ import android.graphics.Paint.Style;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 
+/**
+ * Associated with full_view_pic. Draws the selected picture
+ * on the canvas. 
+ * 
+ * */
+
 public class TaggedImageView extends ImageView {
 
 	private Paint paint;

@@ -4,6 +4,11 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
+/**
+ *  A factory class that focuses on resizing bitmaps.
+ * 
+ * */
+
 public class ResizedBitmapFactory {
 	public static int calculateInSampleSize(BitmapFactory.Options options,
 			int reqWidth, int reqHeight) {
