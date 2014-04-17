@@ -1,5 +1,7 @@
 package ca.ualberta.cs.taggingapp.models;
 
+import java.util.ArrayList;
+
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -33,15 +35,18 @@ public class TaggedImageView extends ImageView {
 
 	@Override
 	protected void onDraw(Canvas canvas) {
-		if (!this.picture.getRegions().isEmpty()) {
-			for (Region region : this.picture.getRegions()) {
-				canvas.drawRect(region.getUpperLeftCorner().x,
-						region.getUpperLeftCorner().y,
-						region.getLowerRightCorner().x,
-						region.getLowerRightCorner().y, paint);
+		if (this.picture != null) {
+			ArrayList<Region> regions = this.picture.getRegions();
+			if (regions != null && !regions.isEmpty()) {
+				for (Region region : this.picture.getRegions()) {
+					canvas.drawRect(region.getUpperLeftCorner().x,
+							region.getUpperLeftCorner().y,
+							region.getLowerRightCorner().x,
+							region.getLowerRightCorner().y, paint);
+				}
 			}
+			invalidate();
 		}
-		invalidate();
 	}
 
 	@Override
