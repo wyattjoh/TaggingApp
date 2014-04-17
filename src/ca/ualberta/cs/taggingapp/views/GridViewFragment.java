@@ -85,6 +85,12 @@ public class GridViewFragment extends Fragment {
 			return super.onOptionsItemSelected(item);
 		}
 	}
+	
+	@Override
+	public void onResume() {
+		super.onResume();
+		gia.notifyDataSetChanged();
+	}
 
 	protected void newPicture() {
 		// calls camera code
