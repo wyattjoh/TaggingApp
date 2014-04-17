@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.ListView;
 import ca.ualberta.cs.taggingapp.R;
+import ca.ualberta.cs.taggingapp.models.Picture;
 import ca.ualberta.cs.taggingapp.models.PictureList;
 import ca.ualberta.cs.taggingapp.models.Region;
 import ca.ualberta.cs.taggingapp.models.Tag;
@@ -68,6 +69,10 @@ public class AddNameToTag extends Activity {
 
 	protected void addTextTag() {
 		// Create tag and region and hopefully save it here
+		Picture pic = PictureList.getInstance().getSelected();
+		Region region = AddTag.getRegion();
+		pic.addRegion(region);
+		
 		Tag tag = new Tag(tagName.getText().toString(), tagURL.getText()
 				.toString());
 		ArrayList<Region> regList = PictureList.getInstance().getSelected()

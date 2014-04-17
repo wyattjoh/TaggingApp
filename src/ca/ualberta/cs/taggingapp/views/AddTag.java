@@ -28,6 +28,8 @@ public class AddTag extends Activity {
 	int tagType = 0;
 	String[] tagMethods = { "Zoom", "Drag", "Double Tap" };
 	String[] tagMethodKeys = { "ZOOM", "DRAG", "DEFAULT_TAP" };
+	
+	private static Region region = null;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -98,14 +100,20 @@ public class AddTag extends Activity {
 
 	protected void addRegion() {
 		Picture pic = PictureList.getInstance().getSelected();
-		Region region = new Region(pic, picture.getUpperLeftPoint(),
+		region = new Region(pic, picture.getUpperLeftPoint(),
 				picture.getLowerRightPoint());
-		pic.addRegion(region);
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
 		overridePendingTransition(0, 0);
+	}
+
+	/**
+	 * @return the region
+	 */
+	public static Region getRegion() {
+		return region;
 	}
 }
