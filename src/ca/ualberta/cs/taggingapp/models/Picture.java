@@ -80,7 +80,7 @@ public class Picture {
 			// TODO: Load the picture from the URI
 			Log.w("Picture", "Photo loaded from factory");
 			picture = ImageLoadingFactory.decodeScaledBitmapFromUri(
-					getPictureUri(), 1000);
+					getPictureUri(), 500);
 		}
 
 		return picture;
