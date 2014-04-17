@@ -9,21 +9,21 @@
     android:paddingTop="0dp"
     tools:context=".ViewFullPic" >
 
-    <ImageView
-        android:id="@+id/picViewer"
+    <ca.ualberta.cs.taggingapp.models.TaggedImageView
+        android:id="@+id/taggedImageView"
         android:layout_width="wrap_content"
-        android:layout_height="300dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true" />
-
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/ic_launcher" />
+    
      <TextView
          android:id="@+id/listTitle"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
          android:layout_alignParentLeft="true"
          android:layout_alignParentRight="true"
-         android:layout_below="@+id/picViewer"
+         android:layout_below="@+id/taggedImageView"
          android:gravity="center"
          android:text="Tags Associated with this Picture"
          android:textSize="12dp"
@@ -34,18 +34,7 @@
         android:id="@+id/miniTagsList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/picViewer"
         android:layout_below="@+id/listTitle" >
     </ListView>
-
-    <ca.ualberta.cs.taggingapp.models.TaggedImageView
-        android:id="@+id/taggedImageView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/picViewer"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:src="@drawable/ic_launcher" />
 
 </RelativeLayout>

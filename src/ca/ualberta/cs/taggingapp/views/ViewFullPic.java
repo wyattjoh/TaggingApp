@@ -65,7 +65,7 @@ public class ViewFullPic extends Activity {
 
 	protected void populateView() {
 		Picture thePicture = PictureList.getInstance().getSelected();
-		TaggedImageView picture = (TaggedImageView) findViewById(R.id.taggedImageView1);
+		TaggedImageView picture = (TaggedImageView) findViewById(R.id.taggedImageView);
 		picture.setPicture(thePicture);
 		try {
 			picture.setBackground(new BitmapDrawable(getResources(), thePicture
