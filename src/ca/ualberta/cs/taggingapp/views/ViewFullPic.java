@@ -50,6 +50,7 @@ public class ViewFullPic extends Activity {
 			Intent intent = new Intent(this, AddTag.class);
 			intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
 			startActivity(intent);
+			return true;
 		case R.id.discard:
 			Picture thePicture = PictureList.getInstance().getSelected();
 			if (thePicture.getRegions().isEmpty()) {
@@ -59,6 +60,7 @@ public class ViewFullPic extends Activity {
 			}
 			PictureList.getInstance().getPictureList().remove(thePicture);
 			finish();
+			return true;
 		default:
 			return super.onOptionsItemSelected(item);
 		}
