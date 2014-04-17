@@ -3,16 +3,19 @@ package ca.ualberta.cs.taggingapp.views;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Matrix;
+import android.graphics.Point;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.view.ScaleGestureDetector;
 import android.widget.Toast;
 import ca.ualberta.cs.taggingapp.R;
 import ca.ualberta.cs.taggingapp.controllers.Logger;
@@ -23,12 +26,15 @@ import ca.ualberta.cs.taggingapp.models.PictureList;
 import ca.ualberta.cs.taggingapp.models.Region;
 
 public class AddTag extends Activity {
-
+	private Matrix matrix = new Matrix();
+	private float scale = 1f;
+	private Point zoomCenter = new Point(0, 0);
+	private ScaleGestureDetector SGD;
 	DrawImageView picture;
 	int tagType = 0;
 	String[] tagMethods = { "Zoom", "Drag", "Double Tap" };
 	String[] tagMethodKeys = { "ZOOM", "DRAG", "DEFAULT_TAP" };
-	
+
 	private static Region region = null;
 
 	@Override
@@ -38,6 +44,7 @@ public class AddTag extends Activity {
 		setTitle("Tagging App");
 		Picture thePicture = PictureList.getInstance().getSelected();
 		picture = (DrawImageView) findViewById(R.id.drawImageView1);
+		SGD = new ScaleGestureDetector(this,new ScaleListener());
 
 		try {
 			picture.setBackground(new BitmapDrawable(getResources(), thePicture
@@ -54,20 +61,29 @@ public class AddTag extends Activity {
 
 		builder.setTitle("Select Tagging Method").setItems(tagMethods,
 				new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog, int which) {
-						Logger.start(ActiveUserModel.getShared().getUser().getEmail(), tagMethods[which]);
+			public void onClick(DialogInterface dialog, int which) {
+				Logger.start(ActiveUserModel.getShared().getUser().getEmail(), tagMethods[which]);
 
-						ActiveUserModel.getShared().getUser()
-								.setBoundingBoxSetting(tagMethodKeys[which]);
-						Toast.makeText(getBaseContext(),
-								tagMethods[which] + " tagging selected",
-								Toast.LENGTH_LONG).show();
-					}
-				})
-				// Prevents cancel of dialog box
-				.setCancelable(false);
+				ActiveUserModel.getShared().getUser()
+				.setBoundingBoxSetting(tagMethodKeys[which]);
+				Toast.makeText(getBaseContext(),
+						tagMethods[which] + " tagging selected",
+						Toast.LENGTH_LONG).show();
+			}
+		})
+		// Prevents cancel of dialog box
+		.setCancelable(false);
 
 		builder.create().show();
+	}
+
+	@Override
+	public boolean onTouchEvent(MotionEvent ev) {
+		if (ActiveUserModel.getShared().getUser().getBoundingBoxSetting() == "ZOOM") {
+			SGD.onTouchEvent(ev);
+			zoomCenter.set(Math.round(SGD.getFocusX()), Math.round(SGD.getFocusY()));
+		}
+		return true;
 	}
 
 	@Override
@@ -83,18 +99,18 @@ public class AddTag extends Activity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// Handles presses on the action bar items
 		switch (item.getItemId()) {
-		case R.id.accept:
-			addRegion();
-			Intent i = new Intent(AddTag.this, AddNameToTag.class);
-			startActivity(i);
-			finish();
-			Logger.end();
-			return true;
-		case R.id.decline:
-			finish();
-			return true;
-		default:
-			return super.onOptionsItemSelected(item);
+			case R.id.accept:
+				addRegion();
+				Intent i = new Intent(AddTag.this, AddNameToTag.class);
+				startActivity(i);
+				finish();
+				Logger.end();
+				return true;
+			case R.id.decline:
+				finish();
+				return true;
+			default:
+				return super.onOptionsItemSelected(item);
 		}
 	}
 
@@ -104,9 +120,9 @@ public class AddTag extends Activity {
 			region = new Region(pic, picture.getUpperLeftPoint(),
 					picture.getLowerRightPoint());
 		} else {
-			region = new Region(pic, picture.getViewCenter());
-			region.setHeight(Math.round(picture.getHeight() * picture.getScale()));
-			region.setWidth(Math.round(picture.getWidth() * picture.getScale()));
+			region = new Region(pic, zoomCenter);
+			region.setHeight(Math.round(picture.getHeight() * scale));
+			region.setWidth(Math.round(picture.getWidth() * scale));
 		}
 	}
 
@@ -121,5 +137,17 @@ public class AddTag extends Activity {
 	 */
 	public static Region getRegion() {
 		return region;
+	}
+
+	private class ScaleListener extends ScaleGestureDetector.
+	SimpleOnScaleGestureListener {
+		@Override
+		public boolean onScale(ScaleGestureDetector detector) {
+			scale *= detector.getScaleFactor();
+			scale = Math.max(0.1f, Math.min(scale, 5.0f));
+			matrix.setScale(scale, scale);
+			picture.setImageMatrix(matrix);
+			return true;
+		}
 	}
 }
