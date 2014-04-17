@@ -21,6 +21,9 @@ The application purpose is to tag objects and associate the objects tag with
 a URL.
 
 To run the software:
-1) Install and set up the Android SDK Software for the Eclipse IDE
-2) Import the TaggingApp project into Eclipse
-3) Run the project using the Android emulator provided by SDK
+
+1. Install and set up the Android SDK Software for the Eclipse IDE
+
+2. Import the TaggingApp project into Eclipse
+
+3. Run the project using the Android emulator provided by SDK
