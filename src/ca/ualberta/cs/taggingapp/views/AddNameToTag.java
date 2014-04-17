@@ -44,7 +44,7 @@ public class AddNameToTag extends Activity {
 		for (int i = 0; i < TagList.getInstance().getTags().size(); i++) {
 			tags.add(TagList.getInstance().getTags().get(i).getName());
 		}
-		adapter = new ArrayAdapter(this.getBaseContext(), R.layout.list_item, tags);
+		adapter = new ArrayAdapter<String>(this.getBaseContext(), R.layout.list_item, tags);
 
 		tagList.setAdapter(adapter);
 		
@@ -56,10 +56,10 @@ public class AddNameToTag extends Activity {
 				adapter.getItem(position);
 				tagName.append(adapter.getItem(position));
 				
-				for (int i = 0; i < tags.size(); i++) {
-					if (TagList.getInstance().getTags().get(i).equals(tags.get(position))) {
-						tagName.setText("");
-						tagName.append(TagList.getInstance().getTags().get(i).getURL());
+				for (int i = 0; i < TagList.getInstance().getTags().size(); i++) {
+					if (TagList.getInstance().getTags().get(i).getName().equals(adapter.getItem(position))) {
+						tagURL.setText("");
+						tagURL.append(TagList.getInstance().getTags().get(i).getURL());
 					}
 				}
 				
