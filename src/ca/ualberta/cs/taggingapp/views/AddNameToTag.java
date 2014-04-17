@@ -129,8 +129,25 @@ public class AddNameToTag extends Activity {
 		ArrayList<Region> regList = PictureList.getInstance().getSelected()
 				.getRegions();
 		Collections.reverse(regList);
-		regList.get(0).setTag(tag);
-		tag.addTaggedRegion(regList.get(0));
+		
+		
+		boolean found = false;
+		Tag dupTag = null;
+		for (int i =0; i < TagList.getInstance().getTags().size(); i++) {
+			if (TagList.getInstance().getTags().get(i).getName().equals(tag.getName()) && TagList.getInstance().getTags().get(i).getURL().equals(tag.getURL())) {
+				found = true;
+				dupTag = TagList.getInstance().getTags().get(i);
+			}
+		}
+		if (found) {
+			dupTag.addTaggedRegion(regList.get(0));
+			regList.get(0).setTag(dupTag);
+		} else {
+			tag.addTaggedRegion(regList.get(0));
+			regList.get(0).setTag(tag);
+			TagList.getInstance().addTag(tag);
+		}
+		
 
 		// Error tracking println
 		System.out.println(tag.getName());
@@ -139,7 +156,7 @@ public class AddNameToTag extends Activity {
 		for (int i = 0; i < regs.size(); i++)
 			System.out.println(regs.get(i).getLowerRightCorner().x);
 
-		TagList.getInstance().addTag(tag);
+		
 
 		TagList.getInstance().save();
 		PictureList.getInstance().save();
