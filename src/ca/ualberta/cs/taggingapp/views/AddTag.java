@@ -6,6 +6,8 @@ import java.io.IOException;
 import android.app.ActionBar;
 import android.app.ActionBar.OnNavigationListener;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
@@ -23,10 +25,12 @@ import ca.ualberta.cs.taggingapp.models.Picture;
 import ca.ualberta.cs.taggingapp.models.PictureList;
 import ca.ualberta.cs.taggingapp.models.Region;
 
-public class AddTag extends Activity implements OnNavigationListener {
+public class AddTag extends Activity {
 
 	DrawImageView picture;
 	int tagType = 0;
+	String[] tagMethods = { "Zoom", "Drag", "Double Tap" };
+	String[] tagMethodKeys = { "ZOOM", "DRAG", "DEFAULT_TAP" };
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -51,51 +55,23 @@ public class AddTag extends Activity implements OnNavigationListener {
 		final ActionBar actionBar = getActionBar();
 		actionBar.setDisplayShowTitleEnabled(false);
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
-		SpinnerAdapter spinner = ArrayAdapter.createFromResource(this, R.array.action_list, R.layout.spinner_item);
-		OnNavigationListener navigationListener = new OnNavigationListener() {
-			  @Override
-			  public boolean onNavigationItemSelected(int position, long itemId) {
-			    switch (position) {
-			    case 0:
-			    	return true;
-			    case 1:
-			    	ActiveUserModel.getShared().getUser().setBoundingBoxSetting("ZOOM");
-			    	Toast.makeText(getBaseContext(), "Zoom tagging selected",
-							Toast.LENGTH_LONG).show();
-			    	return true;
-			    case 2:
-			    	ActiveUserModel.getShared().getUser().setBoundingBoxSetting("DRAG");
-			    	Toast.makeText(getBaseContext(), "Drag tagging selected",
-							Toast.LENGTH_LONG).show();
-			    	return true;
-			    case 3:
-			    	ActiveUserModel.getShared().getUser().setBoundingBoxSetting("DEFAULT_TAP");
-			    	Toast.makeText(getBaseContext(), "Double tap tagging selected",
-							Toast.LENGTH_LONG).show();
-			    	return true;
-			    default:
-			    	return true;
-			    }
-			  }
-			};
-		actionBar.setListNavigationCallbacks(spinner, navigationListener);
-	}
 
-	@Override
-	public boolean onNavigationItemSelected(int position, long id) {
-		Toast.makeText(getBaseContext(), "postion" + position,
-				Toast.LENGTH_LONG).show();
-		if (tagType == position) {
-			tagType = position;
-			Logger.start("user", tagType);
-		} else {
-			Logger.event("Invalid test");
-			Logger.end();
-			Logger.start("user", tagType);
-		}
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
-		return false;
-		// Our logic
+		builder.setTitle("Select Tagging Method").setItems(tagMethods,
+				new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int which) {
+						Logger.start("user", which);
+
+						ActiveUserModel.getShared().getUser()
+								.setBoundingBoxSetting(tagMethodKeys[which]);
+						Toast.makeText(getBaseContext(),
+								tagMethods[which] + " tagging selected",
+								Toast.LENGTH_LONG).show();
+					}
+				});
+
+		builder.create().show();
 	}
 
 	@Override
