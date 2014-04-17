@@ -1,5 +1,7 @@
 package ca.ualberta.cs.taggingapp.views;
 
+import java.util.UUID;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -51,7 +53,9 @@ public class MainActivity extends Activity {
 
 	public void loginGuest(View view) {
 		// Create the user
-		ActiveUserModel.getShared().performLogin("guest@example.com",
+		String uuid = UUID.randomUUID().toString();
+		uuid = uuid.substring(0, 10);
+		ActiveUserModel.getShared().performLogin("guest-" + uuid + "@example.com",
 				"password");
 
 		Intent i = new Intent(MainActivity.this, SwipeSuper.class);
