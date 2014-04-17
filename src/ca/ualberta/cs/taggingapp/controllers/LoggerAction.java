@@ -1,13 +1,17 @@
 package ca.ualberta.cs.taggingapp.controllers;
 
 public class LoggerAction {
-	private String theMethod = "";
-	private Long theTimeToFinish = 0L;
+	private String theMethod;
+	private Long startTime;
+	private Long endTime;
+	private String theUser;
 	
 	
-	public LoggerAction(String method, Long timeToFinish) {
-		this.theMethod = method;
-		this.theTimeToFinish = timeToFinish;
+	public LoggerAction() {
+		this.theMethod = "";
+		this.startTime = 0L;
+		this.endTime = 0L;
+		this.theUser = "";
 	}
 
 
@@ -31,15 +35,54 @@ public class LoggerAction {
 	 * @return the theTimeToFinish
 	 */
 	public Long getTheTimeToFinish() {
-		return theTimeToFinish;
+		return endTime - startTime;
 	}
 
 
 	/**
-	 * @param theTimeToFinish the theTimeToFinish to set
+	 * @return the theUser
 	 */
-	public void setTheTimeToFinish(Long theTimeToFinish) {
-		this.theTimeToFinish = theTimeToFinish;
+	public String getTheUser() {
+		return theUser;
 	}
 
+
+	/**
+	 * @param theUser the theUser to set
+	 */
+	public void setTheUser(String theUser) {
+		this.theUser = theUser;
+	}
+
+
+	/**
+	 * @return the startTime
+	 */
+	public Long getStartTime() {
+		return startTime;
+	}
+
+
+	/**
+	 * @param startTime the startTime to set
+	 */
+	public void setStartTime(Long startTime) {
+		this.startTime = startTime;
+	}
+
+
+	/**
+	 * @return the endTime
+	 */
+	public Long getEndTime() {
+		return endTime;
+	}
+
+
+	/**
+	 * @param endTime the endTime to set
+	 */
+	public void setEndTime(Long endTime) {
+		this.endTime = endTime;
+	}
 }

@@ -61,7 +61,7 @@ public class AddTag extends Activity {
 		builder.setTitle("Select Tagging Method").setItems(tagMethods,
 				new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int which) {
-						Logger.start("user", which);
+						Logger.start(ActiveUserModel.getShared().getUser().getEmail(), tagMethods[which]);
 
 						ActiveUserModel.getShared().getUser()
 								.setBoundingBoxSetting(tagMethodKeys[which]);
@@ -69,7 +69,9 @@ public class AddTag extends Activity {
 								tagMethods[which] + " tagging selected",
 								Toast.LENGTH_LONG).show();
 					}
-				});
+				})
+				// Prevents cancel of dialog box
+				.setCancelable(false);
 
 		builder.create().show();
 	}

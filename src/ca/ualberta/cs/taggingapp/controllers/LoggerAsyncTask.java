@@ -1,5 +1,7 @@
 package ca.ualberta.cs.taggingapp.controllers;
 
+import java.util.Date;
+
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
@@ -7,25 +9,15 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONObject;
 
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
 
 public class LoggerAsyncTask extends AsyncTask<LoggerAction, Void, Integer[]> {
 
-	public String getUrl() {
-		Uri theUri = new Uri.Builder().scheme("http").authority("requestb.in")
-				.path("xzhvguxz").build();
-
-		return theUri.toString();
-	}
-
 	@Override
 	protected Integer[] doInBackground(LoggerAction... arg0) {
 		int length = arg0.length;
 		Integer[] theResponses = new Integer[arg0.length];
-		
-		Log.w("LoggerAsyncTask", "doInBackground Called.");
 
 		for (int i = 0; i < length; i++) {
 			LoggerAction theAction = arg0[i];
@@ -41,8 +33,10 @@ public class LoggerAsyncTask extends AsyncTask<LoggerAction, Void, Integer[]> {
 
 		try {
 			JSONObject jsonObject = new JSONObject();
-			jsonObject.accumulate("time", Long.toString(theAction.getTheTimeToFinish()));
-			jsonObject.accumulate("method", theAction.getTheMethod());
+			jsonObject.accumulate("timePerformed", Long.toString(new Date().getTime()));
+			jsonObject.accumulate("timeTaken", Long.toString(theAction.getTheTimeToFinish()));
+			jsonObject.accumulate("methodForDrag", theAction.getTheMethod());
+			jsonObject.accumulate("userEmail", theAction.getTheUser());
 			
 			String json = jsonObject.toString();
 			
@@ -74,7 +68,7 @@ public class LoggerAsyncTask extends AsyncTask<LoggerAction, Void, Integer[]> {
 	@Override
 	protected void onPostExecute(Integer[] result) {
 		for (int i = 0; i < result.length; i++) {
-			Log.w("LoggerAsyncTask", "The response from the request was: "
+			Log.w("LoggerAsyncTask", "The response from logging request was: "
 					+ result[i].toString());
 		}
 	}
