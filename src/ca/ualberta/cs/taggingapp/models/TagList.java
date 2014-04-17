@@ -76,12 +76,14 @@ public class TagList extends SavedList<Tag> {
 
 	// This method allows for searching the TagList
 	public Tag findTag(String tagName) {
+		tagName = tagName.toLowerCase();
+		
 		Tag foundTag = null;
 
 		Tag searchTag = new Tag(tagName);
 
 		for (Tag tag : this.theList) {
-			if (tag.equals(searchTag)) {
+			if (tag.getName().toLowerCase().equals(searchTag.getName())) {
 				foundTag = tag;
 				break;
 			}
