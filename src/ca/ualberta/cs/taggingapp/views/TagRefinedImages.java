@@ -34,6 +34,7 @@ public class TagRefinedImages extends Activity {
 		for (int i = 0; i < regs.size(); i++) {
 			if (regs.get(i).getTag().getName().equals(tag)) {
 				tagURL.append(regs.get(i).getTag().getURL());
+				break;
 			}
 		}
 
