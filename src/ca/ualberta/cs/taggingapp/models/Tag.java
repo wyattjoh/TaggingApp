@@ -3,6 +3,11 @@ package ca.ualberta.cs.taggingapp.models;
 import java.util.ArrayList;
 import java.util.UUID;
 
+/**
+ *  A tag class that models all properties of a tag.
+ *  
+ * */
+
 public class Tag {
 	private String id;
 	private String name;

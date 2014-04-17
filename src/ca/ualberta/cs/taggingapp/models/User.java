@@ -2,6 +2,11 @@ package ca.ualberta.cs.taggingapp.models;
 
 import java.util.ArrayList;
 
+/**
+ *  A user class that models all properties of a user.
+ *  
+ * */
+
 public class User {
 	private String email = null;
 	private String password = null;

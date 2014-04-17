@@ -13,6 +13,12 @@ import android.content.Context;
 
 import com.google.gson.Gson;
 
+/**
+ *  Stores information relating to application 
+ *  to the disc.
+ * 
+ * */
+
 public abstract class SavedList<T> {
 
 	private Context theContext;

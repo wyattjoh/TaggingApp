@@ -5,6 +5,11 @@ import com.google.gson.Gson;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+/**
+ *  Retrieves a users saved data from the disc.
+ * 
+ * */
+
 public class SavedUserModel {
 	private static final String PREFS_NAME = "ActiveUserModel";
 	private Context theContext;

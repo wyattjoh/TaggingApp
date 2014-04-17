@@ -13,6 +13,13 @@ import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
 import android.widget.ImageView;
 
+/**
+ *  Draws a canvas and provides code for the scaling of
+ *  bitmaps being displayed on the canvas. Contains code
+ *  for pinch gesture recognition.
+ * 
+ * */
+
 public class DrawImageView extends ImageView {
 
 	private Paint paint;
@@ -20,7 +27,7 @@ public class DrawImageView extends ImageView {
 	private boolean isDrawing;
 	// Pinch Code
 	private static final int INVALID_POINTER_ID = -1;
-	// The ‘active pointer’ is the one currently moving our object.
+	// The active pointer is the one currently moving our object.
 	private int mActivePointerId = INVALID_POINTER_ID;
 	private float mPosX;
 	private float mPosY;

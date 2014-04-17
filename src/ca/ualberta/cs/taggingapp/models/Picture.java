@@ -9,6 +9,11 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.util.Log;
 
+/**
+ *  A picture class that models all properties of a picture.
+ *  
+ * */
+
 public class Picture {
 	private String id;
 	private ArrayList<Region> regions;

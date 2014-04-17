@@ -4,6 +4,12 @@ import java.util.UUID;
 
 import android.graphics.Point;
 
+/**
+ * Determines the region that has been selecting when
+ * tagging is performed in our application.
+ * 
+ * */
+
 public class Region {
 	private Point center = new Point(0, 0);
 	private int width = 0;
