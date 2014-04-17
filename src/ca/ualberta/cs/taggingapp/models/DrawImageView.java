@@ -36,7 +36,6 @@ public class DrawImageView extends ImageView {
 	private float mLastTouchY;
 	private ScaleGestureDetector mScaleDetector;
 	private float mScaleFactor = 1.f;
-	private Bitmap picture = null;
 
 	public DrawImageView(Context context, AttributeSet attrs) {
 		super(context, attrs);
@@ -85,6 +84,7 @@ public class DrawImageView extends ImageView {
 			canvas.drawRect(startPoint.x, startPoint.y, endPoint.x, endPoint.y,
 					paint);
 		}
+		super.onDraw(canvas);
 
 		if (ActiveUserModel.getShared().getUser().getBoundingBoxSetting() == "ZOOM") {
 			canvas.save();
@@ -92,10 +92,7 @@ public class DrawImageView extends ImageView {
 			canvas.scale(mScaleFactor, mScaleFactor);
 			// mIcon.draw(canvas);
 			canvas.restore();
-			canvas.drawRect(5, 5, picture.getHeight() - 5, picture.getWidth() - 5, paint);
 		}
-		
-		super.onDraw(canvas);
 	}
 
 	@Override
@@ -239,7 +236,6 @@ public class DrawImageView extends ImageView {
 	@Override
 	public void setImageBitmap(Bitmap picture) {
 		super.setImageBitmap(picture);
-		this.picture = picture;
 	}
 
 	private class ScaleListener extends
