@@ -16,6 +16,7 @@ import ca.ualberta.cs.taggingapp.R;
 import ca.ualberta.cs.taggingapp.models.Picture;
 import ca.ualberta.cs.taggingapp.models.PictureList;
 import ca.ualberta.cs.taggingapp.models.Region;
+import ca.ualberta.cs.taggingapp.models.TagList;
 
 public class TagAndPhoto extends Activity {
 	Picture thePicture;
@@ -81,6 +82,15 @@ public class TagAndPhoto extends Activity {
 	}
 
 	public void deleteTag(View view) {
+		// Change this code
+		ArrayList<Region> regs = thePicture.getRegions();
+		for (int i = 0; i < regs.size(); i++) {
+			if (regs.get(i).getTag().getName().equals(tag)) {
+				PictureList.getInstance().getSelected().removeRegion(regs.get(i));
+			}
+		}
+		PictureList.getInstance().save();
+		TagAndPhoto.this.finish();
 	}
 
 	@Override
