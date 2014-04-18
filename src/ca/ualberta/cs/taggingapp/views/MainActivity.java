@@ -6,7 +6,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
@@ -30,11 +29,7 @@ public class MainActivity extends Activity {
 
 		// Check if logged in already
 		if (ActiveUserModel.getShared().isLoggedIn()) {
-			Log.w("MainActivity",
-					"Logged in user found, continueing to main screen.");
 			continueToSwipeSuper();
-		} else {
-			Log.w("MainActivity", "Logged in user not found.");
 		}
 	}
 
