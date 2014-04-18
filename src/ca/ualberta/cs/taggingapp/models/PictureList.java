@@ -22,7 +22,6 @@ public class PictureList extends SavedList<Picture> {
 
 	private PictureList(Context theContext) {
 		super(theContext);
-		this.theList = new ArrayList<Picture>();
 	}
 
 	/**

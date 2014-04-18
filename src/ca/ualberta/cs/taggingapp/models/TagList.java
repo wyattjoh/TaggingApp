@@ -21,7 +21,6 @@ public class TagList extends SavedList<Tag> {
 
 	private TagList(Context theContext) {
 		super(theContext);
-		this.theList = new ArrayList<Tag>();
 	}
 
 	public void setTheContext(Context theContext) {

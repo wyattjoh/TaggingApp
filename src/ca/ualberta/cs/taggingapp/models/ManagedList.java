@@ -7,7 +7,7 @@ public class ManagedList<T extends ManagedObject> {
 	protected ArrayList<T> theList;
 
 	public ManagedList() {
-		// TODO Auto-generated constructor stub
+		this.theList = new ArrayList<T>();
 	}
 
 	public T get(String theId) {
