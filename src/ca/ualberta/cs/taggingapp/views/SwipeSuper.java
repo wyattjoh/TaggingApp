@@ -28,7 +28,7 @@ public class SwipeSuper extends FragmentActivity implements
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_swipe_super);
-		setTitle("Tagging App");
+		setTitle("TaggingApp");
 
 		// Intiialize all of the variables to the XML indentifiers
 		vp = (ViewPager) findViewById(R.id.pager);

@@ -21,7 +21,7 @@ public class TagRefinedImages extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_tag_refined_images);
-		setTitle("Tagging App");
+		setTitle("TaggingApp");
 
 		Bundle extras = getIntent().getExtras();
 		String tag = extras.getString("tagName");

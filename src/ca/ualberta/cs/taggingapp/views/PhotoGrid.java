@@ -11,9 +11,8 @@ public class PhotoGrid extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		// setContentView(R.layout.activity_photo_grid);
-
 		setContentView(R.layout.grid_layout);
+		setTitle("TaggingApp");
 
 		GridView gridView = (GridView) findViewById(R.id.photo_grid_view);
 

@@ -30,7 +30,7 @@ public class EditTag extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_edit_tag);
-		setTitle("Tagging App");
+		setTitle("TaggingApp");
 
 		thePicture = PictureList.getInstance().getSelected();
 

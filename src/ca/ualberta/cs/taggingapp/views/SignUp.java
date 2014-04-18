@@ -17,6 +17,7 @@ public class SignUp extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_sign_up);
+		setTitle("TaggingApp SignUp");
 
 		Intent startingIntent = getIntent();
 

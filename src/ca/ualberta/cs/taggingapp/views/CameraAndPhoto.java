@@ -28,6 +28,7 @@ public class CameraAndPhoto extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		setTitle("TaggingApp");
 
 		dispatchTakePictureIntent();
 	}

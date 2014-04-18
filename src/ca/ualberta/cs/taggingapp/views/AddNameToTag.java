@@ -34,6 +34,7 @@ public class AddNameToTag extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_name_to_tag);
+		setTitle("TaggingApp");
 
 		tagName = (EditText) this.findViewById(R.id.tag_name);
 		tagURL = (EditText) this.findViewById(R.id.tag_url);

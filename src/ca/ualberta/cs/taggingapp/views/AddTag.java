@@ -45,7 +45,7 @@ public class AddTag extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_tag);
-		setTitle("Tagging App");
+		setTitle("TaggingApp");
 		Picture thePicture = PictureList.getInstance().getSelected();
 		picture = (DrawImageView) findViewById(R.id.drawImageView1);
 		SGD = new ScaleGestureDetector(this, new ScaleListener());

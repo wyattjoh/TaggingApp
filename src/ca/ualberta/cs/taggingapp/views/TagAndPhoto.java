@@ -25,7 +25,7 @@ public class TagAndPhoto extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_tag_and_photo);
-		setTitle("Tagging App");
+		setTitle("TaggingApp");
 
 		Bundle extras = getIntent().getExtras();
 		thePicture = PictureList.getInstance().getSelected();

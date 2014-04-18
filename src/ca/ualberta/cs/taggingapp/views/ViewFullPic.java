@@ -32,7 +32,7 @@ public class ViewFullPic extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_view_full_pic);
-		setTitle("Tagging App");
+		setTitle("TaggingApp");
 
 		setupListView();
 	}
