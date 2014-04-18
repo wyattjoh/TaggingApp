@@ -3,8 +3,8 @@ package ca.ualberta.cs.taggingapp.models;
 import android.content.Context;
 
 /**
- *  Manages the current user, login and logout as 
- *  well as the authentication of the user.
+ * Manages the current user, login and logout as well as the authentication of
+ * the user.
  * 
  * @author wyatt
  * 

@@ -3,7 +3,7 @@ package ca.ualberta.cs.taggingapp.controllers;
 import ca.ualberta.cs.taggingapp.models.ActiveUserModel;
 
 /**
- *  A controller that handles the users login information.
+ * A controller that handles the users login information.
  * 
  * */
 

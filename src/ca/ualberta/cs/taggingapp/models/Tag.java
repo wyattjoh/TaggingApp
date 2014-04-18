@@ -4,18 +4,18 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 /**
- *  A tag class that models all properties of a tag.
- *  
+ * A tag class that models all properties of a tag.
+ * 
  * */
 
-public class Tag extends ManagedObject{
+public class Tag extends ManagedObject {
 	private String name;
 	private String URL;
 	private ArrayList<Region> taggedRegions = new ArrayList<Region>();
 
 	public Tag() {
 		super();
-		
+
 		this.name = null;
 		this.URL = null;
 	}
@@ -28,7 +28,7 @@ public class Tag extends ManagedObject{
 
 	public Tag(String name, String URL) {
 		this();
-	
+
 		this.name = name;
 		this.URL = URL;
 	}

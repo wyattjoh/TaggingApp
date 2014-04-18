@@ -5,7 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
 /**
- *  A factory class that focuses on resizing bitmaps.
+ * A factory class that focuses on resizing bitmaps.
  * 
  * */
 

@@ -5,8 +5,8 @@ import java.util.UUID;
 import android.graphics.Point;
 
 /**
- * Determines the region that has been selecting when
- * tagging is performed in our application.
+ * Determines the region that has been selecting when tagging is performed in
+ * our application.
  * 
  * */
 
@@ -22,10 +22,10 @@ public class Region extends ManagedObject {
 	private Region() {
 		super();
 	}
-	
+
 	public Region(Picture picture, Point center) {
 		this();
-		
+
 		this.height = 64;
 		this.width = 64;
 		this.pictureId = picture.getId();
@@ -34,7 +34,7 @@ public class Region extends ManagedObject {
 
 	public Region(Picture picture, int x, int y) {
 		this();
-		
+
 		this.height = 64;
 		this.width = 64;
 		this.pictureId = picture.getId();
@@ -43,7 +43,7 @@ public class Region extends ManagedObject {
 
 	public Region(Picture picture, Point upperLeft, Point lowerRight) {
 		this();
-		
+
 		this.pictureId = picture.getId();
 		this.upperLeftCorner = upperLeft;
 		this.lowerRightCorner = lowerRight;
@@ -53,7 +53,7 @@ public class Region extends ManagedObject {
 	public Region(Picture picture, int upperLeftX, int upperLeftY,
 			int lowerRightX, int lowerRightY) {
 		this();
-		
+
 		this.pictureId = picture.getId();
 		this.upperLeftCorner.x = upperLeftX;
 		this.upperLeftCorner.y = upperLeftY;

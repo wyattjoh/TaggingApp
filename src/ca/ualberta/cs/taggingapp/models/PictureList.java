@@ -9,7 +9,7 @@ import android.content.Context;
 import android.net.Uri;
 
 /**
- *  Creates and manages a list of picture objects.
+ * Creates and manages a list of picture objects.
  * 
  * @author Wyatt Johnson
  */

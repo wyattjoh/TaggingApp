@@ -53,7 +53,7 @@ public class AddTag extends Activity {
 		SGD = new ScaleGestureDetector(this, new ScaleListener());
 
 		picture.setOnTouchListener(new OnTouchListener() {
-			
+
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
 				return false;

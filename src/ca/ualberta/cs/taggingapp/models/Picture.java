@@ -10,8 +10,8 @@ import android.net.Uri;
 import android.util.Log;
 
 /**
- *  A picture class that models all properties of a picture.
- *  
+ * A picture class that models all properties of a picture.
+ * 
  * */
 
 public class Picture extends ManagedObject {
@@ -21,7 +21,7 @@ public class Picture extends ManagedObject {
 
 	public Picture() {
 		super();
-		
+
 		this.regions = new ArrayList<Region>();
 	}
 
@@ -84,10 +84,10 @@ public class Picture extends ManagedObject {
 
 		return picture;
 	}
-	
+
 	public Bitmap getSmallPicture() throws FileNotFoundException {
-		return ImageLoadingFactory.decodeScaledBitmapFromUri(
-				getPictureUri(), 200);
+		return ImageLoadingFactory.decodeScaledBitmapFromUri(getPictureUri(),
+				200);
 	}
 
 	public void setPicture(Bitmap picture) {

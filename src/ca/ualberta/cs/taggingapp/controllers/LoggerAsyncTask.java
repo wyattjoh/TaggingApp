@@ -29,23 +29,27 @@ public class LoggerAsyncTask extends AsyncTask<LoggerAction, Void, Integer[]> {
 
 	protected Integer performRequest(LoggerAction theAction) {
 		HttpClient httpclient = new DefaultHttpClient();
-		HttpPost method = new HttpPost("http://cmput301.softwareprocess.es:8080/cmput301w14t12/tags");
+		HttpPost method = new HttpPost(
+				"http://cmput301.softwareprocess.es:8080/cmput301w14t12/tags");
 
 		try {
 			JSONObject jsonObject = new JSONObject();
-			jsonObject.accumulate("timePerformed", Long.toString(theAction.getStartTime()));
-			jsonObject.accumulate("timeTaken", Long.toString(theAction.getTheTimeToFinish()));
+			jsonObject.accumulate("timePerformed",
+					Long.toString(theAction.getStartTime()));
+			jsonObject.accumulate("timeTaken",
+					Long.toString(theAction.getTheTimeToFinish()));
 			jsonObject.accumulate("methodForDrag", theAction.getTheMethod());
 			jsonObject.accumulate("userEmail", theAction.getTheUser());
-			
+
 			String json = jsonObject.toString();
-			
+
 			StringEntity se = new StringEntity(json);
-			
+
 			// 6. set httpPost Entity
 			method.setEntity(se);
- 
-            // 7. Set some headers to inform server about the type of the content   
+
+			// 7. Set some headers to inform server about the type of the
+			// content
 			method.setHeader("Accept", "application/json");
 			method.setHeader("Content-type", "application/json");
 

@@ -31,15 +31,16 @@ public class EditTag extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_edit_tag);
 		setTitle("Tagging App");
-		
+
 		thePicture = PictureList.getInstance().getSelected();
 
 		// Get the tag name and photo id
 		Bundle extras = getIntent().getExtras();
 		tagName = extras.getString("tagName");
-		
+
 		url = (EditText) findViewById(R.id.url_edit);
-		ArrayList <Region> regs = PictureList.getInstance().getSelected().getRegions();
+		ArrayList<Region> regs = PictureList.getInstance().getSelected()
+				.getRegions();
 		for (int i = 0; i < regs.size(); i++) {
 			if (regs.get(i).getTag().getName().equals(tagName)) {
 				url.append(regs.get(i).getTag().getURL());
@@ -114,20 +115,21 @@ public class EditTag extends Activity {
 		PictureList.getInstance().save();
 		EditTag.this.finish();
 	}
-	
+
 	public void delete() {
-		
+
 		// Delete all instances of the tag from all pictures
 		ArrayList<Picture> pics = PictureList.getInstance().getPictureList();
 		for (int i = 0; i < pics.size(); i++) {
 			ArrayList<Region> regs = pics.get(i).getRegions();
 			for (int j = 0; j < regs.size(); j++) {
 				if (regs.get(j).getTag().getName().equals(tagName)) {
-					PictureList.getInstance().getPicture(i).removeRegion(regs.get(j));
+					PictureList.getInstance().getPicture(i)
+							.removeRegion(regs.get(j));
 				}
 			}
 		}
-		
+
 		// Delete the tag from the tag list
 		ArrayList<Tag> tags = TagList.getInstance().getTags();
 		for (int k = 0; k < tags.size(); k++) {
@@ -135,9 +137,9 @@ public class EditTag extends Activity {
 				TagList.getInstance().removeTag(tags.get(k));
 			}
 		}
-		
-		//TagList.getInstance().save();
-		//PictureList.getInstance().save();
+
+		// TagList.getInstance().save();
+		// PictureList.getInstance().save();
 	}
 
 }

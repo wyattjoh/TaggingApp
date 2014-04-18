@@ -29,7 +29,7 @@ public class AddNameToTag extends Activity {
 	EditText tagName;
 	EditText tagURL;
 	ListView tagList;
-	ArrayAdapter <String> adapter;
+	ArrayAdapter<String> adapter;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +44,8 @@ public class AddNameToTag extends Activity {
 		for (int i = 0; i < TagList.getInstance().getTags().size(); i++) {
 			tags.add(TagList.getInstance().getTags().get(i).getName());
 		}
-		adapter = new ArrayAdapter<String>(this.getBaseContext(), R.layout.list_item, tags);
+		adapter = new ArrayAdapter<String>(this.getBaseContext(),
+				R.layout.list_item, tags);
 
 		tagList.setAdapter(adapter);
 
@@ -57,9 +58,11 @@ public class AddNameToTag extends Activity {
 				tagName.append(adapter.getItem(position));
 
 				for (int i = 0; i < TagList.getInstance().getTags().size(); i++) {
-					if (TagList.getInstance().getTags().get(i).getName().equals(adapter.getItem(position))) {
+					if (TagList.getInstance().getTags().get(i).getName()
+							.equals(adapter.getItem(position))) {
 						tagURL.setText("");
-						tagURL.append(TagList.getInstance().getTags().get(i).getURL());
+						tagURL.append(TagList.getInstance().getTags().get(i)
+								.getURL());
 					}
 				}
 
@@ -129,12 +132,14 @@ public class AddNameToTag extends Activity {
 		ArrayList<Region> regList = PictureList.getInstance().getSelected()
 				.getRegions();
 		Collections.reverse(regList);
-		
-		
+
 		boolean found = false;
 		Tag dupTag = null;
-		for (int i =0; i < TagList.getInstance().getTags().size(); i++) {
-			if (TagList.getInstance().getTags().get(i).getName().equals(tag.getName()) && TagList.getInstance().getTags().get(i).getURL().equals(tag.getURL())) {
+		for (int i = 0; i < TagList.getInstance().getTags().size(); i++) {
+			if (TagList.getInstance().getTags().get(i).getName()
+					.equals(tag.getName())
+					&& TagList.getInstance().getTags().get(i).getURL()
+							.equals(tag.getURL())) {
 				found = true;
 				dupTag = TagList.getInstance().getTags().get(i);
 			}
@@ -147,7 +152,6 @@ public class AddNameToTag extends Activity {
 			regList.get(0).setTag(tag);
 			TagList.getInstance().addTag(tag);
 		}
-		
 
 		// Error tracking println
 		System.out.println(tag.getName());
@@ -155,8 +159,6 @@ public class AddNameToTag extends Activity {
 		ArrayList<Region> regs = tag.getTaggedRegions();
 		for (int i = 0; i < regs.size(); i++)
 			System.out.println(regs.get(i).getLowerRightCorner().x);
-
-		
 
 		TagList.getInstance().save();
 		PictureList.getInstance().save();

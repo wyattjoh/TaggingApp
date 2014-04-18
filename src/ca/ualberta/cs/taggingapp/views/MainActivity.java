@@ -55,8 +55,8 @@ public class MainActivity extends Activity {
 		// Create the user
 		String uuid = UUID.randomUUID().toString();
 		uuid = uuid.substring(0, 10);
-		ActiveUserModel.getShared().performLogin("guest-" + uuid + "@example.com",
-				"password");
+		ActiveUserModel.getShared().performLogin(
+				"guest-" + uuid + "@example.com", "password");
 
 		Intent i = new Intent(MainActivity.this, SwipeSuper.class);
 		startActivity(i);

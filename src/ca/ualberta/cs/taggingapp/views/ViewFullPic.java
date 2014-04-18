@@ -33,20 +33,22 @@ public class ViewFullPic extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_view_full_pic);
 		setTitle("Tagging App");
-		
+
 		setupListView();
 	}
 
 	protected void setupListView() {
 		miniTagsList = (ListView) this.findViewById(R.id.miniTagsList);
-		
+
 		LayoutInflater inflater = getLayoutInflater();
-		ViewGroup header = (ViewGroup)inflater.inflate(R.layout.view_full_pic_header, miniTagsList, false);
+		ViewGroup header = (ViewGroup) inflater.inflate(
+				R.layout.view_full_pic_header, miniTagsList, false);
 		miniTagsList.removeAllViewsInLayout();
 		miniTagsList.addHeaderView(header, null, false);
-		
+
 		Picture thePicture = PictureList.getInstance().getSelected();
-		TaggedImageView picture = (TaggedImageView) header.findViewById(R.id.taggedImageView);
+		TaggedImageView picture = (TaggedImageView) header
+				.findViewById(R.id.taggedImageView);
 		picture.setPicture(thePicture);
 	}
 
@@ -69,7 +71,7 @@ public class ViewFullPic extends Activity {
 		case R.id.discard:
 			Picture thePicture = PictureList.getInstance().getSelected();
 			if (!thePicture.getRegions().isEmpty()) {
-					thePicture.removeAllRegions();
+				thePicture.removeAllRegions();
 			}
 			PictureList.getInstance().getPictureList().remove(thePicture);
 			PictureList.getInstance().save();
@@ -87,11 +89,11 @@ public class ViewFullPic extends Activity {
 	}
 
 	protected void populateView() {
-		
+
 		ArrayList<Region> regs = PictureList.getInstance().getSelected()
 				.getRegions();
 		s = new ArrayList<String>();
-		
+
 		Log.w("ViewFullPic",
 				"Number of regions: " + Integer.toString(regs.size()));
 		for (Region region : regs) {
@@ -116,7 +118,7 @@ public class ViewFullPic extends Activity {
 				i.putExtra("pos", position);
 				i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
 				startActivity(i);
-				//finish();
+				// finish();
 			}
 		});
 	}

@@ -13,9 +13,8 @@ import android.view.MotionEvent;
 import android.widget.ImageView;
 
 /**
- *  Draws a canvas and provides code for the scaling of
- *  bitmaps being displayed on the canvas. Contains code
- *  for pinch gesture recognition.
+ * Draws a canvas and provides code for the scaling of bitmaps being displayed
+ * on the canvas. Contains code for pinch gesture recognition.
  * 
  * */
 
@@ -53,7 +52,6 @@ public class DrawImageView extends ImageView {
 		Point point = new Point(x, y);
 		return point;
 	}
-	
 
 	@Override
 	protected void onDraw(Canvas canvas) {
@@ -67,7 +65,7 @@ public class DrawImageView extends ImageView {
 
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
-			
+
 		switch (event.getAction()) {
 		case MotionEvent.ACTION_DOWN:
 			if (ActiveUserModel.getShared().getUser().getBoundingBoxSetting() == "DRAG") {
@@ -75,7 +73,6 @@ public class DrawImageView extends ImageView {
 				endPoint = new PointF();
 				isDrawing = true;
 			}
-			
 
 		case MotionEvent.ACTION_MOVE:
 			if (ActiveUserModel.getShared().getUser().getBoundingBoxSetting() == "DRAG") {
@@ -84,7 +81,7 @@ public class DrawImageView extends ImageView {
 					endPoint.y = event.getY();
 				}
 			}
-			
+
 			invalidate();
 			break;
 		case MotionEvent.ACTION_UP:
@@ -106,7 +103,7 @@ public class DrawImageView extends ImageView {
 				}
 				isDrawing = true;
 			}
-			
+
 			if (ActiveUserModel.getShared().getUser().getBoundingBoxSetting() == "DEFAULT_TAP") {
 				if (startPoint == null) {
 					startPoint = new PointF(event.getX(), event.getY());

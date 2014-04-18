@@ -24,8 +24,7 @@ public class GridImageAdapter extends BaseAdapter {
 		ArrayList<Picture> pics = PictureList.getInstance().getPictureList();
 		if (tagName == null) {
 			thePictureList = pics;
-		}
-		else {
+		} else {
 			thePictureList = new ArrayList<Picture>();
 			for (int i = 0; i < pics.size(); i++) {
 				ArrayList<Region> regs = pics.get(i).getRegions();

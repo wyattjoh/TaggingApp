@@ -45,7 +45,7 @@ public class TaggedImageView extends ImageView {
 
 		try {
 			theBitmap = picture.getPicture();
-			
+
 			this.setImageBitmap(theBitmap);
 
 		} catch (FileNotFoundException e) {

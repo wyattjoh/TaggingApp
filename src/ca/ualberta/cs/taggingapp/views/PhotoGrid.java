@@ -18,7 +18,7 @@ public class PhotoGrid extends Activity {
 		GridView gridView = (GridView) findViewById(R.id.photo_grid_view);
 
 		// Instance of ImageAdapter Class
-		gridView.setAdapter(new GridImageAdapter(this,null));
+		gridView.setAdapter(new GridImageAdapter(this, null));
 
 	}
 

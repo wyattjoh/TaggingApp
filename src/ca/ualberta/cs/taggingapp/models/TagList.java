@@ -2,15 +2,16 @@ package ca.ualberta.cs.taggingapp.models;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-
-import com.google.gson.reflect.TypeToken;
+import java.util.Locale;
 
 import android.content.Context;
 import android.util.Log;
 
+import com.google.gson.reflect.TypeToken;
+
 /**
- *  Creates and maintains a list of tags.
- *  
+ * Creates and maintains a list of tags.
+ * 
  * */
 
 public class TagList extends SavedList<Tag> {
@@ -31,7 +32,7 @@ public class TagList extends SavedList<Tag> {
 		return this.theContext;
 	}
 
-	public static ManagedList createInstance(Context theContext) {
+	public static TagList createInstance(Context theContext) {
 		singleton = new TagList(theContext);
 		singleton.setTheContext(theContext);
 		singleton.theList = singleton.load();
@@ -73,24 +74,6 @@ public class TagList extends SavedList<Tag> {
 		return selectedTag;
 	}
 
-	// This method allows for searching the TagList
-	public Tag findTag(String tagName) {
-		tagName = tagName.toLowerCase();
-		
-		Tag foundTag = null;
-
-		Tag searchTag = new Tag(tagName);
-
-		for (Tag tag : this.theList) {
-			if (tag.getName().toLowerCase().equals(searchTag.getName())) {
-				foundTag = tag;
-				break;
-			}
-		}
-
-		return foundTag;
-	}
-
 	@Override
 	public String getFilename() {
 		return FILENAME;
@@ -98,7 +81,6 @@ public class TagList extends SavedList<Tag> {
 
 	@Override
 	public Tag[] getPrimativeArray(ArrayList<Tag> orignalArray) {
-		Log.w("TagList", "getPrimativeArray");
 		return orignalArray.toArray(new Tag[0]);
 	}
 

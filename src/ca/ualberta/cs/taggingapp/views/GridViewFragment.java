@@ -43,7 +43,7 @@ public class GridViewFragment extends Fragment {
 				.findViewById(R.id.photo_grid_view);
 
 		// Instance of ImageAdapter Class
-		gia = new GridImageAdapter(getActivity(),null);
+		gia = new GridImageAdapter(getActivity(), null);
 		gridView.setAdapter(gia);
 
 		gridView.setOnItemClickListener(new OnItemClickListener() {
@@ -85,7 +85,7 @@ public class GridViewFragment extends Fragment {
 			return super.onOptionsItemSelected(item);
 		}
 	}
-	
+
 	@Override
 	public void onResume() {
 		super.onResume();

@@ -5,15 +5,13 @@ public class LoggerAction {
 	private Long startTime;
 	private Long endTime;
 	private String theUser;
-	
-	
+
 	public LoggerAction() {
 		this.theMethod = "";
 		this.startTime = 0L;
 		this.endTime = 0L;
 		this.theUser = "";
 	}
-
 
 	/**
 	 * @return the theMethod
@@ -22,14 +20,13 @@ public class LoggerAction {
 		return theMethod;
 	}
 
-
 	/**
-	 * @param theMethod the theMethod to set
+	 * @param theMethod
+	 *            the theMethod to set
 	 */
 	public void setTheMethod(String theMethod) {
 		this.theMethod = theMethod;
 	}
-
 
 	/**
 	 * @return the theTimeToFinish
@@ -38,7 +35,6 @@ public class LoggerAction {
 		return endTime - startTime;
 	}
 
-
 	/**
 	 * @return the theUser
 	 */
@@ -46,14 +42,13 @@ public class LoggerAction {
 		return theUser;
 	}
 
-
 	/**
-	 * @param theUser the theUser to set
+	 * @param theUser
+	 *            the theUser to set
 	 */
 	public void setTheUser(String theUser) {
 		this.theUser = theUser;
 	}
-
 
 	/**
 	 * @return the startTime
@@ -62,14 +57,13 @@ public class LoggerAction {
 		return startTime;
 	}
 
-
 	/**
-	 * @param startTime the startTime to set
+	 * @param startTime
+	 *            the startTime to set
 	 */
 	public void setStartTime(Long startTime) {
 		this.startTime = startTime;
 	}
-
 
 	/**
 	 * @return the endTime
@@ -78,9 +72,9 @@ public class LoggerAction {
 		return endTime;
 	}
 
-
 	/**
-	 * @param endTime the endTime to set
+	 * @param endTime
+	 *            the endTime to set
 	 */
 	public void setEndTime(Long endTime) {
 		this.endTime = endTime;

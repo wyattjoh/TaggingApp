@@ -6,7 +6,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 /**
- *  Retrieves a users saved data from the disc.
+ * Retrieves a users saved data from the disc.
  * 
  * */
 

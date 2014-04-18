@@ -10,8 +10,7 @@ import android.net.Uri;
 import android.provider.MediaStore;
 
 /**
- *  A factory class that receives a uri of an image and
- *  loads the image. 
+ * A factory class that receives a uri of an image and loads the image.
  * 
  * */
 
@@ -38,14 +37,14 @@ public class ImageLoadingFactory {
 		return singleton;
 	}
 
-	//gets the bitmap from the provided uri
+	// gets the bitmap from the provided uri
 	public static Bitmap getImageFromUri(Uri imageUri)
 			throws FileNotFoundException, IOException {
 		return MediaStore.Images.Media.getBitmap(
 				getInstance().context.getContentResolver(), imageUri);
 	}
 
-	//decodes the scaled uri passed in and returns a bitmap
+	// decodes the scaled uri passed in and returns a bitmap
 	public static Bitmap decodeScaledBitmapFromUri(Uri uri, int requiredSize)
 			throws FileNotFoundException {
 		BitmapFactory.Options o = new BitmapFactory.Options();

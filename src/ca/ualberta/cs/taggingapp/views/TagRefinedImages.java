@@ -30,7 +30,8 @@ public class TagRefinedImages extends Activity {
 		tagName.append(tag);
 
 		TextView tagURL = (TextView) findViewById(R.id.tagURL);
-		ArrayList <Region> regs = PictureList.getInstance().getSelected().getRegions();
+		ArrayList<Region> regs = PictureList.getInstance().getSelected()
+				.getRegions();
 		for (int i = 0; i < regs.size(); i++) {
 			if (regs.get(i).getTag().getName().equals(tag)) {
 				tagURL.append(regs.get(i).getTag().getURL());
