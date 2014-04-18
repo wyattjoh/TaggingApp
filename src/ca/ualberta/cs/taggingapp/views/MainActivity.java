@@ -3,6 +3,7 @@ package ca.ualberta.cs.taggingapp.views;
 import java.util.UUID;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,6 +15,7 @@ import ca.ualberta.cs.taggingapp.R;
 import ca.ualberta.cs.taggingapp.models.ActiveUserModel;
 import ca.ualberta.cs.taggingapp.models.ImageLoadingFactory;
 import ca.ualberta.cs.taggingapp.models.PictureList;
+import ca.ualberta.cs.taggingapp.models.RegionList;
 import ca.ualberta.cs.taggingapp.models.TagList;
 
 public class MainActivity extends Activity {
@@ -24,15 +26,7 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);
 		setTitle("Tagging App");
 
-		// Create the picture and tags list
-		PictureList.createInstance(getApplicationContext());
-		TagList.createInstance(getApplicationContext());
-
-		// Create the active user model
-		ActiveUserModel.createShared(getApplicationContext());
-
-		// Create the ImageLoadingFactory
-		ImageLoadingFactory.createInstance(getApplicationContext());
+		createSharedSingletons(getApplicationContext());
 
 		// Check if logged in already
 		if (ActiveUserModel.getShared().isLoggedIn()) {
@@ -42,6 +36,19 @@ public class MainActivity extends Activity {
 		} else {
 			Log.w("MainActivity", "Logged in user not found.");
 		}
+	}
+
+	protected void createSharedSingletons(Context theContext) {
+		// Create the picture and tags list
+		PictureList.createInstance(theContext);
+		TagList.createInstance(theContext);
+		RegionList.createInstance(theContext);
+
+		// Create the active user model
+		ActiveUserModel.createShared(theContext);
+
+		// Create the ImageLoadingFactory
+		ImageLoadingFactory.createInstance(theContext);
 	}
 
 	@Override
