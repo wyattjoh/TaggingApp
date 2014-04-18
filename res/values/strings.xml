@@ -33,5 +33,10 @@
         <item>Drag</item>
         <item>Double Tap</item>
     </string-array>
+        <string name="tag_name">Tag Name</string>
+        <string name="tag_url">Tag URL</string>
+        <string name="tags_associated_with_this_picture">Tags Associated with this Picture</string>
+        <string name="delete_tag">Delete Tag</string>
+        <string name="save">Save</string>
     
 </resources>
