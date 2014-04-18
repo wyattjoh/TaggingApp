@@ -22,7 +22,6 @@ public class TaggedImageView extends ImageView {
 
 	private Paint paint;
 	private Picture picture;
-	private int height;
 
 	public TaggedImageView(Context context, AttributeSet attrs) {
 		super(context, attrs);

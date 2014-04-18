@@ -37,7 +37,8 @@ public class TagsListFragment extends Fragment {
 		for (int i = 0; i < TagList.getInstance().getTags().size(); i++) {
 			tags.add(TagList.getInstance().getTags().get(i).getName());
 		}
-		adapter = new ArrayAdapter(getActivity(), R.layout.list_item, tags);
+		adapter = new ArrayAdapter<String>(getActivity(), R.layout.list_item,
+				tags);
 
 		listView.setAdapter(adapter);
 
@@ -87,7 +88,8 @@ public class TagsListFragment extends Fragment {
 		for (int i = 0; i < TagList.getInstance().getTags().size(); i++) {
 			tags.add(TagList.getInstance().getTags().get(i).getName());
 		}
-		adapter = new ArrayAdapter(getActivity(), R.layout.list_item, tags);
+		adapter = new ArrayAdapter<String>(getActivity(), R.layout.list_item,
+				tags);
 
 		listView.setAdapter(adapter);
 	}
