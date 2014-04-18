@@ -16,7 +16,6 @@ import ca.ualberta.cs.taggingapp.R;
 import ca.ualberta.cs.taggingapp.models.Picture;
 import ca.ualberta.cs.taggingapp.models.PictureList;
 import ca.ualberta.cs.taggingapp.models.Region;
-import ca.ualberta.cs.taggingapp.models.TagList;
 
 public class TagAndPhoto extends Activity {
 	Picture thePicture;

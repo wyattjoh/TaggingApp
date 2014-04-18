@@ -17,7 +17,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
-import android.view.ScaleGestureDetector.OnScaleGestureListener;
 import android.view.ScaleGestureDetector.SimpleOnScaleGestureListener;
 import android.view.View;
 import android.view.View.OnTouchListener;
@@ -26,7 +25,6 @@ import ca.ualberta.cs.taggingapp.R;
 import ca.ualberta.cs.taggingapp.controllers.Logger;
 import ca.ualberta.cs.taggingapp.models.ActiveUserModel;
 import ca.ualberta.cs.taggingapp.models.DrawImageView;
-import ca.ualberta.cs.taggingapp.models.ManagedObject;
 import ca.ualberta.cs.taggingapp.models.Picture;
 import ca.ualberta.cs.taggingapp.models.PictureList;
 import ca.ualberta.cs.taggingapp.models.Region;
@@ -75,6 +73,7 @@ public class AddTag extends Activity {
 
 		builder.setTitle("Select Tagging Method")
 				.setItems(tagMethods, new DialogInterface.OnClickListener() {
+					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						Logger.start(ActiveUserModel.getShared().getUser()
 								.getEmail(), tagMethods[which]);
@@ -105,6 +104,7 @@ public class AddTag extends Activity {
 		return true;
 	}
 
+	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		// getMenuInflater().inflate(R.menu.add_tag, menu);

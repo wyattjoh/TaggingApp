@@ -1,7 +1,6 @@
 package ca.ualberta.cs.taggingapp.models;
 
 import java.util.ArrayList;
-import java.util.UUID;
 
 /**
  * A tag class that models all properties of a tag.
@@ -88,6 +87,7 @@ public class Tag extends ManagedObject {
 	/**
 	 * @return the id
 	 */
+	@Override
 	public String getId() {
 		return id;
 	}
@@ -96,6 +96,7 @@ public class Tag extends ManagedObject {
 	 * @param id
 	 *            the id to set
 	 */
+	@Override
 	public void setId(String id) {
 		this.id = id;
 	}

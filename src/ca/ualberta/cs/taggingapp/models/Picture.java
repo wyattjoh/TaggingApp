@@ -3,11 +3,8 @@ package ca.ualberta.cs.taggingapp.models;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.UUID;
-
 import android.graphics.Bitmap;
 import android.net.Uri;
-import android.util.Log;
 
 /**
  * A picture class that models all properties of a picture.

@@ -1,7 +1,5 @@
 package ca.ualberta.cs.taggingapp.models;
 
-import java.util.UUID;
-
 import android.graphics.Point;
 
 /**
