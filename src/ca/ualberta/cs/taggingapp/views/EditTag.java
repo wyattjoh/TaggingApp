@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
 import ca.ualberta.cs.taggingapp.R;
+import ca.ualberta.cs.taggingapp.models.ManagedObject;
 import ca.ualberta.cs.taggingapp.models.Picture;
 import ca.ualberta.cs.taggingapp.models.PictureList;
 import ca.ualberta.cs.taggingapp.models.Region;
@@ -23,7 +24,7 @@ public class EditTag extends Activity {
 	int position;
 	EditText tag;
 	EditText url;
-	Picture thePicture;
+	ManagedObject thePicture;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

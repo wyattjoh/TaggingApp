@@ -32,7 +32,7 @@ public class TagList extends SavedList<Tag> {
 		return this.theContext;
 	}
 
-	public static TagList createInstance(Context theContext) {
+	public static ManagedList createInstance(Context theContext) {
 		singleton = new TagList(theContext);
 		singleton.setTheContext(theContext);
 		singleton.theList = singleton.load();
@@ -90,15 +90,6 @@ public class TagList extends SavedList<Tag> {
 		}
 
 		return foundTag;
-	}
-
-	public Tag getTagWithId(String theId) {
-		for (Tag tag : this.theList) {
-			if (tag.getId().equals(theId)) {
-				return tag;
-			}
-		}
-		return null;
 	}
 
 	@Override

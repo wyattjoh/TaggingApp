@@ -117,15 +117,6 @@ public class PictureList extends SavedList<Picture> {
 		return FILENAME;
 	}
 
-	public Picture getPictureFromId(String theId) {
-		for (Picture pic : this.theList) {
-			if (pic.getId().equals(theId)) {
-				return pic;
-			}
-		}
-		return null;
-	}
-
 	@Override
 	public Picture[] getPrimativeArray(ArrayList<Picture> orignalArray) {
 		return orignalArray.toArray(new Picture[0]);

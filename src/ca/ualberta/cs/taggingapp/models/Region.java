@@ -10,46 +10,56 @@ import android.graphics.Point;
  * 
  * */
 
-public class Region {
+public class Region extends ManagedObject {
 	private Point center = new Point(0, 0);
 	private int width = 0;
 	private int height = 0;
 	private Point upperLeftCorner = new Point(0, 0);
 	private Point lowerRightCorner = new Point(0, 0);
-	private String tag = null;
-	private String picture = null;
-	private String id;
+	private String regionId = null;
+	private String pictureId = null;
 
-	public Region(Picture picture, int upperLeftX, int upperLeftY,
-			int lowerRightX, int lowerRightY) {
-		this.id = UUID.randomUUID().toString();
-		this.picture = picture.getId();
-		this.upperLeftCorner.x = upperLeftX;
-		this.upperLeftCorner.y = upperLeftY;
-		this.lowerRightCorner.x = lowerRightX;
-		this.lowerRightCorner.y = lowerRightY;
-		this.updateRegionFromCorners();
+	private Region() {
+		super();
+	}
+	
+	public Region(Picture picture, Point center) {
+		this();
+		
+		this.height = 64;
+		this.width = 64;
+		this.pictureId = picture.getId();
+		this.setCenter(center);
+	}
+
+	public Region(Picture picture, int x, int y) {
+		this();
+		
+		this.height = 64;
+		this.width = 64;
+		this.pictureId = picture.getId();
+		this.setCenter(x, y);
 	}
 
 	public Region(Picture picture, Point upperLeft, Point lowerRight) {
-		this.picture = picture.getId();
+		this();
+		
+		this.pictureId = picture.getId();
 		this.upperLeftCorner = upperLeft;
 		this.lowerRightCorner = lowerRight;
 		this.updateRegionFromCorners();
 	}
 
-	public Region(Picture picture, int x, int y) {
-		this.height = 64;
-		this.width = 64;
-		this.picture = picture.getId();
-		this.setCenter(x, y);
-	}
-
-	public Region(Picture picture, Point center) {
-		this.height = 64;
-		this.width = 64;
-		this.picture = picture.getId();
-		this.setCenter(center);
+	public Region(Picture picture, int upperLeftX, int upperLeftY,
+			int lowerRightX, int lowerRightY) {
+		this();
+		
+		this.pictureId = picture.getId();
+		this.upperLeftCorner.x = upperLeftX;
+		this.upperLeftCorner.y = upperLeftY;
+		this.lowerRightCorner.x = lowerRightX;
+		this.lowerRightCorner.y = lowerRightY;
+		this.updateRegionFromCorners();
 	}
 
 	// Start of getters and setters
@@ -117,19 +127,19 @@ public class Region {
 	}
 
 	public Tag getTag() {
-		return TagList.getInstance().getTagWithId(tag);
+		return TagList.getInstance().get(regionId);
 	}
 
 	public void setTag(Tag tag) {
-		this.tag = tag.getId();
+		this.regionId = tag.getId();
 	}
 
 	public Picture getPicture() {
-		return PictureList.getInstance().getPictureFromId(picture);
+		return PictureList.getInstance().get(pictureId);
 	}
 
-	public void setPicture(Picture picture) {
-		this.picture = picture.getId();
+	public void setPicture(ManagedObject picture) {
+		this.pictureId = picture.getId();
 	}
 
 	// End of getters and setters
@@ -147,7 +157,7 @@ public class Region {
 		}
 		this.setTag(tag);
 
-		Tag theTag = TagList.getInstance().getTagWithId(this.tag);
+		Tag theTag = TagList.getInstance().get(this.regionId);
 
 		theTag.addTaggedRegion(this);
 	}

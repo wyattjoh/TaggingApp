@@ -14,15 +14,13 @@ import android.content.Context;
 import com.google.gson.Gson;
 
 /**
- *  Stores information relating to application 
- *  to the disc.
+ * Stores information relating to application to the disc.
  * 
  * */
 
-public abstract class SavedList<T> {
+public abstract class SavedList<T extends ManagedObject> extends ManagedList<T> {
 
 	private Context theContext;
-	protected ArrayList<T> theList;
 
 	public SavedList(Context theContext) {
 		this.theContext = theContext;
@@ -74,8 +72,10 @@ public abstract class SavedList<T> {
 			Type listofTObject = getType();
 			T[] theStateList = gson.fromJson(isr, listofTObject);
 
-			for (T object : theStateList) {
-				theState.add(object);
+			if (theStateList != null) {
+				for (T object : theStateList) {
+					theState.add(object);
+				}
 			}
 
 			isr.close();

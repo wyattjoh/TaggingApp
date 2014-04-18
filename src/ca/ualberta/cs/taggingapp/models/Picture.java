@@ -14,14 +14,14 @@ import android.util.Log;
  *  
  * */
 
-public class Picture {
-	private String id;
+public class Picture extends ManagedObject {
 	private ArrayList<Region> regions;
 	private transient Bitmap picture = null;
 	private String picturePath = null;
 
 	public Picture() {
-		this.id = UUID.randomUUID().toString();
+		super();
+		
 		this.regions = new ArrayList<Region>();
 	}
 
@@ -77,8 +77,7 @@ public class Picture {
 
 	public Bitmap getPicture() throws FileNotFoundException, IOException {
 		if (picture == null && picturePath != null) {
-			// TODO: Load the picture from the URI
-			Log.w("Picture", "Photo loaded from factory");
+			// Load the picture from the URI
 			picture = ImageLoadingFactory.decodeScaledBitmapFromUri(
 					getPictureUri(), 1000);
 		}
@@ -93,22 +92,5 @@ public class Picture {
 
 	public void setPicture(Bitmap picture) {
 		this.picture = picture;
-	}
-
-	// End of getters and setters
-
-	/**
-	 * @return the id
-	 */
-	public String getId() {
-		return id;
-	}
-
-	/**
-	 * @param id
-	 *            the id to set
-	 */
-	public void setId(String id) {
-		this.id = id;
 	}
 }

@@ -8,17 +8,16 @@ import java.util.UUID;
  *  
  * */
 
-public class Tag {
-	private String id;
+public class Tag extends ManagedObject{
 	private String name;
 	private String URL;
 	private ArrayList<Region> taggedRegions = new ArrayList<Region>();
 
-	public Tag(String name, String URL) {
-		this();
-
-		this.name = name;
-		this.URL = URL;
+	public Tag() {
+		super();
+		
+		this.name = null;
+		this.URL = null;
 	}
 
 	public Tag(String name) {
@@ -27,10 +26,11 @@ public class Tag {
 		this.name = name;
 	}
 
-	public Tag() {
-		this.id = UUID.randomUUID().toString();
-		this.name = null;
-		this.URL = null;
+	public Tag(String name, String URL) {
+		this();
+	
+		this.name = name;
+		this.URL = URL;
 	}
 
 	// Start of getters and setters
