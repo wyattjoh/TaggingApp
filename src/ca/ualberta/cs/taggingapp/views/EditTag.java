@@ -25,39 +25,34 @@ import ca.ualberta.cs.taggingapp.models.TagList;
  * 
  */
 public class EditTag extends Activity {
+	public static final String TAG_ID = "TAG_ID";
 
-	String tagName;
-	int position;
-	EditText tag;
-	EditText url;
-	ManagedObject thePicture;
+	private Tag theTag;
+	private Picture thePicture;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_edit_tag);
 		setTitle("TaggingApp");
+		
 		// Get the proper image
 		thePicture = PictureList.getInstance().getSelected();
 
 		// Get the tag name and photo id
 		Bundle extras = getIntent().getExtras();
-		tagName = extras.getString("tagName");
+		
+		String tagId = extras.getString(TAG_ID);
+		
+		theTag = TagList.getInstance().get(tagId);
 
-		url = (EditText) findViewById(R.id.url_edit);
-		// Find the proper region, and extract the URL info. Append
-		// these strings to the text input fields.
-		ArrayList<Region> regs = PictureList.getInstance().getSelected()
-				.getRegions();
-		for (int i = 0; i < regs.size(); i++) {
-			if (regs.get(i).getTag().getName().equals(tagName)) {
-				url.append(regs.get(i).getTag().getURL());
-			}
-		}
-		position = extras.getInt("pos");
+		// Set the tag url
+		EditText urlField = (EditText) findViewById(R.id.url_edit);
+		urlField.setText(theTag.getURL());
+		
 		// Append the tagName to the tag text input field.
-		tag = (EditText) findViewById(R.id.tag_edit);
-		tag.append(tagName);
+		EditText tagNameField = (EditText) findViewById(R.id.tag_edit);
+		tagNameField.setText(theTag.getName());
 
 	}
 
@@ -87,14 +82,7 @@ public class EditTag extends Activity {
 						new DialogInterface.OnClickListener() {
 							@Override
 							public void onClick(DialogInterface dialog, int id) {
-								// if this button is clicked, close
-								// current activity
-								Intent i = new Intent(EditTag.this,
-										ViewFullPic.class);
-								delete();
-								i.putExtra("tagName", tagName);
-								startActivity(i);
-								EditTag.this.finish();
+								// TODO: Implement
 							}
 						})
 				.setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -106,49 +94,32 @@ public class EditTag extends Activity {
 					}
 				});
 
-		// create alert dialog
-		AlertDialog alertDialog = alertDialogBuilder.create();
-
-		// show it
-		alertDialog.show();
+		// create alert dialog and show it
+		alertDialogBuilder.create().show();
 	}
 
 	// Saves the new information to the correct tag instances and saves the
 	// altered PictureList to SD card.
 	public void saveTag(View view) {
-		// Horrible stringy code, forgive me
-		PictureList.getInstance().getSelected().getRegions().get(position)
-				.getTag().setName(tag.getText().toString());
-		PictureList.getInstance().getSelected().getRegions().get(position)
-				.getTag().setURL(url.getText().toString());
+		// Get the urlField
+		EditText urlField = (EditText) findViewById(R.id.url_edit);
+		
+		// Get the tagNameField
+		EditText tagNameField = (EditText) findViewById(R.id.tag_edit);
+
+		// Update the tag object
+		theTag.setName(tagNameField.getText().toString());
+		theTag.setURL(urlField.getText().toString());
+		
+		// Save the list as we just updated a tag
 		TagList.getInstance().save();
-		PictureList.getInstance().save();
-		EditTag.this.finish();
+
+		// Finish the activity
+		finish();
 	}
 
 	public void delete() {
-
-		// Delete all instances of the tag from all pictures
-		ArrayList<Picture> pics = PictureList.getInstance().getArrayList();
-		for (int i = 0; i < pics.size(); i++) {
-			ArrayList<Region> regs = pics.get(i).getRegions();
-			for (int j = 0; j < regs.size(); j++) {
-				if (regs.get(j).getTag().getName().equals(tagName)) {
-					PictureList.getInstance().get(i).removeRegion(regs.get(j));
-				}
-			}
-		}
-
-		// Delete the tag from the tag list
-		ArrayList<Tag> tags = TagList.getInstance().getArrayList();
-		for (int k = 0; k < tags.size(); k++) {
-			if (tags.get(k).getName().equals(tagName)) {
-				TagList.getInstance().remove(tags.get(k));
-			}
-		}
-
-		// TagList.getInstance().save();
-		// PictureList.getInstance().save();
+		// TODO: Implement
 	}
 
 }

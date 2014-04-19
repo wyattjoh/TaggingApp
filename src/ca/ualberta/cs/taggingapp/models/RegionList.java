@@ -38,13 +38,35 @@ public class RegionList extends SavedList<Region> {
 		return singleton;
 	}
 
-	public ArrayList<Picture> getAllPicturesFromTag(Tag theTag) {
-		ArrayList<Picture> thePictureList = new ArrayList<Picture>();
+	protected ArrayList<Region> getAllRegionsForTag(Tag theTag) {
+		ArrayList<Region> theRegions = new ArrayList<Region>();
 
 		for (Region region : getArrayList()) {
 			if (region.isForTag(theTag)) {
-				thePictureList.add(region.getPicture());
+				theRegions.add(region);
 			}
+		}
+
+		return theRegions;
+	}
+
+	protected ArrayList<Region> getAllRegionsForPicture(Picture thePicture) {
+		ArrayList<Region> theRegions = new ArrayList<Region>();
+
+		for (Region region : getArrayList()) {
+			if (region.isForPicture(thePicture)) {
+				theRegions.add(region);
+			}
+		}
+
+		return theRegions;
+	}
+
+	public ArrayList<Picture> getAllPicturesFromTag(Tag theTag) {
+		ArrayList<Picture> thePictureList = new ArrayList<Picture>();
+
+		for (Region region : getAllRegionsForTag(theTag)) {
+			thePictureList.add(region.getPicture());
 		}
 
 		return thePictureList;
@@ -53,13 +75,39 @@ public class RegionList extends SavedList<Region> {
 	public ArrayList<Tag> getAllTagsFromPicture(Picture thePic) {
 		ArrayList<Tag> theTagList = new ArrayList<Tag>();
 
-		for (Region region : getArrayList()) {
-			if (region.isForPicture(thePic)) {
-				theTagList.add(region.getTag());
-			}
+		for (Region region : getAllRegionsForPicture(thePic)) {
+			theTagList.add(region.getTag());
 		}
 
 		return theTagList;
+	}
+
+	public void deleteAllRegionsForTag(Tag theTagWeAreDeleting) {
+		ArrayList<Region> theRegionsThatAreForTag = getAllRegionsForTag(theTagWeAreDeleting);
+
+		for (Region theRegion : theRegionsThatAreForTag) {
+			Picture thePicture = theRegion.getPicture();
+			thePicture.removeRegion(theRegion);
+
+			remove(theRegion);
+		}
+		
+		PictureList.getInstance().save();
+		save();
+	}
+
+	public void deleteAllRegionsForPicture(Picture thePictureWeAreDeleting) {
+		ArrayList<Region> theRegionsThatAreForPicture = getAllRegionsForPicture(thePictureWeAreDeleting);
+		
+		for (Region theRegion: theRegionsThatAreForPicture) {
+			Tag theTag = theRegion.getTag();
+			theTag.removeRegion(theRegion);
+			
+			remove(theRegion);
+		}
+		
+		TagList.getInstance().save();
+		save();
 	}
 
 	@Override

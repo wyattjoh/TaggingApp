@@ -16,6 +16,7 @@ import ca.ualberta.cs.taggingapp.R;
 import ca.ualberta.cs.taggingapp.models.Picture;
 import ca.ualberta.cs.taggingapp.models.PictureList;
 import ca.ualberta.cs.taggingapp.models.Region;
+import ca.ualberta.cs.taggingapp.models.RegionList;
 import ca.ualberta.cs.taggingapp.models.Tag;
 import ca.ualberta.cs.taggingapp.models.TagList;
 
@@ -79,29 +80,21 @@ public class TagAndPhoto extends Activity {
 		Intent i = new Intent(TagAndPhoto.this, TagRefinedImages.class);
 		i.putExtra(TagRefinedImages.TAG_ID, tag.getId());
 		startActivity(i);
-		TagAndPhoto.this.finish();
 	}
 
 	// OnClick for the 'edit tag' button
 	public void editTag(View view) {
 		Intent i = new Intent(TagAndPhoto.this, EditTag.class);
-		i.putExtra(TagRefinedImages.TAG_ID, tag.getId());
+		i.putExtra(EditTag.TAG_ID, tag.getId());
 		startActivity(i);
-		TagAndPhoto.this.finish();
 	}
 
 	// OnClick for the 'delete tag' button
 	public void deleteTag(View view) {
 		// Change this code
-		ArrayList<Region> regs = thePicture.getRegions();
-		for (int i = 0; i < regs.size(); i++) {
-			if (regs.get(i).getTag().getName().equals(tag)) {
-				PictureList.getInstance().getSelected()
-						.removeRegion(regs.get(i));
-			}
-		}
-		PictureList.getInstance().save();
-		TagAndPhoto.this.finish();
+		RegionList.getInstance().deleteAllRegionsForTag(tag);
+		TagList.getInstance().remove(tag);
+		finish();
 	}
 
 	@Override
