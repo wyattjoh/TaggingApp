@@ -59,17 +59,11 @@ public class TaggedImageView extends ImageView {
 	protected void onDraw(Canvas canvas) {
 		super.onDraw(canvas);
 
-		if (this.picture != null) {
-			ArrayList<Region> regions = this.picture.getRegions();
-			if (regions != null && !regions.isEmpty()) {
-				for (Region region : this.picture.getRegions()) {
-					canvas.drawRect(region.getUpperLeftCorner().x,
-							region.getUpperLeftCorner().y,
-							region.getLowerRightCorner().x,
-							region.getLowerRightCorner().y, paint);
-				}
-			}
-			invalidate();
+		for (Region region : this.picture.getRegions()) {
+			canvas.drawRect(region.getUpperLeftCorner().x,
+					region.getUpperLeftCorner().y,
+					region.getLowerRightCorner().x,
+					region.getLowerRightCorner().y, paint);
 		}
 	}
 }

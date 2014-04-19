@@ -9,14 +9,6 @@ public enum BoundingBoxSetting {
 		}
 
 	},
-	ZOOM {
-
-		@Override
-		public String getName() {
-			return "Zoom";
-		}
-
-	},
 	DOUBLE_TAP {
 		@Override
 		public String getName() {

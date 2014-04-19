@@ -55,7 +55,7 @@ public class Picture extends RegionObject {
 		if (picture == null && picturePath != null) {
 			// Load the picture from the URI
 			picture = ImageLoadingFactory.decodeScaledBitmapFromUri(
-					getPictureUri(), 1000);
+					getPictureUri(), 2000);
 		}
 
 		return picture;

@@ -4,18 +4,10 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Matrix;
-import android.graphics.Point;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.MotionEvent;
-import android.view.ScaleGestureDetector;
-import android.view.ScaleGestureDetector.SimpleOnScaleGestureListener;
-import android.view.View;
-import android.view.View.OnTouchListener;
-import android.widget.Toast;
 import ca.ualberta.cs.taggingapp.R;
 import ca.ualberta.cs.taggingapp.controllers.Logger;
 import ca.ualberta.cs.taggingapp.models.ActiveUserModel;
@@ -31,14 +23,7 @@ import ca.ualberta.cs.taggingapp.models.Region;
  * 
  */
 public class AddTag extends Activity {
-	private Matrix matrix = new Matrix();
-	private float scale = 1f;
-	private Point zoomCenter = new Point(0, 0);
-	private ScaleGestureDetector SGD;
-	DrawImageView picture;
-	int tagType = 0;
-	// The names and corresponding tag types the user can choose from
-
+	DrawImageView drawImageView;
 	private static Region region = null;
 
 	@Override
@@ -48,17 +33,8 @@ public class AddTag extends Activity {
 		setTitle("TaggingApp");
 		// Get the correct image form the PictureList and set the ImageView
 		Picture thePicture = PictureList.getInstance().getSelected();
-		picture = (DrawImageView) findViewById(R.id.drawImageView);
-		picture.setPicture(thePicture);
-
-		SGD = new ScaleGestureDetector(this, new ScaleListener());
-
-		picture.setOnTouchListener(new OnTouchListener() {
-			@Override
-			public boolean onTouch(View v, MotionEvent event) {
-				return false;
-			}
-		});
+		drawImageView = (DrawImageView) findViewById(R.id.drawImageView);
+		drawImageView.setPicture(thePicture);
 
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
@@ -84,18 +60,6 @@ public class AddTag extends Activity {
 				.setCancelable(false);
 
 		builder.create().show();
-	}
-
-	// Simply sets the correct menu bar for the window
-	@Override
-	public boolean onTouchEvent(MotionEvent ev) {
-		if (ActiveUserModel.getShared().getUser().getBoundingBoxSetting() == BoundingBoxSetting.ZOOM) {
-
-			SGD.onTouchEvent(ev);
-			zoomCenter.set(Math.round(SGD.getFocusX()),
-					Math.round(SGD.getFocusY()));
-		}
-		return true;
 	}
 
 	@Override
@@ -131,18 +95,9 @@ public class AddTag extends Activity {
 	// Handles getting the region data and creating the new region instance
 	protected void addRegion() {
 		Picture pic = PictureList.getInstance().getSelected();
-		BoundingBoxSetting boundingBoxSetting = ActiveUserModel.getShared()
-				.getUser().getBoundingBoxSetting();
 
-		if (boundingBoxSetting == BoundingBoxSetting.DRAG
-				|| boundingBoxSetting == BoundingBoxSetting.ZOOM) {
-			region = new Region(pic, picture.getUpperLeftPoint(),
-					picture.getLowerRightPoint());
-		} else {
-			region = new Region(pic, zoomCenter);
-			region.setHeight(Math.round(picture.getHeight() * scale));
-			region.setWidth(Math.round(picture.getWidth() * scale));
-		}
+		region = new Region(pic, drawImageView.getUpperLeftPoint(),
+				drawImageView.getLowerRightPoint());
 	}
 
 	@Override
@@ -156,16 +111,5 @@ public class AddTag extends Activity {
 	 */
 	public static Region getRegion() {
 		return region;
-	}
-
-	private class ScaleListener extends SimpleOnScaleGestureListener {
-		@Override
-		public boolean onScale(ScaleGestureDetector detector) {
-			scale *= detector.getScaleFactor();
-			scale = Math.max(0.1f, Math.min(scale, 5.0f));
-			matrix.setScale(scale, scale);
-			picture.setImageMatrix(matrix);
-			return true;
-		}
 	}
 }

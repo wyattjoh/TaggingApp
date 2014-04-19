@@ -7,15 +7,12 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.Point;
 import android.graphics.PointF;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
-import android.view.ScaleGestureDetector;
-import android.view.ScaleGestureDetector.SimpleOnScaleGestureListener;
 import android.widget.ImageView;
 
 /**
@@ -30,24 +27,15 @@ public class DrawImageView extends ImageView {
 	private PointF startPoint = null;
 	private PointF endPoint = null;
 	private boolean isDrawing;
-	private float scale = 1f;
-	private Matrix matrix = new Matrix();
-	private Point zoomCenter = new Point(0, 0);
-	private ScaleGestureDetector SGD;
 
 	public DrawImageView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 
-		init(context);
-	}
-
-	private void init(Context context) {
 		paint = new Paint();
 		paint.setColor(Color.WHITE);
 		paint.setStyle(Style.STROKE);
 		paint.setStrokeWidth(2);
 		paint.setAntiAlias(true);
-		SGD = new ScaleGestureDetector(context, new ScaleListener(this));
 	}
 
 	public Point getUpperLeftPoint() {
@@ -68,8 +56,7 @@ public class DrawImageView extends ImageView {
 	protected void onDraw(Canvas canvas) {
 		super.onDraw(canvas);
 		if (isDrawing) {
-			canvas.drawRect(startPoint.x, startPoint.y, endPoint.x, endPoint.y,
-					paint);
+			canvas.drawRect(startPoint.x, startPoint.y, endPoint.x, endPoint.y, paint);
 		}
 	}
 
@@ -78,13 +65,7 @@ public class DrawImageView extends ImageView {
 		BoundingBoxSetting boundingBoxSetting = ActiveUserModel.getShared()
 				.getUser().getBoundingBoxSetting();
 
-		if (boundingBoxSetting == BoundingBoxSetting.ZOOM) {
-
-			zoomCenter.set(Math.round(SGD.getFocusX()),
-					Math.round(SGD.getFocusY()));
-			SGD.onTouchEvent(event);
-
-		} else if (boundingBoxSetting == BoundingBoxSetting.DRAG) {
+		if (boundingBoxSetting == BoundingBoxSetting.DRAG) {
 			switch (event.getAction()) {
 			case MotionEvent.ACTION_DOWN:
 				startPoint = new PointF(event.getX(), event.getY());
@@ -165,32 +146,6 @@ public class DrawImageView extends ImageView {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
-		}
-	}
-
-	public float getScale() {
-		return this.scale;
-	}
-
-	public Point getZoomCenter() {
-		return this.zoomCenter;
-	}
-
-	private class ScaleListener extends SimpleOnScaleGestureListener {
-		private DrawImageView picture;
-
-		public ScaleListener(DrawImageView picture) {
-			super();
-			this.picture = picture;
-		}
-
-		@Override
-		public boolean onScale(ScaleGestureDetector detector) {
-			scale *= detector.getScaleFactor();
-			scale = Math.max(0.1f, Math.min(scale, 5.0f));
-			matrix.setScale(scale, scale);
-			picture.setImageMatrix(matrix);
-			return true;
 		}
 	}
 }
