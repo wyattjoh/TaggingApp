@@ -19,10 +19,10 @@ import ca.ualberta.cs.taggingapp.models.Tag;
 import ca.ualberta.cs.taggingapp.models.TagList;
 
 /**
- * @author Tagging Group
- * Activity that allows the user to modify the name and URL of a given tag. The
- * user is brought here after selecting 'edit tag' from the "TagAndPhoto" activity.
- *
+ * @author Tagging Group Activity that allows the user to modify the name and
+ *         URL of a given tag. The user is brought here after selecting 'edit
+ *         tag' from the "TagAndPhoto" activity.
+ * 
  */
 public class EditTag extends Activity {
 
@@ -129,22 +129,21 @@ public class EditTag extends Activity {
 	public void delete() {
 
 		// Delete all instances of the tag from all pictures
-		ArrayList<Picture> pics = PictureList.getInstance().getPictureList();
+		ArrayList<Picture> pics = PictureList.getInstance().getArrayList();
 		for (int i = 0; i < pics.size(); i++) {
 			ArrayList<Region> regs = pics.get(i).getRegions();
 			for (int j = 0; j < regs.size(); j++) {
 				if (regs.get(j).getTag().getName().equals(tagName)) {
-					PictureList.getInstance().getPicture(i)
-							.removeRegion(regs.get(j));
+					PictureList.getInstance().get(i).removeRegion(regs.get(j));
 				}
 			}
 		}
 
 		// Delete the tag from the tag list
-		ArrayList<Tag> tags = TagList.getInstance().getTags();
+		ArrayList<Tag> tags = TagList.getInstance().getArrayList();
 		for (int k = 0; k < tags.size(); k++) {
 			if (tags.get(k).getName().equals(tagName)) {
-				TagList.getInstance().removeTag(tags.get(k));
+				TagList.getInstance().remove(tags.get(k));
 			}
 		}
 

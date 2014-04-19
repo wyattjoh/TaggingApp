@@ -1,16 +1,13 @@
 package ca.ualberta.cs.taggingapp.models;
 
-import java.util.ArrayList;
-
 /**
  * A tag class that models all properties of a tag.
  * 
  * */
 
-public class Tag extends ManagedObject {
+public class Tag extends RegionObject {
 	private String name;
 	private String URL;
-	private ArrayList<Region> taggedRegions = new ArrayList<Region>();
 
 	public Tag() {
 		super();
@@ -47,21 +44,6 @@ public class Tag extends ManagedObject {
 
 	public void setURL(String uRL) {
 		URL = uRL;
-	}
-
-	public ArrayList<Region> getTaggedRegions() {
-		return taggedRegions;
-	}
-
-	// End of getters and setters
-
-	// These methods associates or dissociates a region with a tag
-	public void addTaggedRegion(Region region) {
-		this.taggedRegions.add(region);
-	}
-
-	public void removeTaggedRegion(Region region) {
-		this.taggedRegions.remove(region);
 	}
 
 	/*

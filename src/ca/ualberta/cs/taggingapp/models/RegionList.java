@@ -3,9 +3,8 @@ package ca.ualberta.cs.taggingapp.models;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
-import com.google.gson.reflect.TypeToken;
-
 import android.content.Context;
+import com.google.gson.reflect.TypeToken;
 
 public class RegionList extends SavedList<Region> {
 	private final static String FILENAME = "RegionListListSaved.json";
@@ -37,6 +36,30 @@ public class RegionList extends SavedList<Region> {
 					"Cannot get shared of TagList when none created!");
 		}
 		return singleton;
+	}
+
+	public ArrayList<Picture> getAllPicturesFromTag(Tag theTag) {
+		ArrayList<Picture> thePictureList = new ArrayList<Picture>();
+
+		for (Region region : getArrayList()) {
+			if (region.isForTag(theTag)) {
+				thePictureList.add(region.getPicture());
+			}
+		}
+
+		return thePictureList;
+	}
+
+	public ArrayList<Tag> getAllTagsFromPicture(Picture thePic) {
+		ArrayList<Tag> theTagList = new ArrayList<Tag>();
+
+		for (Region region : getArrayList()) {
+			if (region.isForPicture(thePic)) {
+				theTagList.add(region.getTag());
+			}
+		}
+
+		return theTagList;
 	}
 
 	@Override

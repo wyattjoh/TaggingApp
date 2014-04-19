@@ -1,7 +1,5 @@
 package ca.ualberta.cs.taggingapp.views;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import android.app.Activity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -11,34 +9,32 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Toast;
 import ca.ualberta.cs.taggingapp.R;
 import ca.ualberta.cs.taggingapp.models.Picture;
 import ca.ualberta.cs.taggingapp.models.PictureList;
 import ca.ualberta.cs.taggingapp.models.Region;
+import ca.ualberta.cs.taggingapp.models.RegionList;
 import ca.ualberta.cs.taggingapp.models.Tag;
 import ca.ualberta.cs.taggingapp.models.TagList;
 
 /**
- * @author Tagging Gtroup
- * Activity that controls the text input screen for adding names to 
- * new bounding boxes. After a bounding box is selected from the previous
- * screen (AddTag), the user is brought to this screen to assign a new 
- * name and URL to the region. 
- *
+ * @author Tagging Gtroup Activity that controls the text input screen for
+ *         adding names to new bounding boxes. After a bounding box is selected
+ *         from the previous screen (AddTag), the user is brought to this screen
+ *         to assign a new name and URL to the region.
+ * 
  */
 
 public class AddNameToTag extends Activity {
 
-	// The input boxes present in the screen
-	EditText tagName;
-	EditText tagURL;
+	EditText tagNameField;
+	EditText tagUrlField;
 	ListView tagList;
-	// The adapter for the tag list that appears below the URL box
-	ArrayAdapter<String> adapter;
+	TagArrayAdapter adapter;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -46,20 +42,13 @@ public class AddNameToTag extends Activity {
 		setContentView(R.layout.activity_add_name_to_tag);
 		setTitle("TaggingApp");
 
-		// Get and assign the textviews so that the values can be retrieved
-		tagName = (EditText) this.findViewById(R.id.tag_name);
-		tagURL = (EditText) this.findViewById(R.id.tag_url);
-		// Get and assign the listview
+		tagNameField = (EditText) this.findViewById(R.id.tag_name);
+		tagUrlField = (EditText) this.findViewById(R.id.tag_url);
 		tagList = (ListView) this.findViewById(R.id.tags_list_view);
-		// Init the arraylist to hold the tags for the listview
-		final ArrayList<String> tags = new ArrayList<String>();
-		for (int i = 0; i < TagList.getInstance().getTags().size(); i++) {
-			tags.add(TagList.getInstance().getTags().get(i).getName());
-		}
-		// Init the adapter to the proper tags list
-		adapter = new ArrayAdapter<String>(this.getBaseContext(),
-				R.layout.list_item, tags);
-		// Link the adapter to the listview
+
+		adapter = new TagArrayAdapter(getApplicationContext(), TagList
+				.getInstance().getArrayList());
+
 		tagList.setAdapter(adapter);
 
 		// If a listitem is tapped...
@@ -67,26 +56,30 @@ public class AddNameToTag extends Activity {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View v,
 					int position, long id) {
-				tagName.setText("");
-				adapter.getItem(position);
-				tagName.append(adapter.getItem(position));
-				
-				// Sets the proper URL and TAG name from the listview to the input boxes
-				for (int i = 0; i < TagList.getInstance().getTags().size(); i++) {
-					if (TagList.getInstance().getTags().get(i).getName()
-							.equals(adapter.getItem(position))) {
-						tagURL.setText("");
-						tagURL.append(TagList.getInstance().getTags().get(i)
-								.getURL());
-					}
-				}
 
+				Tag tag = adapter.getItem(position);
+				Toast.makeText(getApplicationContext(), "Tag: " + tag.getId(),
+						Toast.LENGTH_LONG).show();
+
+				finishTaggingAction(tag);
+
+				// tagName.setText("");
+				// adapter.getItem(position);
+				// tagName.append(adapter.getItem(position));
+				//
+				// for (int i = 0; i < TagList.getInstance().getTags().size();
+				// i++) {
+				// if (TagList.getInstance().getTags().get(i).getName()
+				// .equals(adapter.getItem(position))) {
+				// tagURL.setText("");
+				// tagURL.append(TagList.getInstance().getTags().get(i)
+				// .getURL());
+				// }
+				// }
 			}
 		});
 
-		// The following block handles the textchangedlistener, which will refine the
-		// listview according to what is typed into the tagName field
-		tagName.addTextChangedListener(new TextWatcher() {
+		tagNameField.addTextChangedListener(new TextWatcher() {
 
 			@Override
 			public void onTextChanged(CharSequence cs, int arg1, int arg2,
@@ -124,88 +117,57 @@ public class AddNameToTag extends Activity {
 		// Handles presses on the action bar items
 		switch (item.getItemId()) {
 		case R.id.accept:
-			addTextTag();
-			AddNameToTag.this.finish(); 
+			finishTaggingAction(null);
 			return true;
 		case R.id.decline:
-			AddNameToTag.this.finish();
+			finish();
 			return true;
 		default:
 			return super.onOptionsItemSelected(item);
 		}
 	}
 
-	// Upon selecting the checkmark, this code is run before leaving the activity
-	// so that the new tag and URL are saved
-	protected void addTextTag() {
-		// Create tag and region and save it here
+	protected void finishTaggingAction(Tag tag) {
+		addTextTag(tag);
+		finish();
+	}
+
+	protected void addTextTag(Tag tag) {
+		// Get the current picture
 		Picture pic = PictureList.getInstance().getSelected();
+
 		// Get the region from the previous activity
 		Region region = AddTag.getRegion();
+
+		final Boolean isNewPicture = tag == null;
+
+		if (isNewPicture) {
+			String tagName = tagNameField.getText().toString();
+			String tagUrl = tagUrlField.getText().toString();
+
+			tag = new Tag(tagName, tagUrl);
+		}
+
+		// Add the region to the tag
+		tag.addRegion(region);
+
+		// Set the tag, pic already set on construction
+		region.setTag(tag);
+
+		// Adds the region to the list
+		RegionList.getInstance().add(region);
+
+		// Add the region to the picture
 		pic.addRegion(region);
-		
-		// Create the new tag, get the region list, and get the most recently
-		// created tag
-		Tag tag = new Tag(tagName.getText().toString(), tagURL.getText()
-				.toString());
-		ArrayList<Region> regList = PictureList.getInstance().getSelected()
-				.getRegions();
-		Collections.reverse(regList);
 
-		// Check if the same tag already exists. If so, simply add the bounding box region
-		// to the instance of the already created tag. If not, create the new tag and add
-		// it to the tagList.
-		
-		// Check for duplicate
-		boolean found = false;
-		Tag dupTag = null;
-		for (int i = 0; i < TagList.getInstance().getTags().size(); i++) {
-			if (TagList.getInstance().getTags().get(i).getName()
-					.equals(tag.getName())
-					&& TagList.getInstance().getTags().get(i).getURL()
-							.equals(tag.getURL())) {
-				found = true;
-				dupTag = TagList.getInstance().getTags().get(i);
-			}
-		}
-		// If the tag exists:
-		if (found) {
-			dupTag.addTaggedRegion(regList.get(0));
-			regList.get(0).setTag(dupTag);
-		} else {
-			// If not:
-			tag.addTaggedRegion(regList.get(0));
-			regList.get(0).setTag(tag);
-			TagList.getInstance().addTag(tag);
-		}
-
-		// Error tracking code. You can delete this block if needed.
-		System.out.println(tag.getName());
-		System.out.println(tag.getURL());
-		ArrayList<Region> regs = tag.getTaggedRegions();
-		for (int i = 0; i < regs.size(); i++)
-			System.out.println(regs.get(i).getLowerRightCorner().x);
-
-		// Save the new instances onto the SD card
-		TagList.getInstance().save();
+		// Save the picture list
 		PictureList.getInstance().save();
-	}
 
-	// In the case that the user decided to leave this screen without entering a proper
-	// name and URL, the last region must be deleted from the regionList, because the 
-	// name and URL fields will be null. This block essentially cancels the add tag action
-	// and cleans up the instances that are not fully initialized.
-	@Override
-	public void onPause() {
-		super.onPause();
-		ArrayList<Region> regList = PictureList.getInstance().getSelected()
-				.getRegions();
-		Collections.reverse(regList);
-		if (regList.get(0).getTag().getName() == null) {
-			regList.remove(0);
-			PictureList.getInstance().save();
+		// Save the tag
+		if (isNewPicture) {
+			TagList.getInstance().add(tag);
+		} else {
+			TagList.getInstance().save();
 		}
-
 	}
-
 }

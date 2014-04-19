@@ -88,4 +88,43 @@ public abstract class SavedList<T extends ManagedObject> extends ManagedList<T> 
 
 		return theState;
 	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ca.ualberta.cs.taggingapp.models.ManagedList#setArrayList(java.util.ArrayList
+	 * )
+	 */
+	@Override
+	public void setArrayList(ArrayList<T> theNewList) {
+		super.setArrayList(theNewList);
+		save();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ca.ualberta.cs.taggingapp.models.ManagedList#add(ca.ualberta.cs.taggingapp
+	 * .models.ManagedObject)
+	 */
+	@Override
+	public void add(T object) {
+		super.add(object);
+		save();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ca.ualberta.cs.taggingapp.models.ManagedList#remove(ca.ualberta.cs.taggingapp
+	 * .models.ManagedObject)
+	 */
+	@Override
+	public void remove(T object) {
+		super.remove(object);
+		save();
+	}
 }

@@ -11,10 +11,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 /**
- * @author Tagging Gtroup
- * Activity that allows the user to create a new profile. The user is taken
- * here from mainActivity after selecting 'sign up'.
- *
+ * @author Tagging Gtroup Activity that allows the user to create a new profile.
+ *         The user is taken here from mainActivity after selecting 'sign up'.
+ * 
  */
 public class SignUp extends Activity {
 	public static final String EMAIL_FIELD_EXTRA_KEY = "emailField";

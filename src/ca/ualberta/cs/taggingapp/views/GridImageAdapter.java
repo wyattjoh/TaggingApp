@@ -3,7 +3,6 @@ package ca.ualberta.cs.taggingapp.views;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
-import android.app.Activity;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,39 +11,31 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import ca.ualberta.cs.taggingapp.models.Picture;
 import ca.ualberta.cs.taggingapp.models.PictureList;
-import ca.ualberta.cs.taggingapp.models.Region;
+import ca.ualberta.cs.taggingapp.models.RegionList;
+import ca.ualberta.cs.taggingapp.models.Tag;
 
 /**
- * @author Tagging Gtroup
- * Simple adapter to map images to the main gridview.
+ * @author Tagging Gtroup Simple adapter to map images to the main gridview.
  */
 public class GridImageAdapter extends BaseAdapter {
 	private ArrayList<Picture> thePictureList;
 	private Context theContext;
 
-	public GridImageAdapter(Activity theActivity, String tagName) {
-		// Set the context. Cannot use 'this.getContext' because this class
-		// does not extend activity
-		theContext = theActivity.getApplicationContext();
-		ArrayList<Picture> pics = PictureList.getInstance().getPictureList();
-		if (tagName == null) {
+	public GridImageAdapter(Context theContext, Tag theTag) {
+		this.theContext = theContext;
+
+		ArrayList<Picture> pics = PictureList.getInstance().getArrayList();
+
+		if (theTag == null) {
 			thePictureList = pics;
 		} else {
-			thePictureList = new ArrayList<Picture>();
-			for (int i = 0; i < pics.size(); i++) {
-				ArrayList<Region> regs = pics.get(i).getRegions();
-				for (int j = 0; j < regs.size(); j++) {
-					if (regs.get(j).getTag().getName().equals(tagName)) {
-						thePictureList.add(pics.get(i));
-					}
-				}
-			}
+			thePictureList = RegionList.getInstance().getAllPicturesFromTag(
+					theTag);
 		}
 	}
 
 	@Override
 	public int getCount() {
-		// TODO Auto-generated method stub
 		return thePictureList.size();
 	}
 

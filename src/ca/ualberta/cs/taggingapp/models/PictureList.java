@@ -59,42 +59,10 @@ public class PictureList extends SavedList<Picture> {
 	}
 
 	/*
-	 * Inserts the picture at the top of the list
-	 */
-	public void addPicture(Picture thePicture) {
-		this.theList.add(0, thePicture);
-		save();
-	}
-
-	/*
 	 * Gets the photo at the designated location and adds it to the list
 	 */
-	public void addPicture(Uri location) {
-		Picture newPicture = new Picture(location);
-		this.theList.add(0, newPicture);
-		save();
-	}
-
-	/*
-	 * Gets a picture from a specific position in the list
-	 */
-	public Picture getPicture(int position) {
-		return this.theList.get(position);
-	}
-
-	/*
-	 * Sets the picture list to the input
-	 */
-	public void setPictureList(ArrayList<Picture> thePictureList) {
-		this.theList = thePictureList;
-		save();
-	}
-
-	/*
-	 * Gets the current picture list
-	 */
-	public ArrayList<Picture> getPictureList() {
-		return this.theList;
+	public void add(Uri location) {
+		add(new Picture(location));
 	}
 
 	/*

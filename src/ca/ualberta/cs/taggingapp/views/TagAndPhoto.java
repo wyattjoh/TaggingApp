@@ -16,17 +16,20 @@ import ca.ualberta.cs.taggingapp.R;
 import ca.ualberta.cs.taggingapp.models.Picture;
 import ca.ualberta.cs.taggingapp.models.PictureList;
 import ca.ualberta.cs.taggingapp.models.Region;
+import ca.ualberta.cs.taggingapp.models.Tag;
+import ca.ualberta.cs.taggingapp.models.TagList;
 
 /**
- * @author Tagging Group
- * Activity that displays the photo and the selected tag directly below it.
- * It also displays the options to 'edit', 'delete', and view more images
- * containing the tag.
- *
+ * @author Tagging Group Activity that displays the photo and the selected tag
+ *         directly below it. It also displays the options to 'edit', 'delete',
+ *         and view more images containing the tag.
+ * 
  */
 public class TagAndPhoto extends Activity {
-	Picture thePicture;
-	String tag;
+	public final static String TAG_ID = "TAG_ID";
+
+	private Picture thePicture;
+	private Tag tag;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -37,8 +40,10 @@ public class TagAndPhoto extends Activity {
 		// Get the extras and set the proper image to the view
 		Bundle extras = getIntent().getExtras();
 		thePicture = PictureList.getInstance().getSelected();
-		// Get the tag name
-		tag = extras.getString("tagName");
+
+		String tagId = extras.getString(TAG_ID);
+
+		tag = TagList.getInstance().get(tagId);
 
 		ImageView img = (ImageView) findViewById(R.id.picViewer);
 		try {
@@ -53,20 +58,13 @@ public class TagAndPhoto extends Activity {
 
 		// Append to the textview
 		TextView tagName = (TextView) findViewById(R.id.tag);
-		tagName.append(tag);
-		// Append to the textview
+		tagName.setText(tag.getName());
+
 		TextView tagURL = (TextView) findViewById(R.id.tagURL);
-		// Get all of the regions associated with that tag
-		ArrayList<Region> regs = PictureList.getInstance().getSelected()
-				.getRegions();
-		for (int i = 0; i < regs.size(); i++) {
-			if (regs.get(i).getTag().getName().equals(tag)) {
-				tagURL.append(regs.get(i).getTag().getURL());
-			}
-		}
+		tagURL.setText(tag.getURL());
 
 		Button moreImages = (Button) findViewById(R.id.morePhotosWTag);
-		moreImages.append(tag);
+		moreImages.append(tag.getName());
 	}
 
 	@Override
@@ -79,17 +77,19 @@ public class TagAndPhoto extends Activity {
 	// OnClick for the 'more photos' button
 	public void morePhotos(View view) {
 		Intent i = new Intent(TagAndPhoto.this, TagRefinedImages.class);
-		i.putExtra("tagName", tag);
+		i.putExtra(TagRefinedImages.TAG_ID, tag.getId());
 		startActivity(i);
 		TagAndPhoto.this.finish();
 	}
+
 	// OnClick for the 'edit tag' button
 	public void editTag(View view) {
 		Intent i = new Intent(TagAndPhoto.this, EditTag.class);
-		i.putExtra("tagName", tag);
+		i.putExtra(TagRefinedImages.TAG_ID, tag.getId());
 		startActivity(i);
 		TagAndPhoto.this.finish();
 	}
+
 	// OnClick for the 'delete tag' button
 	public void deleteTag(View view) {
 		// Change this code

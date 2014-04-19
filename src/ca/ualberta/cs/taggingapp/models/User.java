@@ -34,7 +34,7 @@ public class User {
 		this.pictures.add(picture);
 	}
 
-	public void removePicture(ManagedObject picture) {
+	public void removePicture(Picture picture) {
 		this.pictures.remove(picture);
 	}
 

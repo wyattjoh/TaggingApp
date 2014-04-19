@@ -16,11 +16,10 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 
 /**
- * @author Tagging Group
- * This activity represents the 'Photos' tab in the 'home screen'. When the 
- * left tab is selected, this activity's XML is displayed below the tab
- * selector.
- *
+ * @author Tagging Group This activity represents the 'Photos' tab in the 'home
+ *         screen'. When the left tab is selected, this activity's XML is
+ *         displayed below the tab selector.
+ * 
  */
 public class GridViewFragment extends Fragment {
 	private GridImageAdapter gia = null;
@@ -51,7 +50,8 @@ public class GridViewFragment extends Fragment {
 		gia = new GridImageAdapter(getActivity(), null);
 		gridView.setAdapter(gia);
 
-		// When an image is selected, find the correct image and start the new activity
+		// When an image is selected, find the correct image and start the new
+		// activity
 		gridView.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View v,
@@ -106,7 +106,8 @@ public class GridViewFragment extends Fragment {
 	 * @see android.support.v4.app.FragmentActivity#onActivityResult(int, int,
 	 * android.content.Intent)
 	 */
-	// Upon return from the camera functions, save the taken photo and show it in the gridview
+	// Upon return from the camera functions, save the taken photo and show it
+	// in the gridview
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (requestCode == CameraAndPhoto.REQUEST_TAKE_PHOTO) {
@@ -114,7 +115,7 @@ public class GridViewFragment extends Fragment {
 
 				Uri photoUri = Uri.parse(data
 						.getStringExtra(CameraAndPhoto.PHOTO_URI));
-				PictureList.getInstance().addPicture(photoUri);
+				PictureList.getInstance().add(photoUri);
 				gia.notifyDataSetChanged();
 
 			} else if (resultCode == Activity.RESULT_CANCELED) {

@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,26 +12,23 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import ca.ualberta.cs.taggingapp.R;
 import ca.ualberta.cs.taggingapp.models.Picture;
 import ca.ualberta.cs.taggingapp.models.PictureList;
-import ca.ualberta.cs.taggingapp.models.Region;
+import ca.ualberta.cs.taggingapp.models.RegionList;
 import ca.ualberta.cs.taggingapp.models.Tag;
 import ca.ualberta.cs.taggingapp.models.TaggedImageView;
 
 /**
- * @author Tagging Group
- * This activity shows the full photo, and all of the tags in a list view below it.
- * The user is taken here after they select a image from the grid image view in
- * swipe super.
- *
+ * @author Tagging Group This activity shows the full photo, and all of the tags
+ *         in a list view below it. The user is taken here after they select a
+ *         image from the grid image view in swipe super.
+ * 
  */
 public class ViewFullPic extends Activity {
 
-	ArrayAdapter<String> adapter;
-	ArrayList<String> s;
+	TagArrayAdapter adapter;
 	ListView miniTagsList;
 
 	@Override
@@ -51,7 +47,6 @@ public class ViewFullPic extends Activity {
 		LayoutInflater inflater = getLayoutInflater();
 		ViewGroup header = (ViewGroup) inflater.inflate(
 				R.layout.view_full_pic_header, miniTagsList, false);
-		miniTagsList.removeAllViewsInLayout();
 		miniTagsList.addHeaderView(header, null, false);
 		// Set the proper photo to the imageview
 		Picture thePicture = PictureList.getInstance().getSelected();
@@ -81,8 +76,7 @@ public class ViewFullPic extends Activity {
 			if (!thePicture.getRegions().isEmpty()) {
 				thePicture.removeAllRegions();
 			}
-			PictureList.getInstance().getPictureList().remove(thePicture);
-			PictureList.getInstance().save();
+			PictureList.getInstance().remove(thePicture);
 			finish();
 			return true;
 		default:
@@ -97,23 +91,12 @@ public class ViewFullPic extends Activity {
 	}
 
 	protected void populateView() {
+		Picture thePic = PictureList.getInstance().getSelected();
 
-		ArrayList<Region> regs = PictureList.getInstance().getSelected()
-				.getRegions();
-		s = new ArrayList<String>();
+		ArrayList<Tag> theTagList = RegionList.getInstance()
+				.getAllTagsFromPicture(thePic);
 
-		Log.w("ViewFullPic",
-				"Number of regions: " + Integer.toString(regs.size()));
-		for (Region region : regs) {
-			Tag theTag = region.getTag();
-
-			s.add(theTag.getName());
-
-			Log.w("ViewFullPic", "The tag: " + theTag.getName());
-		}
-
-		adapter = new ArrayAdapter<String>(getApplicationContext(),
-				R.layout.list_item, s);
+		adapter = new TagArrayAdapter(getApplicationContext(), theTagList);
 
 		miniTagsList.setAdapter(adapter);
 
@@ -121,12 +104,15 @@ public class ViewFullPic extends Activity {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View v,
 					int position, long id) {
+				Tag tag = adapter.getItem(position - 1);
+
 				Intent i = new Intent(ViewFullPic.this, TagAndPhoto.class);
-				i.putExtra("tagName", adapter.getItem(position - 1));
-				i.putExtra("pos", position - 1);
+
+				i.putExtra(TagAndPhoto.TAG_ID, tag.getId());
+
 				i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+
 				startActivity(i);
-				// finish();
 			}
 		});
 	}

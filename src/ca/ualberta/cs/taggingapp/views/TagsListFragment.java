@@ -12,22 +12,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import ca.ualberta.cs.taggingapp.R;
+import ca.ualberta.cs.taggingapp.models.Tag;
 import ca.ualberta.cs.taggingapp.models.TagList;
 
 /**
- * @author Tagging Group
- * This activity represents the 'Tags' tab in the 'home screen'. When the 
- * right tab is selected, this activity's XML is displayed below the tab
- * selector.
- *
+ * @author Tagging Group This activity represents the 'Tags' tab in the 'home
+ *         screen'. When the right tab is selected, this activity's XML is
+ *         displayed below the tab selector.
+ * 
  */
 public class TagsListFragment extends Fragment {
 
-	private ArrayAdapter<String> adapter;
+	private TagArrayAdapter adapter;
 	private EditText searchView;
 	ListView listView;
 
@@ -41,16 +40,7 @@ public class TagsListFragment extends Fragment {
 		listView = (ListView) rootView.findViewById(R.id.tags_list_view);
 		searchView = (EditText) rootView.findViewById(R.id.tag_search);
 
-		// Populate the tags list
-		ArrayList<String> tags = new ArrayList<String>();
-		for (int i = 0; i < TagList.getInstance().getTags().size(); i++) {
-			tags.add(TagList.getInstance().getTags().get(i).getName());
-		}
-		// Set the adapter to display the tags list
-		adapter = new ArrayAdapter<String>(getActivity(), R.layout.list_item,
-				tags);
-		// Set the adapter to the listview
-		listView.setAdapter(adapter);
+		populateView();
 
 		listView.setOnItemClickListener(new OnItemClickListener() {
 			@Override
@@ -58,9 +48,10 @@ public class TagsListFragment extends Fragment {
 					int position, long id) {
 				Intent i = new Intent(rootView.getContext(),
 						TagRefinedImages.class);
-				// i.putExtra("tagName",
-				// TagList.getInstance().getTags().get(position).getName());
-				i.putExtra("tagName", adapter.getItem(position));
+
+				Tag theTag = adapter.getItem(position);
+
+				i.putExtra(TagRefinedImages.TAG_ID, theTag.getId());
 				startActivity(i);
 			}
 		});
@@ -92,13 +83,15 @@ public class TagsListFragment extends Fragment {
 
 	@Override
 	public void onResume() {
-		// TODO Auto-generated method stub
 		super.onResume();
-		ArrayList<String> tags = new ArrayList<String>();
-		for (int i = 0; i < TagList.getInstance().getTags().size(); i++) {
-			tags.add(TagList.getInstance().getTags().get(i).getName());
-		}
-		adapter = new ArrayAdapter<String>(getActivity(), R.layout.list_item,
+
+		populateView();
+	}
+
+	protected void populateView() {
+		ArrayList<Tag> tags = TagList.getInstance().getArrayList();
+
+		adapter = new TagArrayAdapter(getActivity().getApplicationContext(),
 				tags);
 
 		listView.setAdapter(adapter);

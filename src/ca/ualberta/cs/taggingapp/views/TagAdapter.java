@@ -12,8 +12,8 @@ import ca.ualberta.cs.taggingapp.R;
 import ca.ualberta.cs.taggingapp.models.Tag;
 
 /**
- * @author Tagging Group
- * A simple adapter class that maps the tags list to a listview.
+ * @author Tagging Group A simple adapter class that maps the tags list to a
+ *         listview.
  */
 public class TagAdapter extends ArrayAdapter<Tag> {
 	private ArrayList<Tag> theTags;

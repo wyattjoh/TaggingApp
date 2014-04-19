@@ -1,10 +1,5 @@
 package ca.ualberta.cs.taggingapp.views;
 
-import java.util.ArrayList;
-
-import ca.ualberta.cs.taggingapp.R;
-import ca.ualberta.cs.taggingapp.models.PictureList;
-import ca.ualberta.cs.taggingapp.models.Region;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,14 +9,20 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 import android.widget.TextView;
+import ca.ualberta.cs.taggingapp.R;
+import ca.ualberta.cs.taggingapp.models.PictureList;
+import ca.ualberta.cs.taggingapp.models.Tag;
+import ca.ualberta.cs.taggingapp.models.TagList;
 
 /**
- * @author Tagging Group
- * Activity that displays photos with the same tag in a gridview, similar
- * to the GridViewFragment class.
- *
+ * @author Tagging Group Activity that displays photos with the same tag in a
+ *         gridview, similar to the GridViewFragment class.
+ * 
  */
 public class TagRefinedImages extends Activity {
+	public static final String TAG_ID = "TAG_ID";
+
+	private Tag theTag;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -30,28 +31,24 @@ public class TagRefinedImages extends Activity {
 		setTitle("TaggingApp");
 
 		Bundle extras = getIntent().getExtras();
-		String tag = extras.getString("tagName");
+
+		String tagId = extras.getString(TAG_ID);
+
+		theTag = TagList.getInstance().get(tagId);
 
 		// Get the tagName and display it in the textview
 		TextView tagName = (TextView) findViewById(R.id.tag);
-		tagName.append(tag);
-		
-		// Get the tagName and display it in the textview
+		tagName.setText(theTag.getName());
+
 		TextView tagURL = (TextView) findViewById(R.id.tagURL);
-		ArrayList<Region> regs = PictureList.getInstance().getSelected()
-				.getRegions();
-		for (int i = 0; i < regs.size(); i++) {
-			if (regs.get(i).getTag().getName().equals(tag)) {
-				tagURL.append(regs.get(i).getTag().getURL());
-				break;
-			}
-		}
+		tagURL.setText(theTag.getURL());
 
 		GridView gridView = (GridView) this
 				.findViewById(R.id.refinedImgGridView);
 
-		// Instance of ImageAdapter Class
-		final GridImageAdapter gia = new GridImageAdapter(this, tag);
+		GridImageAdapter gia = new GridImageAdapter(getApplicationContext(),
+				theTag);
+
 		gridView.setAdapter(gia);
 
 		gridView.setOnItemClickListener(new OnItemClickListener() {
@@ -65,11 +62,6 @@ public class TagRefinedImages extends Activity {
 				PictureList.getInstance().setSelected(imagePosition);
 
 				startActivity(i);
-				/*
-				 * Toast.makeText(rootView.getContext(), "pic" +
-				 * (gia.getItem(position)) +" selected",
-				 * Toast.LENGTH_SHORT).show();
-				 */
 			}
 		});
 	}

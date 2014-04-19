@@ -1,5 +1,8 @@
 package ca.ualberta.cs.taggingapp.models;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -63,34 +66,35 @@ public class DrawImageView extends ImageView {
 
 	@Override
 	protected void onDraw(Canvas canvas) {
+		super.onDraw(canvas);
 		if (isDrawing) {
 			canvas.drawRect(startPoint.x, startPoint.y, endPoint.x, endPoint.y,
 					paint);
 		}
-		super.onDraw(canvas);
-
 	}
 
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
-		
+
 		if (ActiveUserModel.getShared().getUser().getBoundingBoxSetting() == "ZOOM") {
 
 			SGD.onTouchEvent(event);
 			zoomCenter.set(Math.round(SGD.getFocusX()),
 					Math.round(SGD.getFocusY()));
-			
+
 		} else {
 			switch (event.getAction()) {
 			case MotionEvent.ACTION_DOWN:
-				if (ActiveUserModel.getShared().getUser().getBoundingBoxSetting() == "DRAG") {
+				if (ActiveUserModel.getShared().getUser()
+						.getBoundingBoxSetting() == "DRAG") {
 					startPoint = new PointF(event.getX(), event.getY());
 					endPoint = new PointF();
 					isDrawing = true;
 				}
 
 			case MotionEvent.ACTION_MOVE:
-				if (ActiveUserModel.getShared().getUser().getBoundingBoxSetting() == "DRAG") {
+				if (ActiveUserModel.getShared().getUser()
+						.getBoundingBoxSetting() == "DRAG") {
 					if (isDrawing) {
 						endPoint.x = event.getX();
 						endPoint.y = event.getY();
@@ -100,7 +104,8 @@ public class DrawImageView extends ImageView {
 				invalidate();
 				break;
 			case MotionEvent.ACTION_UP:
-				if (ActiveUserModel.getShared().getUser().getBoundingBoxSetting() == "DRAG") {
+				if (ActiveUserModel.getShared().getUser()
+						.getBoundingBoxSetting() == "DRAG") {
 					if (isDrawing) {
 						endPoint.x = event.getX();
 						endPoint.y = event.getY();
@@ -119,7 +124,8 @@ public class DrawImageView extends ImageView {
 					isDrawing = true;
 				}
 
-				if (ActiveUserModel.getShared().getUser().getBoundingBoxSetting() == "DEFAULT_TAP") {
+				if (ActiveUserModel.getShared().getUser()
+						.getBoundingBoxSetting() == "DEFAULT_TAP") {
 					if (startPoint == null) {
 						startPoint = new PointF(event.getX(), event.getY());
 					} else if (endPoint == null) {
@@ -152,27 +158,35 @@ public class DrawImageView extends ImageView {
 		return true;
 	}
 
-	@Override
-	public void setImageBitmap(Bitmap picture) {
-		super.setImageBitmap(picture);
+	public void setPicture(Picture picture) {
+		try {
+			Bitmap theBitmap = picture.getPicture();
+			super.setImageBitmap(theBitmap);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
-	
+
 	public float getScale() {
 		return this.scale;
 	}
-	
+
 	public Point getZoomCenter() {
 		return this.zoomCenter;
 	}
-	
+
 	private class ScaleListener extends SimpleOnScaleGestureListener {
 		private DrawImageView picture;
-		
+
 		public ScaleListener(DrawImageView picture) {
 			super();
 			this.picture = picture;
 		}
-		
+
 		@Override
 		public boolean onScale(ScaleGestureDetector detector) {
 			scale *= detector.getScaleFactor();

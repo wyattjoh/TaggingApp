@@ -14,7 +14,7 @@ public class Region extends ManagedObject {
 	private int height = 0;
 	private Point upperLeftCorner = new Point(0, 0);
 	private Point lowerRightCorner = new Point(0, 0);
-	private String regionId = null;
+	private String tagId = null;
 	private String pictureId = null;
 
 	private Region() {
@@ -125,19 +125,27 @@ public class Region extends ManagedObject {
 	}
 
 	public Tag getTag() {
-		return TagList.getInstance().get(regionId);
+		return TagList.getInstance().get(tagId);
 	}
 
 	public void setTag(Tag tag) {
-		this.regionId = tag.getId();
+		this.tagId = tag.getId();
 	}
 
 	public Picture getPicture() {
 		return PictureList.getInstance().get(pictureId);
 	}
 
-	public void setPicture(ManagedObject picture) {
+	public void setPicture(Picture picture) {
 		this.pictureId = picture.getId();
+	}
+
+	public Boolean isForPicture(Picture thePicture) {
+		return thePicture.getId().equals(pictureId);
+	}
+
+	public Boolean isForTag(Tag theTag) {
+		return theTag.getId().equals(tagId);
 	}
 
 	// End of getters and setters
@@ -145,19 +153,19 @@ public class Region extends ManagedObject {
 	public void removeRegion() {
 		this.getPicture().removeRegion(this);
 		if (this.getTag() != null) {
-			this.getTag().removeTaggedRegion(this);
+			this.getTag().addRegion(this);
 		}
 	}
 
 	public void editRegionTag(Tag tag) {
 		if (this.getTag() != null) {
-			this.getTag().removeTaggedRegion(this);
+			this.getTag().removeRegion(this);
 		}
 		this.setTag(tag);
 
-		Tag theTag = TagList.getInstance().get(this.regionId);
+		Tag theTag = TagList.getInstance().get(this.tagId);
 
-		theTag.addTaggedRegion(this);
+		theTag.addRegion(this);
 	}
 
 	/*

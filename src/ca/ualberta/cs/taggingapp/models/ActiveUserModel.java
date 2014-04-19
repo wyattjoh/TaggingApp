@@ -76,6 +76,7 @@ public class ActiveUserModel {
 		theSavedUserModel.remove();
 		TagList.getInstance().remove();
 		PictureList.getInstance().remove();
+		RegionList.getInstance().remove();
 	}
 
 	public Boolean isLoggedIn() {

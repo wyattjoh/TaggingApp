@@ -2,7 +2,6 @@ package ca.ualberta.cs.taggingapp.models;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
 import android.graphics.Bitmap;
 import android.net.Uri;
 
@@ -11,15 +10,12 @@ import android.net.Uri;
  * 
  * */
 
-public class Picture extends ManagedObject {
-	private ArrayList<Region> regions;
+public class Picture extends RegionObject {
 	private transient Bitmap picture = null;
 	private String picturePath = null;
 
 	public Picture() {
 		super();
-
-		this.regions = new ArrayList<Region>();
 	}
 
 	public Picture(Bitmap bitmap) {
@@ -45,23 +41,6 @@ public class Picture extends ManagedObject {
 
 		this.picture = bitmap;
 		this.picturePath = uri;
-	}
-
-	// Start of getters and setters
-	public ArrayList<Region> getRegions() {
-		return regions;
-	}
-
-	public void addRegion(Region region) {
-		this.regions.add(region);
-	}
-
-	public void removeRegion(Region region) {
-		this.regions.remove(region);
-	}
-
-	public void removeAllRegions() {
-		this.regions.clear();
 	}
 
 	public Uri getPictureUri() {

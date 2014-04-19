@@ -1,5 +1,7 @@
 package ca.ualberta.cs.taggingapp.controllers;
 
+import java.util.Date;
+
 public class LoggerAction {
 	private String theMethod;
 	private Long startTime;
@@ -61,8 +63,8 @@ public class LoggerAction {
 	 * @param startTime
 	 *            the startTime to set
 	 */
-	public void setStartTime(Long startTime) {
-		this.startTime = startTime;
+	public void setStartTime() {
+		this.startTime = new Date().getTime();
 	}
 
 	/**
@@ -76,7 +78,7 @@ public class LoggerAction {
 	 * @param endTime
 	 *            the endTime to set
 	 */
-	public void setEndTime(Long endTime) {
-		this.endTime = endTime;
+	public void setEndTime() {
+		this.endTime = new Date().getTime();
 	}
 }

@@ -43,25 +43,6 @@ public class TagList extends SavedList<Tag> {
 		return singleton;
 	}
 
-	public ArrayList<Tag> getTags() {
-		return theList;
-	}
-
-	// These methods add or remove tags from the TagList
-	public void addTag(Tag tag) {
-		this.theList.add(tag);
-		save();
-	}
-
-	public void removeTag(Tag tag) {
-		this.theList.remove(tag);
-		save();
-	}
-
-	public Tag getTag(int position) {
-		return this.theList.get(position);
-	}
-
 	public void setSelected(int position) {
 		selectedTag = this.theList.get(position);
 	}
