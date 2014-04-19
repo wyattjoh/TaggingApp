@@ -22,8 +22,8 @@ a URL.
 
 To run the software:
 
-1. Install and set up the Android SDK Software for the Eclipse IDE
-
-2. Import the TaggingApp project into Eclipse
-
-3. Run the project using the Android emulator provided by SDK
+1. Install and set the Eclipse IDE (version Indigo or higher)
+2. Install the Android SDK bundle following the steps from the link above
+3. Clone the TaggingApp repository from Github onto your computer
+4. Import the TaggingApp project into Eclipse
+5. Run the project using the Android emulator provided by SDK
