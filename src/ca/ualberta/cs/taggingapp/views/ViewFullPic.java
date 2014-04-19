@@ -96,7 +96,7 @@ public class ViewFullPic extends Activity {
 		ArrayList<Tag> theTagList = RegionList.getInstance()
 				.getAllTagsFromPicture(thePic);
 
-		adapter = new TagArrayAdapter(getApplicationContext(), theTagList);
+		adapter = new TagArrayAdapter(getApplicationContext(), theTagList, true);
 
 		miniTagsList.setAdapter(adapter);
 

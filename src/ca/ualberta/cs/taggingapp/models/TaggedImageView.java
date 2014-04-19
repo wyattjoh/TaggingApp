@@ -58,12 +58,19 @@ public class TaggedImageView extends ImageView {
 	@Override
 	protected void onDraw(Canvas canvas) {
 		super.onDraw(canvas);
+		
+		ArrayList<Region> theRegions = this.picture.getRegions();
 
-		for (Region region : this.picture.getRegions()) {
-			canvas.drawRect(region.getUpperLeftCorner().x,
-					region.getUpperLeftCorner().y,
-					region.getLowerRightCorner().x,
-					region.getLowerRightCorner().y, paint);
+		for (int i = 0; i < theRegions.size(); i++) {
+			Region theRegion = theRegions.get(i);
+			
+			canvas.drawRect(theRegion.getUpperLeftCorner().x,
+					theRegion.getUpperLeftCorner().y,
+					theRegion.getLowerRightCorner().x,
+					theRegion.getLowerRightCorner().y, paint);
+			
+			paint.setTextSize(20);
+			canvas.drawText(Integer.toString(i + 1), theRegion.getUpperLeftCorner().x + 5, theRegion.getUpperLeftCorner().y + 20, paint); 
 		}
 	}
 }
