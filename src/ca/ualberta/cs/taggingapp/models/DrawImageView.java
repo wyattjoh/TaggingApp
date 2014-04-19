@@ -4,12 +4,15 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.Point;
 import android.graphics.PointF;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
+import android.view.ScaleGestureDetector;
+import android.view.ScaleGestureDetector.SimpleOnScaleGestureListener;
 import android.widget.ImageView;
 
 /**
@@ -24,19 +27,24 @@ public class DrawImageView extends ImageView {
 	private PointF startPoint = null;
 	private PointF endPoint = null;
 	private boolean isDrawing;
+	private float scale = 1f;
+	private Matrix matrix = new Matrix();
+	private Point zoomCenter = new Point(0, 0);
+	private ScaleGestureDetector SGD;
 
 	public DrawImageView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 
-		init();
+		init(context);
 	}
 
-	private void init() {
+	private void init(Context context) {
 		paint = new Paint();
 		paint.setColor(Color.WHITE);
 		paint.setStyle(Style.STROKE);
 		paint.setStrokeWidth(2);
 		paint.setAntiAlias(true);
+		SGD = new ScaleGestureDetector(context, new ScaleListener(this));
 	}
 
 	public Point getUpperLeftPoint() {
@@ -65,73 +73,81 @@ public class DrawImageView extends ImageView {
 
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
+		
+		if (ActiveUserModel.getShared().getUser().getBoundingBoxSetting() == "ZOOM") {
 
-		switch (event.getAction()) {
-		case MotionEvent.ACTION_DOWN:
-			if (ActiveUserModel.getShared().getUser().getBoundingBoxSetting() == "DRAG") {
-				startPoint = new PointF(event.getX(), event.getY());
-				endPoint = new PointF();
-				isDrawing = true;
-			}
-
-		case MotionEvent.ACTION_MOVE:
-			if (ActiveUserModel.getShared().getUser().getBoundingBoxSetting() == "DRAG") {
-				if (isDrawing) {
-					endPoint.x = event.getX();
-					endPoint.y = event.getY();
+			SGD.onTouchEvent(event);
+			zoomCenter.set(Math.round(SGD.getFocusX()),
+					Math.round(SGD.getFocusY()));
+			
+		} else {
+			switch (event.getAction()) {
+			case MotionEvent.ACTION_DOWN:
+				if (ActiveUserModel.getShared().getUser().getBoundingBoxSetting() == "DRAG") {
+					startPoint = new PointF(event.getX(), event.getY());
+					endPoint = new PointF();
+					isDrawing = true;
 				}
-			}
 
-			invalidate();
-			break;
-		case MotionEvent.ACTION_UP:
-			if (ActiveUserModel.getShared().getUser().getBoundingBoxSetting() == "DRAG") {
-				if (isDrawing) {
-					endPoint.x = event.getX();
-					endPoint.y = event.getY();
-					if (endPoint.x < startPoint.x) {
-						float temp = endPoint.x;
-						endPoint.x = startPoint.x;
-						startPoint.x = temp;
+			case MotionEvent.ACTION_MOVE:
+				if (ActiveUserModel.getShared().getUser().getBoundingBoxSetting() == "DRAG") {
+					if (isDrawing) {
+						endPoint.x = event.getX();
+						endPoint.y = event.getY();
 					}
-					if (endPoint.y < startPoint.y) {
-						float temp = endPoint.y;
-						endPoint.y = startPoint.y;
-						startPoint.y = temp;
+				}
+
+				invalidate();
+				break;
+			case MotionEvent.ACTION_UP:
+				if (ActiveUserModel.getShared().getUser().getBoundingBoxSetting() == "DRAG") {
+					if (isDrawing) {
+						endPoint.x = event.getX();
+						endPoint.y = event.getY();
+						if (endPoint.x < startPoint.x) {
+							float temp = endPoint.x;
+							endPoint.x = startPoint.x;
+							startPoint.x = temp;
+						}
+						if (endPoint.y < startPoint.y) {
+							float temp = endPoint.y;
+							endPoint.y = startPoint.y;
+							startPoint.y = temp;
+						}
+						invalidate();
+					}
+					isDrawing = true;
+				}
+
+				if (ActiveUserModel.getShared().getUser().getBoundingBoxSetting() == "DEFAULT_TAP") {
+					if (startPoint == null) {
+						startPoint = new PointF(event.getX(), event.getY());
+					} else if (endPoint == null) {
+						endPoint = new PointF(event.getX(), event.getY());
+						if (endPoint.x < startPoint.x) {
+							float temp = endPoint.x;
+							endPoint.x = startPoint.x;
+							startPoint.x = temp;
+						}
+						if (endPoint.y < startPoint.y) {
+							float temp = endPoint.y;
+							endPoint.y = startPoint.y;
+							startPoint.y = temp;
+						}
+						isDrawing = true;
+					} else {
+						startPoint.x = event.getX();
+						startPoint.y = event.getY();
+						endPoint = null;
+						isDrawing = false;
 					}
 					invalidate();
 				}
-				isDrawing = true;
-			}
+				break;
 
-			if (ActiveUserModel.getShared().getUser().getBoundingBoxSetting() == "DEFAULT_TAP") {
-				if (startPoint == null) {
-					startPoint = new PointF(event.getX(), event.getY());
-				} else if (endPoint == null) {
-					endPoint = new PointF(event.getX(), event.getY());
-					if (endPoint.x < startPoint.x) {
-						float temp = endPoint.x;
-						endPoint.x = startPoint.x;
-						startPoint.x = temp;
-					}
-					if (endPoint.y < startPoint.y) {
-						float temp = endPoint.y;
-						endPoint.y = startPoint.y;
-						startPoint.y = temp;
-					}
-					isDrawing = true;
-				} else {
-					startPoint.x = event.getX();
-					startPoint.y = event.getY();
-					endPoint = null;
-					isDrawing = false;
-				}
-				invalidate();
+			default:
+				break;
 			}
-			break;
-
-		default:
-			break;
 		}
 		return true;
 	}
@@ -139,5 +155,31 @@ public class DrawImageView extends ImageView {
 	@Override
 	public void setImageBitmap(Bitmap picture) {
 		super.setImageBitmap(picture);
+	}
+	
+	public float getScale() {
+		return this.scale;
+	}
+	
+	public Point getZoomCenter() {
+		return this.zoomCenter;
+	}
+	
+	private class ScaleListener extends SimpleOnScaleGestureListener {
+		private DrawImageView picture;
+		
+		public ScaleListener(DrawImageView picture) {
+			super();
+			this.picture = picture;
+		}
+		
+		@Override
+		public boolean onScale(ScaleGestureDetector detector) {
+			scale *= detector.getScaleFactor();
+			scale = Math.max(0.1f, Math.min(scale, 5.0f));
+			matrix.setScale(scale, scale);
+			picture.setImageMatrix(matrix);
+			return true;
+		}
 	}
 }

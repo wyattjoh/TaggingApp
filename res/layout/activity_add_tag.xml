@@ -10,7 +10,7 @@
     tools:context=".AddTag" >
 
     <ca.ualberta.cs.taggingapp.models.DrawImageView
-        android:id="@+id/drawImageView1"
+        android:id="@+id/drawImageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:scaleType="matrix"
