@@ -10,6 +10,12 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+/**
+ * @author Tagging Gtroup
+ * Activity that allows the user to create a new profile. The user is taken
+ * here from mainActivity after selecting 'sign up'.
+ *
+ */
 public class SignUp extends Activity {
 	public static final String EMAIL_FIELD_EXTRA_KEY = "emailField";
 
@@ -19,8 +25,8 @@ public class SignUp extends Activity {
 		setContentView(R.layout.activity_sign_up);
 		setTitle("TaggingApp SignUp");
 
+		// Get the email that was entered in the previous screen
 		Intent startingIntent = getIntent();
-
 		Bundle extras = startingIntent.getExtras();
 
 		if (extras != null) {
@@ -44,7 +50,11 @@ public class SignUp extends Activity {
 		return true;
 	}
 
+	/*
+	 * Create the user from the email and password that they entered.
+	 */
 	public void createUser(View view) {
+		// Get email and pass from text fields
 		EditText emailText = (EditText) findViewById(R.id.email);
 		String emailString = emailText.getText().toString();
 

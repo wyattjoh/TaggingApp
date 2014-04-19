@@ -17,6 +17,13 @@ import ca.ualberta.cs.taggingapp.models.Picture;
 import ca.ualberta.cs.taggingapp.models.PictureList;
 import ca.ualberta.cs.taggingapp.models.Region;
 
+/**
+ * @author Tagging Group
+ * Activity that displays the photo and the selected tag directly below it.
+ * It also displays the options to 'edit', 'delete', and view more images
+ * containing the tag.
+ *
+ */
 public class TagAndPhoto extends Activity {
 	Picture thePicture;
 	String tag;
@@ -27,9 +34,10 @@ public class TagAndPhoto extends Activity {
 		setContentView(R.layout.activity_tag_and_photo);
 		setTitle("TaggingApp");
 
+		// Get the extras and set the proper image to the view
 		Bundle extras = getIntent().getExtras();
 		thePicture = PictureList.getInstance().getSelected();
-
+		// Get the tag name
 		tag = extras.getString("tagName");
 
 		ImageView img = (ImageView) findViewById(R.id.picViewer);
@@ -43,11 +51,12 @@ public class TagAndPhoto extends Activity {
 			e.printStackTrace();
 		}
 
+		// Append to the textview
 		TextView tagName = (TextView) findViewById(R.id.tag);
 		tagName.append(tag);
-
+		// Append to the textview
 		TextView tagURL = (TextView) findViewById(R.id.tagURL);
-
+		// Get all of the regions associated with that tag
 		ArrayList<Region> regs = PictureList.getInstance().getSelected()
 				.getRegions();
 		for (int i = 0; i < regs.size(); i++) {
@@ -67,20 +76,21 @@ public class TagAndPhoto extends Activity {
 		return true;
 	}
 
+	// OnClick for the 'more photos' button
 	public void morePhotos(View view) {
 		Intent i = new Intent(TagAndPhoto.this, TagRefinedImages.class);
 		i.putExtra("tagName", tag);
 		startActivity(i);
 		TagAndPhoto.this.finish();
 	}
-
+	// OnClick for the 'edit tag' button
 	public void editTag(View view) {
 		Intent i = new Intent(TagAndPhoto.this, EditTag.class);
 		i.putExtra("tagName", tag);
 		startActivity(i);
 		TagAndPhoto.this.finish();
 	}
-
+	// OnClick for the 'delete tag' button
 	public void deleteTag(View view) {
 		// Change this code
 		ArrayList<Region> regs = thePicture.getRegions();

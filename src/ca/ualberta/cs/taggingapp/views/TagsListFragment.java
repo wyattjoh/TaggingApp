@@ -18,6 +18,13 @@ import android.widget.ListView;
 import ca.ualberta.cs.taggingapp.R;
 import ca.ualberta.cs.taggingapp.models.TagList;
 
+/**
+ * @author Tagging Group
+ * This activity represents the 'Tags' tab in the 'home screen'. When the 
+ * right tab is selected, this activity's XML is displayed below the tab
+ * selector.
+ *
+ */
 public class TagsListFragment extends Fragment {
 
 	private ArrayAdapter<String> adapter;
@@ -28,18 +35,21 @@ public class TagsListFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 
+		// Set the adapters and the text input field for the search view
 		final View rootView = inflater.inflate(R.layout.fragment_tags_list,
 				container, false);
 		listView = (ListView) rootView.findViewById(R.id.tags_list_view);
 		searchView = (EditText) rootView.findViewById(R.id.tag_search);
 
+		// Populate the tags list
 		ArrayList<String> tags = new ArrayList<String>();
 		for (int i = 0; i < TagList.getInstance().getTags().size(); i++) {
 			tags.add(TagList.getInstance().getTags().get(i).getName());
 		}
+		// Set the adapter to display the tags list
 		adapter = new ArrayAdapter<String>(getActivity(), R.layout.list_item,
 				tags);
-
+		// Set the adapter to the listview
 		listView.setAdapter(adapter);
 
 		listView.setOnItemClickListener(new OnItemClickListener() {

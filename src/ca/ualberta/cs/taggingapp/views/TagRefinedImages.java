@@ -15,6 +15,12 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 import android.widget.TextView;
 
+/**
+ * @author Tagging Group
+ * Activity that displays photos with the same tag in a gridview, similar
+ * to the GridViewFragment class.
+ *
+ */
 public class TagRefinedImages extends Activity {
 
 	@Override
@@ -26,9 +32,11 @@ public class TagRefinedImages extends Activity {
 		Bundle extras = getIntent().getExtras();
 		String tag = extras.getString("tagName");
 
+		// Get the tagName and display it in the textview
 		TextView tagName = (TextView) findViewById(R.id.tag);
 		tagName.append(tag);
-
+		
+		// Get the tagName and display it in the textview
 		TextView tagURL = (TextView) findViewById(R.id.tagURL);
 		ArrayList<Region> regs = PictureList.getInstance().getSelected()
 				.getRegions();

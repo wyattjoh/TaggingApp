@@ -22,6 +22,13 @@ import ca.ualberta.cs.taggingapp.models.Region;
 import ca.ualberta.cs.taggingapp.models.Tag;
 import ca.ualberta.cs.taggingapp.models.TaggedImageView;
 
+/**
+ * @author Tagging Group
+ * This activity shows the full photo, and all of the tags in a list view below it.
+ * The user is taken here after they select a image from the grid image view in
+ * swipe super.
+ *
+ */
 public class ViewFullPic extends Activity {
 
 	ArrayAdapter<String> adapter;
@@ -38,6 +45,7 @@ public class ViewFullPic extends Activity {
 	}
 
 	protected void setupListView() {
+		// Get the listview from the XML file
 		miniTagsList = (ListView) this.findViewById(R.id.miniTagsList);
 
 		LayoutInflater inflater = getLayoutInflater();
@@ -45,7 +53,7 @@ public class ViewFullPic extends Activity {
 				R.layout.view_full_pic_header, miniTagsList, false);
 		miniTagsList.removeAllViewsInLayout();
 		miniTagsList.addHeaderView(header, null, false);
-
+		// Set the proper photo to the imageview
 		Picture thePicture = PictureList.getInstance().getSelected();
 		TaggedImageView picture = (TaggedImageView) header
 				.findViewById(R.id.taggedImageView);

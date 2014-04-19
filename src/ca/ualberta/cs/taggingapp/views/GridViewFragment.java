@@ -16,9 +16,9 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 
 /**
- * @author Tagging Gtroup
+ * @author Tagging Group
  * This activity represents the 'Photos' tab in the 'home screen'. When the 
- * left tab is selected, this activity's XML is diplayed below the tab
+ * left tab is selected, this activity's XML is displayed below the tab
  * selector.
  *
  */

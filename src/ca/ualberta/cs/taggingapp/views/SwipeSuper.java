@@ -15,9 +15,17 @@ import android.view.MenuItem;
 import ca.ualberta.cs.taggingapp.R;
 import ca.ualberta.cs.taggingapp.controllers.UserController;
 
+/**
+ * @author Tagging Gtroup
+ * This activity is the apps 'home' screen. It contains the swipe view with both tabs
+ * 'photos' and 'tags'. It is the first screen that the user sees after starting the app,
+ * assuming that they are already signed in.
+ *
+ */
 public class SwipeSuper extends FragmentActivity implements
 		ActionBar.TabListener {
 
+	// Variables for setting up the tabs
 	private ViewPager vp;
 	private TabsPagerAdapter tpa;
 	private ActionBar ab;
@@ -36,8 +44,7 @@ public class SwipeSuper extends FragmentActivity implements
 		tpa = new TabsPagerAdapter(getSupportFragmentManager());
 
 		vp.setAdapter(tpa);
-		// ab.setHomeButtonEnabled(false); **** NOTE: THIS SHOULD BE
-		// UN-COMMENTED LATER ****
+		
 		ab.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
 		// Initialize the tabs from the
