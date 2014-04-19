@@ -78,12 +78,6 @@ public class AddTag extends Activity {
 										.setBoundingBoxSetting(
 												BoundingBoxSetting
 														.getFromIndex(which));
-								Toast.makeText(
-										getBaseContext(),
-										BoundingBoxSetting.getFromIndex(which)
-												.getName()
-												+ " tagging selected",
-										Toast.LENGTH_LONG).show();
 							}
 						})
 				// Prevents cancel of dialog box
