@@ -75,98 +75,95 @@ public class DrawImageView extends ImageView {
 
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
+		BoundingBoxSetting boundingBoxSetting = ActiveUserModel.getShared()
+				.getUser().getBoundingBoxSetting();
 
-		if (ActiveUserModel.getShared().getUser().getBoundingBoxSetting() == "ZOOM") {
+		if (boundingBoxSetting == BoundingBoxSetting.ZOOM) {
 
-			SGD.onTouchEvent(event);
 			zoomCenter.set(Math.round(SGD.getFocusX()),
 					Math.round(SGD.getFocusY()));
+			SGD.onTouchEvent(event);
 
-		} else {
+		} else if (boundingBoxSetting == BoundingBoxSetting.DRAG) {
 			switch (event.getAction()) {
 			case MotionEvent.ACTION_DOWN:
-				if (ActiveUserModel.getShared().getUser()
-						.getBoundingBoxSetting() == "DRAG") {
-					startPoint = new PointF(event.getX(), event.getY());
-					endPoint = new PointF();
-					isDrawing = true;
-				}
+				startPoint = new PointF(event.getX(), event.getY());
+				endPoint = new PointF();
+				isDrawing = true;
+				break;
 
 			case MotionEvent.ACTION_MOVE:
-				if (ActiveUserModel.getShared().getUser()
-						.getBoundingBoxSetting() == "DRAG") {
-					if (isDrawing) {
-						endPoint.x = event.getX();
-						endPoint.y = event.getY();
-					}
+				if (isDrawing) {
+					endPoint.x = event.getX();
+					endPoint.y = event.getY();
 				}
-
 				invalidate();
 				break;
-			case MotionEvent.ACTION_UP:
-				if (ActiveUserModel.getShared().getUser()
-						.getBoundingBoxSetting() == "DRAG") {
-					if (isDrawing) {
-						endPoint.x = event.getX();
-						endPoint.y = event.getY();
-						if (endPoint.x < startPoint.x) {
-							float temp = endPoint.x;
-							endPoint.x = startPoint.x;
-							startPoint.x = temp;
-						}
-						if (endPoint.y < startPoint.y) {
-							float temp = endPoint.y;
-							endPoint.y = startPoint.y;
-							startPoint.y = temp;
-						}
-						invalidate();
-					}
-					isDrawing = true;
-				}
 
-				if (ActiveUserModel.getShared().getUser()
-						.getBoundingBoxSetting() == "DEFAULT_TAP") {
-					if (startPoint == null) {
-						startPoint = new PointF(event.getX(), event.getY());
-					} else if (endPoint == null) {
-						endPoint = new PointF(event.getX(), event.getY());
-						if (endPoint.x < startPoint.x) {
-							float temp = endPoint.x;
-							endPoint.x = startPoint.x;
-							startPoint.x = temp;
-						}
-						if (endPoint.y < startPoint.y) {
-							float temp = endPoint.y;
-							endPoint.y = startPoint.y;
-							startPoint.y = temp;
-						}
-						isDrawing = true;
-					} else {
-						startPoint.x = event.getX();
-						startPoint.y = event.getY();
-						endPoint = null;
-						isDrawing = false;
+			case MotionEvent.ACTION_UP:
+				if (isDrawing) {
+					endPoint.x = event.getX();
+					endPoint.y = event.getY();
+					if (endPoint.x < startPoint.x) {
+						float temp = endPoint.x;
+						endPoint.x = startPoint.x;
+						startPoint.x = temp;
+					}
+					if (endPoint.y < startPoint.y) {
+						float temp = endPoint.y;
+						endPoint.y = startPoint.y;
+						startPoint.y = temp;
 					}
 					invalidate();
 				}
+				isDrawing = true;
+				break;
+
+			default:
+				break;
+			}
+		} else if (boundingBoxSetting == BoundingBoxSetting.DOUBLE_TAP) {
+			switch (event.getAction()) {
+			case MotionEvent.ACTION_UP:
+				if (startPoint == null) {
+					startPoint = new PointF(event.getX(), event.getY());
+				} else if (endPoint == null) {
+					endPoint = new PointF(event.getX(), event.getY());
+					if (endPoint.x < startPoint.x) {
+						float temp = endPoint.x;
+						endPoint.x = startPoint.x;
+						startPoint.x = temp;
+					}
+					if (endPoint.y < startPoint.y) {
+						float temp = endPoint.y;
+						endPoint.y = startPoint.y;
+						startPoint.y = temp;
+					}
+					isDrawing = true;
+				} else {
+					startPoint.x = event.getX();
+					startPoint.y = event.getY();
+					endPoint = null;
+					isDrawing = false;
+				}
+				invalidate();
 				break;
 
 			default:
 				break;
 			}
 		}
+
 		return true;
 	}
 
 	public void setPicture(Picture picture) {
 		try {
 			Bitmap theBitmap = picture.getPicture();
-			super.setImageBitmap(theBitmap);
+			setImageBitmap(theBitmap);
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

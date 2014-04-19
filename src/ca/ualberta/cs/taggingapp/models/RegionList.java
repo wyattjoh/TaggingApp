@@ -91,21 +91,21 @@ public class RegionList extends SavedList<Region> {
 
 			remove(theRegion);
 		}
-		
+
 		PictureList.getInstance().save();
 		save();
 	}
 
 	public void deleteAllRegionsForPicture(Picture thePictureWeAreDeleting) {
 		ArrayList<Region> theRegionsThatAreForPicture = getAllRegionsForPicture(thePictureWeAreDeleting);
-		
-		for (Region theRegion: theRegionsThatAreForPicture) {
+
+		for (Region theRegion : theRegionsThatAreForPicture) {
 			Tag theTag = theRegion.getTag();
 			theTag.removeRegion(theRegion);
-			
+
 			remove(theRegion);
 		}
-		
+
 		TagList.getInstance().save();
 		save();
 	}

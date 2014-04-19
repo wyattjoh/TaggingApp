@@ -11,7 +11,7 @@ public class User {
 	private String email = null;
 	private String password = null;
 	private ArrayList<Picture> pictures = new ArrayList<Picture>();
-	private String boundingBoxSetting = "DEFAULT_TAP";
+	private BoundingBoxSetting boundingBoxSetting = BoundingBoxSetting.DRAG;
 
 	// Start of getters and setters
 	public String getEmail() {
@@ -38,11 +38,11 @@ public class User {
 		this.pictures.remove(picture);
 	}
 
-	public String getBoundingBoxSetting() {
+	public BoundingBoxSetting getBoundingBoxSetting() {
 		return boundingBoxSetting;
 	}
 
-	public void setBoundingBoxSetting(String boundingBoxSetting) {
+	public void setBoundingBoxSetting(BoundingBoxSetting boundingBoxSetting) {
 		this.boundingBoxSetting = boundingBoxSetting;
 	}
 

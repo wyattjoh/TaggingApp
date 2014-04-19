@@ -1,20 +1,13 @@
 package ca.ualberta.cs.taggingapp.views;
 
-import java.util.ArrayList;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
 import ca.ualberta.cs.taggingapp.R;
-import ca.ualberta.cs.taggingapp.models.ManagedObject;
-import ca.ualberta.cs.taggingapp.models.Picture;
-import ca.ualberta.cs.taggingapp.models.PictureList;
-import ca.ualberta.cs.taggingapp.models.Region;
 import ca.ualberta.cs.taggingapp.models.Tag;
 import ca.ualberta.cs.taggingapp.models.TagList;
 
@@ -28,28 +21,24 @@ public class EditTag extends Activity {
 	public static final String TAG_ID = "TAG_ID";
 
 	private Tag theTag;
-	private Picture thePicture;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_edit_tag);
 		setTitle("TaggingApp");
-		
-		// Get the proper image
-		thePicture = PictureList.getInstance().getSelected();
 
 		// Get the tag name and photo id
 		Bundle extras = getIntent().getExtras();
-		
+
 		String tagId = extras.getString(TAG_ID);
-		
+
 		theTag = TagList.getInstance().get(tagId);
 
 		// Set the tag url
 		EditText urlField = (EditText) findViewById(R.id.url_edit);
 		urlField.setText(theTag.getURL());
-		
+
 		// Append the tagName to the tag text input field.
 		EditText tagNameField = (EditText) findViewById(R.id.tag_edit);
 		tagNameField.setText(theTag.getName());
@@ -103,14 +92,14 @@ public class EditTag extends Activity {
 	public void saveTag(View view) {
 		// Get the urlField
 		EditText urlField = (EditText) findViewById(R.id.url_edit);
-		
+
 		// Get the tagNameField
 		EditText tagNameField = (EditText) findViewById(R.id.tag_edit);
 
 		// Update the tag object
 		theTag.setName(tagNameField.getText().toString());
 		theTag.setURL(urlField.getText().toString());
-		
+
 		// Save the list as we just updated a tag
 		TagList.getInstance().save();
 

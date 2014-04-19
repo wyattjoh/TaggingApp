@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.graphics.Matrix;
 import android.graphics.Point;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -20,6 +19,7 @@ import android.widget.Toast;
 import ca.ualberta.cs.taggingapp.R;
 import ca.ualberta.cs.taggingapp.controllers.Logger;
 import ca.ualberta.cs.taggingapp.models.ActiveUserModel;
+import ca.ualberta.cs.taggingapp.models.BoundingBoxSetting;
 import ca.ualberta.cs.taggingapp.models.DrawImageView;
 import ca.ualberta.cs.taggingapp.models.Picture;
 import ca.ualberta.cs.taggingapp.models.PictureList;
@@ -38,8 +38,6 @@ public class AddTag extends Activity {
 	DrawImageView picture;
 	int tagType = 0;
 	// The names and corresponding tag types the user can choose from
-	String[] tagMethods = { "Zoom", "Drag", "Double Tap" };
-	String[] tagMethodKeys = { "ZOOM", "DRAG", "DEFAULT_TAP" };
 
 	private static Region region = null;
 
@@ -65,19 +63,29 @@ public class AddTag extends Activity {
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
 		builder.setTitle("Select Tagging Method")
-				.setItems(tagMethods, new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						Logger.start(ActiveUserModel.getShared().getUser()
-								.getEmail(), tagMethods[which]);
+				.setItems(BoundingBoxSetting.getNames(),
+						new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog,
+									int which) {
+								Logger.start(ActiveUserModel.getShared()
+										.getUser().getEmail(),
+										BoundingBoxSetting.getFromIndex(which));
 
-						ActiveUserModel.getShared().getUser()
-								.setBoundingBoxSetting(tagMethodKeys[which]);
-						Toast.makeText(getBaseContext(),
-								tagMethods[which] + " tagging selected",
-								Toast.LENGTH_LONG).show();
-					}
-				})
+								ActiveUserModel
+										.getShared()
+										.getUser()
+										.setBoundingBoxSetting(
+												BoundingBoxSetting
+														.getFromIndex(which));
+								Toast.makeText(
+										getBaseContext(),
+										BoundingBoxSetting.getFromIndex(which)
+												.getName()
+												+ " tagging selected",
+										Toast.LENGTH_LONG).show();
+							}
+						})
 				// Prevents cancel of dialog box
 				.setCancelable(false);
 
@@ -87,9 +95,7 @@ public class AddTag extends Activity {
 	// Simply sets the correct menu bar for the window
 	@Override
 	public boolean onTouchEvent(MotionEvent ev) {
-		Log.w("AddTag", ActiveUserModel.getShared().getUser()
-				.getBoundingBoxSetting());
-		if (ActiveUserModel.getShared().getUser().getBoundingBoxSetting() == "ZOOM") {
+		if (ActiveUserModel.getShared().getUser().getBoundingBoxSetting() == BoundingBoxSetting.ZOOM) {
 
 			SGD.onTouchEvent(ev);
 			zoomCenter.set(Math.round(SGD.getFocusX()),
@@ -131,10 +137,11 @@ public class AddTag extends Activity {
 	// Handles getting the region data and creating the new region instance
 	protected void addRegion() {
 		Picture pic = PictureList.getInstance().getSelected();
-		String boundingBoxSetting = ActiveUserModel.getShared().getUser()
-				.getBoundingBoxSetting();
+		BoundingBoxSetting boundingBoxSetting = ActiveUserModel.getShared()
+				.getUser().getBoundingBoxSetting();
 
-		if (boundingBoxSetting == "DRAG" || boundingBoxSetting == "DEFAULT_TAP") {
+		if (boundingBoxSetting == BoundingBoxSetting.DRAG
+				|| boundingBoxSetting == BoundingBoxSetting.ZOOM) {
 			region = new Region(pic, picture.getUpperLeftPoint(),
 					picture.getLowerRightPoint());
 		} else {
