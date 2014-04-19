@@ -6,6 +6,12 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.widget.GridView;
 
+/**
+ * @author Tagging Group
+ * The gridview that appears in the GridViewFragment and the 
+ * TagRefinedImages activities. Sets the proper adapter also.
+ *
+ */
 public class PhotoGrid extends Activity {
 
 	@Override

@@ -15,6 +15,13 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 
+/**
+ * @author Tagging Gtroup
+ * This activity represents the 'Photos' tab in the 'home screen'. When the 
+ * left tab is selected, this activity's XML is diplayed below the tab
+ * selector.
+ *
+ */
 public class GridViewFragment extends Fragment {
 	private GridImageAdapter gia = null;
 
@@ -34,9 +41,7 @@ public class GridViewFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-
-		// ApplicationState.getInstance().load();
-
+		// Find the gridview
 		final View rootView = inflater.inflate(R.layout.grid_layout, container,
 				false);
 		final GridView gridView = (GridView) rootView
@@ -46,6 +51,7 @@ public class GridViewFragment extends Fragment {
 		gia = new GridImageAdapter(getActivity(), null);
 		gridView.setAdapter(gia);
 
+		// When an image is selected, find the correct image and start the new activity
 		gridView.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View v,
@@ -57,12 +63,6 @@ public class GridViewFragment extends Fragment {
 				PictureList.getInstance().setSelected(imagePosition);
 
 				startActivity(i);
-
-				/*
-				 * Toast.makeText(rootView.getContext(), "pic" +
-				 * (gia.getItem(position)) +" selected",
-				 * Toast.LENGTH_SHORT).show();
-				 */
 			}
 		});
 
@@ -86,6 +86,8 @@ public class GridViewFragment extends Fragment {
 		}
 	}
 
+	// If the user returns to this activity, have the adapter check the dataset
+	// again and update the gridview if necessary
 	@Override
 	public void onResume() {
 		super.onResume();
@@ -104,6 +106,7 @@ public class GridViewFragment extends Fragment {
 	 * @see android.support.v4.app.FragmentActivity#onActivityResult(int, int,
 	 * android.content.Intent)
 	 */
+	// Upon return from the camera functions, save the taken photo and show it in the gridview
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (requestCode == CameraAndPhoto.REQUEST_TAKE_PHOTO) {

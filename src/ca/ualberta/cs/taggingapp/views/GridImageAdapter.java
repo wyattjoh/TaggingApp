@@ -14,11 +14,17 @@ import ca.ualberta.cs.taggingapp.models.Picture;
 import ca.ualberta.cs.taggingapp.models.PictureList;
 import ca.ualberta.cs.taggingapp.models.Region;
 
+/**
+ * @author Tagging Gtroup
+ * Simple adapter to map images to the main gridview.
+ */
 public class GridImageAdapter extends BaseAdapter {
 	private ArrayList<Picture> thePictureList;
 	private Context theContext;
 
 	public GridImageAdapter(Activity theActivity, String tagName) {
+		// Set the context. Cannot use 'this.getContext' because this class
+		// does not extend activity
 		theContext = theActivity.getApplicationContext();
 		ArrayList<Picture> pics = PictureList.getInstance().getPictureList();
 		if (tagName == null) {
@@ -54,6 +60,7 @@ public class GridImageAdapter extends BaseAdapter {
 		return arg0;
 	}
 
+	// Returns the image held at position 'position'.
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		ImageView imageView = new ImageView(theContext);

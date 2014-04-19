@@ -14,6 +14,11 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 
+/**
+ * @author Tagging Gtroup
+ * Activity that handles taking and saving a photo
+ *
+ */
 public class CameraAndPhoto extends Activity {
 	Uri mCurrentPhotoUri;
 	String mCurrentPhotoPath;

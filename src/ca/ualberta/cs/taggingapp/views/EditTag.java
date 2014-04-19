@@ -18,6 +18,12 @@ import ca.ualberta.cs.taggingapp.models.Region;
 import ca.ualberta.cs.taggingapp.models.Tag;
 import ca.ualberta.cs.taggingapp.models.TagList;
 
+/**
+ * @author Tagging Group
+ * Activity that allows the user to modify the name and URL of a given tag. The
+ * user is brought here after selecting 'edit tag' from the "TagAndPhoto" activity.
+ *
+ */
 public class EditTag extends Activity {
 
 	String tagName;
@@ -31,7 +37,7 @@ public class EditTag extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_edit_tag);
 		setTitle("TaggingApp");
-
+		// Get the proper image
 		thePicture = PictureList.getInstance().getSelected();
 
 		// Get the tag name and photo id
@@ -39,6 +45,8 @@ public class EditTag extends Activity {
 		tagName = extras.getString("tagName");
 
 		url = (EditText) findViewById(R.id.url_edit);
+		// Find the proper region, and extract the URL info. Append
+		// these strings to the text input fields.
 		ArrayList<Region> regs = PictureList.getInstance().getSelected()
 				.getRegions();
 		for (int i = 0; i < regs.size(); i++) {
@@ -47,12 +55,13 @@ public class EditTag extends Activity {
 			}
 		}
 		position = extras.getInt("pos");
-
+		// Append the tagName to the tag text input field.
 		tag = (EditText) findViewById(R.id.tag_edit);
 		tag.append(tagName);
 
 	}
 
+	// Set the right menu options
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -104,8 +113,9 @@ public class EditTag extends Activity {
 		alertDialog.show();
 	}
 
+	// Saves the new information to the correct tag instances and saves the
+	// altered PictureList to SD card.
 	public void saveTag(View view) {
-
 		// Horrible stringy code, forgive me
 		PictureList.getInstance().getSelected().getRegions().get(position)
 				.getTag().setName(tag.getText().toString());

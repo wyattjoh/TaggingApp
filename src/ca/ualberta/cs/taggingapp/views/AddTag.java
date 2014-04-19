@@ -21,9 +21,16 @@ import ca.ualberta.cs.taggingapp.models.Picture;
 import ca.ualberta.cs.taggingapp.models.PictureList;
 import ca.ualberta.cs.taggingapp.models.Region;
 
+/**
+ * @author Tagging Group
+ * Activity that allows the user to draw bounding boxes on the image.
+ *
+ */
 public class AddTag extends Activity {
+	
 	DrawImageView picture;
 	int tagType = 0;
+	// The names and corresponding tag types the user can choose from
 	String[] tagMethods = { "Zoom", "Drag", "Double Tap" };
 	String[] tagMethodKeys = { "ZOOM", "DRAG", "DEFAULT_TAP" };
 
@@ -34,6 +41,7 @@ public class AddTag extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_tag);
 		setTitle("TaggingApp");
+		// Get the correct image form the PictureList and set the ImageView
 		Picture thePicture = PictureList.getInstance().getSelected();
 		picture = (DrawImageView) findViewById(R.id.drawImageView);
 
@@ -48,8 +56,9 @@ public class AddTag extends Activity {
 			e.printStackTrace();
 		}
 
+		// Create an alert to prompt the user to enter the tagging method that they
+		// want to use to tag the photo
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
 		builder.setTitle("Select Tagging Method")
 		.setItems(tagMethods, new DialogInterface.OnClickListener() {
 			@Override
@@ -70,6 +79,7 @@ public class AddTag extends Activity {
 		builder.create().show();
 	}
 
+	// Simply sets the correct menu bar for the window
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -79,6 +89,7 @@ public class AddTag extends Activity {
 		return super.onCreateOptionsMenu(menu);
 	}
 
+	// Handles the onClick events for the checkmark and cross buttons in the action bar
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// Handles presses on the action bar items
@@ -98,9 +109,11 @@ public class AddTag extends Activity {
 		}
 	}
 
+	// Handles getting the region data and creating the new region instance
 	protected void addRegion() {
 		Picture pic = PictureList.getInstance().getSelected();
-		if (ActiveUserModel.getShared().getUser().getBoundingBoxSetting() == "DRAG" || ActiveUserModel.getShared().getUser().getBoundingBoxSetting() == "DEFAULT_TAP") {
+		if (ActiveUserModel.getShared().getUser().getBoundingBoxSetting() == "DRAG" ||
+				ActiveUserModel.getShared().getUser().getBoundingBoxSetting() == "DEFAULT_TAP") {
 			region = new Region(pic, picture.getUpperLeftPoint(),
 					picture.getLowerRightPoint());
 		} else {
