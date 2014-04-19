@@ -62,20 +62,6 @@ public class AddNameToTag extends Activity {
 						Toast.LENGTH_LONG).show();
 
 				finishTaggingAction(tag);
-
-				// tagName.setText("");
-				// adapter.getItem(position);
-				// tagName.append(adapter.getItem(position));
-				//
-				// for (int i = 0; i < TagList.getInstance().getTags().size();
-				// i++) {
-				// if (TagList.getInstance().getTags().get(i).getName()
-				// .equals(adapter.getItem(position))) {
-				// tagURL.setText("");
-				// tagURL.append(TagList.getInstance().getTags().get(i)
-				// .getURL());
-				// }
-				// }
 			}
 		});
 
