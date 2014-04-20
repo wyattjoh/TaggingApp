@@ -6,7 +6,9 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 import ca.ualberta.cs.taggingapp.R;
+import ca.ualberta.cs.taggingapp.models.RegionList;
 import ca.ualberta.cs.taggingapp.models.Tag;
 import ca.ualberta.cs.taggingapp.models.TagList;
 
@@ -62,7 +64,9 @@ public class EditTag extends Activity {
 						new DialogInterface.OnClickListener() {
 							@Override
 							public void onClick(DialogInterface dialog, int id) {
-								// TODO: Implement
+								RegionList.getInstance().deleteAllRegionsForTag(theTag);
+								TagList.getInstance().remove(theTag);
+								EditTag.this.finish();
 							}
 						})
 				.setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -83,13 +87,29 @@ public class EditTag extends Activity {
 	public void saveTag(View view) {
 		// Get the urlField
 		EditText urlField = (EditText) findViewById(R.id.url_edit);
+		String urlFieldString = urlField.getText().toString();
 
 		// Get the tagNameField
 		EditText tagNameField = (EditText) findViewById(R.id.tag_edit);
+		String nameFieldString = tagNameField.getText().toString();
 
+		if (urlFieldString.length() <= 0) {
+			Toast.makeText(getApplicationContext(),
+					"Can't have an empty tag url!", Toast.LENGTH_SHORT)
+					.show();
+			return;
+		}
+		
+		if (nameFieldString.length() <= 0) {
+			Toast.makeText(getApplicationContext(),
+					"Can't have an empty tag name!", Toast.LENGTH_SHORT)
+					.show();
+			return;
+		}
+		
 		// Update the tag object
-		theTag.setName(tagNameField.getText().toString());
-		theTag.setURL(urlField.getText().toString());
+		theTag.setName(nameFieldString);
+		theTag.setURL(urlFieldString);
 
 		// Save the list as we just updated a tag
 		TagList.getInstance().save();
