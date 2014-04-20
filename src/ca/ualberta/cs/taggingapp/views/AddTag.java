@@ -9,7 +9,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import ca.ualberta.cs.taggingapp.R;
-import ca.ualberta.cs.taggingapp.controllers.Logger;
 import ca.ualberta.cs.taggingapp.models.ActiveUserModel;
 import ca.ualberta.cs.taggingapp.models.BoundingBoxSetting;
 import ca.ualberta.cs.taggingapp.models.DrawImageView;
@@ -44,10 +43,6 @@ public class AddTag extends Activity {
 							@Override
 							public void onClick(DialogInterface dialog,
 									int which) {
-								Logger.start(ActiveUserModel.getShared()
-										.getUser().getEmail(),
-										BoundingBoxSetting.getFromIndex(which));
-
 								ActiveUserModel
 										.getShared()
 										.getUser()
@@ -82,7 +77,6 @@ public class AddTag extends Activity {
 			Intent i = new Intent(AddTag.this, AddNameToTag.class);
 			startActivity(i);
 			finish();
-			Logger.end();
 			return true;
 		case R.id.decline:
 			finish();
