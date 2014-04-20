@@ -104,7 +104,7 @@
   </class>  
   <class id="12" language="java" name="ca.ualberta.cs.taggingapp.models.Region" project="TaggingApp" 
     file="/TaggingApp/src/ca/ualberta/cs/taggingapp/models/Region.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="2319" y="508"/>    
+    <position height="-1" width="-1" x="2313" y="384"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -348,182 +348,195 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </enumeration>  
-  <association id="39">    
-    <end type="SOURCE" refId="24" navigable="false">      
-      <attribute id="40" name="tpa"/>      
-      <multiplicity id="41" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="22" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="42">    
-    <end type="SOURCE" refId="17" navigable="false">      
-      <attribute id="43" name="adapter"/>      
-      <multiplicity id="44" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="37" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="45">    
-    <end type="SOURCE" refId="37" navigable="false">      
-      <attribute id="46" name="theFilter"/>      
-      <multiplicity id="47" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="36" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="48">    
-    <end type="SOURCE" refId="33" navigable="false">      
-      <attribute id="49" name="singleton"/>      
-      <multiplicity id="50" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="33" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="51">    
-    <end type="SOURCE" refId="14" navigable="false">      
-      <attribute id="52" name="singleton"/>      
-      <multiplicity id="53" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="14" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="54">    
-    <end type="SOURCE" refId="33"/>    
-    <end type="TARGET" refId="7"/>  
-  </generalization>  
-  <association id="55">    
+  <class id="39" language="java" name="ca.ualberta.cs.taggingapp.models.ManagedObject" project="TaggingApp" 
+    file="/TaggingApp/src/ca/ualberta/cs/taggingapp/models/ManagedObject.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2072" y="290"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <association id="40">    
     <end type="SOURCE" refId="9" navigable="false">      
-      <attribute id="56" name="theAction"/>      
-      <multiplicity id="57" minimum="0" maximum="1"/>    
+      <attribute id="41" name="theAction"/>      
+      <multiplicity id="42" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="16" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <generalization id="58">    
+  <generalization id="43">    
+    <end type="SOURCE" refId="33"/>    
+    <end type="TARGET" refId="7"/>  
+  </generalization>  
+  <generalization id="44">    
     <end type="SOURCE" refId="20"/>    
     <end type="TARGET" refId="7"/>  
   </generalization>  
-  <association id="59">    
+  <association id="45">    
     <end type="SOURCE" refId="11" navigable="false">      
-      <attribute id="60" name="theSavedUserModel"/>      
-      <multiplicity id="61" minimum="0" maximum="1"/>    
+      <attribute id="46" name="theSavedUserModel"/>      
+      <multiplicity id="47" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="19" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="62">    
-    <end type="SOURCE" refId="37" navigable="false">      
-      <attribute id="63" name="theBackupObjects"/>      
-      <multiplicity id="64" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="4" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="65">    
-    <end type="SOURCE" refId="27" navigable="false">      
-      <attribute id="66" name="boundingBoxSetting"/>      
-      <multiplicity id="67" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="38" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="68">    
-    <end type="SOURCE" refId="27" navigable="false">      
-      <attribute id="69" name="pictures"/>      
-      <multiplicity id="70" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="25" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="71">    
-    <end type="SOURCE" refId="20" navigable="false">      
-      <attribute id="72" name="singleton"/>      
-      <multiplicity id="73" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="20" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="74">    
+  <association id="48">    
     <end type="SOURCE" refId="13" navigable="false">      
-      <attribute id="75" name="gia"/>      
-      <multiplicity id="76" minimum="0" maximum="1"/>    
+      <attribute id="49" name="gia"/>      
+      <multiplicity id="50" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="6" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="77">    
+  <association id="51">    
     <end type="SOURCE" refId="26" navigable="false">      
-      <attribute id="78" name="picture"/>      
-      <multiplicity id="79" minimum="0" maximum="1"/>    
+      <attribute id="52" name="picture"/>      
+      <multiplicity id="53" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="25" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="80">    
-    <end type="SOURCE" refId="6" navigable="false">      
-      <attribute id="81" name="thePictureList"/>      
-      <multiplicity id="82" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="25" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="83">    
+  <association id="54">    
     <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="84" name="thePicture"/>      
-      <multiplicity id="85" minimum="0" maximum="1"/>    
+      <attribute id="55" name="thePicture"/>      
+      <multiplicity id="56" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="25" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="86">    
+  <association id="57">    
     <end type="SOURCE" refId="11" navigable="false">      
-      <attribute id="87" name="theUser"/>      
-      <multiplicity id="88" minimum="0" maximum="1"/>    
+      <attribute id="58" name="theUser"/>      
+      <multiplicity id="59" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="27" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="89">    
-    <end type="SOURCE" refId="11" navigable="false">      
-      <attribute id="90" name="singleton"/>      
-      <multiplicity id="91" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="11" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="92">    
+  <association id="60">    
     <end type="SOURCE" refId="21" navigable="false">      
-      <attribute id="93" name="adapter"/>      
-      <multiplicity id="94" minimum="0" maximum="1"/>    
+      <attribute id="61" name="adapter"/>      
+      <multiplicity id="62" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="37" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="95">    
-    <end type="SOURCE" refId="20" navigable="false">      
-      <attribute id="96" name="selectedTag"/>      
-      <multiplicity id="97" minimum="0" maximum="1"/>    
+  <nesting id="63">    
+    <end type="SOURCE" refId="37"/>    
+    <end type="TARGET" refId="36"/>  
+  </nesting>  
+  <association id="64">    
+    <end type="SOURCE" refId="17" navigable="false">      
+      <attribute id="65" name="adapter"/>      
+      <multiplicity id="66" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="37" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="67">    
+    <end type="SOURCE" refId="24" navigable="false">      
+      <attribute id="68" name="tpa"/>      
+      <multiplicity id="69" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="22" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="70">    
+    <end type="SOURCE" refId="37" navigable="false">      
+      <attribute id="71" name="theFilter"/>      
+      <multiplicity id="72" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="36" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="73">    
+    <end type="SOURCE" refId="14" navigable="false">      
+      <attribute id="74" name="singleton"/>      
+      <multiplicity id="75" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="14" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="76">    
+    <end type="SOURCE" refId="33" navigable="false">      
+      <attribute id="77" name="singleton"/>      
+      <multiplicity id="78" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="33" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="79">    
+    <end type="SOURCE" refId="37" navigable="false">      
+      <attribute id="80" name="theBackupObjects"/>      
+      <multiplicity id="81" minimum="0" maximum="2147483647"/>    
     </end>    
     <end type="TARGET" refId="4" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <nesting id="98">    
-    <end type="SOURCE" refId="37"/>    
-    <end type="TARGET" refId="36"/>  
-  </nesting>  
-  <association id="99">    
-    <end type="SOURCE" refId="33" navigable="false">      
-      <attribute id="100" name="selectedPicture"/>      
-      <multiplicity id="101" minimum="0" maximum="1"/>    
+  <generalization id="82">    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="39"/>  
+  </generalization>  
+  <association id="83">    
+    <end type="SOURCE" refId="27" navigable="false">      
+      <attribute id="84" name="boundingBoxSetting"/>      
+      <multiplicity id="85" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="38" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="86">    
+    <end type="SOURCE" refId="27" navigable="false">      
+      <attribute id="87" name="pictures"/>      
+      <multiplicity id="88" minimum="0" maximum="2147483647"/>    
     </end>    
     <end type="TARGET" refId="25" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="102">    
+  <association id="89">    
+    <end type="SOURCE" refId="20" navigable="false">      
+      <attribute id="90" name="singleton"/>      
+      <multiplicity id="91" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="20" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="92">    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="93" name="thePictureList"/>      
+      <multiplicity id="94" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="25" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="95">    
+    <end type="SOURCE" refId="11" navigable="false">      
+      <attribute id="96" name="singleton"/>      
+      <multiplicity id="97" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="98">    
+    <end type="SOURCE" refId="20" navigable="false">      
+      <attribute id="99" name="selectedTag"/>      
+      <multiplicity id="100" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="101">    
+    <end type="SOURCE" refId="33" navigable="false">      
+      <attribute id="102" name="selectedPicture"/>      
+      <multiplicity id="103" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="25" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="104">    
     <end type="SOURCE" refId="8" navigable="false">      
-      <attribute id="103" name="adapter"/>      
-      <multiplicity id="104" minimum="0" maximum="1"/>    
+      <attribute id="105" name="adapter"/>      
+      <multiplicity id="106" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="37" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  

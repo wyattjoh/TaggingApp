@@ -135,6 +135,7 @@ public class DrawImageView extends ImageView {
 		return true;
 	}
 
+	//sets the picture
 	public void setPicture(Picture picture) {
 		picture.setLargeBitmapOnImageView(this);
 	}
