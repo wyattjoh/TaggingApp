@@ -31,7 +31,9 @@ public class BitmapWorkerTask extends AsyncTask<Uri, Void, Bitmap> {
 		thePicture = picture;
 	}
 
-	// Decode image in background.
+	/**
+	 * Decode the images in the background
+	 */
 	@Override
 	protected Bitmap doInBackground(Uri... params) {
 		data = params[0];
@@ -47,7 +49,9 @@ public class BitmapWorkerTask extends AsyncTask<Uri, Void, Bitmap> {
 
 	}
 
-	// Once complete, see if ImageView is still around and set bitmap.
+	/**
+	 *  Once complete, see if ImageView is still around and set bitmap.
+	 */
 	@Override
 	protected void onPostExecute(Bitmap bitmap) {
         if (isCancelled()) {
@@ -68,6 +72,12 @@ public class BitmapWorkerTask extends AsyncTask<Uri, Void, Bitmap> {
         }
 	}
 
+	/**
+	 * Cancels the potential work
+	 * @param data
+	 * @param imageView
+	 * @return
+	 */
 	public static boolean cancelPotentialWork(Uri data, ImageView imageView) {
 		final BitmapWorkerTask bitmapWorkerTask = getBitmapWorkerTask(imageView);
 
@@ -87,6 +97,12 @@ public class BitmapWorkerTask extends AsyncTask<Uri, Void, Bitmap> {
 		return true;
 	}
 
+	/**
+	 * Fetches the worker task for the specific image view
+	 * 
+	 * @param imageView
+	 * @return
+	 */
 	private static BitmapWorkerTask getBitmapWorkerTask(ImageView imageView) {
 		if (imageView != null) {
 			final Drawable drawable = imageView.getDrawable();
