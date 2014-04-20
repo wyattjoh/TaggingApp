@@ -120,4 +120,13 @@ public class GridViewFragment extends Fragment {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see android.support.v4.app.Fragment#onResume()
+	 */
+	@Override
+	public void onResume() {
+		super.onResume();
+		gridImageAdapter.notifyDataSetChanged();
+	}
+
 }
