@@ -389,78 +389,70 @@
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="60">    
-    <end type="SOURCE" refId="11" navigable="false">      
-      <attribute id="61" name="gia"/>      
+    <end type="SOURCE" refId="23" navigable="false">      
+      <attribute id="61" name="picture"/>      
       <multiplicity id="62" minimum="0" maximum="1"/>    
     </end>    
-    <end type="TARGET" refId="6" navigable="true"/>    
+    <end type="TARGET" refId="22" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="63">    
-    <end type="SOURCE" refId="23" navigable="false">      
-      <attribute id="64" name="picture"/>      
-      <multiplicity id="65" minimum="0" maximum="1"/>    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="64" name="thePictureList"/>      
+      <multiplicity id="65" minimum="0" maximum="2147483647"/>    
     </end>    
     <end type="TARGET" refId="22" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="66">    
-    <end type="SOURCE" refId="6" navigable="false">      
-      <attribute id="67" name="thePictureList"/>      
-      <multiplicity id="68" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="22" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="69">    
     <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="70" name="thePicture"/>      
-      <multiplicity id="71" minimum="0" maximum="1"/>    
+      <attribute id="67" name="thePicture"/>      
+      <multiplicity id="68" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="22" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <generalization id="72">    
+  <generalization id="69">    
     <end type="SOURCE" refId="35"/>    
     <end type="TARGET" refId="34"/>  
   </generalization>  
-  <generalization id="73">    
+  <generalization id="70">    
     <end type="SOURCE" refId="22"/>    
     <end type="TARGET" refId="35"/>  
   </generalization>  
-  <association id="74">    
+  <association id="71">    
     <end type="SOURCE" refId="9" navigable="false">      
-      <attribute id="75" name="theUser"/>      
-      <multiplicity id="76" minimum="0" maximum="1"/>    
+      <attribute id="72" name="theUser"/>      
+      <multiplicity id="73" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="24" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="77">    
+  <association id="74">    
     <end type="SOURCE" refId="9" navigable="false">      
-      <attribute id="78" name="singleton"/>      
-      <multiplicity id="79" minimum="0" maximum="1"/>    
+      <attribute id="75" name="singleton"/>      
+      <multiplicity id="76" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="9" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="80">    
+  <association id="77">    
     <end type="SOURCE" refId="17" navigable="false">      
-      <attribute id="81" name="selectedTag"/>      
-      <multiplicity id="82" minimum="0" maximum="1"/>    
+      <attribute id="78" name="selectedTag"/>      
+      <multiplicity id="79" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="4" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="83">    
+  <association id="80">    
     <end type="SOURCE" refId="30" navigable="false">      
-      <attribute id="84" name="selectedPicture"/>      
-      <multiplicity id="85" minimum="0" maximum="1"/>    
+      <attribute id="81" name="selectedPicture"/>      
+      <multiplicity id="82" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="22" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <generalization id="86">    
+  <generalization id="83">    
     <end type="SOURCE" refId="4"/>    
     <end type="TARGET" refId="35"/>  
   </generalization>  
