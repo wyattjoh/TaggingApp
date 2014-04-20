@@ -10,7 +10,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 /**
- * @author Tagging Gtroup Activity that allows the user to create a new profile.
+ * @author Tagging Group Activity that allows the user to create a new profile.
  *         The user is taken here from mainActivity after selecting 'sign up'.
  * 
  */
