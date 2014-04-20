@@ -29,28 +29,53 @@ public class Picture extends RegionObject {
 		this.picturePath = uri.toString();
 	}
 
+	/**
+	 * Sets the picture
+	 * @param picture
+	 */
 	public void setPicture(Bitmap picture) {
 		this.picture = picture;
 	}
 
+	/**
+	 * @return the picture uri
+	 */
 	public Uri getPictureUri() {
 		return Uri.parse(this.picturePath);
 	}
 
+	/**
+	 * Sets the picture URI
+	 * @param uri
+	 */
 	public void setPictureUri(Uri uri) {
 		this.picturePath = uri.toString();
 	}
 
+	/**
+	 * Sets the bitmap for the image size
+	 * @param theImageView
+	 * @param theSize
+	 * @param shouldCache
+	 */
 	private void setBitmapOnImageViewForSize(ImageView theImageView,
 			int theSize, boolean shouldCache) {
 		ImageLoadingFactory.loadBitmap(this, getPictureUri(), theImageView,
 				theSize, shouldCache);
 	}
 
+	/**
+	 * Sets the bitmap for the picture to the ImageView
+	 * @param theImageView
+	 */
 	public void setLargeBitmapOnImageView(ImageView theImageView) {
 		setBitmapOnImageViewForSize(theImageView, 1000, false);
 	}
 
+	/**
+	 * Sets the bitmap for the picture to the imageview
+	 * @param theImageView
+	 */
 	public void setSmallBitmapOnImageView(ImageView theImageView) {
 		if (picture == null) {
 			setBitmapOnImageViewForSize(theImageView, 160, true);

@@ -26,12 +26,25 @@ public abstract class SavedList<T extends ManagedObject> extends ManagedList<T> 
 		this.theContext = theContext;
 	}
 
+	/**
+	 * @return the filename to save the data as
+	 */
 	public abstract String getFilename();
 
+	/**
+	 * @param orignalArray
+	 * @return the primative array for the arraylist
+	 */
 	public abstract T[] getPrimativeArray(ArrayList<T> orignalArray);
 
+	/**
+	 * @return the type for gson
+	 */
 	public abstract Type getType();
 
+	/**
+	 * Saves the current list to the filesystem
+	 */
 	public void save() {
 		try {
 			Gson gson = new Gson();
@@ -55,11 +68,17 @@ public abstract class SavedList<T extends ManagedObject> extends ManagedList<T> 
 		}
 	}
 
+	/**
+	 * Removes the current list from the filesystem
+	 */
 	public void remove() {
-		this.theList = new ArrayList<T>();
+		this.theList.clear();
 		save();
 	}
 
+	/**
+	 * @return the loaded list from the filesystem
+	 */
 	protected ArrayList<T> load() {
 		ArrayList<T> theState = new ArrayList<T>();
 
@@ -89,12 +108,8 @@ public abstract class SavedList<T extends ManagedObject> extends ManagedList<T> 
 		return theState;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * ca.ualberta.cs.taggingapp.models.ManagedList#setArrayList(java.util.ArrayList
-	 * )
+	/* (non-Javadoc)
+	 * @see ca.ualberta.cs.taggingapp.models.ManagedList#setArrayList(java.util.ArrayList)
 	 */
 	@Override
 	public void setArrayList(ArrayList<T> theNewList) {
@@ -102,12 +117,8 @@ public abstract class SavedList<T extends ManagedObject> extends ManagedList<T> 
 		save();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * ca.ualberta.cs.taggingapp.models.ManagedList#add(ca.ualberta.cs.taggingapp
-	 * .models.ManagedObject)
+	/* (non-Javadoc)
+	 * @see ca.ualberta.cs.taggingapp.models.ManagedList#add(ca.ualberta.cs.taggingapp.models.ManagedObject)
 	 */
 	@Override
 	public void add(T object) {
@@ -115,12 +126,8 @@ public abstract class SavedList<T extends ManagedObject> extends ManagedList<T> 
 		save();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * ca.ualberta.cs.taggingapp.models.ManagedList#remove(ca.ualberta.cs.taggingapp
-	 * .models.ManagedObject)
+	/* (non-Javadoc)
+	 * @see ca.ualberta.cs.taggingapp.models.ManagedList#remove(ca.ualberta.cs.taggingapp.models.ManagedObject)
 	 */
 	@Override
 	public void remove(T object) {

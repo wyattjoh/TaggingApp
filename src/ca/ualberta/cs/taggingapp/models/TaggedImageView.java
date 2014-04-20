@@ -22,21 +22,24 @@ public class TaggedImageView extends ImageView {
 
 	public TaggedImageView(Context context, AttributeSet attrs) {
 		super(context, attrs);
-		init();
-	}
-
-	private void init() {
+		
 		paint = new Paint();
 		paint.setStrokeWidth(2);
 		paint.setAntiAlias(true);
 	}
 
+	/**
+	 * @param picture
+	 */
 	public void setPicture(Picture picture) {
 		this.picture = picture;
 
 		this.picture.setLargeBitmapOnImageView(this);
 	}
 
+	/* (non-Javadoc)
+	 * @see android.widget.ImageView#onDraw(android.graphics.Canvas)
+	 */
 	@Override
 	protected void onDraw(Canvas canvas) {
 		super.onDraw(canvas);

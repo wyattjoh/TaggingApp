@@ -61,95 +61,160 @@ public class Region extends ManagedObject {
 	}
 
 	// Start of getters and setters
+	/**
+	 * @param x
+	 * @param y
+	 */
 	public void setCenter(int x, int y) {
 		this.center.x = x;
 		this.center.y = y;
 		this.updateRegionFromCenter();
 	}
 
+	/**
+	 * @param point
+	 */
 	public void setCenter(Point point) {
 		this.center = point;
 		this.updateRegionFromCenter();
 	}
 
+	/**
+	 * @return
+	 */
 	public Point getCenter() {
 		return center;
 	}
 
+	/**
+	 * @return
+	 */
 	public int getWidth() {
 		return width;
 	}
 
+	/**
+	 * @param width
+	 */
 	public void setWidth(int width) {
 		this.width = width;
 		this.updateRegionFromCenter();
 	}
 
+	/**
+	 * @return
+	 */
 	public int getHeight() {
 		return height;
 	}
 
+	/**
+	 * @param height
+	 */
 	public void setHeight(int height) {
 		this.height = height;
 		this.updateRegionFromCenter();
 	}
 
+	/**
+	 * @param x
+	 * @param y
+	 */
 	public void setUpperLeftCorner(int x, int y) {
 		this.upperLeftCorner.x = x;
 		this.upperLeftCorner.y = y;
 		this.updateRegionFromCorners();
 	}
 
+	/**
+	 * @param point
+	 */
 	public void setUpperLeftCorner(Point point) {
 		this.upperLeftCorner = point;
 		this.updateRegionFromCorners();
 	}
 
+	/**
+	 * @return
+	 */
 	public Point getUpperLeftCorner() {
 		return upperLeftCorner;
 	}
 
+	/**
+	 * @param x
+	 * @param y
+	 */
 	public void setLowerRightCorner(int x, int y) {
 		this.lowerRightCorner.x = x;
 		this.lowerRightCorner.y = y;
 		this.updateRegionFromCorners();
 	}
 
+	/**
+	 * @param point
+	 */
 	public void setLowerRightCorner(Point point) {
 		this.lowerRightCorner = point;
 		this.updateRegionFromCorners();
 	}
 
+	/**
+	 * @return
+	 */
 	public Point getLowerRightCorner() {
 		return lowerRightCorner;
 	}
 
+	/**
+	 * @return
+	 */
 	public Tag getTag() {
 		return TagList.getInstance().get(tagId);
 	}
 
+	/**
+	 * @param tag
+	 */
 	public void setTag(Tag tag) {
 		this.tagId = tag.getId();
 	}
 
+	/**
+	 * @return
+	 */
 	public Picture getPicture() {
 		return PictureList.getInstance().get(pictureId);
 	}
 
+	/**
+	 * @param picture
+	 */
 	public void setPicture(Picture picture) {
 		this.pictureId = picture.getId();
 	}
 
+	/**
+	 * @param thePicture
+	 * @return
+	 */
 	public Boolean isForPicture(Picture thePicture) {
 		return thePicture.getId().equals(pictureId);
 	}
 
+	/**
+	 * @param theTag
+	 * @return
+	 */
 	public Boolean isForTag(Tag theTag) {
 		return theTag.getId().equals(tagId);
 	}
 
 	// End of getters and setters
 
+	/**
+	 * 
+	 */
 	public void removeRegion() {
 		this.getPicture().removeRegion(this);
 		if (this.getTag() != null) {
@@ -157,6 +222,9 @@ public class Region extends ManagedObject {
 		}
 	}
 
+	/**
+	 * @param tag
+	 */
 	public void editRegionTag(Tag tag) {
 		if (this.getTag() != null) {
 			this.getTag().removeRegion(this);
@@ -173,8 +241,10 @@ public class Region extends ManagedObject {
 	 * center of the region or the corners. One of two of these methods is used
 	 * on create or edit, depending on the tagging style or type of edit.
 	 */
-	// Updates the center point, width and height of the region given corner
-	// points
+
+	/**
+	 * Updates the center point, width and height of the region given corner points
+	 */
 	public void updateRegionFromCorners() {
 		int centerX = (this.lowerRightCorner.x + this.upperLeftCorner.x) / 2;
 		int centerY = (this.lowerRightCorner.y + this.upperLeftCorner.y) / 2;
@@ -185,8 +255,9 @@ public class Region extends ManagedObject {
 		this.setWidth(width);
 	}
 
-	// Updates the corner points given a new center, using the current width and
-	// height
+	/**
+	 * Updates the corner points given a new center, using the current width and height
+	 */
 	public void updateRegionFromCenter() {
 		int lowerRightCornerX = this.center.x + (this.width / 2);
 		int lowerRightCornerY = this.center.y + (this.height / 2);

@@ -11,11 +11,21 @@ import android.widget.TextView;
 import ca.ualberta.cs.taggingapp.R;
 import ca.ualberta.cs.taggingapp.models.Tag;
 
+/**
+ * Manages the list of tags
+ * 
+ * @author wyatt
+ *
+ */
 public class TagArrayAdapter extends ArrayAdapter<Tag> {
 	private Boolean withIndex = false;
 	private NameFilter theFilter = null;
 	private ArrayList<Tag> theBackupObjects = new ArrayList<Tag>();
 
+	/**
+	 * @param context
+	 * @param objects
+	 */
 	public TagArrayAdapter(Context context, ArrayList<Tag> objects) {
 		super(context, R.layout.list_item, objects);
 		this.theFilter = new NameFilter();
@@ -26,6 +36,11 @@ public class TagArrayAdapter extends ArrayAdapter<Tag> {
 		}
 	}
 
+	/**
+	 * @param context
+	 * @param objects
+	 * @param withIndex
+	 */
 	public TagArrayAdapter(Context context, ArrayList<Tag> objects,
 			Boolean withIndex) {
 		this(context, objects);
@@ -33,6 +48,9 @@ public class TagArrayAdapter extends ArrayAdapter<Tag> {
 		this.withIndex = withIndex;
 	}
 
+	/**
+	 * Reloads the list view
+	 */
 	private void reloadDataFromBackup() {
 		this.clear();
 		this.addAll(theBackupObjects);
@@ -45,6 +63,9 @@ public class TagArrayAdapter extends ArrayAdapter<Tag> {
 	 * @see android.widget.ArrayAdapter#getView(int, android.view.View,
 	 * android.view.ViewGroup)
 	 */
+	/* (non-Javadoc)
+	 * @see android.widget.ArrayAdapter#getView(int, android.view.View, android.view.ViewGroup)
+	 */
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		View theView = super.getView(position, convertView, parent);
@@ -54,6 +75,10 @@ public class TagArrayAdapter extends ArrayAdapter<Tag> {
 		return theView;
 	}
 
+	/**
+	 * @param theView
+	 * @param position
+	 */
 	private void populateRowView(View theView, int position) {
 		Tag theTag = getItem(position);
 
@@ -67,8 +92,15 @@ public class TagArrayAdapter extends ArrayAdapter<Tag> {
 		}
 	}
 
+	/**
+	 * @author wyatt
+	 *
+	 */
 	private class NameFilter extends Filter {
 
+		/* (non-Javadoc)
+		 * @see android.widget.Filter#performFiltering(java.lang.CharSequence)
+		 */
 		@Override
 		protected FilterResults performFiltering(CharSequence constraint) {
 			FilterResults filterResults = new FilterResults();
@@ -96,6 +128,9 @@ public class TagArrayAdapter extends ArrayAdapter<Tag> {
 			return filterResults;
 		}
 
+		/* (non-Javadoc)
+		 * @see android.widget.Filter#publishResults(java.lang.CharSequence, android.widget.Filter.FilterResults)
+		 */
 		@SuppressWarnings("unchecked")
 		@Override
 		protected void publishResults(CharSequence constraint,
@@ -116,6 +151,9 @@ public class TagArrayAdapter extends ArrayAdapter<Tag> {
 	/*
 	 * (non-Javadoc)
 	 * 
+	 * @see android.widget.ArrayAdapter#getFilter()
+	 */
+	/* (non-Javadoc)
 	 * @see android.widget.ArrayAdapter#getFilter()
 	 */
 	@Override

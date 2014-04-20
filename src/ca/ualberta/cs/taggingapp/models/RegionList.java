@@ -6,6 +6,12 @@ import java.util.ArrayList;
 import android.content.Context;
 import com.google.gson.reflect.TypeToken;
 
+/**
+ * A list of regions
+ * 
+ * @author wyatt
+ *
+ */
 public class RegionList extends SavedList<Region> {
 	private final static String FILENAME = "RegionListListSaved.json";
 	private static RegionList singleton = null;
@@ -15,14 +21,24 @@ public class RegionList extends SavedList<Region> {
 		super(theContext);
 	}
 
+	/**
+	 * @param theContext
+	 */
 	public void setTheContext(Context theContext) {
 		this.theContext = theContext;
 	}
 
+	/**
+	 * @return
+	 */
 	public Context getTheContext() {
 		return this.theContext;
 	}
 
+	/**
+	 * @param theContext
+	 * @return
+	 */
 	public static RegionList createInstance(Context theContext) {
 		singleton = new RegionList(theContext);
 		singleton.setTheContext(theContext);
@@ -30,6 +46,9 @@ public class RegionList extends SavedList<Region> {
 		return singleton;
 	}
 
+	/**
+	 * @return
+	 */
 	public static RegionList getInstance() {
 		if (singleton == null) {
 			throw new RuntimeException(
@@ -38,6 +57,10 @@ public class RegionList extends SavedList<Region> {
 		return singleton;
 	}
 
+	/**
+	 * @param theTag
+	 * @return all the regions for the tag
+	 */
 	protected ArrayList<Region> getAllRegionsForTag(Tag theTag) {
 		ArrayList<Region> theRegions = new ArrayList<Region>();
 
@@ -50,6 +73,10 @@ public class RegionList extends SavedList<Region> {
 		return theRegions;
 	}
 
+	/**
+	 * @param thePicture
+	 * @return all regions for the picture
+	 */
 	protected ArrayList<Region> getAllRegionsForPicture(Picture thePicture) {
 		ArrayList<Region> theRegions = new ArrayList<Region>();
 
@@ -62,6 +89,10 @@ public class RegionList extends SavedList<Region> {
 		return theRegions;
 	}
 
+	/**
+	 * @param theTag
+	 * @return all pictures from the tag
+	 */
 	public ArrayList<Picture> getAllPicturesFromTag(Tag theTag) {
 		ArrayList<Picture> thePictureList = new ArrayList<Picture>();
 
@@ -72,6 +103,10 @@ public class RegionList extends SavedList<Region> {
 		return thePictureList;
 	}
 
+	/**
+	 * @param thePic
+	 * @return all tags for the picture
+	 */
 	public ArrayList<Tag> getAllTagsFromPicture(Picture thePic) {
 		ArrayList<Tag> theTagList = new ArrayList<Tag>();
 
@@ -82,6 +117,10 @@ public class RegionList extends SavedList<Region> {
 		return theTagList;
 	}
 
+	/**
+	 * Deletes all the regions for the tag
+	 * @param theTagWeAreDeleting
+	 */
 	public void deleteAllRegionsForTag(Tag theTagWeAreDeleting) {
 		ArrayList<Region> theRegionsThatAreForTag = getAllRegionsForTag(theTagWeAreDeleting);
 
@@ -96,6 +135,10 @@ public class RegionList extends SavedList<Region> {
 		save();
 	}
 
+	/**
+	 * Deletes all the regions for a picture
+	 * @param thePictureWeAreDeleting
+	 */
 	public void deleteAllRegionsForPicture(Picture thePictureWeAreDeleting) {
 		ArrayList<Region> theRegionsThatAreForPicture = getAllRegionsForPicture(thePictureWeAreDeleting);
 
@@ -110,16 +153,25 @@ public class RegionList extends SavedList<Region> {
 		save();
 	}
 
+	/* (non-Javadoc)
+	 * @see ca.ualberta.cs.taggingapp.models.SavedList#getFilename()
+	 */
 	@Override
 	public String getFilename() {
 		return FILENAME;
 	}
 
+	/* (non-Javadoc)
+	 * @see ca.ualberta.cs.taggingapp.models.SavedList#getPrimativeArray(java.util.ArrayList)
+	 */
 	@Override
 	public Region[] getPrimativeArray(ArrayList<Region> orignalArray) {
 		return orignalArray.toArray(new Region[0]);
 	}
 
+	/* (non-Javadoc)
+	 * @see ca.ualberta.cs.taggingapp.models.SavedList#getType()
+	 */
 	@Override
 	public Type getType() {
 		return new TypeToken<Region[]>() {

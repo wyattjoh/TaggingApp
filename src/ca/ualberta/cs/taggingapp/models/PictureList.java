@@ -11,7 +11,7 @@ import android.net.Uri;
 /**
  * Creates and manages a list of picture objects.
  * 
- * @author Wyatt Johnson
+ * @author wyatt
  */
 
 public class PictureList extends SavedList<Picture> {
@@ -53,19 +53,24 @@ public class PictureList extends SavedList<Picture> {
 		return singleton;
 	}
 
+	/**
+	 * Updates the picture in the list
+	 * @param index
+	 * @param pic
+	 */
 	public void updatePic(int index, Picture pic) {
 		this.theList.set(index, pic);
 		save();
 	}
 
-	/*
+	/**
 	 * Gets the photo at the designated location and adds it to the list
 	 */
 	public void add(Uri location) {
 		add(new Picture(location));
 	}
 
-	/*
+	/**
 	 * Sets the selected image
 	 */
 	public void setSelected(int position) {
@@ -73,27 +78,40 @@ public class PictureList extends SavedList<Picture> {
 		setSelected(thePicture);
 	}
 	
+	/**
+	 * Sets the image as selected
+	 * @param thePicture
+	 */
 	public void setSelected(Picture thePicture) {
 		selectedPicture = thePicture;
 	}
 
-	/*
+	/**
 	 * Get the selected image
 	 */
 	public Picture getSelected() {
 		return selectedPicture;
 	}
 
+	/* (non-Javadoc)
+	 * @see ca.ualberta.cs.taggingapp.models.SavedList#getFilename()
+	 */
 	@Override
 	public String getFilename() {
 		return FILENAME;
 	}
 
+	/* (non-Javadoc)
+	 * @see ca.ualberta.cs.taggingapp.models.SavedList#getPrimativeArray(java.util.ArrayList)
+	 */
 	@Override
 	public Picture[] getPrimativeArray(ArrayList<Picture> orignalArray) {
 		return orignalArray.toArray(new Picture[0]);
 	}
 
+	/* (non-Javadoc)
+	 * @see ca.ualberta.cs.taggingapp.models.SavedList#getType()
+	 */
 	@Override
 	public Type getType() {
 		return new TypeToken<Picture[]>() {

@@ -2,6 +2,12 @@ package ca.ualberta.cs.taggingapp.models;
 
 import java.util.UUID;
 
+/**
+ * A object with an Id
+ * 
+ * @author wyatt
+ *
+ */
 public class ManagedObject {
 
 	protected String id;
