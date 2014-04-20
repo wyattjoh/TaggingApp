@@ -25,18 +25,31 @@ public class TaggedImageView extends ImageView {
 		init();
 	}
 
+	/**
+	 * Initializes properties used when drawing.
+	 */
 	private void init() {
 		paint = new Paint();
 		paint.setStrokeWidth(2);
 		paint.setAntiAlias(true);
 	}
 
+
+	/**
+	 * @param picture
+	 * 
+	 */
 	public void setPicture(Picture picture) {
 		this.picture = picture;
 
 		this.picture.setLargeBitmapOnImageView(this);
 	}
 
+	/* (non-Javadoc)
+	 * @see android.widget.ImageView#onDraw(android.graphics.Canvas)
+	 * 
+	 * Draws picture and the tags associated with it. 
+	 */
 	@Override
 	protected void onDraw(Canvas canvas) {
 		super.onDraw(canvas);
