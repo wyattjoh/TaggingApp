@@ -14,7 +14,7 @@ import android.os.Environment;
 import android.provider.MediaStore;
 
 /**
- * @author Tagging Gtroup Activity that handles taking and saving a photo
+ * @author Tagging Group Activity that handles taking and saving a photo
  * 
  */
 public class CameraAndPhoto extends Activity {

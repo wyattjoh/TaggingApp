@@ -14,7 +14,7 @@ import android.widget.ImageView;
 
 /**
  * A class that contains an array list of bitmaps and returns them to the grid
- * view of photo picker layout.
+ * view.
  * 
  * @author Katherine Jasniewski
  * 

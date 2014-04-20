@@ -15,7 +15,7 @@ import ca.ualberta.cs.taggingapp.models.Tag;
 import ca.ualberta.cs.taggingapp.models.TagObject;
 
 /**
- * @author Tagging Gtroup Simple adapter to map images to the main gridview.
+ * @author Tagging Group Simple adapter to map images to the main gridview.
  */
 public class GridImageAdapter extends BaseAdapter {
 	private ArrayList<Picture> thePictureList;

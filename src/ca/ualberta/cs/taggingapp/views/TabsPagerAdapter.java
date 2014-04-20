@@ -7,7 +7,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 /**
- * @author Tagging Gtroup Returns the proper fragment classes for each tab.
+ * @author Tagging Group Returns the proper fragment classes for each tab.
  * 
  */
 public class TabsPagerAdapter extends FragmentPagerAdapter {
