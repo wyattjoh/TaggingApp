@@ -39,14 +39,26 @@ public class ImageLoadingFactory {
 		return singleton;
 	}
 
-	// gets the bitmap from the provided uri
+	/**
+	 * Gets the bitmap from the provided uri
+	 * @param imageUri
+	 * @return
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 */
 	public static Bitmap getImageFromUri(Uri imageUri)
 			throws FileNotFoundException, IOException {
 		return MediaStore.Images.Media.getBitmap(
 				getInstance().context.getContentResolver(), imageUri);
 	}
 
-	// decodes the scaled uri passed in and returns a bitmap
+	/**
+	 * decodes the scaled uri passed in and returns a bitmap
+	 * @param uri
+	 * @param requiredSize
+	 * @return
+	 * @throws FileNotFoundException
+	 */
 	public static Bitmap decodeScaledBitmapFromUri(Uri uri, int requiredSize)
 			throws FileNotFoundException {
 		BitmapFactory.Options options = new BitmapFactory.Options();
@@ -61,6 +73,13 @@ public class ImageLoadingFactory {
 				.getContentResolver().openInputStream(uri), null, options);
 	}
 
+	/**
+	 * Calculates the image sample size for the image loading process
+	 * @param options
+	 * @param reqWidth
+	 * @param reqHeight
+	 * @return
+	 */
 	private static int calculateInSampleSize(BitmapFactory.Options options,
 			int reqWidth, int reqHeight) {
 		// Raw height and width of image
@@ -85,6 +104,14 @@ public class ImageLoadingFactory {
 		return inSampleSize;
 	}
 
+	/**
+	 * Sends request to load the image from the SD card
+	 * @param picture
+	 * @param resId
+	 * @param imageView
+	 * @param imageSize
+	 * @param shouldCache
+	 */
 	public static void loadBitmap(Picture picture, Uri resId,
 			ImageView imageView, int imageSize, boolean shouldCache) {
 		if (BitmapWorkerTask.cancelPotentialWork(resId, imageView)) {

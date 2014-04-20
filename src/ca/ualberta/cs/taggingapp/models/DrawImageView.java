@@ -34,6 +34,9 @@ public class DrawImageView extends ImageView {
 		paint.setAntiAlias(true);
 	}
 
+	/**
+	 * @return the upper left point
+	 */
 	public Point getUpperLeftPoint() {
 		int x = Math.round(startPoint.x);
 		int y = Math.round(startPoint.y);
@@ -41,6 +44,9 @@ public class DrawImageView extends ImageView {
 		return point;
 	}
 
+	/**
+	 * @return the lower right point
+	 */
 	public Point getLowerRightPoint() {
 		int x = Math.round(endPoint.x);
 		int y = Math.round(endPoint.y);
@@ -48,6 +54,9 @@ public class DrawImageView extends ImageView {
 		return point;
 	}
 
+	/* (non-Javadoc)
+	 * @see android.widget.ImageView#onDraw(android.graphics.Canvas)
+	 */
 	@Override
 	protected void onDraw(Canvas canvas) {
 		super.onDraw(canvas);
@@ -57,6 +66,9 @@ public class DrawImageView extends ImageView {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see android.view.View#onTouchEvent(android.view.MotionEvent)
+	 */
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
 		BoundingBoxSetting boundingBoxSetting = ActiveUserModel.getShared()
