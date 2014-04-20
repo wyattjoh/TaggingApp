@@ -4,10 +4,13 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Point;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Toast;
 import ca.ualberta.cs.taggingapp.R;
 import ca.ualberta.cs.taggingapp.models.ActiveUserModel;
 import ca.ualberta.cs.taggingapp.models.BoundingBoxSetting;
@@ -34,6 +37,7 @@ public class AddTag extends Activity {
 		Picture thePicture = PictureList.getInstance().getSelected();
 		drawImageView = (DrawImageView) findViewById(R.id.drawImageView);
 		drawImageView.setPicture(thePicture);
+		region = null;
 
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
@@ -73,10 +77,13 @@ public class AddTag extends Activity {
 		// Handles presses on the action bar items
 		switch (item.getItemId()) {
 		case R.id.accept:
-			addRegion();
-			Intent i = new Intent(AddTag.this, AddNameToTag.class);
-			startActivity(i);
-			finish();
+			if (addRegion()) {
+				Intent i = new Intent(AddTag.this, AddNameToTag.class);
+				startActivity(i);
+				finish();
+			} else {
+				Toast.makeText(getApplicationContext(), "No Region Selected!", Toast.LENGTH_LONG).show();
+			}
 			return true;
 		case R.id.decline:
 			finish();
@@ -87,11 +94,18 @@ public class AddTag extends Activity {
 	}
 
 	// Handles getting the region data and creating the new region instance
-	protected void addRegion() {
+	protected boolean addRegion() {
 		Picture pic = PictureList.getInstance().getSelected();
 
-		region = new Region(pic, drawImageView.getUpperLeftPoint(),
-				drawImageView.getLowerRightPoint());
+		Point upperLeftPoint = drawImageView.getUpperLeftPoint();
+		Point lowerRightPoint = drawImageView.getLowerRightPoint();
+
+		if (upperLeftPoint != null && lowerRightPoint != null) {
+			region = new Region(pic, upperLeftPoint, lowerRightPoint);
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	@Override

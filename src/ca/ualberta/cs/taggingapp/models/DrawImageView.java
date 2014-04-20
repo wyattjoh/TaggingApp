@@ -20,8 +20,8 @@ import android.widget.ImageView;
 public class DrawImageView extends ImageView {
 
 	private Paint paint;
-	private PointF startPoint = null;
-	private PointF endPoint = null;
+	private PointF startPoint;
+	private PointF endPoint;
 	private boolean isDrawing;
 
 	public DrawImageView(Context context, AttributeSet attrs) {
@@ -32,15 +32,23 @@ public class DrawImageView extends ImageView {
 		paint.setStyle(Style.STROKE);
 		paint.setStrokeWidth(2);
 		paint.setAntiAlias(true);
+		
+		startPoint = null;
+		endPoint = null;
 	}
 
 	/**
 	 * @return the upper left point
 	 */
 	public Point getUpperLeftPoint() {
-		int x = Math.round(startPoint.x);
-		int y = Math.round(startPoint.y);
-		Point point = new Point(x, y);
+		Point point = null;
+		if (startPoint != null) {
+			int x = Math.round(startPoint.x);
+			int y = Math.round(startPoint.y);
+
+			point = new Point(x, y);
+		}
+
 		return point;
 	}
 
@@ -48,9 +56,14 @@ public class DrawImageView extends ImageView {
 	 * @return the lower right point
 	 */
 	public Point getLowerRightPoint() {
-		int x = Math.round(endPoint.x);
-		int y = Math.round(endPoint.y);
-		Point point = new Point(x, y);
+		Point point = null;
+		if (endPoint != null) {
+			int x = Math.round(endPoint.x);
+			int y = Math.round(endPoint.y);
+
+			point = new Point(x, y);
+		}
+
 		return point;
 	}
 
