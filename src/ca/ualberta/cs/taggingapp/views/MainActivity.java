@@ -17,7 +17,7 @@ import ca.ualberta.cs.taggingapp.models.RegionList;
 import ca.ualberta.cs.taggingapp.models.TagList;
 
 /**
- * @author Tagging Gtroup The main activity of the app. Because this is the log
+ * @author Tagging Group The main activity of the app. Because this is the log
  *         in screen, the user is only brought here if they have never
  *         previously used the app, or if they logged out since their last
  *         session

@@ -21,7 +21,7 @@ import ca.ualberta.cs.taggingapp.models.Tag;
 import ca.ualberta.cs.taggingapp.models.TagList;
 
 /**
- * @author Tagging Gtroup Activity that controls the text input screen for
+ * @author Tagging Group Activity that controls the text input screen for
  *         adding names to new bounding boxes. After a bounding box is selected
  *         from the previous screen (AddTag), the user is brought to this screen
  *         to assign a new name and URL to the region.
