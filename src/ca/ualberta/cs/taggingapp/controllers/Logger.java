@@ -10,12 +10,21 @@ import ca.ualberta.cs.taggingapp.models.BoundingBoxSetting;
 public class Logger {
 	private static LoggerAction theAction = new LoggerAction();
 
+	/**
+	 * Start the logging
+	 * 
+	 * @param theUser
+	 * @param tagMethod
+	 */
 	public static void start(String theUser, BoundingBoxSetting tagMethod) {
 		theAction.setStartTime();
 		theAction.setTheUser(theUser);
 		theAction.setTheMethod(tagMethod.getName());
 	}
 
+	/**
+	 * End the logging
+	 */
 	public static void end() {
 		theAction.setEndTime();
 		pushTestStats();
