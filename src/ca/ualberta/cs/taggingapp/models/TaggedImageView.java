@@ -30,8 +30,6 @@ public class TaggedImageView extends ImageView {
 
 	private void init() {
 		paint = new Paint();
-		paint.setColor(Color.WHITE);
-		paint.setStyle(Style.STROKE);
 		paint.setStrokeWidth(2);
 		paint.setAntiAlias(true);
 	}
@@ -39,38 +37,41 @@ public class TaggedImageView extends ImageView {
 	public void setPicture(Picture picture) {
 		this.picture = picture;
 
-		Bitmap theBitmap;
-
-		try {
-			theBitmap = picture.getPicture();
-
-			this.setImageBitmap(theBitmap);
-
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		this.picture.setLargeBitmapOnImageView(this);
 	}
 
 	@Override
 	protected void onDraw(Canvas canvas) {
 		super.onDraw(canvas);
-		
+
 		ArrayList<Region> theRegions = this.picture.getRegions();
 
-		for (int i = 0; i < theRegions.size(); i++) {
-			Region theRegion = theRegions.get(i);
-			
+		paint.setColor(Color.rgb(232, 232, 232));
+		for (Region theRegion : theRegions) {
+			paint.setAlpha(60);
+			paint.setStyle(Style.FILL);
 			canvas.drawRect(theRegion.getUpperLeftCorner().x,
 					theRegion.getUpperLeftCorner().y,
 					theRegion.getLowerRightCorner().x,
 					theRegion.getLowerRightCorner().y, paint);
 			
+			paint.setStyle(Style.STROKE);
+			paint.setAlpha(255);
+			canvas.drawRect(theRegion.getUpperLeftCorner().x,
+					theRegion.getUpperLeftCorner().y,
+					theRegion.getLowerRightCorner().x,
+					theRegion.getLowerRightCorner().y, paint);
+		}
+
+		paint.setColor(Color.WHITE);
+		paint.setAlpha(255);
+		for (int i = 0; i < theRegions.size(); i++) {
+			Region theRegion = theRegions.get(i);
+			
 			paint.setTextSize(20);
-			canvas.drawText(Integer.toString(i + 1), theRegion.getUpperLeftCorner().x + 5, theRegion.getUpperLeftCorner().y + 20, paint); 
+			canvas.drawText(Integer.toString(i + 1),
+					theRegion.getUpperLeftCorner().x + 5,
+					theRegion.getUpperLeftCorner().y + 20, paint);
 		}
 	}
 }

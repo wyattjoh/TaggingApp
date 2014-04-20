@@ -86,14 +86,6 @@ public class GridViewFragment extends Fragment {
 		}
 	}
 
-	// If the user returns to this activity, have the adapter check the dataset
-	// again and update the gridview if necessary
-	@Override
-	public void onResume() {
-		super.onResume();
-		gia.notifyDataSetChanged();
-	}
-
 	protected void newPicture() {
 		// calls camera code
 		Intent i = new Intent(getActivity(), CameraAndPhoto.class);

@@ -5,7 +5,6 @@ import java.io.IOException;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -44,15 +43,7 @@ public class TagAndPhoto extends Activity {
 		tag = TagList.getInstance().get(tagId);
 
 		ImageView img = (ImageView) findViewById(R.id.picViewer);
-		try {
-			img.setImageBitmap(thePicture.getPicture());
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		thePicture.setLargeBitmapOnImageView(img);
 
 		// Append to the textview
 		TextView tagName = (TextView) findViewById(R.id.tag);
@@ -63,13 +54,6 @@ public class TagAndPhoto extends Activity {
 
 		Button moreImages = (Button) findViewById(R.id.morePhotosWTag);
 		moreImages.append(tag.getName());
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.tag_and_photo, menu);
-		return true;
 	}
 
 	// OnClick for the 'more photos' button

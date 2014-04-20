@@ -6,8 +6,11 @@ import java.io.IOException;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.widget.ImageView;
+import ca.ualberta.cs.taggingapp.controllers.BitmapWorkerTask;
 
 /**
  * A factory class that receives a uri of an image and loads the image.
@@ -67,5 +70,17 @@ public class ImageLoadingFactory {
 		o2.inSampleSize = scale;
 		return BitmapFactory.decodeStream(getInstance().context
 				.getContentResolver().openInputStream(uri), null, o2);
+	}
+
+	public static void loadBitmap(Uri resId, ImageView imageView, int imageSize) {
+		if (BitmapWorkerTask.cancelPotentialWork(resId, imageView)) {
+			final BitmapWorkerTask task = new BitmapWorkerTask(imageView,
+					imageSize);
+			final AsyncDrawable asyncDrawable = new AsyncDrawable(
+					getInstance().context.getResources(), null,
+					task);
+			imageView.setImageDrawable(asyncDrawable);
+			task.execute(resId);
+		}
 	}
 }

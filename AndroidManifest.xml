@@ -25,7 +25,8 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name="ca.ualberta.cs.taggingapp.views.MainActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -38,7 +39,8 @@
         </activity>
         <activity
             android:name="ca.ualberta.cs.taggingapp.views.SignUp"
-            android:label="@string/title_activity_sign_up" >
+            android:label="@string/title_activity_sign_up"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="ca.ualberta.cs.taggingapp.views.SwipeSuper"
@@ -47,15 +49,19 @@
         </activity>
         <activity
             android:name="ca.ualberta.cs.taggingapp.views.ViewFullPic"
-            android:label="@string/title_activity_view_full_pic" >
+            android:label="@string/title_activity_view_full_pic"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="ca.ualberta.cs.taggingapp.views.TagAndPhoto"
-            android:label="@string/title_activity_tag_and_photo" >
+            android:label="@string/title_activity_tag_and_photo"
+            android:screenOrientation="portrait"
+             >
         </activity>
         <activity
             android:name="ca.ualberta.cs.taggingapp.views.TagRefinedImages"
-            android:label="@string/title_activity_tag_refined_images" >
+            android:label="@string/title_activity_tag_refined_images"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="ca.ualberta.cs.taggingapp.views.EditTag"
@@ -63,7 +69,8 @@
         </activity>
         <activity
             android:name="ca.ualberta.cs.taggingapp.views.AddTag"
-            android:label="@string/title_activity_add_tag" >
+            android:label="@string/title_activity_add_tag"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="ca.ualberta.cs.taggingapp.views.AddNameToTag"

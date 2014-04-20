@@ -12,7 +12,6 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.Toast;
 import ca.ualberta.cs.taggingapp.R;
 import ca.ualberta.cs.taggingapp.models.Picture;
 import ca.ualberta.cs.taggingapp.models.PictureList;
@@ -58,8 +57,6 @@ public class AddNameToTag extends Activity {
 					int position, long id) {
 
 				Tag tag = adapter.getItem(position);
-				Toast.makeText(getApplicationContext(), "Tag: " + tag.getId(),
-						Toast.LENGTH_LONG).show();
 
 				finishTaggingAction(tag);
 			}

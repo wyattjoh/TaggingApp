@@ -56,13 +56,8 @@ public class GridImageAdapter extends BaseAdapter {
 	public View getView(int position, View convertView, ViewGroup parent) {
 		ImageView imageView = new ImageView(theContext);
 		Picture thePictue = getItem(position);
-
-		try {
-			imageView.setImageBitmap(thePictue.getSmallPicture());
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
+		thePictue.setSmallBitmapOnImageView(imageView);
 
 		imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
 		imageView.setLayoutParams(new GridView.LayoutParams(160, 160));

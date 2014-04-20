@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
 import ca.ualberta.cs.taggingapp.R;
@@ -43,14 +42,6 @@ public class EditTag extends Activity {
 		EditText tagNameField = (EditText) findViewById(R.id.tag_edit);
 		tagNameField.setText(theTag.getName());
 
-	}
-
-	// Set the right menu options
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.edit_tag, menu);
-		return true;
 	}
 
 	public void deleteTag(View view) {

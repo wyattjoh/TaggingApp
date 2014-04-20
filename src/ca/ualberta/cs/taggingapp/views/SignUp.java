@@ -5,7 +5,6 @@ import ca.ualberta.cs.taggingapp.controllers.UserController;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
-import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -40,13 +39,6 @@ public class SignUp extends Activity {
 	private void populateView(String emailString) {
 		EditText emailField = (EditText) findViewById(R.id.email);
 		emailField.setText(emailString);
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.sign_up, menu);
-		return true;
 	}
 
 	/*
