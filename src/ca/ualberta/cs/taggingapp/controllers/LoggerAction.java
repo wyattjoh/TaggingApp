@@ -2,6 +2,11 @@ package ca.ualberta.cs.taggingapp.controllers;
 
 import java.util.Date;
 
+/**
+ * Data structure for the logging actions such that it will 
+ * contain all the info for performing an aSync log.
+ **/
+
 public class LoggerAction {
 	private String theMethod;
 	private Long startTime;
