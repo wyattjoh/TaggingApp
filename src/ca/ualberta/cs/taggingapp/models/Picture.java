@@ -1,12 +1,9 @@
 package ca.ualberta.cs.taggingapp.models;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.util.Log;
 import android.widget.ImageView;
-import ca.ualberta.cs.taggingapp.controllers.BitmapWorkerTask;
 
 /**
  * A picture class that models all properties of a picture.
@@ -14,18 +11,11 @@ import ca.ualberta.cs.taggingapp.controllers.BitmapWorkerTask;
  * */
 
 public class Picture extends RegionObject {
-	private transient Bitmap smallPicture = null;
 	private transient Bitmap picture = null;
 	private String picturePath = null;
 
 	public Picture() {
 		super();
-	}
-
-	public Picture(Bitmap bitmap) {
-		this();
-
-		this.picture = bitmap;
 	}
 
 	public Picture(String uri) {
@@ -40,11 +30,8 @@ public class Picture extends RegionObject {
 		this.picturePath = uri.toString();
 	}
 
-	public Picture(Bitmap bitmap, String uri) {
-		this();
-
-		this.picture = bitmap;
-		this.picturePath = uri;
+	public void setPicture(Bitmap picture) {
+		this.picture = picture;
 	}
 
 	public Uri getPictureUri() {
@@ -54,30 +41,23 @@ public class Picture extends RegionObject {
 	public void setPictureUri(Uri uri) {
 		this.picturePath = uri.toString();
 	}
-	
-	private void setBitmapOnImageViewForSize(ImageView theImageView, int theSize) {
-		ImageLoadingFactory.loadBitmap(getPictureUri(), theImageView, theSize);
+
+	private void setBitmapOnImageViewForSize(ImageView theImageView,
+			int theSize, boolean shouldCache) {
+		ImageLoadingFactory.loadBitmap(this, getPictureUri(), theImageView,
+				theSize, shouldCache);
 	}
-	
+
 	public void setLargeBitmapOnImageView(ImageView theImageView) {
-		setBitmapOnImageViewForSize(theImageView, 2000);
+		setBitmapOnImageViewForSize(theImageView, 2000, false);
 	}
 
 	public void setSmallBitmapOnImageView(ImageView theImageView) {
-		setBitmapOnImageViewForSize(theImageView, 200);
-	}
-	
-	public Bitmap getPicture() throws FileNotFoundException, IOException {
 		if (picture == null) {
-			// Load the picture from the URI
-			picture = ImageLoadingFactory.decodeScaledBitmapFromUri(
-					getPictureUri(), 2000);
+			setBitmapOnImageViewForSize(theImageView, 200, true);
+		} else {
+			theImageView.setImageBitmap(picture);
+			Log.w("Picture", "Cached image loaded.");
 		}
-
-		return picture;
-	}
-
-	public void setPicture(Bitmap picture) {
-		this.picture = picture;
 	}
 }

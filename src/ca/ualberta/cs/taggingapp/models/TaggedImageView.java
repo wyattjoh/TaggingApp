@@ -1,11 +1,8 @@
 package ca.ualberta.cs.taggingapp.models;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.ArrayList;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -54,7 +51,7 @@ public class TaggedImageView extends ImageView {
 					theRegion.getUpperLeftCorner().y,
 					theRegion.getLowerRightCorner().x,
 					theRegion.getLowerRightCorner().y, paint);
-			
+
 			paint.setStyle(Style.STROKE);
 			paint.setAlpha(255);
 			canvas.drawRect(theRegion.getUpperLeftCorner().x,
@@ -67,7 +64,7 @@ public class TaggedImageView extends ImageView {
 		paint.setAlpha(255);
 		for (int i = 0; i < theRegions.size(); i++) {
 			Region theRegion = theRegions.get(i);
-			
+
 			paint.setTextSize(20);
 			canvas.drawText(Integer.toString(i + 1),
 					theRegion.getUpperLeftCorner().x + 5,

@@ -19,19 +19,20 @@ public class TagArrayAdapter extends ArrayAdapter<Tag> {
 	public TagArrayAdapter(Context context, ArrayList<Tag> objects) {
 		super(context, R.layout.list_item, objects);
 		this.theFilter = new NameFilter();
-		
+
 		// Complete a shallow copy
-		for (Tag aTag: objects) {
+		for (Tag aTag : objects) {
 			this.theBackupObjects.add(aTag);
 		}
 	}
-	
-	public TagArrayAdapter(Context context, ArrayList<Tag> objects, Boolean withIndex) {
+
+	public TagArrayAdapter(Context context, ArrayList<Tag> objects,
+			Boolean withIndex) {
 		this(context, objects);
-		
+
 		this.withIndex = withIndex;
 	}
-	
+
 	private void reloadDataFromBackup() {
 		this.clear();
 		this.addAll(theBackupObjects);
@@ -57,9 +58,10 @@ public class TagArrayAdapter extends ArrayAdapter<Tag> {
 		Tag theTag = getItem(position);
 
 		TextView theRowView = (TextView) theView.findViewById(R.id.theRowText);
-		
+
 		if (withIndex) {
-			theRowView.setText(Integer.toString(position + 1) + ". " + theTag.getName());
+			theRowView.setText(Integer.toString(position + 1) + ". "
+					+ theTag.getName());
 		} else {
 			theRowView.setText(theTag.getName());
 		}
@@ -69,15 +71,15 @@ public class TagArrayAdapter extends ArrayAdapter<Tag> {
 
 		@Override
 		protected FilterResults performFiltering(CharSequence constraint) {
-			FilterResults filterResults = new FilterResults();  
+			FilterResults filterResults = new FilterResults();
 			ArrayList<Tag> theResults = new ArrayList<Tag>();
-			
+
 			int theLength = TagArrayAdapter.this.getCount();
-			
+
 			String theConstraint = constraint.toString();
-			
+
 			if (theConstraint.length() > 0) {
-			
+
 				for (int i = 0; i < theLength; i++) {
 					Tag theTag = TagArrayAdapter.this.getItem(i);
 
@@ -85,12 +87,12 @@ public class TagArrayAdapter extends ArrayAdapter<Tag> {
 						theResults.add(theTag);
 					}
 				}
-			
+
 			}
-			
+
 			filterResults.values = theResults;
 			filterResults.count = theResults.size();
-			
+
 			return filterResults;
 		}
 
@@ -99,7 +101,7 @@ public class TagArrayAdapter extends ArrayAdapter<Tag> {
 		protected void publishResults(CharSequence constraint,
 				FilterResults results) {
 			ArrayList<Tag> theResults = (ArrayList<Tag>) results.values;
-			
+
 			if (theResults.size() > 0) {
 				TagArrayAdapter.this.clear();
 				TagArrayAdapter.this.addAll(theResults);
@@ -108,10 +110,12 @@ public class TagArrayAdapter extends ArrayAdapter<Tag> {
 				reloadDataFromBackup();
 			}
 		}
-		
+
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.widget.ArrayAdapter#getFilter()
 	 */
 	@Override

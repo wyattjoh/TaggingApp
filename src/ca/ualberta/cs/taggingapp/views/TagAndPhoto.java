@@ -1,7 +1,5 @@
 package ca.ualberta.cs.taggingapp.views;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;

@@ -5,6 +5,7 @@ import java.lang.ref.WeakReference;
 
 import ca.ualberta.cs.taggingapp.models.AsyncDrawable;
 import ca.ualberta.cs.taggingapp.models.ImageLoadingFactory;
+import ca.ualberta.cs.taggingapp.models.Picture;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -15,11 +16,14 @@ public class BitmapWorkerTask extends AsyncTask<Uri, Void, Bitmap> {
 	private final WeakReference<ImageView> imageViewReference;
 	private final int imageSize;
 	private Uri data = null;
+	private Picture thePicture = null;
 
-	public BitmapWorkerTask(ImageView imageView, int imageViewSize) {
+	public BitmapWorkerTask(Picture picture, ImageView imageView,
+			int imageViewSize) {
 		// Use a WeakReference to ensure the ImageView can be garbage collected
 		imageViewReference = new WeakReference<ImageView>(imageView);
 		imageSize = imageViewSize;
+		thePicture = picture;
 	}
 
 	// Decode image in background.
@@ -28,7 +32,8 @@ public class BitmapWorkerTask extends AsyncTask<Uri, Void, Bitmap> {
 		data = params[0];
 
 		try {
-			return ImageLoadingFactory.decodeScaledBitmapFromUri(data, imageSize);
+			return ImageLoadingFactory.decodeScaledBitmapFromUri(data,
+					imageSize);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -44,10 +49,14 @@ public class BitmapWorkerTask extends AsyncTask<Uri, Void, Bitmap> {
 			final ImageView imageView = imageViewReference.get();
 			if (imageView != null) {
 				imageView.setImageBitmap(bitmap);
+
+				if (thePicture != null) {
+					thePicture.setPicture(bitmap);
+				}
 			}
 		}
 	}
-	
+
 	public static boolean cancelPotentialWork(Uri data, ImageView imageView) {
 		final BitmapWorkerTask bitmapWorkerTask = getBitmapWorkerTask(imageView);
 

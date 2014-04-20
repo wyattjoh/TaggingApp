@@ -1,6 +1,5 @@
 package ca.ualberta.cs.taggingapp.views;
 
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 import android.content.Context;
@@ -56,7 +55,7 @@ public class GridImageAdapter extends BaseAdapter {
 	public View getView(int position, View convertView, ViewGroup parent) {
 		ImageView imageView = new ImageView(theContext);
 		Picture thePictue = getItem(position);
-		
+
 		thePictue.setSmallBitmapOnImageView(imageView);
 
 		imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);

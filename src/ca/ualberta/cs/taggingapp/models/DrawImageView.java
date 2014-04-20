@@ -1,10 +1,6 @@
 package ca.ualberta.cs.taggingapp.models;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -56,7 +52,8 @@ public class DrawImageView extends ImageView {
 	protected void onDraw(Canvas canvas) {
 		super.onDraw(canvas);
 		if (isDrawing) {
-			canvas.drawRect(startPoint.x, startPoint.y, endPoint.x, endPoint.y, paint);
+			canvas.drawRect(startPoint.x, startPoint.y, endPoint.x, endPoint.y,
+					paint);
 		}
 	}
 
@@ -139,13 +136,6 @@ public class DrawImageView extends ImageView {
 	}
 
 	public void setPicture(Picture picture) {
-		try {
-			Bitmap theBitmap = picture.getPicture();
-			setImageBitmap(theBitmap);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		picture.setLargeBitmapOnImageView(this);
 	}
 }

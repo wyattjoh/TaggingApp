@@ -6,7 +6,6 @@ import java.io.IOException;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.widget.ImageView;
@@ -72,13 +71,18 @@ public class ImageLoadingFactory {
 				.getContentResolver().openInputStream(uri), null, o2);
 	}
 
-	public static void loadBitmap(Uri resId, ImageView imageView, int imageSize) {
+	public static void loadBitmap(Picture picture, Uri resId,
+			ImageView imageView, int imageSize, boolean shouldCache) {
 		if (BitmapWorkerTask.cancelPotentialWork(resId, imageView)) {
-			final BitmapWorkerTask task = new BitmapWorkerTask(imageView,
-					imageSize);
+			final BitmapWorkerTask task;
+			if (shouldCache) {
+				task = new BitmapWorkerTask(picture, imageView, imageSize);
+			} else {
+				task = new BitmapWorkerTask(null, imageView, imageSize);
+			}
+
 			final AsyncDrawable asyncDrawable = new AsyncDrawable(
-					getInstance().context.getResources(), null,
-					task);
+					getInstance().context.getResources(), null, task);
 			imageView.setImageDrawable(asyncDrawable);
 			task.execute(resId);
 		}
