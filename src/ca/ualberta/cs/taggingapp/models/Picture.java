@@ -2,7 +2,6 @@ package ca.ualberta.cs.taggingapp.models;
 
 import android.graphics.Bitmap;
 import android.net.Uri;
-import android.util.Log;
 import android.widget.ImageView;
 
 /**
@@ -49,15 +48,14 @@ public class Picture extends RegionObject {
 	}
 
 	public void setLargeBitmapOnImageView(ImageView theImageView) {
-		setBitmapOnImageViewForSize(theImageView, 2000, false);
+		setBitmapOnImageViewForSize(theImageView, 1000, false);
 	}
 
 	public void setSmallBitmapOnImageView(ImageView theImageView) {
 		if (picture == null) {
-			setBitmapOnImageViewForSize(theImageView, 200, true);
+			setBitmapOnImageViewForSize(theImageView, 160, true);
 		} else {
 			theImageView.setImageBitmap(picture);
-			Log.w("Picture", "Cached image loaded.");
 		}
 	}
 }

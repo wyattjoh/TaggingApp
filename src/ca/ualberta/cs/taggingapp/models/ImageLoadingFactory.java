@@ -49,26 +49,40 @@ public class ImageLoadingFactory {
 	// decodes the scaled uri passed in and returns a bitmap
 	public static Bitmap decodeScaledBitmapFromUri(Uri uri, int requiredSize)
 			throws FileNotFoundException {
-		BitmapFactory.Options o = new BitmapFactory.Options();
-		o.inJustDecodeBounds = true;
+		BitmapFactory.Options options = new BitmapFactory.Options();
+		options.inJustDecodeBounds = true;
 		BitmapFactory.decodeStream(getInstance().context.getContentResolver()
-				.openInputStream(uri), null, o);
+				.openInputStream(uri), null, options);
 
-		int width_tmp = o.outWidth, height_tmp = o.outHeight;
-		int scale = 1;
+		options.inSampleSize = calculateInSampleSize(options, requiredSize, requiredSize);
+		options.inJustDecodeBounds = false;
 
-		while (true) {
-			if (width_tmp / 2 < requiredSize || height_tmp / 2 < requiredSize)
-				break;
-			width_tmp /= 2;
-			height_tmp /= 2;
-			scale *= 2;
+		return BitmapFactory.decodeStream(getInstance().context
+				.getContentResolver().openInputStream(uri), null, options);
+	}
+
+	private static int calculateInSampleSize(BitmapFactory.Options options,
+			int reqWidth, int reqHeight) {
+		// Raw height and width of image
+		final int height = options.outHeight;
+		final int width = options.outWidth;
+		int inSampleSize = 1;
+
+		if (height > reqHeight || width > reqWidth) {
+
+			final int halfHeight = height / 2;
+			final int halfWidth = width / 2;
+
+			// Calculate the largest inSampleSize value that is a power of 2 and
+			// keeps both
+			// height and width larger than the requested height and width.
+			while ((halfHeight / inSampleSize) > reqHeight
+					&& (halfWidth / inSampleSize) > reqWidth) {
+				inSampleSize *= 2;
+			}
 		}
 
-		BitmapFactory.Options o2 = new BitmapFactory.Options();
-		o2.inSampleSize = scale;
-		return BitmapFactory.decodeStream(getInstance().context
-				.getContentResolver().openInputStream(uri), null, o2);
+		return inSampleSize;
 	}
 
 	public static void loadBitmap(Picture picture, Uri resId,

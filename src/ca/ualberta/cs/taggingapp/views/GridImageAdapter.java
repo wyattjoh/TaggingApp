@@ -12,6 +12,7 @@ import ca.ualberta.cs.taggingapp.models.Picture;
 import ca.ualberta.cs.taggingapp.models.PictureList;
 import ca.ualberta.cs.taggingapp.models.RegionList;
 import ca.ualberta.cs.taggingapp.models.Tag;
+import ca.ualberta.cs.taggingapp.models.TagObject;
 
 /**
  * @author Tagging Gtroup Simple adapter to map images to the main gridview.
@@ -54,15 +55,34 @@ public class GridImageAdapter extends BaseAdapter {
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		ImageView imageView = new ImageView(theContext);
-		Picture thePictue = getItem(position);
+		Picture thePicture = getItem(position);
+		String thePictureId = thePicture.getId();
 
-		thePictue.setSmallBitmapOnImageView(imageView);
+		TagObject theViewTagObject = (TagObject) imageView.getTag();
+
+		if (theViewTagObject == null) {
+			populateImageView(position, imageView, thePicture);
+		} else {
+			String theTaggedPictureId = theViewTagObject.getThePicture()
+					.getId();
+
+			if (!(theTaggedPictureId.equals(thePictureId))) {
+				populateImageView(position, imageView, thePicture);
+			}
+		}
+
+		return imageView;
+	}
+
+	protected void populateImageView(int position, ImageView imageView,
+			Picture thePicture) {
+		TagObject theTagObject = new TagObject(position, thePicture);
+		imageView.setTag(theTagObject);
+		
+		thePicture.setSmallBitmapOnImageView(imageView);
 
 		imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
 		imageView.setLayoutParams(new GridView.LayoutParams(160, 160));
-		imageView.setTag(position);
-
-		return imageView;
 	}
 
 }

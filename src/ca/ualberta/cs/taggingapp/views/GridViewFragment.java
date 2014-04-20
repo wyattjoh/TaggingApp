@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import ca.ualberta.cs.taggingapp.R;
 import ca.ualberta.cs.taggingapp.models.PictureList;
+import ca.ualberta.cs.taggingapp.models.TagObject;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -22,7 +23,7 @@ import android.widget.GridView;
  * 
  */
 public class GridViewFragment extends Fragment {
-	private GridImageAdapter gia = null;
+	private GridImageAdapter gridImageAdapter = null;
 
 	/*
 	 * (non-Javadoc)
@@ -47,8 +48,8 @@ public class GridViewFragment extends Fragment {
 				.findViewById(R.id.photo_grid_view);
 
 		// Instance of ImageAdapter Class
-		gia = new GridImageAdapter(getActivity(), null);
-		gridView.setAdapter(gia);
+		gridImageAdapter = new GridImageAdapter(getActivity(), null);
+		gridView.setAdapter(gridImageAdapter);
 
 		// When an image is selected, find the correct image and start the new
 		// activity
@@ -58,9 +59,9 @@ public class GridViewFragment extends Fragment {
 					int position, long id) {
 				Intent i = new Intent(rootView.getContext(), ViewFullPic.class);
 
-				Integer imagePosition = (Integer) v.getTag();
+				TagObject imagePosition = (TagObject) v.getTag();
 
-				PictureList.getInstance().setSelected(imagePosition);
+				PictureList.getInstance().setSelected(imagePosition.getThePosition());
 
 				startActivity(i);
 			}
@@ -108,7 +109,7 @@ public class GridViewFragment extends Fragment {
 				Uri photoUri = Uri.parse(data
 						.getStringExtra(CameraAndPhoto.PHOTO_URI));
 				PictureList.getInstance().add(photoUri);
-				gia.notifyDataSetChanged();
+				gridImageAdapter.notifyDataSetChanged();
 
 			} else if (resultCode == Activity.RESULT_CANCELED) {
 

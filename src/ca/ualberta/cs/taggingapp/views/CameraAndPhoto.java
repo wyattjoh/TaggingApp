@@ -12,7 +12,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.util.Log;
 
 /**
  * @author Tagging Gtroup Activity that handles taking and saving a photo
@@ -108,7 +107,6 @@ public class CameraAndPhoto extends Activity {
 	}
 
 	private void galleryAddPic() {
-		Log.w("CameraAndPhoto", "Photo saved to: " + mCurrentPhotoPath);
 		Intent mediaScanIntent = new Intent(
 				Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, mCurrentPhotoUri);
 		getApplicationContext().sendBroadcast(mediaScanIntent);

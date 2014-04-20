@@ -12,6 +12,7 @@ import ca.ualberta.cs.taggingapp.R;
 import ca.ualberta.cs.taggingapp.models.PictureList;
 import ca.ualberta.cs.taggingapp.models.Tag;
 import ca.ualberta.cs.taggingapp.models.TagList;
+import ca.ualberta.cs.taggingapp.models.TagObject;
 
 /**
  * @author Tagging Group Activity that displays photos with the same tag in a
@@ -56,9 +57,9 @@ public class TagRefinedImages extends Activity {
 					int position, long id) {
 				Intent i = new Intent(TagRefinedImages.this, ViewFullPic.class);
 
-				Integer imagePosition = (Integer) v.getTag();
+				TagObject imagePosition = (TagObject) v.getTag();
 
-				PictureList.getInstance().setSelected(imagePosition);
+				PictureList.getInstance().setSelected(imagePosition.getThePicture());
 
 				startActivity(i);
 			}

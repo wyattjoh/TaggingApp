@@ -69,7 +69,12 @@ public class PictureList extends SavedList<Picture> {
 	 * Sets the selected image
 	 */
 	public void setSelected(int position) {
-		selectedPicture = this.theList.get(position);
+		Picture thePicture = this.theList.get(position);
+		setSelected(thePicture);
+	}
+	
+	public void setSelected(Picture thePicture) {
+		selectedPicture = thePicture;
 	}
 
 	/*
