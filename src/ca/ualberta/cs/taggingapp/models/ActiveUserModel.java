@@ -23,8 +23,8 @@ public class ActiveUserModel {
 		this.theUser = theSavedUserModel.load();
 	}
 
-	/*
-	 * Creates a new shared object
+	/**
+	 * Creates a new shared user model
 	 */
 	public static ActiveUserModel createShared(Context theContext) {
 		if (singleton == null) {
@@ -34,6 +34,11 @@ public class ActiveUserModel {
 		return singleton;
 	}
 
+	/**
+	 * Gets the shared user model
+	 * 
+	 * @return
+	 */
 	public static ActiveUserModel getShared() {
 		if (singleton == null) {
 			throw new RuntimeException(
@@ -43,6 +48,13 @@ public class ActiveUserModel {
 		return singleton;
 	}
 
+	/**
+	 * Perform the login for the email and the password
+	 * 
+	 * @param theEmail
+	 * @param thePassword
+	 * @return True if valid login, False if invalid login
+	 */
 	public Boolean performLogin(String theEmail, String thePassword) {
 		if (isLoggedIn()) {
 			performLogout();
@@ -65,10 +77,19 @@ public class ActiveUserModel {
 
 	}
 
+	/**
+	 * Perform authentication, currently return True
+	 * 
+	 * @param theUser
+	 * @return
+	 */
 	public Boolean authenticateUser(User theUser) {
 		return true;
 	}
 
+	/**
+	 * Perform the logout of the user, removes all the shared instance data
+	 */
 	public void performLogout() {
 		theUser = null;
 
@@ -79,6 +100,9 @@ public class ActiveUserModel {
 		RegionList.getInstance().remove();
 	}
 
+	/**
+	 * @return True if logged in, false if not 
+	 */
 	public Boolean isLoggedIn() {
 		if (theUser == null) {
 			return false;
@@ -87,6 +111,10 @@ public class ActiveUserModel {
 		}
 	}
 
+	/**
+	 * Gets the user object
+	 * @return the user object
+	 */
 	public User getUser() {
 		return theUser;
 	}
