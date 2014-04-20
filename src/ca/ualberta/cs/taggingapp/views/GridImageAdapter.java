@@ -78,7 +78,7 @@ public class GridImageAdapter extends BaseAdapter {
 			Picture thePicture) {
 		TagObject theTagObject = new TagObject(position, thePicture);
 		imageView.setTag(theTagObject);
-		
+
 		thePicture.setSmallBitmapOnImageView(imageView);
 
 		imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);

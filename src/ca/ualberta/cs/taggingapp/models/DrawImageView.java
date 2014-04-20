@@ -54,7 +54,9 @@ public class DrawImageView extends ImageView {
 		return point;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.widget.ImageView#onDraw(android.graphics.Canvas)
 	 */
 	@Override
@@ -66,7 +68,9 @@ public class DrawImageView extends ImageView {
 		}
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.view.View#onTouchEvent(android.view.MotionEvent)
 	 */
 	@Override
@@ -147,7 +151,7 @@ public class DrawImageView extends ImageView {
 		return true;
 	}
 
-	//sets the picture
+	// sets the picture
 	public void setPicture(Picture picture) {
 		picture.setLargeBitmapOnImageView(this);
 	}

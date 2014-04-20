@@ -101,7 +101,7 @@ public class ActiveUserModel {
 	}
 
 	/**
-	 * @return True if logged in, false if not 
+	 * @return True if logged in, false if not
 	 */
 	public Boolean isLoggedIn() {
 		if (theUser == null) {
@@ -113,6 +113,7 @@ public class ActiveUserModel {
 
 	/**
 	 * Gets the user object
+	 * 
 	 * @return the user object
 	 */
 	public User getUser() {

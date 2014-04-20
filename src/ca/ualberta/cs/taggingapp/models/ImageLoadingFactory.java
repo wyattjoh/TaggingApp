@@ -41,6 +41,7 @@ public class ImageLoadingFactory {
 
 	/**
 	 * Gets the bitmap from the provided uri
+	 * 
 	 * @param imageUri
 	 * @return
 	 * @throws FileNotFoundException
@@ -54,6 +55,7 @@ public class ImageLoadingFactory {
 
 	/**
 	 * decodes the scaled uri passed in and returns a bitmap
+	 * 
 	 * @param uri
 	 * @param requiredSize
 	 * @return
@@ -66,7 +68,8 @@ public class ImageLoadingFactory {
 		BitmapFactory.decodeStream(getInstance().context.getContentResolver()
 				.openInputStream(uri), null, options);
 
-		options.inSampleSize = calculateInSampleSize(options, requiredSize, requiredSize);
+		options.inSampleSize = calculateInSampleSize(options, requiredSize,
+				requiredSize);
 		options.inJustDecodeBounds = false;
 
 		return BitmapFactory.decodeStream(getInstance().context
@@ -75,6 +78,7 @@ public class ImageLoadingFactory {
 
 	/**
 	 * Calculates the image sample size for the image loading process
+	 * 
 	 * @param options
 	 * @param reqWidth
 	 * @param reqHeight
@@ -106,6 +110,7 @@ public class ImageLoadingFactory {
 
 	/**
 	 * Sends request to load the image from the SD card
+	 * 
 	 * @param picture
 	 * @param resId
 	 * @param imageView

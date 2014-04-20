@@ -10,7 +10,7 @@ import com.google.gson.reflect.TypeToken;
  * A list of regions
  * 
  * @author wyatt
- *
+ * 
  */
 public class RegionList extends SavedList<Region> {
 	private final static String FILENAME = "RegionListListSaved.json";
@@ -119,6 +119,7 @@ public class RegionList extends SavedList<Region> {
 
 	/**
 	 * Deletes all the regions for the tag
+	 * 
 	 * @param theTagWeAreDeleting
 	 */
 	public void deleteAllRegionsForTag(Tag theTagWeAreDeleting) {
@@ -137,6 +138,7 @@ public class RegionList extends SavedList<Region> {
 
 	/**
 	 * Deletes all the regions for a picture
+	 * 
 	 * @param thePictureWeAreDeleting
 	 */
 	public void deleteAllRegionsForPicture(Picture thePictureWeAreDeleting) {
@@ -153,7 +155,9 @@ public class RegionList extends SavedList<Region> {
 		save();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see ca.ualberta.cs.taggingapp.models.SavedList#getFilename()
 	 */
 	@Override
@@ -161,15 +165,21 @@ public class RegionList extends SavedList<Region> {
 		return FILENAME;
 	}
 
-	/* (non-Javadoc)
-	 * @see ca.ualberta.cs.taggingapp.models.SavedList#getPrimativeArray(java.util.ArrayList)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ca.ualberta.cs.taggingapp.models.SavedList#getPrimativeArray(java.util
+	 * .ArrayList)
 	 */
 	@Override
 	public Region[] getPrimativeArray(ArrayList<Region> orignalArray) {
 		return orignalArray.toArray(new Region[0]);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see ca.ualberta.cs.taggingapp.models.SavedList#getType()
 	 */
 	@Override

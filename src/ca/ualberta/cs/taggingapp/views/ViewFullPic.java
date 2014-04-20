@@ -18,6 +18,7 @@ import ca.ualberta.cs.taggingapp.models.Picture;
 import ca.ualberta.cs.taggingapp.models.PictureList;
 import ca.ualberta.cs.taggingapp.models.RegionList;
 import ca.ualberta.cs.taggingapp.models.Tag;
+import ca.ualberta.cs.taggingapp.models.TagList;
 import ca.ualberta.cs.taggingapp.models.TaggedImageView;
 
 /**
@@ -73,10 +74,16 @@ public class ViewFullPic extends Activity {
 			return true;
 		case R.id.discard:
 			Picture thePicture = PictureList.getInstance().getSelected();
-			if (!thePicture.getRegions().isEmpty()) {
-				thePicture.removeAllRegions();
-			}
+
+			// Remove all the regions
+			RegionList.getInstance().deleteAllRegionsForPicture(thePicture);
+
+			// Remove the picture
 			PictureList.getInstance().remove(thePicture);
+
+			// Delete all orphaned tags
+			TagList.getInstance().deleteAllOrphanedTags();
+
 			finish();
 			return true;
 		default:

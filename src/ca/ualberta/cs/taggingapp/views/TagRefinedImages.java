@@ -59,7 +59,8 @@ public class TagRefinedImages extends Activity {
 
 				TagObject imagePosition = (TagObject) v.getTag();
 
-				PictureList.getInstance().setSelected(imagePosition.getThePicture());
+				PictureList.getInstance().setSelected(
+						imagePosition.getThePicture());
 
 				startActivity(i);
 			}

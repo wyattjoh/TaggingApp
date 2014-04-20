@@ -31,6 +31,7 @@ public class Picture extends RegionObject {
 
 	/**
 	 * Sets the picture
+	 * 
 	 * @param picture
 	 */
 	public void setPicture(Bitmap picture) {
@@ -46,6 +47,7 @@ public class Picture extends RegionObject {
 
 	/**
 	 * Sets the picture URI
+	 * 
 	 * @param uri
 	 */
 	public void setPictureUri(Uri uri) {
@@ -54,6 +56,7 @@ public class Picture extends RegionObject {
 
 	/**
 	 * Sets the bitmap for the image size
+	 * 
 	 * @param theImageView
 	 * @param theSize
 	 * @param shouldCache
@@ -66,6 +69,7 @@ public class Picture extends RegionObject {
 
 	/**
 	 * Sets the bitmap for the picture to the ImageView
+	 * 
 	 * @param theImageView
 	 */
 	public void setLargeBitmapOnImageView(ImageView theImageView) {
@@ -74,6 +78,7 @@ public class Picture extends RegionObject {
 
 	/**
 	 * Sets the bitmap for the picture to the imageview
+	 * 
 	 * @param theImageView
 	 */
 	public void setSmallBitmapOnImageView(ImageView theImageView) {

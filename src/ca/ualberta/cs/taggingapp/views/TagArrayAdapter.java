@@ -15,7 +15,7 @@ import ca.ualberta.cs.taggingapp.models.Tag;
  * Manages the list of tags
  * 
  * @author wyatt
- *
+ * 
  */
 public class TagArrayAdapter extends ArrayAdapter<Tag> {
 	private Boolean withIndex = false;
@@ -63,8 +63,11 @@ public class TagArrayAdapter extends ArrayAdapter<Tag> {
 	 * @see android.widget.ArrayAdapter#getView(int, android.view.View,
 	 * android.view.ViewGroup)
 	 */
-	/* (non-Javadoc)
-	 * @see android.widget.ArrayAdapter#getView(int, android.view.View, android.view.ViewGroup)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see android.widget.ArrayAdapter#getView(int, android.view.View,
+	 * android.view.ViewGroup)
 	 */
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
@@ -94,11 +97,13 @@ public class TagArrayAdapter extends ArrayAdapter<Tag> {
 
 	/**
 	 * @author wyatt
-	 *
+	 * 
 	 */
 	private class NameFilter extends Filter {
 
-		/* (non-Javadoc)
+		/*
+		 * (non-Javadoc)
+		 * 
 		 * @see android.widget.Filter#performFiltering(java.lang.CharSequence)
 		 */
 		@Override
@@ -128,8 +133,11 @@ public class TagArrayAdapter extends ArrayAdapter<Tag> {
 			return filterResults;
 		}
 
-		/* (non-Javadoc)
-		 * @see android.widget.Filter#publishResults(java.lang.CharSequence, android.widget.Filter.FilterResults)
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see android.widget.Filter#publishResults(java.lang.CharSequence,
+		 * android.widget.Filter.FilterResults)
 		 */
 		@SuppressWarnings("unchecked")
 		@Override
@@ -153,7 +161,9 @@ public class TagArrayAdapter extends ArrayAdapter<Tag> {
 	 * 
 	 * @see android.widget.ArrayAdapter#getFilter()
 	 */
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.widget.ArrayAdapter#getFilter()
 	 */
 	@Override

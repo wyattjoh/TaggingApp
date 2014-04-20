@@ -13,7 +13,7 @@ import android.os.AsyncTask;
 import android.widget.ImageView;
 
 /**
- * Loadings the bitmap from SD card on the Android phone. 
+ * Loadings the bitmap from SD card on the Android phone.
  * 
  **/
 
@@ -50,30 +50,30 @@ public class BitmapWorkerTask extends AsyncTask<Uri, Void, Bitmap> {
 	}
 
 	/**
-	 *  Once complete, see if ImageView is still around and set bitmap.
+	 * Once complete, see if ImageView is still around and set bitmap.
 	 */
 	@Override
 	protected void onPostExecute(Bitmap bitmap) {
-        if (isCancelled()) {
-            bitmap = null;
-        }
+		if (isCancelled()) {
+			bitmap = null;
+		}
 
-        if (imageViewReference != null && bitmap != null) {
-            final ImageView imageView = imageViewReference.get();
-            final BitmapWorkerTask bitmapWorkerTask =
-                    getBitmapWorkerTask(imageView);
-            if (this == bitmapWorkerTask && imageView != null) {
-                imageView.setImageBitmap(bitmap);
-                
+		if (imageViewReference != null && bitmap != null) {
+			final ImageView imageView = imageViewReference.get();
+			final BitmapWorkerTask bitmapWorkerTask = getBitmapWorkerTask(imageView);
+			if (this == bitmapWorkerTask && imageView != null) {
+				imageView.setImageBitmap(bitmap);
+
 				if (thePicture != null) {
 					thePicture.setPicture(bitmap);
 				}
-            }
-        }
+			}
+		}
 	}
 
 	/**
 	 * Cancels the potential work
+	 * 
 	 * @param data
 	 * @param imageView
 	 * @return

@@ -22,7 +22,7 @@ public class TaggedImageView extends ImageView {
 
 	public TaggedImageView(Context context, AttributeSet attrs) {
 		super(context, attrs);
-		
+
 		paint = new Paint();
 		paint.setStrokeWidth(2);
 		paint.setAntiAlias(true);
@@ -37,7 +37,9 @@ public class TaggedImageView extends ImageView {
 		this.picture.setLargeBitmapOnImageView(this);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.widget.ImageView#onDraw(android.graphics.Canvas)
 	 */
 	@Override

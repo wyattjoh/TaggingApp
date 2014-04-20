@@ -55,6 +55,7 @@ public class PictureList extends SavedList<Picture> {
 
 	/**
 	 * Updates the picture in the list
+	 * 
 	 * @param index
 	 * @param pic
 	 */
@@ -77,9 +78,10 @@ public class PictureList extends SavedList<Picture> {
 		Picture thePicture = this.theList.get(position);
 		setSelected(thePicture);
 	}
-	
+
 	/**
 	 * Sets the image as selected
+	 * 
 	 * @param thePicture
 	 */
 	public void setSelected(Picture thePicture) {
@@ -93,7 +95,9 @@ public class PictureList extends SavedList<Picture> {
 		return selectedPicture;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see ca.ualberta.cs.taggingapp.models.SavedList#getFilename()
 	 */
 	@Override
@@ -101,15 +105,21 @@ public class PictureList extends SavedList<Picture> {
 		return FILENAME;
 	}
 
-	/* (non-Javadoc)
-	 * @see ca.ualberta.cs.taggingapp.models.SavedList#getPrimativeArray(java.util.ArrayList)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ca.ualberta.cs.taggingapp.models.SavedList#getPrimativeArray(java.util
+	 * .ArrayList)
 	 */
 	@Override
 	public Picture[] getPrimativeArray(ArrayList<Picture> orignalArray) {
 		return orignalArray.toArray(new Picture[0]);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see ca.ualberta.cs.taggingapp.models.SavedList#getType()
 	 */
 	@Override

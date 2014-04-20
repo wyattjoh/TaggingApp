@@ -11,7 +11,7 @@ import ca.ualberta.cs.taggingapp.controllers.BitmapWorkerTask;
  * Stores the async drawable elements
  * 
  * @author wyatt
- *
+ * 
  */
 public class AsyncDrawable extends BitmapDrawable {
 	private final WeakReference<BitmapWorkerTask> bitmapWorkerTaskReference;
@@ -25,6 +25,7 @@ public class AsyncDrawable extends BitmapDrawable {
 
 	/**
 	 * Get the worker task from the weak reference
+	 * 
 	 * @return
 	 */
 	public BitmapWorkerTask getBitmapWorkerTask() {

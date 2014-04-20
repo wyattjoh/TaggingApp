@@ -61,7 +61,8 @@ public class GridViewFragment extends Fragment {
 
 				TagObject imagePosition = (TagObject) v.getTag();
 
-				PictureList.getInstance().setSelected(imagePosition.getThePosition());
+				PictureList.getInstance().setSelected(
+						imagePosition.getThePosition());
 
 				startActivity(i);
 			}

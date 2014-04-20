@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * A smart object list for sorting elements
  * 
  * @author wyatt
- *
+ * 
  * @param <T>
  */
 public class ManagedList<T extends ManagedObject> {
@@ -32,6 +32,7 @@ public class ManagedList<T extends ManagedObject> {
 
 	/**
 	 * Gets the element at a position
+	 * 
 	 * @param position
 	 * @return
 	 */
@@ -48,6 +49,7 @@ public class ManagedList<T extends ManagedObject> {
 
 	/**
 	 * Sets the list to the new list
+	 * 
 	 * @param theNewList
 	 */
 	public void setArrayList(ArrayList<T> theNewList) {
@@ -57,6 +59,7 @@ public class ManagedList<T extends ManagedObject> {
 
 	/**
 	 * Adds the object to the list
+	 * 
 	 * @param object
 	 */
 	public void add(T object) {
@@ -65,6 +68,7 @@ public class ManagedList<T extends ManagedObject> {
 
 	/**
 	 * Removes the object from the list
+	 * 
 	 * @param object
 	 */
 	public void remove(T object) {

@@ -6,7 +6,7 @@ public class TagObject {
 	 */
 	private int thePosition;
 	private Picture thePicture;
-	
+
 	public TagObject(int position, Picture picture) {
 		thePosition = position;
 		thePicture = picture;
@@ -20,7 +20,8 @@ public class TagObject {
 	}
 
 	/**
-	 * @param thePosition the thePosition to set
+	 * @param thePosition
+	 *            the thePosition to set
 	 */
 	public void setThePosition(int thePosition) {
 		this.thePosition = thePosition;
@@ -34,7 +35,8 @@ public class TagObject {
 	}
 
 	/**
-	 * @param thePicture the thePicture to set
+	 * @param thePicture
+	 *            the thePicture to set
 	 */
 	public void setThePicture(Picture thePicture) {
 		this.thePicture = thePicture;

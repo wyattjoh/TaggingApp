@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * An object that contains regions
  * 
  * @author wyatt
- *
+ * 
  */
 public class RegionObject extends ManagedObject {
 

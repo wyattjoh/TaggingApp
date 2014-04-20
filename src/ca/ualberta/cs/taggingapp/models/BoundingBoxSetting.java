@@ -4,7 +4,7 @@ package ca.ualberta.cs.taggingapp.models;
  * Stores the settings for the BoundingBox
  * 
  * @author wyatt
- *
+ * 
  */
 public enum BoundingBoxSetting {
 	DRAG {

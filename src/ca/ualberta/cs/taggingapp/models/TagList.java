@@ -2,7 +2,10 @@ package ca.ualberta.cs.taggingapp.models;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Iterator;
+
 import android.content.Context;
+
 import com.google.gson.reflect.TypeToken;
 
 /**
@@ -65,5 +68,28 @@ public class TagList extends SavedList<Tag> {
 	public Type getType() {
 		return new TypeToken<Tag[]>() {
 		}.getType();
+	}
+
+	/**
+	 * Removes the orphaned tags
+	 */
+	public void deleteAllOrphanedTags() {
+		Iterator<Tag> theTagIterator = getArrayList().iterator();
+
+		Boolean wasModified = false;
+		while (theTagIterator.hasNext()) {
+			Tag theTag = theTagIterator.next();
+
+			ArrayList<Region> theRegions = theTag.getRegions();
+
+			if (theRegions.size() <= 0) {
+				theTagIterator.remove();
+				wasModified = true;
+			}
+		}
+
+		if (wasModified) {
+			save();
+		}
 	}
 }

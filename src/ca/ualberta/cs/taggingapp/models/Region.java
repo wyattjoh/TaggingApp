@@ -243,7 +243,8 @@ public class Region extends ManagedObject {
 	 */
 
 	/**
-	 * Updates the center point, width and height of the region given corner points
+	 * Updates the center point, width and height of the region given corner
+	 * points
 	 */
 	public void updateRegionFromCorners() {
 		int centerX = (this.lowerRightCorner.x + this.upperLeftCorner.x) / 2;
@@ -256,7 +257,8 @@ public class Region extends ManagedObject {
 	}
 
 	/**
-	 * Updates the corner points given a new center, using the current width and height
+	 * Updates the corner points given a new center, using the current width and
+	 * height
 	 */
 	public void updateRegionFromCenter() {
 		int lowerRightCornerX = this.center.x + (this.width / 2);

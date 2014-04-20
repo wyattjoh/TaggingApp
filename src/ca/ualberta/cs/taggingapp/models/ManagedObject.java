@@ -6,7 +6,7 @@ import java.util.UUID;
  * A object with an Id
  * 
  * @author wyatt
- *
+ * 
  */
 public class ManagedObject {
 
