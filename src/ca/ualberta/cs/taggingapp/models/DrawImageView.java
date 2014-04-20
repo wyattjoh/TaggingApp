@@ -13,7 +13,7 @@ import android.widget.ImageView;
 
 /**
  * Draws a canvas and provides code for the scaling of bitmaps being displayed
- * on the canvas. Contains code for pinch gesture recognition.
+ * on the canvas.
  * 
  * */
 

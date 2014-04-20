@@ -12,6 +12,11 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.widget.ImageView;
 
+/**
+ * Loadings the bitmap from SD card on the Android phone. 
+ * 
+ **/
+
 public class BitmapWorkerTask extends AsyncTask<Uri, Void, Bitmap> {
 	private final WeakReference<ImageView> imageViewReference;
 	private final int imageSize;
