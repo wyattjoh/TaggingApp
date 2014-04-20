@@ -32,7 +32,7 @@ public class DrawImageView extends ImageView {
 		paint.setStyle(Style.STROKE);
 		paint.setStrokeWidth(2);
 		paint.setAntiAlias(true);
-		
+
 		startPoint = null;
 		endPoint = null;
 	}

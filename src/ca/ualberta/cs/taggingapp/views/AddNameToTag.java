@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 import ca.ualberta.cs.taggingapp.R;
 import ca.ualberta.cs.taggingapp.models.Picture;
 import ca.ualberta.cs.taggingapp.models.PictureList;
@@ -111,11 +112,12 @@ public class AddNameToTag extends Activity {
 	}
 
 	protected void finishTaggingAction(Tag tag) {
-		addTextTag(tag);
-		finish();
+		if (addTextTag(tag)) {
+			finish();
+		}
 	}
 
-	protected void addTextTag(Tag tag) {
+	protected boolean addTextTag(Tag tag) {
 		// Get the current picture
 		Picture pic = PictureList.getInstance().getSelected();
 
@@ -127,6 +129,20 @@ public class AddNameToTag extends Activity {
 		if (isNewPicture) {
 			String tagName = tagNameField.getText().toString();
 			String tagUrl = tagUrlField.getText().toString();
+
+			if (tagName.length() <= 0) {
+				Toast.makeText(getApplicationContext(),
+						"Can't have an empty tag name!", Toast.LENGTH_SHORT)
+						.show();
+				return false;
+			}
+
+			if (tagUrl.length() <= 0) {
+				Toast.makeText(getApplicationContext(),
+						"Can't have an empty tag url!", Toast.LENGTH_SHORT)
+						.show();
+				return false;
+			}
 
 			tag = new Tag(tagName, tagUrl);
 		}
@@ -152,5 +168,7 @@ public class AddNameToTag extends Activity {
 		} else {
 			TagList.getInstance().save();
 		}
+
+		return true;
 	}
 }

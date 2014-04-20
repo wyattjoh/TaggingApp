@@ -6,7 +6,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Point;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -27,6 +26,7 @@ import ca.ualberta.cs.taggingapp.models.Region;
 public class AddTag extends Activity {
 	DrawImageView drawImageView;
 	private static Region region = null;
+	private Toast theWarning = null;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -82,7 +82,7 @@ public class AddTag extends Activity {
 				startActivity(i);
 				finish();
 			} else {
-				Toast.makeText(getApplicationContext(), "No Region Selected!", Toast.LENGTH_LONG).show();
+				openToast("No region selected!");
 			}
 			return true;
 		case R.id.decline:
@@ -106,6 +106,18 @@ public class AddTag extends Activity {
 		} else {
 			return false;
 		}
+	}
+
+	private void openToast(String theNotification) {
+		if (theWarning != null) {
+			theWarning.cancel();
+			theWarning.setText(theNotification);
+		} else {
+			theWarning = Toast.makeText(getApplicationContext(),
+					theNotification, Toast.LENGTH_LONG);
+		}
+
+		theWarning.show();
 	}
 
 	@Override
